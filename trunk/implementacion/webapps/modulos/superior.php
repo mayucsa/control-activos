@@ -11,7 +11,7 @@ set_time_limit(0); ?>
     <meta name="author" content="Ing. Alfredo Fidel Chan Chuc">
     <link rel="icon" href="../../../includes/imagenes/favicon.png">
     <!-- <meta name="theme-color" content="E5CA00"> -->
-    <title>Produccion</title>
+    <title>Control activos</title>
 
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="../../../includees/css/main.css">
@@ -79,7 +79,7 @@ set_time_limit(0); ?>
     <!-- inicio div controller de angular -->
     <div ng-app="Mayucsa" class="ng-cloak" ng-controller="AngularCtrler">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="#">Producci&oacute;n</a>
+    <header class="app-header"><a class="app-header__logo" href="#">Control activos</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">

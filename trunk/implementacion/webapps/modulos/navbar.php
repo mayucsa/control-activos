@@ -37,10 +37,10 @@
 ?>
           <ul class="app-menu">
             <!-- dashboard -->
-            <li class="treeview" ng-show="perfilUsu.dashboard_principal = 1">
+            <li class="treeview" ng-show="perfilUsu.dashboard_principal == 1">
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-chart-line"></i><span class="app-menu__label">Dashboard</span><i class="treeview-indicator fas fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                  <li>
+                  <!-- <li>
                     <a class="treeview-item" href="../../dashboard/morteros/dashboard_morteros.php"><i class="icon fa fa-circle-o"></i> Morteros</a>
                   </li>
                   <li>
@@ -48,15 +48,24 @@
                   </li>
                   <li>
                     <a class="treeview-item" href="../../dashboard/trituradora/dashboard_trituradora.php"><i class="icon fa fa-circle-o"></i> Trituradora</a>
+                  </li> -->
+                </ul>
+            </li>
+            <!-- catálogos -->
+            <li class="treeview" ng-show="perfilUsu.catalogo_principal == 1">
+              <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Catálogos</span><i class="treeview-indicator fas fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                  <li ng-show="perfilUsu.catalogo_equipos_vista == 1">
+                    <a class="treeview-item" href="../../catalogos/equipos/equipos_vista.php"><i class="icon fa fa-circle-o"></i> Equipos</a>
                   </li>
                 </ul>
             </li>
             <!-- Seguridad -->
-            <li class="treeview" ng-show="perfilUsu.seguridad_principal = 1">
+            <li class="treeview" ng-show="perfilUsu.seguridad_principal == 1">
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-cog"></i><span class="app-menu__label">Seguridad</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                  <li ng-show="perfilUsu.crear_usuarios_vista = 1">
-                    <a class="treeview-item" href="../../almacenistas/inventario/inventario_bloquera.php"><i class="icon fa fa-circle-o"></i> Usuarios</a>
+                  <li ng-show="perfilUsu.crear_usuarios_vista == 1">
+                    <a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Usuarios</a>
                   </li>
                 </ul>
             </li>

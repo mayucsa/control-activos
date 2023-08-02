@@ -7,7 +7,7 @@ function dd($var){
     }
 }
 function getUserPerfil($dbcon, $id){
-	$sql = "SELECT * FROM permisos_produccion WHERE cve_usuario = ".$id;
+	$sql = "SELECT * FROM permisos_activos WHERE cve_usuario = ".$id;
 	dd($dbcon->qBuilder($dbcon->conn(), 'first', $sql));
 }
 include_once "../../dbconexion/conn.php";

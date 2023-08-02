@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Producci&oacute;n</title>
+	<title>Control de activos</title>
 
 	<link rel="stylesheet" type="text/css" href="includes/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="includes/css/css-login.css">
@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
 				<form class="box p-4 text-center" onsubmit="return false" method="post" autocomplete="off">
-					<h1>Producci&oacute;n</h1>
+					<h2>Control de activos</h1>
 					<p class="text-muted"> Acceda con su número de empleado</p>
 					<label>Usuario</label>
 					<input type="text" class="form-control" name="p_usuario" id="p_usuario" placeholder="Número de empleado">
