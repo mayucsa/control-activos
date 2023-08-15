@@ -14,7 +14,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">EDITAR EQUIPO</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -59,7 +59,7 @@
                 <div class="tile">
                     <div class="card card-info" ng-show="perfilUsu.catalogo_equipos_captura == 1">
                         <div class="card-header">
-                            <h3 class="card-title">ALTA DE EQUIPOS </h3>
+                            <h3 class="card-title">CREACIÓN DE EQUIPOS </h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">EQUIPOS</h3>
+                            <h3 class="card-title">EQUIPOS CREADOS</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>

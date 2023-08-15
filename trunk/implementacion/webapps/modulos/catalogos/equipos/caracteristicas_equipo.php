@@ -14,7 +14,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">EDITAR CARACTERISTICAS</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -97,7 +97,7 @@
                 <div class="tile">
                     <div class="card card-info" ng-show="perfilUsu.catalogo_equipos_captura == 1">
                         <div class="card-header">
-                            <h3 class="card-title">Caracteristicas </h3>
+                            <h3 class="card-title">ASIGNACIÓN DE CARACTERISTICAS </h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -112,7 +112,7 @@
                                             <option selected="selected" value="">[Seleccione una opción..]</option>
                                             <option ng-repeat="(i, obj) in equipo" value="{{obj.cve_equipo}}">{{obj.nombre_equipo}}</option>
                                         </select>
-                                        <label>Producto</label>
+                                        <label>Equipo</label>
                                     </div>
                                     <div style="width: 100%;" class="form-floating mx-1">
                                         <input class="form-control UpperCase" ng-model="marca" id="marca" autocomplete="off" ng-disabled="true">
@@ -190,7 +190,7 @@
                                     <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
                                         <thead>
                                             <tr>
-                                                <th> Producto</th>
+                                                <th> Equipo</th>
                                                 <th> Marca</th>
                                                 <th>Modelo</th>
                                                 <th>Descripcion</th>

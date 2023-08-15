@@ -14,7 +14,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">EDITAR ASIGNACIÓN</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -65,7 +65,7 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
               <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-              <li class="breadcrumb-item"><a href="caracteristicas_equipos.php">Caracteristicas de equipos</a></li>
+              <li class="breadcrumb-item"><a href="caracteristicas_equipos.php"> Asignación de equipos</a></li>
             </ul>
         </div>
 
@@ -74,7 +74,7 @@
                 <div class="tile">
                     <div class="card card-info" ng-show="perfilUsu.catalogo_equipos_captura == 1">
                         <div class="card-header">
-                            <h3 class="card-title">RELACIÓN </h3>
+                            <h3 class="card-title">ASIGNACIÓN DE EQUIPOS </h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
