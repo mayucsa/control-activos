@@ -58,8 +58,24 @@
                   <li ng-show="perfilUsu.catalogo_equipos_vista == 1">
                     <a class="treeview-item" href="../../catalogos/equipos/equipos_vista.php"><i class="icon fa fa-circle-o"></i> Equipos</a>
                   </li>
+                  <li >
+                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="icon fa fa-circle-o"></i> Caracteristicas de equipos</a>
+                  </li>
                 </ul>
             </li>
+            <!-- asignación de equipos -->
+            <li class="treeview">
+              <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Asignación</span><i class="treeview-indicator fa fa-angle-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a class="treeview-item" href="../../catalogos/equipos/asignacion.php"><i class="icon fa fa-circle-o"></i> Equipos</a>
+                </li>
+              </ul>
+            </li>
+
+
             <!-- Seguridad -->
             <li class="treeview" ng-show="perfilUsu.seguridad_principal == 1">
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-cog"></i><span class="app-menu__label">Seguridad</span><i class="treeview-indicator fa fa-angle-right"></i></a>

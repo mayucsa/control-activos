@@ -10,6 +10,39 @@
         </head>
 
 <div ng-controller="vistaCatalogoEquipos">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <div style="width: 100%;" class="form-floating mx-1">
+                                        <input class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false">
+                                        <label>Numero de equipo</label>
+                                    </div>
+            <div style="width: 100%;" class="form-floating mx-1">
+                <input class="form-control UpperCase" ng-model="cambioNombreVer" id="cambioNombreVer" autocomplete="off" >
+                <label>Nombre del equipo</label>
+            </div>
+            <div style="width: 100%;" class="form-floating mx-1">
+                    <input type="text" ng-model="cambioDescripcion" id="cambioDescripcion" name="cambioDescripcion" class="form-control form-control-md " >
+                    <label>Descripción del equipo</label>
+                </div>
+        </div>
+        <!-- aca termina el cuerpo del modal -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-primary" ng-click="cambioNombre()">Guardar Datos</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
     <main class="app-content">
         <div class="app-title">
             <div>
@@ -26,7 +59,7 @@
                 <div class="tile">
                     <div class="card card-info" ng-show="perfilUsu.catalogo_equipos_captura == 1">
                         <div class="card-header">
-                            <h3 class="card-title">ALTA DE EQUIPOS</h3>
+                            <h3 class="card-title">ALTA DE EQUIPOS </h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -36,8 +69,9 @@
                         <div class="card-body">
                             <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">
+                               
                                     <div style="width: 100%;" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="nombre" id="nombre" autocomplete="off">
+                                        <input class="form-control UpperCase" ng-model="nombre" id="nombre" autocomplete="off"  ng-blur="validaNombre(nombre)">
                                         <label>Nombre equipo</label>
                                     </div>
                                     <div style="width: 100%;" class="form-floating mx-1">
@@ -63,9 +97,35 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body">
-
+                        <div class="card-footer">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Producto</th>
+                                        <th>Descripción </th>
+                                        <th> Opciones</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(i, obj) in verequipos track by i">
+                                        <td class="text-center">{{obj.cve_equipo}}</td>
+                                        <td>{{obj.nombre_equipo}}</td>
+                                        <td class="text-center">{{obj.descripcion}}</td>
+                                        <td class="text-center">
+                                            
+                                            <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_equipo, obj.nombre_equipo, obj.descripcion)" data-toggle="modal" data-target="#exampleModal">
+                                                
+                                            </button>
+                                            <span class= "btn btn-danger btn-xs" title="Descargar PDF"><i class="fas fa-trash-alt"></i> </span>
+                                           
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
