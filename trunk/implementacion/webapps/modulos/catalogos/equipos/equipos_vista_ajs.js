@@ -1,4 +1,4 @@
-   app.controller('vistaCatalogoEquipos', function (BASEURL, ID, $scope, $http) {
+    app.controller('vistaCatalogoEquipos', function (BASEURL, ID, $scope, $http) {
 	$scope.nombre = '';
 	$scope.descripcion = '';
 
@@ -15,11 +15,6 @@
 			'id': ID
 		}).then(function (response){
 			response = response.data;
-			// console.log('getMarca', response[0].marca);
-			// console.log('getPresentacion', response[0].presentacion);
-			// $scope.marca = response[0].marca;
-			// $scope.modelo = response[0].modelo;
-			// $scope.descripcion = response[0].descripcion;
 			if (response.code == 400) {
 				Swal.fire({
 					// confirmButtonColor: '#3085d6',
@@ -44,6 +39,7 @@
 			);
 			return;
 		}
+		
 		Swal.fire({
 			title: 'Estás a punto de editar la cantidad de una entrada.',
 			text: '¿Es correcta la información agregada?',
@@ -55,7 +51,7 @@
 			cancelButtonText: 'Cancelar'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				jsShowWindowLoad('Generando entrada...');
+				
 				$http.post('Controller.php', {
 					'task': 'editarNombre',
 					'numero': $scope.numero,
@@ -64,21 +60,33 @@
 					
 					'id': ID,
 				}).then(function(response){
-					jsRemoveWindowLoad();
-					Swal.fire({
-						title: '¡Éxito!',
-						html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
-						icon: 'success',
-						showCancelButton: false,
-						confirmButtonColor: 'green',
-						confirmButtonText: 'Aceptar'
-					}).then((result) => {
-						if (result.isConfirmed) {
-							location.reload();
-						  }else{
-						  	location.reload();
-						  }
-					})
+					response = response.data;
+					if (response.code == 400) {
+						Swal.fire({
+							// confirmButtonColor: '#3085d6',
+							title: 'Equipo existente',
+							html: response.msj,
+							confirmButtonColor: '#1A4672'
+							});
+							$scope.nombre = '';
+					}else{
+						jsShowWindowLoad('Generando entrada...');
+						jsRemoveWindowLoad();
+						Swal.fire({ 
+							title: '¡Éxito!',
+							html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
+							icon: 'success',
+							showCancelButton: false,
+							confirmButtonColor: 'green',
+							confirmButtonText: 'Aceptar'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.reload();
+							  }else{
+								  location.reload();
+							  }
+						})}
+					
 				}, function(error){
 					console.log('error', error);
 	    			jsRemoveWindowLoad();

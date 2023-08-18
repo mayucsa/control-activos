@@ -176,48 +176,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 
 
 
-	// $scope.validaSerie = function (tipo, numero) {
-	// 	if (tipo == 'serie') {
-	// 		$http.post('Controller.php', {
-	// 			'task': 'validacionSerie',
-	// 			'valor': '1',
-	// 			'numeroserie': numero,
-	// 			'id': ID
-	// 		}).then(function (response){
-	// 			response = response.data;
-	// 			if (response.code == 400) {
-	// 				Swal.fire({
-	// 					title: 'Número de serie existente',
-	// 					html: response.msj,
-	// 					confirmButtonColor: '#1A4672'
-	// 					});
-	// 					$scope.numeroserie = '';
-	// 			}
-	// 		}, function(error){
-	// 			console.log('error', error);
-	// 		})
-	// 	} else {
-	// 		$http.post('Controller.php', {
-	// 			'task': 'validacionSerie',
-	// 			'valor': '2',
-	// 			'numerofactura': numero,
-	// 			'id': ID
-	// 		}).then(function (response){
-	// 			response = response.data;
-	// 			if (response.code == 400) {
-	// 				Swal.fire({
-	// 					title: 'Número de factura existente',
-	// 					html: response.msj,
-	// 					confirmButtonColor: '#1A4672'
-	// 					});
-	// 					$scope.numerofactura = '';
-	// 			}
-	// 		}, function(error){
-	// 			console.log('error', error);
-	// 		})
-	// 	}
-
-	// }
+	
 	$scope.cambioCaracteristica = function () {
 		if ($scope.cambioMarca == '' || $scope.cambiaModelo == null) {
 			Swal.fire(
@@ -227,7 +186,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 			);
 			return;
 		}
-		Swal.fire({
+		Swal.fire({ 
 			title: 'Estás a punto de editar la cantidad de una entrada.',
 			text: '¿Es correcta la información agregada?',
 			icon: 'warning',
@@ -238,7 +197,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 			cancelButtonText: 'Cancelar'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				jsShowWindowLoad('Generando entrada...');
+				
 				$http.post('Controller.php', {
 					'task': 'editarCaracteristica',
 					'id': ID,
@@ -258,21 +217,46 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 					
 					'id': ID,
 				}).then(function(response){
-					jsRemoveWindowLoad();
-					Swal.fire({
-						title: '¡Éxito!',
-						html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
-						icon: 'success',
-						showCancelButton: false,
-						confirmButtonColor: 'green',
-						confirmButtonText: 'Aceptar'
-					}).then((result) => {
-						if (result.isConfirmed) {
-							location.reload();
-						  }else{
-						  	location.reload();
-						  }
-					})
+					response = response.data;
+					if (response.code == 400) {
+						Swal.fire({
+							// confirmButtonColor: '#3085d6',
+							title: 'Equipo existente',
+							html: response.msj,
+							confirmButtonColor: '#1A4672'
+							});
+							$scope.cambiaNumeroserie = '';}
+					else{{
+						jsShowWindowLoad('Generando entrada...');
+						jsRemoveWindowLoad();
+						Swal.fire({
+							title: '¡Éxito!',
+							html: 'Se editado el equipo'+ ' ' + $scope.verNombre +' ' + 'de manera correcta,<br> <b>Número de serie: ' + $scope.cambiaNumeroserie +'</b>',
+							icon: 'success',
+							showCancelButton: false,
+							confirmButtonColor: 'green',
+							confirmButtonText: 'Aceptar'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.reload();
+							  }else{
+								  location.reload();
+							  }
+						})}
+						
+
+						
+				
+				
+				
+					}
+				
+				
+				
+				
+				
+				
+				
 				}, function(error){
 					console.log('error', error);
 	    			jsRemoveWindowLoad();

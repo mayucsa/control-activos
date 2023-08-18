@@ -224,40 +224,82 @@ function guardarAsignacion($dbcon, $Datos){
 // funciones para editar
 // editar el nombre y la descripción
 function editarNombre($dbcon, $Datos){
-	$fecha = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
 
-	$sql = " UPDATE cat_equipos
+    // Verificar si ya existe un registro con el mismo nombre
+    $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	
+    if ($resultado->count > 1) {
+        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
+    }
+	else if($resultado->count == 1){
+		$fecha = date('Y-m-d H:i:s');
+		$status = '1';
+		$conn = $dbcon->conn();
+		$sql = " UPDATE cat_equipos
+	SET  descripcion  ='".$Datos->descripcion."'
+	WHERE cve_equipo =" .$Datos->numero."";
+	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+	}
+	else{
+		$fecha = date('Y-m-d H:i:s');
+		$status = '1';
+		$conn = $dbcon->conn();
+		$sql = " UPDATE cat_equipos
 	SET  nombre_equipo  ='".$Datos->nombre."', descripcion  ='".$Datos->descripcion."'
 	WHERE cve_equipo =" .$Datos->numero."";
 	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+	}
+
+
+	
 	// dd($sql);
 }
 
 function editarCaracteristica($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
-
-	
-	$sql = " UPDATE caracteristicas_equipos
-	SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."', numero_serie  ='".$Datos->numeroserie."',
+	$sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_serie  ='".$Datos->numeroserie."'";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	if ($resultado->count > 1) {
+        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
+    }
+	else if($resultado->count == 1){
+		$sql = " UPDATE caracteristicas_equipos
+	SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."',
 	 numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
 	 vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
 	tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
 	WHERE cve_cequipo =" .$Datos->numeroEquipo."";
 	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
 	// dd($sql);
+
+	} else{$sql = " UPDATE caracteristicas_equipos
+		SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."', numero_serie  ='".$Datos->numeroserie."',
+		 numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
+		 vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
+		tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
+		WHERE cve_cequipo =" .$Datos->numeroEquipo."";
+		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+		// dd($sql);}
+	}
 }
 
 function editarAsignacion($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
-
-	$sql = " UPDATE asignacion_equipos
-	SET  cve_cequipo  =".$Datos->nombre."
-	WHERE cve_asignacion =" .$Datos->numeroAsignacion."";
-	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	// dd($sql);
+	$sql = "SELECT COUNT(*) AS count FROM asignacion_equipos WHERE cve_cequipo = ".$Datos->nombre." ";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	
+    if ($resultado->count >= 1) {
+        dd(['code'=>400,'msj'=>'Este equipo ya esta asignado a un empleado']);
+    } else{$sql = " UPDATE asignacion_equipos
+		SET  cve_cequipo  =".$Datos->nombre."
+		WHERE cve_asignacion =" .$Datos->numeroAsignacion."";
+		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+		// dd($sql);}
+	}
 }
 
 

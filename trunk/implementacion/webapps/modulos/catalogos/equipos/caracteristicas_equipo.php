@@ -8,7 +8,7 @@
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/jquery.dataTables.min.css">
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
         </head>
-
+ 
 <div ng-controller="vistaCaracteristicasEquipos">
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -41,7 +41,8 @@
             <label>Descripción</label>
         </div>
         <div style="width: 100%;" class="form-floating mx-1">
-            <input class="form-control UpperCase" ng-model="cambiaNumeroserie" id="cambiaNumeroserie" autocomplete="off" >
+        <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
+            <input class="form-control UpperCase" ng-model="cambiaNumeroserie" id="cambiaNumeroserie"  autocomplete="off" >
             <label>Número de serie</label>
         </div>
         <div style="width: 100%;" class="form-floating mx-1">

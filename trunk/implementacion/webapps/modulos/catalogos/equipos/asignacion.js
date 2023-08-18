@@ -142,14 +142,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 
 	$scope.cambioAsignacion = function () {
-		// if ($scope.cambioMarca == '' || $scope.cambiaModelo == null) {
-		// 	Swal.fire(
-		// 	  'Campo faltante',
-		// 	  'Es necesario llenar todos los campos',
-		// 	  'warning'
-		// 	);
-		// 	return;
-		// }
+		
 		Swal.fire({
 			title: 'Estás a punto de editar la cantidad de una entrada.',
 			text: '¿Es correcta la información agregada?',
@@ -161,7 +154,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			cancelButtonText: 'Cancelar'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				jsShowWindowLoad('Generando entrada...');
+				
 				$http.post('Controller.php', {
 					'task': 'editarAsignacion',
 					'id': ID,
@@ -171,21 +164,35 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 					
 					'id': ID,
 				}).then(function(response){
-					jsRemoveWindowLoad();
-					Swal.fire({
-						title: '¡Éxito!',
-						html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
-						icon: 'success',
-						showCancelButton: false,
-						confirmButtonColor: 'green',
-						confirmButtonText: 'Aceptar'
-					}).then((result) => {
-						if (result.isConfirmed) {
-							location.reload();
-						  }else{
-						  	location.reload();
+					response = response.data;
+					if (response.code == 400) {
+						Swal.fire({
+							// confirmButtonColor: '#3085d6',
+							title: 'Equipo existente',
+							html: response.msj,
+							confirmButtonColor: '#1A4672'
+							});
+							}
+							else{
+								jsShowWindowLoad('Generando entrada...');
+								jsRemoveWindowLoad();
+								Swal.fire({
+									title: '¡Éxito!',
+									html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
+									icon: 'success',
+									showCancelButton: false,
+									confirmButtonColor: 'green',
+									confirmButtonText: 'Aceptar'
+								}).then((result) => {
+									if (result.isConfirmed) {
+										location.reload();
+									}else{
+										location.reload();
 						  }
 					})
+
+							}
+					
 				}, function(error){
 					console.log('error', error);
 	    			jsRemoveWindowLoad();
