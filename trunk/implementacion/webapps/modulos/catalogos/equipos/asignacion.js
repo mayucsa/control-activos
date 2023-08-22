@@ -6,16 +6,6 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.codigo = '';
 		$scope.nombre = '';
 	}
-	
-	// $http.post('Controller.php', {
-	// 	'task': 'getProducto'
-	// }).then(function (response){
-	// 	response = response.data;
-	// 	console.log('getProducto', response);
-	// 	$scope.prod = response;
-	// },function(error){
-	// 	console.log('error', error);
-	// });
 
 	$http.post('Controller.php', {
 		'task': 'getProduccion'
@@ -202,10 +192,71 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 	}
 
+	$scope.eliminarAsignacion = function () {
+		
+		Swal.fire({
+			title: 'Estás a punto de eliminar esta asignación.',
+			text: '¿Es correcta la información agregada?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			confirmButtonText: 'Aceptar',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				
+				$http.post('Controller.php', {
+					'task': 'eliminarAsignacion',
+					'id': ID,
+					'nombreEliminar':$scope.nombreEliminar
+				}).then(function(response){
+					response = response.data;
+					if (response.code == 400) {
+						Swal.fire({
+							// confirmButtonColor: '#3085d6',
+							title: 'Equipo existente',
+							html: response.msj,
+							confirmButtonColor: '#1A4672'
+							});
+							}
+							else{
+								jsShowWindowLoad('Generando entrada...');
+								jsRemoveWindowLoad();
+								Swal.fire({
+									title: '¡Éxito!',
+									html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
+									icon: 'success',
+									showCancelButton: false,
+									confirmButtonColor: 'green',
+									confirmButtonText: 'Aceptar'
+								}).then((result) => {
+									if (result.isConfirmed) {
+										location.reload();
+									}else{
+										location.reload();
+						  }
+					})
+
+							}
+					
+				}, function(error){
+					console.log('error', error);
+	    			jsRemoveWindowLoad();
+				})
+			}
+		});
+
+	}
+
 	$scope.consultar = function (cve_asignacion ,nombrecompleto) {
 		// $scope.numero=cve_equipo;
 		$scope.numeroAsignacion = cve_asignacion;
 		$scope.nombreEmpleado = nombrecompleto;
+	}
+	$scope.consultarEliminar = function (cve_asignacion) {
+		// $scope.numero=cve_equipo;
+		$scope.nombreEliminar = cve_asignacion;
 	}
 	$http.post('Controller.php', {
 		'task': 'getEquipos'
@@ -227,6 +278,8 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		console.log('error', error);
 	});
 
+
+	
 	$http.post('Controller.php', {
 		'task': 'getCaracteristicas'
 	}).then(function (response){

@@ -30,16 +30,7 @@ function getVercaracteristicas($dbcon){
     dd($datos);
 }
 
-// me sirve para mostrar en la pantalla de equipos 
-// todas los equipos que se han puesto guardado
-// function getVerEquipos($dbcon){
-// 	$sql = "SELECT ce.cve_cequipo, modelo, marca, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador,
-// 	memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso, ce.cve_equipo, nombre_equipo
-// 	FROM caracteristicas_equipos ce
-// 	INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo;";
-//     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-//     dd($datos);
-// }
+
 
 // aca comienzan las validaciones, la primera es sobre si se repite el nombre
 function agregarSiNoExiste($dbcon, $Datos) {
@@ -72,21 +63,7 @@ function validacionSerie($dbcon, $Datos) {
     if ($resultado->count >= 1) {
         dd(['code'=>400,'msj'=>'Un equipo se ha registrado con ese numero de serie']);
     }
-	// else{
-	// 	$fecha = date('Y-m-d H:i:s');
-	// 	$status = '1';
-	// 	$conn = $dbcon->conn();
-	// 	$sql = "INSERT INTO caracteristicas_equipos (cve_equipo, marca, modelo, descripcion, numero_serie, 
-	// 	numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, 
-	// 	creado_por, estatus_equipo, fecha_ingreso)
-	// 			VALUES (".$Datos->nombre.", '".$Datos->marca."', '".$Datos->modelo."', 
-	// 			'".$Datos->descripcion."', '".$Datos->numeroserie."', '".$Datos->numerofactura."',
-	// 			'".$Datos->sistemaoperativo."', '".$Datos->procesador."', ".$Datos->velocidadprocesador.",
-	// 			".$Datos->memoriaram.", '".$Datos->tipoalmacenamiento."', ".$Datos->capaalmacenamiento.",
-	// 			".$Datos->id.", ".$status.", '".$fecha."')";
-				
-	// 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-	// }
+	
 }
 function validacionFactura($dbcon, $Datos) {
     $conn = $dbcon->conn();
@@ -99,21 +76,7 @@ function validacionFactura($dbcon, $Datos) {
     if ($resultado->count >= 1) {
         dd(['code'=>400,'msj'=>'Ya ha registrado este numero de factura a un equipo']);
     }
-	// else{
-	// 	$fecha = date('Y-m-d H:i:s');
-	// 	$status = '1';
-	// 	$conn = $dbcon->conn();
-	// 	$sql = "INSERT INTO caracteristicas_equipos (cve_equipo, marca, modelo, descripcion, numero_serie, 
-	// 	numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, 
-	// 	creado_por, estatus_equipo, fecha_ingreso)
-	// 			VALUES (".$Datos->nombre.", '".$Datos->marca."', '".$Datos->modelo."', 
-	// 			'".$Datos->descripcion."', '".$Datos->numeroserie."', '".$Datos->numerofactura."',
-	// 			'".$Datos->sistemaoperativo."', '".$Datos->procesador."', ".$Datos->velocidadprocesador.",
-	// 			".$Datos->memoriaram.", '".$Datos->tipoalmacenamiento."', ".$Datos->capaalmacenamiento.",
-	// 			".$Datos->id.", ".$status.", '".$fecha."')";
-				
-	// 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-	// }
+	
 }
 
 
@@ -302,6 +265,17 @@ function editarAsignacion($dbcon, $Datos){
 	}
 }
 
+function eliminarAsignacion($dbcon, $Datos){
+	$fecha = date('Y-m-d H:i:s');
+	$conn = $dbcon->conn();
+	$sql = "UPDATE asignacion_equipos
+	SET  cve_cequipo  =0
+	WHERE cve_asignacion =" .$Datos->nombreEliminar." ";
+	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+		// dd($sql);}
+	
+}
+
 
 
 
@@ -323,6 +297,7 @@ function getEmpleado ($dbcon){
 }
 // para traer las caracteristicas del equipo
 function getCaracteristicas ($dbcon){
+	
 	$sql = "select cve_cequipo, marca, modelo, numero_serie from caracteristicas_equipos  ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
@@ -368,6 +343,10 @@ switch ($tarea) {
 	case 'editarAsignacion':
 		editarAsignacion($dbcon,$objDatos );
 		break;
+	case 'eliminarAsignacion':
+		eliminarAsignacion($dbcon,$objDatos );
+		break;
+		
 		// los get son para traer informción y que este se muestre
 	case 'getEquipos':
 		getEquipos($dbcon, );

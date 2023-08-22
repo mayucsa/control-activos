@@ -214,7 +214,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 					'memoriaram': $scope.cambiaMemoriaram,
 					'tipoalmacenamiento': $scope.cambiaTipoalmacenamiento,
 					'capaalmacenamiento': $scope.cambiaCapaalmacenamiento,
-					
+					 
 					'id': ID,
 				}).then(function(response){
 					response = response.data;

@@ -21,8 +21,8 @@
         </div>
         <div class="modal-body">
         <div style="width: 100%;" class="form-floating mx-1" margin >
-                                        <input class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false"  >
-                                        <label>Numero de equipo</label>
+                                        <input hidden="true" class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false"  >
+                                        <!-- <label>Numero de equipo</label> -->
                                     </div>
             <div style="width: 100%;" class="form-floating mx-1" pt-5>
                 <input class="form-control UpperCase" ng-model="cambioNombreVer" id="cambioNombreVer" autocomplete="off" >

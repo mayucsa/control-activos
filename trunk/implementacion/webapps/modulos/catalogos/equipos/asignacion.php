@@ -21,8 +21,8 @@
         </div>
         <div class="modal-body">
             <div style="width: 100%;" class="form-floating mx-1">
-                <input class="form-control UpperCase" ng-model="numeroAsignacion" id="numero" autocomplete="off"  ng-disabled="false">
-                <label>Numero de asignación</label>
+                <input hidden="true" class="form-control UpperCase" ng-model="numeroAsignacion" id="numero" autocomplete="off"  ng-disabled="false">
+               
             </div>
             <div style="width: 100%;" class="form-floating mx-1">
                 <input class="form-control UpperCase" ng-model="nombreEmpleado" id="numero" autocomplete="off"  ng-disabled="false">
@@ -70,6 +70,10 @@
             </button>
         </div>
         <div class="modal-body">
+        <div style="width: 100%;" class="form-floating mx-1">
+                                        <input hidden="true" type="text" ng-model="nombreEliminar" id="marca" name="marca" class="form-control form-control-md " disabled>
+                                        
+                                    </div>
         <p>
             ¿Esta seguro que desa elimar este registro? No podrá elimar los cambios 
         </p>
@@ -78,7 +82,7 @@
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
-            <button type="button" class="btn btn-danger" ng-click="eliminarCaracteristicas()">Aceptar</button>
+            <button type="button" class="btn btn-danger" ng-click="eliminarAsignacion()">Aceptar</button>
         </div>
         </div>
     </div>
@@ -192,7 +196,7 @@
                                         <td class="text-center">
                                                 <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
+                                                <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt" ng-click="consultarEliminar(obj.cve_asignacion)" data-toggle="modal" data-target="#borrarModal">                                           
                                                     </button>
                                                
                                            </td>

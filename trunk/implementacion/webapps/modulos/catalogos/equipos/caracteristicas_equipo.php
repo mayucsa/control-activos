@@ -21,12 +21,12 @@
         </div>
         <div class="modal-body">
         <div style="width: 100%;" class="form-floating mx-1">
-            <input class="form-control UpperCase" ng-model="numeroEquipo" id="numeroEquipo" autocomplete="off"  disabled>
-            <label>Numero</label>
+            <input hidden="true" class="form-control UpperCase" ng-model="numeroEquipo" id="numeroEquipo" autocomplete="off"  disabled>
+            <!-- <label>Numero</label> -->
         </div>
         <div style="width: 100%;" class="form-floating mx-1">
-            <input class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
-            <label>Nombre de equipo</label>
+            <input hidden="true" class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
+            <!-- <label>Nombre de equipo</label> -->
         </div>
         <div style="width: 100%;" class="form-floating mx-1">
             <input class="form-control UpperCase" ng-model="cambiaMarca" id="cambiaMarca" autocomplete="off" >

@@ -196,25 +196,6 @@
 		console.log('error', error);
 	});
 
-	// $scope.habilitarinput = function () {
-
-	// 	$http.post('Controller.php', {
-	// 		'task': 'getEquiposCambio',
-	// 		'nombre': $scope.cambioNombre
-	// 	}).then(function (response){
-	// 		response = response.data;
-	// 		// // console.log('getMarca', response[0].marca);
-	// 		// console.log('getPresentacion', response[0].presentacion);
-	// 		$scope.cambioNombre = response[0].nombre_equipo;
-	// 		$scope.cambioDescripcion = response[0].descripcion;
-			
-	// 	}, function(error){
-	// 		console.log('error', error);
-	// 	})
-
-	// }
-	
-
 	$http.post('Controller.php', {
 		'task': 'getEquipos'
 	}).then(function (response){
