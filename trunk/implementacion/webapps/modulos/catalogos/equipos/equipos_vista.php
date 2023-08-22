@@ -20,11 +20,11 @@
             </button>
         </div>
         <div class="modal-body">
-        <div style="width: 100%;" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false">
+        <div style="width: 100%;" class="form-floating mx-1" margin >
+                                        <input class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false"  >
                                         <label>Numero de equipo</label>
                                     </div>
-            <div style="width: 100%;" class="form-floating mx-1">
+            <div style="width: 100%;" class="form-floating mx-1" pt-5>
                 <input class="form-control UpperCase" ng-model="cambioNombreVer" id="cambioNombreVer" autocomplete="off" >
                 <label>Nombre del equipo</label>
             </div>
@@ -42,6 +42,31 @@
     </div>
     </div>
 
+
+    <!-- modal para borrar -->
+    <div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <p>
+            ¿Esta seguro que desa elimar este registro? No podrá elimar los cambios 
+        </p>
+        
+        </div>
+        <!-- aca termina el cuerpo del modal -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" ng-click="eliminarCaracteristicas()">Aceptar</button>
+        </div>
+        </div>
+    </div>
+    </div>
 
     <main class="app-content">
         <div class="app-title">
@@ -117,9 +142,9 @@
                                         <td class="text-center">
                                             
                                             <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_equipo, obj.nombre_equipo, obj.descripcion)" data-toggle="modal" data-target="#exampleModal">
-                                                
                                             </button>
-                                            <span class= "btn btn-danger btn-xs" title="Descargar PDF"><i class="fas fa-trash-alt"></i> </span>
+                                            <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
+                                                    </button>
                                            
                                     </tr>
                                 </tbody>

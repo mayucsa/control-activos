@@ -58,6 +58,32 @@
         </div>
     </div>
     </div>
+
+<!-- modal para borrar -->
+<div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <p>
+            ¿Esta seguro que desa elimar este registro? No podrá elimar los cambios 
+        </p>
+        
+        </div>
+        <!-- aca termina el cuerpo del modal -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" ng-click="eliminarCaracteristicas()">Aceptar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
     <main class="app-content">
         <div class="app-title">
             <div>
@@ -146,8 +172,8 @@
                             <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
                                 <thead>
                                     <tr>
-                                        <th>codigo/nombre empleado</th>
-                                        <th> numero de serie del equipo</th>
+                                        <th>código/nombre empleado</th>
+                                        <th> número de serie del equipo</th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
                                         <th>Caracteristicas</th>
@@ -165,9 +191,9 @@
                                         <td class="text-center">{{obj.fecha_asignacion}}</td>
                                         <td class="text-center">
                                                 <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
-                                                
                                                 </button>
-                                                <span class= "btn btn-danger btn-xs" title="Descargar PDF"><i class="fas fa-trash-alt"></i> </span>
+                                                <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
+                                                    </button>
                                                
                                            </td>
                                     </tr>

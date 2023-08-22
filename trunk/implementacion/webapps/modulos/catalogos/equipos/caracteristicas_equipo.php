@@ -10,8 +10,8 @@
         </head>
  
 <div ng-controller="vistaCaracteristicasEquipos">
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">EDITAR CARACTERISTICAS</h5>
@@ -82,6 +82,35 @@
         </div>
     </div>
     </div>
+
+    <!-- modal para borrar -->
+    <div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <p>
+            ¿Esta seguro que desa elimar este registro? No podrá elimar los cambios 
+        </p>
+        
+        </div>
+        <!-- aca termina el cuerpo del modal -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" ng-click="eliminarCaracteristicas()">Aceptar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
     <main class="app-content">
         <div class="app-title">
             <div>
@@ -180,37 +209,36 @@
                     </div>
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">LISTA DE EQUIPOS</h3>
+                            <h3 class="card-title">EQUIPOS CREADOS</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
-                            <div class="card-footer">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
-                                        <thead>
-                                            <tr>
-                                                <th> Equipo</th>
-                                                <th> Marca</th>
-                                                <th>Modelo</th>
-                                                <th>Descripcion</th>
-                                                <th>Numero de factura</th>
-                                                <th>Numero de serie</th>
-                                                <th>Sistema operativo</th>
-                                                <th> Procesador</th>
-                                                <th> Velocidad de procesador</th>
-                                                <th>Memoria ram</th>
-                                                <th>Tipo de almacenamiento</th>
-                                                <th>Capacidad de almacenamiento</th>
-                                                <th>Fecha de registro</th>
-                                                <th>Opciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- 
-                                                <td class="text-center">{{obj.nombre_equipo}}</td> -->
-                                            <tr ng-repeat="(i, obj) in vercaracteristicas track by i">
+                        </div>
+                        <div class="card-footer">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
+                                <thead>
+                                <tr>
+                                    <th> Equipo</th>
+                                    <th> Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Descripción</th>
+                                    <th>Número de factura</th>
+                                    <th>Número de serie</th>
+                                    <th>Sistema operativo</th>
+                                    <th> Procesador</th>
+                                    <th> Velocidad de procesador</th>
+                                    <th>Memoria ram</th>
+                                    <th>Tipo de almacenamiento</th>
+                                    <th>Capacidad de almacenamiento</th>
+                                    <th>Fecha de registro</th>
+                                    <th>Opciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(i, obj) in vercaracteristicas track by i">
                                                 <td class="text-center">{{obj.nombre_equipo}}</td>
                                                 <td>{{obj.marca}}</td>
                                                 <td class="text-center">{{obj.modelo}}</td>
@@ -230,16 +258,15 @@
                                                         obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal">
                                                                                                 
                                                     </button>
-                                                    <span class= "btn btn-danger btn-xs" title="Descargar PDF"><i class="fas fa-trash-alt"></i> </span>
-                                                
+                                                    <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
+                                                    </button>
+                                                    
                                                 </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -270,3 +297,7 @@
     <script src="../../../includes/js/data_tables_js/vfs_fonts.js"></script>
     <script src="../../../includes/js/data_tables_js/buttons.html5.min.js"></script>
     <script src="../../../includes/js/data_tables_js/buttons.print.min.js"></script>
+
+   
+
+                                                
