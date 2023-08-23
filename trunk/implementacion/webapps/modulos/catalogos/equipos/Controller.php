@@ -33,24 +33,26 @@ function getVercaracteristicas($dbcon){
 
 
 // aca comienzan las validaciones, la primera es sobre si se repite el nombre
-function agregarSiNoExiste($dbcon, $Datos) {
-    $conn = $dbcon->conn();
+// ya se agregó al controlador de validaciones
 
-    // Verificar si ya existe un registro con el mismo nombre
-    $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+// function agregarSiNoExiste($dbcon, $Datos) {
+//     $conn = $dbcon->conn();
+
+//     // Verificar si ya existe un registro con el mismo nombre
+//     $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
+//     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
-    if ($resultado->count >= 1) {
-        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    }else{
-		$fecha = date('Y-m-d H:i:s');
-		$status = '1';
-		$conn = $dbcon->conn();
-		$sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
-				VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-	}
-}
+//     if ($resultado->count >= 1) {
+//         dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
+//     }else{
+// 		$fecha = date('Y-m-d H:i:s');
+// 		$status = '1';
+// 		$conn = $dbcon->conn();
+// 		$sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
+// 				VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
+// 		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+// 	}
+// }
 // validacion para factura y numero de serie
 function validacionSerie($dbcon, $Datos) {
     $conn = $dbcon->conn();
@@ -116,7 +118,7 @@ function guardarEquipo($dbcon, $Datos){
 	// $conn = $dbcon->conn();
 	// $sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
 	// 		VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
-	// $qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
 	
 	}
@@ -388,9 +390,11 @@ switch ($tarea) {
 		getVercaracteristicas($dbcon);
 		break;
 		// para las validaciones
-	case 'agregarSiNoExiste':
-		agregarSiNoExiste($dbcon,$objDatos);
-		break;
+
+		// ya se agregó la misma función en otro controlador
+	// case 'agregarSiNoExiste':
+	// 	agregarSiNoExiste($dbcon,$objDatos);
+	// 	break;
 	case 'validacionSerie':
 		validacionSerie($dbcon,$objDatos);
 		break;
