@@ -31,7 +31,7 @@
         <div style="width: 100%;" class="form-floating mx-1">
             <input class="form-control UpperCase" ng-model="cambiaMarca" id="cambiaMarca" autocomplete="off" >
             <label>Marca</label>
-        </div>
+        </div style='float:left; width:30%; margin-bottom: 20px'>
         <div style="width: 100%;" class="form-floating mx-1">
             <input class="form-control UpperCase" ng-model="cambiaModelo" id="cambiaModelo" autocomplete="off" >
             <label>Modelo</label>
@@ -45,7 +45,7 @@
             <input class="form-control UpperCase" ng-model="cambiaNumeroserie" id="cambiaNumeroserie"  autocomplete="off" >
             <label>Número de serie</label>
         </div>
-        <div style="width: 100%;" class="form-floating mx-1">
+        <div style="width: 100%; float:left; margin-bottom: 20px" class="form-floating mx-1" >
             <input class="form-control UpperCase" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
             <label>Número de factura</label>
         </div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row form-group form-group-sm">
-                                <div class="col-lg-12 d-lg-flex">
+                                <div class="col-lg-12 d-lg-flex d-grid gap-3">
                                     <div style="width: 100%;" class="form-floating mx-1">
                                         <select class="form-control form-group-md" ng-model="nombre" autocomplete="off" ng-blur="habilitarProducto(equipo)">
                                             <option selected="selected" value="">[Seleccione una opción..]</option>
@@ -253,13 +253,13 @@
                                                 <td class="text-center">{{obj.capacidad_almacenamiento}}</td>
                                                 <td class="text-center">{{obj.fecha_ingreso}}</td>
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
+                                                    <button type="button" class="btn btn-info fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
                                                         obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento,
                                                         obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal">
                                                                                                 
                                                     </button>
-                                                    <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
-                                                    </button>
+                                                    <!-- <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
+                                                    </button> -->
                                                     
                                                 </td>
                                 </tbody>

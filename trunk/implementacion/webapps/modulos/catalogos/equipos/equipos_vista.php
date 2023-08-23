@@ -107,7 +107,7 @@
                             </div>
                             <div class="row form-group form-group-sm border-top">
                                 <div class="col-sm-12" align="center">
-                                    <input type="submit" value="Guardar" href="#" ng-click="validacionCampos()" class="btn btn-primary" style="margin-bottom: -25px !important">
+                                    <input type="submit" value="Guardar" href="#" ng-click="validacionCampos(nombre, descripcion)" class="btn btn-primary" style="margin-bottom: -20px !important">
                                     <input type="submit" value="Limpiar" href="#" ng-click="limpiarCampos()" class="btn btn-warning" style="margin-bottom: -25px !important">
                                 </div>
                             </div>
@@ -141,10 +141,10 @@
                                         <td class="text-center">{{obj.descripcion}}</td>
                                         <td class="text-center">
                                             
-                                            <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_equipo, obj.nombre_equipo, obj.descripcion)" data-toggle="modal" data-target="#exampleModal">
+                                            <button type="button" class="btn btn-info btn-md fas fa-edit" ng-click="consultar(obj.cve_equipo, obj.nombre_equipo, obj.descripcion)" data-toggle="modal" data-target="#exampleModal">
                                             </button>
-                                            <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
-                                                    </button>
+                                            <!-- <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
+                                                    </button> -->
                                            
                                     </tr>
                                 </tbody>

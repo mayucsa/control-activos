@@ -81,26 +81,44 @@ function validacionFactura($dbcon, $Datos) {
 
 
 
-
+// checar este codigo
 function guardarEquipo($dbcon, $Datos){
-	$fecha = date('Y-m-d H:i:s');
-	$status = '1';
+
 	$conn = $dbcon->conn();
-	$sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
-			VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
-	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
-	if ($qBuilder) {
-		$getId = "SELECT max(cve_equipo) cve_equipo FROM cat_equipos WHERE 
-		fecha_registro = '".$fecha."'
-		AND creado_por = ".$Datos->id."
-		AND estatus_equipo =  ".$status."
-		AND nombre_equipo = '".$Datos->nombre."' ";
-		$getId = $dbcon->qBuilder($conn, 'first', $getId);
+    // Verificar si ya existe un registro con el mismo nombre
+    $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	
+    if ($resultado->count >= 1) {
+        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
+    }else{
+		$fecha = date('Y-m-d H:i:s');
+		$status = '1';
+		$conn = $dbcon->conn();
+		$sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
+				VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
+		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+		if ($qBuilder) {
+			$getId = "SELECT max(cve_equipo) cve_equipo FROM cat_equipos WHERE 
+			fecha_registro = '".$fecha."'
+			AND creado_por = ".$Datos->id."
+			AND estatus_equipo =  ".$status."
+			AND nombre_equipo = '".$Datos->nombre."' ";
+			$getId = $dbcon->qBuilder($conn, 'first', $getId);
+	
+			dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getId->cve_equipo]);
+		}else{
+			dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
+	}
+	// $fecha = date('Y-m-d H:i:s');
+	// $status = '1';
+	// $conn = $dbcon->conn();
+	// $sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
+	// 		VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
+	// $qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
-		dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getId->cve_equipo]);
-	}else{
-		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
+	
 	}
 }
 

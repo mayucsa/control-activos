@@ -24,7 +24,7 @@
                 <input hidden="true" class="form-control UpperCase" ng-model="numeroAsignacion" id="numero" autocomplete="off"  ng-disabled="false">
                
             </div>
-            <div style="width: 100%;" class="form-floating mx-1">
+            <div style="width: 100%;" class="form-floating mx-1" margin-bottom: 20px>
                 <input class="form-control UpperCase" ng-model="nombreEmpleado" id="numero" autocomplete="off"  ng-disabled="false">
                 <label>Nombre empleado</label>
             </div>
@@ -35,8 +35,8 @@
                 </select>
                 <label>Producto</label>
             </div>
-            <div class="col-lg-12 d-lg-flex">
-                <div style="width: 100%;" class="form-floating mx-1">
+            <div class="col-lg-12 d-lg-flex   ">
+                <div  style="width: 100%;" class="form-floating mx-1">
                     <input type="text" ng-model="marca" id="marca" name="marca" class="form-control form-control-md " disabled>
                     <label>Marca</label>
                 </div>
@@ -194,9 +194,9 @@
                                         <td class="text-center">{{obj.descripcion}}</td>
                                         <td class="text-center">{{obj.fecha_asignacion}}</td>
                                         <td class="text-center">
-                                                <button type="button" class="btn btn-info btn-lg fas fa-edit" ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                                <button type="button" class="btn btn-info  fas fa-edit" ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt" ng-click="consultarEliminar(obj.cve_asignacion)" data-toggle="modal" data-target="#borrarModal">                                           
+                                                <button type="button" class="btn btn-danger  fas fa-trash-alt" ng-click="consultarEliminar(obj.cve_asignacion)" data-toggle="modal" data-target="#borrarModal">                                           
                                                     </button>
                                                
                                            </td>

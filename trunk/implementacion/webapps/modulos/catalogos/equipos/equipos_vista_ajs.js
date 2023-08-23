@@ -7,6 +7,7 @@
 		$scope.descripcion = '';
 	}
 
+// esta relacionado con el input de nombre de equipo
 	$scope.validaNombre = function (nombre) {
 		console.log('nombre:', nombre);
 		$http.post('Controller.php', {
@@ -26,7 +27,7 @@
 			}
 		}, function(error){
 			console.log('error', error);
-		})
+		}) 
 
 	}
 
@@ -105,8 +106,9 @@
 		// $('#emateriaprima').val([0]['cve_entrada']);
 		// $('#folioe').val([0]['cve_entrada']);
 	}
-	
-	$scope.validacionCampos = function(){
+
+// esta relacionado con e boton de guardar
+	$scope.validacionCampos = function(nombre, descripcion){
 		if ($scope.nombre == '' || $scope.nombre == null) {
 			Swal.fire(
 			  'Campo faltante',
@@ -136,6 +138,15 @@
 					response = response.data;
 					// console.log('response', response);
 					jsRemoveWindowLoad();
+					if (response.code == 400) {
+						Swal.fire({
+							// confirmButtonColor: '#3085d6',
+							title: 'Equipo existente',
+							html: response.msj,
+							confirmButtonColor: '#1A4672'
+							});
+							$scope.nombre = '';
+					}
 					if (response.code == 200) {
 						Swal.fire({
 						  title: '¡Éxito!',
