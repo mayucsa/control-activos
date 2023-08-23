@@ -45,7 +45,7 @@
             <input class="form-control UpperCase" ng-model="cambiaNumeroserie" id="cambiaNumeroserie"  autocomplete="off" >
             <label>Número de serie</label>
         </div>
-        <div style="width: 100%; float:left; margin-bottom: 20px" class="form-floating mx-1" >
+        <div style="width: 100%;" class="form-floating mx-1" >
             <input class="form-control UpperCase" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
             <label>Número de factura</label>
         </div>
