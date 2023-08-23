@@ -28,10 +28,10 @@
                 <input class="form-control UpperCase" ng-model="cambioNombreVer" id="cambioNombreVer" autocomplete="off" >
                 <label>Nombre del equipo</label>
             </div>
-            <div style="width: 100%;" class="form-floating mx-1">
+            <!-- <div style="width: 100%;" class="form-floating mx-1">
                     <input type="text" ng-model="cambioDescripcion" id="cambioDescripcion" name="cambioDescripcion" class="form-control form-control-md " >
                     <label>Descripción del equipo</label>
-                </div>
+                </div> -->
         </div>
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">

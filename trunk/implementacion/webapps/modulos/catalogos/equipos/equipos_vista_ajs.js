@@ -33,7 +33,7 @@
 	// }
 
 	$scope.cambioNombre = function () {
-		if ($scope.cambioNombreVer == '' || $scope.cambioDescripcion == null) {
+		if ($scope.cambioNombreVer == '' ) {
 			Swal.fire(
 			  'Campo faltante',
 			  'Es necesario llenar todos los campos',
@@ -58,7 +58,7 @@
 					'task': 'editarNombre',
 					'numero': $scope.numero,
 					'nombre': $scope.cambioNombreVer,
-					'descripcion': $scope.cambioDescripcion,
+					// 'descripcion': $scope.cambioDescripcion,
 					
 					'id': ID,
 				}).then(function(response){

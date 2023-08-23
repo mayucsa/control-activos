@@ -213,24 +213,24 @@ function editarNombre($dbcon, $Datos){
     $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
-    if ($resultado->count > 1) {
+    if ($resultado->count >= 1) {
         dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
     }
-	else if($resultado->count == 1){
-		$fecha = date('Y-m-d H:i:s');
-		$status = '1';
-		$conn = $dbcon->conn();
-		$sql = " UPDATE cat_equipos
-	SET  descripcion  ='".$Datos->descripcion."'
-	WHERE cve_equipo =" .$Datos->numero."";
-	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	}
+	// else if($resultado->count == 1){
+	// 	$fecha = date('Y-m-d H:i:s');
+	// 	$status = '1';
+	// 	$conn = $dbcon->conn();
+	// 	$sql = " UPDATE cat_equipos
+	// SET  descripcion  ='".$Datos->descripcion."'
+	// WHERE cve_equipo =" .$Datos->numero."";
+	// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+	// }
 	else{
 		$fecha = date('Y-m-d H:i:s');
 		$status = '1';
 		$conn = $dbcon->conn();
 		$sql = " UPDATE cat_equipos
-	SET  nombre_equipo  ='".$Datos->nombre."', descripcion  ='".$Datos->descripcion."'
+	SET  nombre_equipo  ='".$Datos->nombre."'
 	WHERE cve_equipo =" .$Datos->numero."";
 	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
 	}
