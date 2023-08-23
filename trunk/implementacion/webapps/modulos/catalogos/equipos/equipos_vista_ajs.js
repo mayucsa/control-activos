@@ -33,7 +33,7 @@
 	// }
 
 	$scope.cambioNombre = function () {
-		if ($scope.cambioNombreVer == '' ) {
+		if ($scope.cambioNombreVer == '' || $scope.cambioDescripcion == null) {
 			Swal.fire(
 			  'Campo faltante',
 			  'Es necesario llenar todos los campos',
@@ -58,7 +58,7 @@
 					'task': 'editarNombre',
 					'numero': $scope.numero,
 					'nombre': $scope.cambioNombreVer,
-					// 'descripcion': $scope.cambioDescripcion,
+					'descripcion': $scope.cambioDescripcion,
 					
 					'id': ID,
 				}).then(function(response){
@@ -118,63 +118,79 @@
 			);
 			return;
 		}
-		$http.post('Controller.php', {
-			'task': 'guardarEquipo',
-			'nombre': $scope.nombre,
-			'id': ID,
-		}).then(function(response){
-			response = response.data;
-			if (response.code == 400) {
-				Swal.fire({
-					// confirmButtonColor: '#3085d6',
-					title: 'Equipo existente',
-					html: response.msj,
-					confirmButtonColor: '#1A4672'
-					});
-					$scope.nombre = '';
-			}else{Swal.fire({
-				title: 'Estás a punto de registrar un equipo nuevo.',
-				text: '¿Es correcta la información agregada?',
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: 'green',
-				cancelButtonColor: 'red',
-				confirmButtonText: 'Aceptar',
-				cancelButtonText: 'Cancelar'
-			}).then((result )=> {
-				if (result.isConfirmed) {
-					jsShowWindowLoad('Capturando equipo nuevo...');
-					
-	
-						// console.log('response', response);
-						jsRemoveWindowLoad();
-						
-						if (response.code == 200) {
-							Swal.fire({
-							  title: '¡Éxito!',
-							  html: 'Su captura de equipo nuevo se generó correctamente.\n <b>Folio: ' +response.folio + '</b>',
-							  icon: 'success',
-							  showCancelButton: false,
-							  confirmButtonColor: 'green',
-							  confirmButtonText: 'Aceptar'
-							}).then((result) => {
-							  if (result.isConfirmed) {
-								  location.reload();
-							  }else{
-								  location.reload();
-							  }
-							});
-						}else{
-							alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
-						}
-					
-				}
-			})}}, function(error){
-				console.log('error', error);
-				jsRemoveWindowLoad();
-			})
-		// console.log('nombre:', $scope.nombre);
 		
+		// console.log('nombre:', $scope.nombre);
+		Swal.fire({
+			title: 'Estás a punto de registrar un equipo nuevo.',
+			text: '¿Es correcta la información agregada?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			confirmButtonText: 'Aceptar',
+			cancelButtonText: 'Cancelar'
+		}).then((result )=> {
+			if (result.isConfirmed) {
+				
+				$http.post('Controller.php', {
+					'task': 'guardarEquipo',
+					'nombre': $scope.nombre,
+					'id': ID,
+				}).then(function(response){
+					response = response.data;
+					if (response.code == 400) {
+						Swal.fire({
+							// confirmButtonColor: '#3085d6',
+							title: 'Equipo existente',
+							html: response.msj,
+							confirmButtonColor: '#1A4672'
+							});
+							$scope.nombre = '';
+					}else if(response.code == 200){
+						jsShowWindowLoad('Capturando equipo nuevo...');
+					jsRemoveWindowLoad();
+					Swal.fire({
+						title: '¡Éxito!',
+						html: 'Su captura de equipo nuevo se generó correctamente.\n <b>Folio: ' +response.folio + '</b>',
+						icon: 'success',
+						showCancelButton: false,
+						confirmButtonColor: 'green',
+						confirmButtonText: 'Aceptar'
+					  }).then((result) => {
+						if (result.isConfirmed) {
+							location.reload();
+						}else{
+							location.reload();
+						}
+					  });
+
+
+					}
+					// if (response.code == 200) {
+					// 	Swal.fire({
+					// 	  title: '¡Éxito!',
+					// 	  html: 'Su captura de equipo nuevo se generó correctamente.\n <b>Folio: ' +response.folio + '</b>',
+					// 	  icon: 'success',
+					// 	  showCancelButton: false,
+					// 	  confirmButtonColor: 'green',
+					// 	  confirmButtonText: 'Aceptar'
+					// 	}).then((result) => {
+					// 	  if (result.isConfirmed) {
+					// 	  	location.reload();
+					// 	  }else{
+					// 	  	location.reload();
+					// 	  }
+					// 	});
+					// }
+					else{
+						alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+					}
+				}, function(error){
+					console.log('error', error);
+					jsRemoveWindowLoad();
+				})
+			}
+		})
 	}
 
 	$http.post('Controller.php', {

@@ -85,6 +85,7 @@ function validacionFactura($dbcon, $Datos) {
 
 // checar este codigo
 function guardarEquipo($dbcon, $Datos){
+	if($Datos->nombre==""){ dd(['code'=>400,'msj'=>'El equipo no se pudo guardar']);}
 
 	$conn = $dbcon->conn();
 
