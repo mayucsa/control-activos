@@ -283,9 +283,28 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		$scope.cambiaTipoalmacenamiento = tipo_almacenamiento;
 		$scope.cambiaCapaalmacenamiento=capacidad_almacenamiento;
 	
-		
-	
 		}
+
+		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura,
+			sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,
+			capacidad_almacenamiento, fecha_ingreso) {
+			// $scope.numero=cve_equipo;
+			$scope.verNumeroE = cve_cequipo;
+			$scope.verEquipo = nombre_equipo;
+			$scope.verMarca = marca;
+			$scope.verModelo=modelo;
+			$scope.verDescripcion = descripcion;
+			$scope.verSerie = numero_serie;
+			$scope.verFactura=numero_factura;
+			$scope.verSistema = sistema_operativo;
+			$scope.verProcesador = procesador;
+			$scope.verVelocidad=vel_procesador;
+			$scope.verRam = memoria_ram;
+			$scope.verAlmacenamiento = tipo_almacenamiento;
+			$scope.verCapacidad=capacidad_almacenamiento;
+			$scope.verRegistro=fecha_ingreso;
+		
+			}
 
 
 	$scope.habilitarProducto = function (equipo) {
