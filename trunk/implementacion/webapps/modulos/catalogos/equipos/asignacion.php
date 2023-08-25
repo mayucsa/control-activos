@@ -13,8 +13,8 @@
 <div class="modal fade" id="asignacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">EDITAR ASIGNACIÓN</h5>
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR ASIGNACIÓN</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -63,17 +63,13 @@
 <div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-        <div style="width: 100%;" class="form-floating mx-1">
-                                        <input hidden="true" type="text" ng-model="nombreEliminar" id="marca" name="marca" class="form-control form-control-md " disabled>
-                                        
-                                    </div>
         <p>
             ¿Esta seguro que desa elimar este registro? No podrá elimar los cambios 
         </p>
@@ -81,7 +77,7 @@
         </div>
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
             <button type="button" class="btn btn-danger" ng-click="eliminarAsignacion()">Aceptar</button>
         </div>
         </div>

@@ -10,11 +10,11 @@
         </head>
  
 <div ng-controller="vistaCaracteristicasEquipos">
-<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade bd-example-modal-lg " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">EDITAR CARACTERISTICAS</h5>
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR CARACTERISTICAS</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
