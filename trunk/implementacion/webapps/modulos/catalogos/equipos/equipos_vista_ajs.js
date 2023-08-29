@@ -33,7 +33,7 @@
 	// }
 
 	$scope.cambioNombre = function () {
-		if ($scope.cambioNombreVer == '' || $scope.cambioDescripcion == null) {
+		if ($scope.cambioNombreVer == '' ) {
 			Swal.fire(
 			  'Campo faltante',
 			  'Es necesario llenar todos los campos',

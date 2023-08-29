@@ -214,7 +214,7 @@ function editarNombre($dbcon, $Datos){
     $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
-    if ($resultado->count >= 1) {
+    if ($resultado->count > 1) {
         dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
     }
 	// else if($resultado->count == 1){

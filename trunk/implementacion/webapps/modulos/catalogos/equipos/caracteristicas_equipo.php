@@ -132,7 +132,7 @@
                                                 <td><input  w-25 ng-model=verRam type="input" disabled></td>
                                                 <td><input  w-25 ng-model=verAlmacenamiento type="input" disabled></td>
                                                 <td><input  w-25 ng-model=verCapacidad type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verRegistro type="input" disabled></td>
+                                                <td><input  w-25 {{obj.fecha_ingreso}}></td>
                                                 
                                 </tbody>
                             </table>
@@ -143,7 +143,6 @@
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
-            <button type="button" class="btn btn-danger" ng-click="eliminarCaracteristicas()">Aceptar</button>
         </div>
         </div>
     </div>
