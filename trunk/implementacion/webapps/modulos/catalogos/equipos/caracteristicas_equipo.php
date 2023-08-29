@@ -31,48 +31,48 @@
             <!-- <label>Nombre de equipo</label> -->
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase" ng-model="cambiaMarca" id="cambiaMarca" autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaMarca" id="cambiaMarca" autocomplete="off" >
             <label class="form-label">Marca</label>
         </div >
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase" ng-model="cambiaModelo" id="cambiaModelo" autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaModelo" id="cambiaModelo" autocomplete="off" >
             <label>Modelo</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase" ng-model="cambiaDescripcion" id="cambiaDescripcion" autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaDescripcion" id="cambiaDescripcion" autocomplete="off" >
             <label>Descripción</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
         <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
-            <input class="form-control UpperCase" ng-model="cambiaNumeroserie" id="cambiaNumeroserie"  autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaNumeroserie" id="cambiaNumeroserie"  autocomplete="off" >
             <label>Número de serie</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
-            <input class="form-control UpperCase" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
             <label>Número de factura</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase" ng-model="cambiaSistemaoperativo" id="cambiaSistemaoperativo" autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaSistemaoperativo" id="cambiaSistemaoperativo" autocomplete="off" >
             <label>Sistema operativo</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase" ng-model="cambiaProcesador" id="cambiaProcesador" autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaProcesador" id="cambiaProcesador" autocomplete="off" >
             <label>Procesador</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control validanumericos" ng-model="cambiaVelocidadprocesador" id="cambiaVelocidadprocesador" autocomplete="off" >
+            <input class="form-control validanumericos text-center"  ng-model="cambiaVelocidadprocesador" id="cambiaVelocidadprocesador" autocomplete="off" >
             <label>Velocidad de procesador</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control validanumericos" ng-model="cambiaMemoriaram" id="cambiaMemoriaram" autocomplete="off" >
+            <input class="form-control validanumericos text-center"  ng-model="cambiaMemoriaram" id="cambiaMemoriaram" autocomplete="off" >
             <label>Memoria ram</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase" ng-model="cambiaTipoalmacenamiento" id="cambiaTipoalmacenamiento" autocomplete="off" >
+            <input class="form-control UpperCase text-center"  ng-model="cambiaTipoalmacenamiento" id="cambiaTipoalmacenamiento" autocomplete="off" >
             <label>Tipo de almacenamiento</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control validanumericos" ng-model="cambiaCapaalmacenamiento" id="capaalmacenamiento" autocomplete="off" >
+            <input class="form-control validanumericos text-center"  ng-model="cambiaCapaalmacenamiento" id="capaalmacenamiento" autocomplete="off" >
             <label>C. de almacenamiento</label>
         </div>
         </div>
@@ -184,52 +184,52 @@
                                         </select>
                                         <label>Equipo</label>
                                     </div>
-                                    <div style="width: 100%;  " class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="marca" id="marca" autocomplete="off" ng-disabled="true">
+                                    <div style="width: 100%;  " class="form-floating mx-1 ">
+                                        <input class="form-control UpperCase text-center" ng-model="marca" id="marca" autocomplete="off" ng-disabled="true">
                                         <label>Marca</label>
                                     </div>
                                     <div style="width: 100%;" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="modelo" id="modelo" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="modelo" id="modelo" autocomplete="off" ng-disabled="true">
                                         <label>Modelo</label>
                                     </div>
                                     <div style="width: 100%;" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="descripcion" id="descripcion" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="descripcion" id="descripcion" autocomplete="off" ng-disabled="true">
                                         <label>Descripción</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 d-lg-flex">
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="numeroserie" id="numeroserie" autocomplete="off" ng-blur="validaSerie(numeroserie)" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="numeroserie" id="numeroserie" autocomplete="off" ng-blur="validaSerie(numeroserie)" ng-disabled="true">
                                         <label>Número de serie</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="numerofactura" id="numerofactura"  autocomplete="off" ng-blur="validaFactura(numerofactura)" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="numerofactura" id="numerofactura"  autocomplete="off" ng-blur="validaFactura(numerofactura)" ng-disabled="true">
                                         <label>Número de factura</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="sistemaoperativo" id="sistemaoperativo" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="sistemaoperativo" id="sistemaoperativo" autocomplete="off" ng-disabled="true">
                                         <label>Sistema operativo</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="procesador" id="procesador" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="procesador" id="procesador" autocomplete="off" ng-disabled="true">
                                         <label>Procesador</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 d-lg-flex">
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control validanumericos" ng-model="velocidadprocesador" id="velocidadprocesador" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control validanumericos text-center" ng-model="velocidadprocesador" id="velocidadprocesador" autocomplete="off" ng-disabled="true">
                                         <label>Velocidad de procesador</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control validanumericos" ng-model="memoriaram" id="memoriaram" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control validanumericos text-center" ng-model="memoriaram" id="memoriaram" autocomplete="off" ng-disabled="true">
                                         <label>Memoria ram</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="tipoalmacenamiento" id="tipoalmacenamiento" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="tipoalmacenamiento" id="tipoalmacenamiento" autocomplete="off" ng-disabled="true">
                                         <label>Tipo de almacenamiento</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control validanumericos" ng-model="capaalmacenamiento" id="almacenamiento" autocomplete="off" ng-disabled="true">
+                                        <input class="form-control validanumericos text-center" ng-model="capaalmacenamiento" id="almacenamiento" autocomplete="off" ng-disabled="true">
                                         <label>Capacidad de almacenamiento</label>
                                     </div>
                                     <!-- <div style="width: 100%;" class="form-floating mx-1">

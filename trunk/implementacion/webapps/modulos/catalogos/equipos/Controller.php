@@ -319,7 +319,8 @@ function getEmpleado ($dbcon){
 // para traer las caracteristicas del equipo
 function getCaracteristicas ($dbcon){
 	
-	$sql = "select cve_cequipo, marca, modelo, numero_serie from caracteristicas_equipos  ";
+	$sql = "select cve_cequipo, marca, modelo, numero_serie, nombre_equipo from caracteristicas_equipos cev
+	INNER JOIN cat_equipos ce ON cev.cve_equipo = ce.cve_equipo ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }

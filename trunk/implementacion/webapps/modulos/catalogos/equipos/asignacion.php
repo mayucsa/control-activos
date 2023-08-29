@@ -24,18 +24,18 @@
                 <input hidden="true" class="form-control UpperCase" ng-model="numeroAsignacion" id="numero" autocomplete="off"  ng-disabled="false">
                
             </div>
-            <div style="width: 100%;" class="form-floating mx-1" margin-bottom: 20px>
+            <div style="width: 100%; " class="form-floating mx-1" >
                 <input class="form-control UpperCase" ng-model="nombreEmpleado" id="numero" autocomplete="off"  ng-disabled="false">
                 <label>Nombre empleado</label>
             </div>
-            <div style="width: 100%;" class="form-floating mx-1">
+            <div style="width: 100%;" class="form-floating mx-1" style="margin-bottom: 20px">
                 <select class="form-control form-group-md" ng-model="nombre"  ng-blur="habilitarinput()" autocomplete="off">
                     <option selected="selected" value="">[Seleccione una opción..]</option>
                     <option ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}">{{obj.cve_cequipo}} - {{obj.numero_serie}} (Número de serie)</option>
                 </select>
                 <label>Producto</label>
             </div>
-            <div class="col-lg-12 d-lg-flex   ">
+            <div class="col-lg-12 d-lg-flex " style=" margin-top: 10px">
                 <div  style="width: 100%;" class="form-floating mx-1">
                     <input type="text" ng-model="marca" id="marca" name="marca" class="form-control form-control-md " disabled>
                     <label>Marca</label>
@@ -111,36 +111,36 @@
                             <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">
                                     <!-- para empleado -->
-                                    <div style="width: 100%;" class="form-floating mx-1">
-                                        <select class="form-control form-group-md" ng-model="codigo" autocomplete="off">
+                                    <div style="width: 100%;" class="form-floating mx-1 text-center">
+                                        <select class="form-control form-group-md " ng-model="codigo" autocomplete="off">
                                             <option selected="selected" value="">[Seleccione al empleado..]</option>
-                                            <option ng-repeat="(i, obj) in empleado" value="{{obj.codigoempleado}}">Código:{{obj.codigoempleado}}--Nombre:{{obj.nombre}}</option>
+                                            <option class="text-center" ng-repeat="(i, obj) in empleado" value="{{obj.codigoempleado}}">Código:{{obj.codigoempleado}}--Nombre:{{obj.nombre}}</option>
                                         </select>
                                         <label>Empleado</label>
                                     </div>
 
                                     <!-- para equipo -->
-                                    <div style="width: 100%;" class="form-floating mx-1">
+                                    <div style="width: 100%;" class="form-floating mx-1 text-center">
                                         <select class="form-control form-group-md" ng-model="nombre" ng-blur="validaEquipo(nombre)" ng-click="habilitarinput()" autocomplete="off">
                                             <option selected="selected" value="">[Seleccione una opción..]</option>
-                                            <option ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}">{{obj.cve_cequipo}} - {{obj.numero_serie}} (Número de serie)</option>
+                                            <option class="text-center"  ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}"> {{obj.numero_serie}}---{{obj.nombre_equipo}} </option>
                                         </select>
                                         <label>Producto</label>
                                     </div>
                                 </div>
                                 
                                 
-                                <div class="col-lg-12 d-lg-flex">
-                                    <div style="width: 100%; margin-bottom: 10px" class="form-floating mx-1">
-                                        <input type="text" ng-model="marca" id="marca" name="marca" class="form-control form-control-md " disabled>
+                                <div class="col-lg-12 d-lg-flex " style=" margin-top: 15px">
+                                    <div style="width: 100%;" class="form-floating mx-1">
+                                        <input type="text" ng-model="marca" id="marca" name="marca" class="form-control form-control-md text-center" disabled>
                                         <label>Marca</label>
                                     </div>
-                                    <div style="width: 100%; margin-bottom: 10px" class="form-floating mx-1">
-                                        <input type="text" ng-model="modelo" id="modelo" name="modelo" class="form-control form-control-md " disabled>
+                                    <div style="width: 100%;" class="form-floating mx-1">
+                                        <input type="text" ng-model="modelo" id="modelo" name="modelo" class="form-control form-control-md text-center" disabled>
                                         <label>Modelo</label>
                                     </div>
-                                    <div style="width: 100%; margin-bottom: 10px" class="form-floating mx-1">
-                                        <input type="text" ng-model="descripcion" id="descripcion" name="descripcion" class="form-control form-control-md " disabled>
+                                    <div style="width: 100%;" class="form-floating mx-1">
+                                        <input type="text" ng-model="descripcion" id="descripcion" name="descripcion" class="form-control form-control-md text-center" disabled>
                                         <label>Descripción</label>
                                     </div>
                                 </div>
