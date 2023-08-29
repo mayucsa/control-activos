@@ -25,104 +25,275 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
         $scope.tipoalmacenamiento = '';
         $scope.capaalmacenamiento = '';
 	}
-	$scope.validacionCampos = function(){
-		if ($scope.nombre == 1 || $scope.nombre == 2 )
-		{	if ($scope.nombre == '' || $scope.nombre == null,
-			$scope.marca == '' || $scope.marca == null, 
-			$scope.modelo == '' || $scope.modelo == null,
-			$scope.descripcion == '' || $scope.descripcion == null,
-			$scope.numeroserie == '' || $scope.numeroserie == null,
-			$scope.numerofactura == '' || $scope.numerofactura == null,
-			$scope.sistemaoperativo == '' || $scope.sistemaoperativo == null,
-			$scope.procesador == '' || $scope.procesador == null,
-			$scope.velocidadprocesador == '' || $scope.velocidadprocesador == null,
-			$scope.memoriaram == '' || $scope.memoriaram == null,
-			$scope.tipoalmacenamiento == '' || $scope.tipoalmacenamiento == null,
-			$scope.capaalmacenamiento == '' || $scope.capaalmacenamiento == null
-			) {
-				Swal.fire(
-				'Campo faltante',
-				'Es necesario llenar todos los campos',
-				'warning'
-				);
-				return;
-			}}
-			else if($scope.nombre >2){
-				if($scope.nombre == '' || $scope.nombre == null,
-				$scope.marca == '' || $scope.marca == null, 
-				$scope.modelo == '' || $scope.modelo == null,
-				$scope.descripcion == '' || $scope.descripcion == null,
-				$scope.numeroserie == '' || $scope.numeroserie == null,
-				$scope.numerofactura == '' || $scope.numerofactura == null)
-				
-				{
-					Swal.fire(
-					'Campo faltante',
-					'Es necesario llenar todos los campos',
-					'warning'
-					);
-					return;
-			}
-			}
-			
-		
-		// console.log('nombre:', $scope.nombre);
-		Swal.fire({
-			title: 'Estás a punto de registrar un equipo nuevo.',
-			text: '¿Es correcta la información agregada?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: 'green',
-			cancelButtonColor: 'red',
-			confirmButtonText: 'Aceptar',
-			cancelButtonText: 'Cancelar'
-		}).then((result )=> {
-			if (result.isConfirmed) {
-				jsShowWindowLoad('Capturando caracteristicas...');
-				$http.post('Controller.php', {
-					'task': 'guardarCaracteristicas',
-					'id': ID,
-					'nombre': $scope.nombre,
-					'marca': $scope.marca,
-					'modelo': $scope.modelo,
-					'descripcion': $scope.descripcion,
-					'numeroserie': $scope.numeroserie,
-					'numerofactura': $scope.numerofactura,
-					'sistemaoperativo': $scope.sistemaoperativo,
-					'procesador': $scope.procesador,
-					'velocidadprocesador': $scope.velocidadprocesador,
-					'memoriaram': $scope.memoriaram,
-					'tipoalmacenamiento': $scope.tipoalmacenamiento,
-					'capaalmacenamiento': $scope.capaalmacenamiento,
+	$scope.validame = function(){
+		console.log('nombre', $scope.nombre)
+	}
 
-				}).then(function(response){
-					response = response.data;
-					// console.log('response', response);
-					jsRemoveWindowLoad();
-					if (response.code == 200) {
-						Swal.fire({
-						  title: '¡Éxito!',
-						  html: 'Su captura de equipo nuevo se generó correctamente.\n Se ha guardado correctamente',
-						  icon: 'success',
-						  showCancelButton: false,
-						  confirmButtonColor: 'green',
-						  confirmButtonText: 'Aceptar'
-						}).then((result) => {
-						  if (result.isConfirmed) {
-						  	location.reload();
-						  }else{
-						  	location.reload();
-						  }
-						});
-					}else{
-						alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+	$scope.validacionCampos = function(){
+		$http.post('Controller.php', {
+			'task': 'ValidaQueEquipoEs',
+			'cve_equipo': $scope.nombre
+		}).then(function(response){
+			response = response.data;
+			if (response.code == 400) {
+				if ($scope.nombre == '' || $scope.nombre == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un equipo',
+						'warning'
+						);
+						return;
+				}if ($scope.marca == '' || $scope.marca == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar una marca',
+						'warning'
+						);
+						return;
+				}if ($scope.modelo == '' || $scope.modelo == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un modelo',
+						'warning'
+						);
+						return;
+				}if ($scope.numeroserie == '' || $scope.numeroserie == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un numero de serie',
+						'warning'
+						);
+						return;
+				}if ($scope.numerofactura == '' || $scope.numerofactura == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar el numero de factura',
+						'warning'
+						);
+						return;
+				}if ($scope.sistemaoperativo == '' || $scope.sistemaoperativo == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar una sistema sistema operativo',
+						'warning'
+						);
+						return;
+				}if ($scope.procesador == '' || $scope.procesador == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un procesador',
+						'warning'
+						);
+						return;
+				}if ($scope.velocidadprocesador == '' || $scope.velocidadprocesador == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar la velocidad del procesador',
+						'warning'
+						);
+						return;
+				}if ($scope.memoriaram == '' || $scope.memoriaram == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar la cantidad de memoria ram',
+						'warning'
+						);
+						return;
+				}if ($scope.tipoalmacenamiento == '' || $scope.tipoalmacenamiento == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar el tiupo de almacenamiento',
+						'warning'
+						);
+						return;
+				}if ($scope.capaalmacenamiento == '' || $scope.capaalmacenamiento == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar la capacidad de almacenamiento',
+						'warning'
+						);
+						return;
+				}
+				Swal.fire({
+					title: 'Estás a punto de registrar un equipo nuevo.',
+					text: '¿Es correcta la información agregada?',
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: 'green',
+					cancelButtonColor: 'red',
+					confirmButtonText: 'Aceptar',
+					cancelButtonText: 'Cancelar'
+				}).then((result )=> {
+					if (result.isConfirmed) {
+						jsShowWindowLoad('Capturando caracteristicas...');
+						$http.post('Controller.php', {
+							'task': 'guardarCaracteristicas',
+							'id': ID,
+							'nombre': $scope.nombre,
+							'marca': $scope.marca,
+							'modelo': $scope.modelo,
+							'descripcion': $scope.descripcion,
+							'numeroserie': $scope.numeroserie,
+							'numerofactura': $scope.numerofactura,
+							'sistemaoperativo': $scope.sistemaoperativo,
+							'procesador': $scope.procesador,
+							'velocidadprocesador': $scope.velocidadprocesador,
+							'memoriaram': $scope.memoriaram,
+							'tipoalmacenamiento': $scope.tipoalmacenamiento,
+							'capaalmacenamiento': $scope.capaalmacenamiento,
+
+						}).then(function(response){
+							response = response.data;
+							// console.log('response', response);
+							jsRemoveWindowLoad();
+							if (response.code == 200) {
+								Swal.fire({
+								  title: '¡Éxito!',
+								  html: 'Su captura de equipo nuevo se generó correctamente.\n Se ha guardado correctamente',
+								  icon: 'success',
+								  showCancelButton: false,
+								  confirmButtonColor: 'green',
+								  confirmButtonText: 'Aceptar'
+								}).then((result) => {
+								  if (result.isConfirmed) {
+								  	location.reload();
+								  }else{
+								  	location.reload();
+								  }
+								});
+							}else{
+								alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+							}
+						}, function(error){
+							console.log('error', error);
+							jsRemoveWindowLoad();
+						})
 					}
-				}, function(error){
-					console.log('error', error);
-					jsRemoveWindowLoad();
-				})
+				});
+			}else{
+				if ($scope.nombre == '' || $scope.nombre == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un equipo',
+						'warning'
+						);
+						return;
+				}if ($scope.marca == '' || $scope.marca == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar una marca',
+						'warning'
+						);
+						return;
+				}if ($scope.modelo == '' || $scope.modelo == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un modelo',
+						'warning'
+						);
+						return;
+				}if ($scope.numeroserie == '' || $scope.numeroserie == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar un numero de serie',
+						'warning'
+						);
+						return;
+				}if ($scope.numerofactura == '' || $scope.numerofactura == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar el numero de factura',
+						'warning'
+						);
+						return;
+				}
+				Swal.fire({
+					title: 'Estás a punto de registrar un equipo nuevo.',
+					text: '¿Es correcta la información agregada?',
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: 'green',
+					cancelButtonColor: 'red',
+					confirmButtonText: 'Aceptar',
+					cancelButtonText: 'Cancelar'
+				}).then((result )=> {
+					if (result.isConfirmed) {
+						jsShowWindowLoad('Capturando caracteristicas...');
+						$http.post('Controller.php', {
+							'task': 'guardarCaracteristicas',
+							'id': ID,
+							'nombre': $scope.nombre,
+							'marca': $scope.marca,
+							'modelo': $scope.modelo,
+							'descripcion': $scope.descripcion,
+							'numeroserie': $scope.numeroserie,
+							'numerofactura': $scope.numerofactura,
+							'sistemaoperativo': $scope.sistemaoperativo,
+							'procesador': $scope.procesador,
+							'velocidadprocesador': $scope.velocidadprocesador,
+							'memoriaram': $scope.memoriaram,
+							'tipoalmacenamiento': $scope.tipoalmacenamiento,
+							'capaalmacenamiento': $scope.capaalmacenamiento,
+
+						}).then(function(response){
+							response = response.data;
+							// console.log('response', response);
+							jsRemoveWindowLoad();
+							if (response.code == 200) {
+								Swal.fire({
+								  title: '¡Éxito!',
+								  html: 'Su captura de equipo nuevo se generó correctamente.\n Se ha guardado correctamente',
+								  icon: 'success',
+								  showCancelButton: false,
+								  confirmButtonColor: 'green',
+								  confirmButtonText: 'Aceptar'
+								}).then((result) => {
+								  if (result.isConfirmed) {
+								  	location.reload();
+								  }else{
+								  	location.reload();
+								  }
+								});
+							}else{
+								alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+							}
+						}, function(error){
+							console.log('error', error);
+							jsRemoveWindowLoad();
+						})
+					}
+				});
 			}
-		})
+		}, function(error){
+			console.log('error', error);
+			jsRemoveWindowLoad();
+		});
+
+
+		// if ($scope.nombre == '' || $scope.nombre == null) {
+		// 		Swal.fire(
+		// 		'Campo faltante',
+		// 		'Es necesario indicar un equipo',
+		// 		'warning'
+		// 		);
+		// 		return;
+		// 	}else{
+		// 		if($scope.nombre == '' || $scope.nombre == null,
+		// 		$scope.marca == '' || $scope.marca == null, 
+		// 		$scope.modelo == '' || $scope.modelo == null,
+		// 		$scope.descripcion == '' || $scope.descripcion == null,
+		// 		$scope.numeroserie == '' || $scope.numeroserie == null,
+		// 		$scope.numerofactura == '' || $scope.numerofactura == null)				
+		// 		{
+		// 			Swal.fire(
+		// 			'Campo faltante',
+		// 			'Es necesario llenar todos los campos',
+		// 			'warning'
+		// 			);
+		// 			return;
+		// 		}
+		// 	}
+
 	}
 // Validar si no un producto igual en la base de datos
 	$scope.validaSerie = function (numeroserie) {
@@ -285,9 +456,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	
 		}
 
-		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura,
-			sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,
-			capacidad_almacenamiento, fecha_ingreso) {
+		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso) {
 			// $scope.numero=cve_equipo;
 			$scope.verNumeroE = cve_cequipo;
 			$scope.verEquipo = nombre_equipo;
@@ -307,49 +476,84 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 			}
 
 
-	$scope.habilitarProducto = function (equipo) {
+	$scope.habilitarProducto = function (nombre) {
+
+		$http.post('Controller.php', {
+			'task': 'ValidaQueEquipoEs',
+			'cve_equipo': nombre
+		}).then(function(response){
+			response = response.data;
+			if (response.code == 400) {
+				$("#marca").attr("disabled", false);
+				$("#modelo").attr("disabled", false);
+				$("#descripcion ").attr("disabled", false);
+				$("#numeroserie").attr("disabled", false);
+				$("#numerofactura").attr("disabled", false);
+				$("#sistemaoperativo").attr("disabled", false);
+				$("#procesador").attr("disabled", false);
+				$("#velocidadprocesador").attr("disabled", false);
+				$("#memoriaram").attr("disabled", false);
+				$("#tipoalmacenamiento").attr("disabled", false);
+				$("#almacenamiento").attr("disabled", false);
+			}else{
+				$("#marca").attr("disabled", false);
+				$("#modelo").attr("disabled", false);
+				$("#descripcion ").attr("disabled", false);
+				$("#numeroserie").attr("disabled", false);
+				$("#numerofactura").attr("disabled", false);
+				$("#sistemaoperativo").attr("disabled", true);
+				$("#procesador").attr("disabled", true);
+				$("#velocidadprocesador").attr("disabled", true);
+				$("#memoriaram").attr("disabled", true);
+				$("#tipoalmacenamiento").attr("disabled", true);
+				$("#almacenamiento").attr("disabled", true);
+			}
+		}, function(error){
+			console.log('error', error);
+			jsRemoveWindowLoad();
+		});
 		
-		if ($scope.nombre==1  || $scope.nombre==2) {
-			$("#marca").attr("disabled", false);
-			$("#modelo").attr("disabled", false);
-			$("#descripcion ").attr("disabled", false);
-			$("#numeroserie").attr("disabled", false);
-			$("#numerofactura").attr("disabled", false);
-			$("#sistemaoperativo").attr("disabled", false);
-			$("#procesador").attr("disabled", false);
-			$("#velocidadprocesador").attr("disabled", false);
-			$("#memoriaram").attr("disabled", false);
-			$("#tipoalmacenamiento").attr("disabled", false);
-			$("#almacenamiento").attr("disabled", false);
-			// $("#prueba2").attr("disabled", false);
+		// if ($scope.nombre==1  || $scope.nombre==2) {
+		// 	$("#marca").attr("disabled", false);
+		// 	$("#modelo").attr("disabled", false);
+		// 	$("#descripcion ").attr("disabled", false);
+		// 	$("#numeroserie").attr("disabled", false);
+		// 	$("#numerofactura").attr("disabled", false);
+		// 	$("#sistemaoperativo").attr("disabled", false);
+		// 	$("#procesador").attr("disabled", false);
+		// 	$("#velocidadprocesador").attr("disabled", false);
+		// 	$("#memoriaram").attr("disabled", false);
+		// 	$("#tipoalmacenamiento").attr("disabled", false);
+		// 	$("#almacenamiento").attr("disabled", false);
+		// 	// $("#prueba2").attr("disabled", false);
 			
 
-		}else if($scope.nombre==0){
-			$("#marca").attr("disabled", true);
-			$("#modelo").attr("disabled", true);
-			$("#descripcion ").attr("disabled", true);
-			$("#numeroserie").attr("disabled", true);
-			$("#numerofactura").attr("disabled", true);
-			$("#sistemaoperativo").attr("disabled", true);
-			$("#procesador").attr("disabled", true);
-			$("#velocidadprocesador").attr("disabled", true);
-			$("#memoriaram").attr("disabled", true);
-			$("#tipoalmacenamiento").attr("disabled", true);
-			$("#almacenamiento").attr("disabled", true);
-		}
-		else{
-			$("#marca").attr("disabled", false);
-			$("#modelo").attr("disabled", false);
-			$("#descripcion ").attr("disabled", false);
-			$("#numeroserie").attr("disabled", false);
-			$("#numerofactura").attr("disabled", false);
-			$("#sistemaoperativo").attr("disabled", true);
-			$("#procesador").attr("disabled", true);
-			$("#velocidadprocesador").attr("disabled", true);
-			$("#memoriaram").attr("disabled", true);
-			$("#tipoalmacenamiento").attr("disabled", true);
-			$("#almacenamiento").attr("disabled", true);
-		}
+		// }else if($scope.nombre==0){
+		// 	$("#marca").attr("disabled", true);
+		// 	$("#modelo").attr("disabled", true);
+		// 	$("#descripcion ").attr("disabled", true);
+		// 	$("#numeroserie").attr("disabled", true);
+		// 	$("#numerofactura").attr("disabled", true);
+		// 	$("#sistemaoperativo").attr("disabled", true);
+		// 	$("#procesador").attr("disabled", true);
+		// 	$("#velocidadprocesador").attr("disabled", true);
+		// 	$("#memoriaram").attr("disabled", true);
+		// 	$("#tipoalmacenamiento").attr("disabled", true);
+		// 	$("#almacenamiento").attr("disabled", true);
+		// }
+		// else{
+		// 	$("#marca").attr("disabled", false);
+		// 	$("#modelo").attr("disabled", false);
+		// 	$("#descripcion ").attr("disabled", false);
+		// 	$("#numeroserie").attr("disabled", false);
+		// 	$("#numerofactura").attr("disabled", false);
+		// 	$("#sistemaoperativo").attr("disabled", true);
+		// 	$("#procesador").attr("disabled", true);
+		// 	$("#velocidadprocesador").attr("disabled", true);
+		// 	$("#memoriaram").attr("disabled", true);
+		// 	$("#tipoalmacenamiento").attr("disabled", true);
+		// 	$("#almacenamiento").attr("disabled", true);
+		// }
 		
 
 	}

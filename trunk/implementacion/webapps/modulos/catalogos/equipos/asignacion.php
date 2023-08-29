@@ -113,7 +113,7 @@
                                     <!-- para empleado -->
                                     <div style="width: 100%;" class="form-floating mx-1 text-center">
                                         <select class="form-control form-group-md " ng-model="codigo" autocomplete="off">
-                                            <option selected="selected" value="">[Seleccione al empleado..]</option>
+                                            <option selected="selected" value="" disabled>[Seleccione al empleado..]</option>
                                             <option class="text-center" ng-repeat="(i, obj) in empleado" value="{{obj.codigoempleado}}">Código:{{obj.codigoempleado}}--Nombre:{{obj.nombre}}</option>
                                         </select>
                                         <label>Empleado</label>
@@ -121,9 +121,9 @@
 
                                     <!-- para equipo -->
                                     <div style="width: 100%;" class="form-floating mx-1 text-center">
-                                        <select class="form-control form-group-md" ng-model="nombre" ng-blur="validaEquipo(nombre)" ng-click="habilitarinput()" autocomplete="off">
-                                            <option selected="selected" value="">[Seleccione una opción..]</option>
-                                            <option class="text-center"  ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}"> {{obj.numero_serie}}---{{obj.nombre_equipo}} </option>
+                                        <select class="form-control form-group-md" ng-model="nombre" ng-blur="validaEquipo(nombre)" autocomplete="off">
+                                            <option selected="selected" value="" disabled>[Seleccione una opción..]</option>
+                                            <option class="text-center" ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}"> {{obj.folio}} </option>
                                         </select>
                                         <label>Producto</label>
                                     </div>

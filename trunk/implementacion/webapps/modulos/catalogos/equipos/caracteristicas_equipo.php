@@ -178,8 +178,8 @@
                             <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex d-grid gap-3">
                                     <div style="width: 100%;" class="form-floating mx-1">
-                                        <select class="form-control form-group-md" ng-model="nombre" autocomplete="off" ng-blur="habilitarProducto(equipo)">
-                                            <option selected="selected" value="">[Seleccione una opción..]</option>
+                                        <select class="form-control form-group-md" ng-model="nombre" autocomplete="off" ng-blur="habilitarProducto(nombre)">
+                                            <option selected="selected" value="" disabled >[Seleccione una opción..]</option>
                                             <option ng-repeat="(i, obj) in equipo" value="{{obj.cve_equipo}}">{{obj.nombre_equipo}}</option>
                                         </select>
                                         <label>Equipo</label>

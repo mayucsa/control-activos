@@ -96,7 +96,7 @@
                                 <div class="col-lg-12 d-lg-flex">
                                
                                     <div style="width: 100%;" class="form-floating mx-1">
-                                        <input class="form-control UpperCase" ng-model="nombre" id="nombre" autocomplete="off"  >
+                                        <input class="form-control UpperCase" ng-model="nombre" id="nombre" autocomplete="off" ng-blur="ValidaExistencia(nombre)" >
                                         <label>Nombre equipo</label>
                                     </div>
                                     <!-- <div style="width: 100%;" class="form-floating mx-1">
