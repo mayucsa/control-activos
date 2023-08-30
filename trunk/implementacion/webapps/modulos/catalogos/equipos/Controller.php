@@ -253,6 +253,9 @@ function editarNombre($dbcon, $Datos){
 function editarCaracteristica($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
+	if ($Datos->descripcion==''){
+		$Datos->descripcion=NULL;}
+		
 	if ($Datos->sistemaoperativo==''){
 		$Datos->sistemaoperativo=NULL;
 	}
