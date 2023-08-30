@@ -135,6 +135,9 @@ function guardarCaracteristicas($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$status = '1';
 	$conn = $dbcon->conn();
+	if ($Datos->descripcion==''){
+		$Datos->descripcion=NULL;}
+
 	if ($Datos->sistemaoperativo==''){
 		$Datos->sistemaoperativo=NULL;
 	}
@@ -255,7 +258,7 @@ function editarCaracteristica($dbcon, $Datos){
 	$conn = $dbcon->conn();
 	if ($Datos->descripcion==''){
 		$Datos->descripcion=NULL;}
-		
+
 	if ($Datos->sistemaoperativo==''){
 		$Datos->sistemaoperativo=NULL;
 	}
