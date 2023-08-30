@@ -22,10 +22,9 @@ function getProduccion($dbcon){
 // me sirve para mostrar en la pantalla de caracteristicas 
 // todas las caracteristicas que se han puesto a los equipos
 function getVercaracteristicas($dbcon){
-	$sql = "SELECT ce.cve_cequipo, modelo, marca, ce.descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador,
-	memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso, ce.cve_equipo, nombre_equipo
-	FROM caracteristicas_equipos ce
-	INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo;";
+	$sql = "SELECT CONCAT('MYS - TIC', ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio, ce.cve_cequipo, nombre_equipo, numero_serie, marca, modelo, ce.descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso
+			FROM caracteristicas_equipos ce
+			INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
@@ -136,8 +135,8 @@ function guardarCaracteristicas($dbcon, $Datos){
 	$status = '1';
 	$conn = $dbcon->conn();
 	if ($Datos->descripcion==''){
-		$Datos->descripcion=NULL;}
-
+		$Datos->descripcion=NULL;
+	}
 	if ($Datos->sistemaoperativo==''){
 		$Datos->sistemaoperativo=NULL;
 	}
@@ -155,9 +154,6 @@ function guardarCaracteristicas($dbcon, $Datos){
 	}
 	if ($Datos->capaalmacenamiento==''){
 		$Datos->capaalmacenamiento=0;
-	}
-	if ($Datos->descripcion==''){
-		$Datos->descripcion=NULL;
 	}
 		
 	

@@ -1,7 +1,7 @@
 app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $http) {
 	$scope.marca = '';
 	$scope.modelo = '';
-    $scope.descripción = '';
+    $scope.descripcion = '';
 	$scope.numeroserie = '';
     $scope.numerofactura = '';
 	$scope.sistemaoperativo = '';
@@ -114,6 +114,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 						);
 						return;
 				}
+				if ($scope.descripcion == '') {
+					$scope.descripción = '';
+				}
 				Swal.fire({
 					title: 'Estás a punto de registrar un equipo nuevo.',
 					text: '¿Es correcta la información agregada?',
@@ -207,6 +210,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 						'warning'
 						);
 						return;
+				}
+				if ($scope.descripcion == '') {
+					$scope.descripción = '';
 				}
 				Swal.fire({
 					title: 'Estás a punto de registrar un equipo nuevo.',
@@ -617,7 +623,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		console.log('getVercaracteristicas', response);
 		$scope.vercaracteristicas = response;
 		setTimeout(function(){
-			$('#tablaProduccion').DataTable({
+			$('#tablaEquipos').DataTable({
 		        "processing": true,
 		        "bDestroy": true,
 				// "order": [5, 'desc'],

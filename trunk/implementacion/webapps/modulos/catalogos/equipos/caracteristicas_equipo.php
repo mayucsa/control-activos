@@ -142,7 +142,7 @@
         </div>
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
         </div>
         </div>
     </div>
@@ -258,14 +258,15 @@
                         </div>
                         <div class="card-footer">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
+                            <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaEquipos">
                                 <thead>
                                 <tr>
-                                    <th> Equipo</th>
-                                    <th> Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Descripción</th>
-                                    <th>Número de factura</th>
+                                    <th>Folio</th>
+                                    <th>Equipo</th>
+                                    <th>Marca</th>
+                                    <!-- <th>Modelo</th> -->
+                                    <!-- <th>Descripción</th> -->
+                                    <!-- <th>Número de factura</th> -->
                                     <th>Número de serie</th>
                                     <!-- <th>Sistema operativo</th>
                                     <th> Procesador</th>
@@ -279,11 +280,12 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="(i, obj) in vercaracteristicas track by i">
+                                                <td class="text-center">{{obj.folio}}</td>
                                                 <td class="text-center">{{obj.nombre_equipo}}</td>
-                                                <td>{{obj.marca}}</td>
-                                                <td class="text-center">{{obj.modelo}}</td>
-                                                <td class="text-center">{{obj.descripcion}}</td>
-                                                <td class="text-center">{{obj.numero_factura}}</td>
+                                                <td class="text-center">{{obj.marca}}</td>
+                                                <!-- <td class="text-center">{{obj.modelo}}</td> -->
+                                                <!-- <td class="text-center">{{obj.descripcion}}</td> -->
+                                                <!-- <td class="text-center">{{obj.numero_factura}}</td> -->
                                                 <td class="text-center">{{obj.numero_serie}}</td>
                                                 <!-- <td class="text-center">{{obj.sistema_operativo}}</td>
                                                 <td>{{obj.procesador}}</td>
@@ -293,15 +295,11 @@
                                                 <td class="text-center">{{obj.capacidad_almacenamiento}}</td>
                                                 <td class="text-center">{{obj.fecha_ingreso}}</td> -->
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-info fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
+                                                    <button type="button" class="btn btn-info btn-sm far fa-eye"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
+                                                        obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento)"  data-toggle="modal" data-target="#borrarModal"></button>
+                                                    <button type="button" class="btn btn-warning btn-sm fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
                                                         obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento,
-                                                        obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal">
-                                                                                                
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning far fa-eye"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
-                                                        obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento)"  data-toggle="modal" data-target="#borrarModal">                                           
-                                                    </button>
-                                                    
+                                                        obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal"></button>
                                                 </td>
                                 </tbody>
                             </table>
