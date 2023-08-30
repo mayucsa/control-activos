@@ -27,8 +27,8 @@
             <!-- <label>Numero</label> -->
         </div>
         <div style="width: 100%;" class="form-floating mx-1 ">
-            <input hidden="true" class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
-            <!-- <label>Nombre de equipo</label> -->
+            <input  class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
+            <label>Nombre de equipo</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
             <input class="form-control UpperCase text-center" ng-model="cambiaMarca" id="cambiaMarca" autocomplete="off" >
@@ -44,7 +44,7 @@
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
         <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
-            <input class="form-control UpperCase text-center" ng-model="cambiaNumeroserie" id="cambiaNumeroserie"  autocomplete="off" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaNumeroserie"  ng-blur="validaSerie(cambiaNumeroserie)" id="cambiaNumeroserie"  autocomplete="off" >
             <label>Número de serie</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
@@ -87,7 +87,7 @@
     </div>
     </div>
 
-    <!-- modal para borrar -->
+    <!-- modal para ver -->
     <div class="modal fade bd-example-modal-lg"  style="width: 100%;" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -203,7 +203,7 @@
                                         <label>Número de serie</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
-                                        <input class="form-control UpperCase text-center" ng-model="numerofactura" id="numerofactura"  autocomplete="off" ng-blur="validaFactura(numerofactura)" ng-disabled="true">
+                                        <input class="form-control UpperCase text-center" ng-model="numerofactura" id="numerofactura"  autocomplete="off"  ng-disabled="true">
                                         <label>Número de factura</label>
                                     </div>
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">

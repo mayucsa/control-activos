@@ -22,7 +22,7 @@ function getProduccion($dbcon){
 // me sirve para mostrar en la pantalla de caracteristicas 
 // todas las caracteristicas que se han puesto a los equipos
 function getVercaracteristicas($dbcon){
-	$sql = "SELECT ce.cve_cequipo, modelo, marca, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador,
+	$sql = "SELECT ce.cve_cequipo, modelo, marca, ce.descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador,
 	memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso, ce.cve_equipo, nombre_equipo
 	FROM caracteristicas_equipos ce
 	INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo;";
@@ -60,19 +60,32 @@ function validacionSerie($dbcon, $Datos) {
     }
 	
 }
-function validacionFactura($dbcon, $Datos) {
-    $conn = $dbcon->conn();
+// function validacionFactura($dbcon, $Datos) {
+//     $conn = $dbcon->conn();
 	
 
-    // Verificar si ya existe un registro con la misma serie
-    $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_factura = '".$Datos->numerofactura."' ";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+//     // Verificar si ya existe un registro con la misma serie
+//     $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_factura = '".$Datos->numerofactura."' ";
+//     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
-    if ($resultado->count >= 1) {
-        dd(['code'=>400,'msj'=>'Ya ha registrado este numero de factura a un equipo']);
-    }
+//     if ($resultado->count >= 1) {
+//         dd(['code'=>400,'msj'=>'Ya ha registrado este numero de factura a un equipo']);
+//     }
 	
-}
+// }
+// function validacionFacturaModal($dbcon, $Datos) {
+//     $conn = $dbcon->conn();
+	
+
+//     // Verificar si ya existe un registro con la misma serie
+//     $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_factura = '".$Datos->numerofactura."' ";
+//     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	
+//     if ($resultado->count >= 1) {
+//         dd(['code'=>400,'msj'=>'Ya ha registrado este numero de factura a un equipo']);
+//     }
+	
+// }
 
 
 
@@ -240,30 +253,59 @@ function editarNombre($dbcon, $Datos){
 function editarCaracteristica($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
-	$sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_serie  ='".$Datos->numeroserie."'";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	if ($resultado->count > 1) {
-        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    }
-	else if($resultado->count == 1){
-		$sql = " UPDATE caracteristicas_equipos
-	SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."',
-	 numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
-	 vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
-	tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
-	WHERE cve_cequipo =" .$Datos->numeroEquipo."";
-	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	// dd($sql);
-
-	} else{$sql = " UPDATE caracteristicas_equipos
-		SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."', numero_serie  ='".$Datos->numeroserie."',
+	if ($Datos->sistemaoperativo==''){
+		$Datos->sistemaoperativo=NULL;
+	}
+	if ($Datos->procesador==''){
+		$Datos->procesador=NULL;
+	}
+	if ($Datos->velocidadprocesador==''){
+		$Datos->velocidadprocesador=0;
+	}
+	if ($Datos->memoriaram==''){
+		$Datos->memoriaram=0;
+	}
+	if ($Datos->tipoalmacenamiento==''){
+		$Datos->tipoalmacenamiento=NULL;
+	}
+	if ($Datos->capaalmacenamiento==''){
+		$Datos->capaalmacenamiento=0;
+	}
+	if ($Datos->descripcion==''){
+		$Datos->descripcion=NULL;
+	}
+	$sql = " UPDATE caracteristicas_equipos
+		SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."',  descripcion  ='".$Datos->descripcion."', numero_serie  ='".$Datos->numeroserie."',
 		 numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
 		 vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
 		tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
 		WHERE cve_cequipo =" .$Datos->numeroEquipo."";
 		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+	// $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_serie  ='".$Datos->numeroserie."'";
+    // $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	// if ($resultado->count > 1) {
+    //     dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
+    // }
+	// else if($resultado->count == 1){
+	// 	$sql = " UPDATE caracteristicas_equipos
+	// SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."',
+	//  numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
+	//  vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
+	// tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
+	// WHERE cve_cequipo =" .$Datos->numeroEquipo."";
+	// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+	// // dd($sql);
+
+	// } else{
+		// $sql = " UPDATE caracteristicas_equipos
+		// SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."', numero_serie  ='".$Datos->numeroserie."',
+		//  numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
+		//  vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
+		// tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
+		// WHERE cve_cequipo =" .$Datos->numeroEquipo."";
+		// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
 		// dd($sql);}
-	}
+	// }
 }
 
 function editarAsignacion($dbcon, $Datos){
@@ -402,9 +444,12 @@ switch ($tarea) {
 	case 'validacionSerie':
 		validacionSerie($dbcon,$objDatos);
 		break;
-	case 'validacionFactura':
-		validacionFactura($dbcon,$objDatos);
-	break;
+	// case 'validacionFactura':
+	// 	validacionFactura($dbcon,$objDatos);
+	// break;
+	// case 'validacionFacturaModal':
+	// 	validacionFacturaModal($dbcon,$objDatos);
+	// break;
 	case 'ValidaQueEquipoEs':
 		ValidaQueEquipoEs($dbcon,$objDatos);
 	break;

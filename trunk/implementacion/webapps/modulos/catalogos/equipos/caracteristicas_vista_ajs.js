@@ -141,6 +141,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 							'memoriaram': $scope.memoriaram,
 							'tipoalmacenamiento': $scope.tipoalmacenamiento,
 							'capaalmacenamiento': $scope.capaalmacenamiento,
+							// 	NXR62413FD
 
 						}).then(function(response){
 							response = response.data;
@@ -296,11 +297,12 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 
 	}
 // Validar si no un producto igual en la base de datos
-	$scope.validaSerie = function (numeroserie) {
+	$scope.validaSerie = function (numeroserie, cambiaNumeroserie) {
 		// console.log('nombre:', numeroserie);
 		$http.post('Controller.php', {
 			'task': 'validacionSerie',
 			'numeroserie': numeroserie,
+			'numeroserie:': cambiaNumeroserie,
 			'id': ID
 		}).then(function (response){
 			response = response.data;
@@ -313,6 +315,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 					confirmButtonColor: '#1A4672'
 					});
 					$scope.numeroserie = '';
+					$scope.cambiaNumeroserie = '';
 			}
 		}, function(error){
 			console.log('error', error);
@@ -320,120 +323,211 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 
 	}	
 
-	$scope.validaFactura = function (numerofactura) {
-		// console.log('nombre:', numeroserie);
-		$http.post('Controller.php', {
-			'task': 'validacionFactura',
-			'numerofactura': numerofactura,
-			'id': ID
-		}).then(function (response){
-			response = response.data;
+	// $scope.validaFactura = function (numerofactura) {
+	// 	// console.log('nombre:', numeroserie);
+	// 	$http.post('Controller.php', {
+	// 		'task': 'validacionFactura',
+	// 		'numerofactura': numerofactura,
+	// 		'id': ID
+	// 	}).then(function (response){
+	// 		response = response.data;
 			
-			if (response.code == 400) {
-				Swal.fire({
-					// confirmButtonColor: '#3085d6',
-					title: 'Número de factura registrado',
-					html: response.msj,
-					confirmButtonColor: '#1A4672'
-					});
-					$scope.numerofactura = '';
-			}
-		}, function(error){
-			console.log('error', error);
-		})
+	// 		if (response.code == 400) {
+	// 			Swal.fire({
+	// 				// confirmButtonColor: '#3085d6',
+	// 				title: 'Número de factura registrado',
+	// 				html: response.msj,
+	// 				confirmButtonColor: '#1A4672'
+	// 				});
+	// 				$scope.numerofactura = '';
+	// 		}
+	// 	}, function(error){
+	// 		console.log('error', error);
+	// 	})
 
-	}	
+	// }	
+
+	// $scope.validaFacturaModal = function (cambiaNumerofactura) {
+	// 	// console.log('nombre:', numeroserie);
+	// 	$http.post('Controller.php', {
+	// 		'task': 'validacionFacturaModal',
+	// 		'numerofactura': cambiaNumerofactura,
+	// 		'id': ID
+	// 	}).then(function (response){
+	// 		response = response.data;
+			
+	// 		if (response.code == 400) {
+	// 			Swal.fire({
+	// 				// confirmButtonColor: '#3085d6',
+	// 				title: 'Número de factura registrado',
+	// 				html: response.msj,
+	// 				confirmButtonColor: '#1A4672'
+	// 				});
+	// 				$scope.cambiaNumerofactura = '';
+	// 		}
+	// 	}, function(error){
+	// 		console.log('error', error);
+	// 	})
+
+	// }	
 
 
 
 
 	
 	$scope.cambioCaracteristica = function () {
-		if ($scope.cambioMarca == '' || $scope.cambiaModelo == null) {
-			Swal.fire(
-			  'Campo faltante',
-			  'Es necesario llenar todos los campos',
-			  'warning'
-			);
-			return;
-		}
-		Swal.fire({ 
-			title: 'Estás a punto de editar la cantidad de una entrada.',
-			text: '¿Es correcta la información agregada?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: 'green',
-			cancelButtonColor: 'red',
-			confirmButtonText: 'Aceptar',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				
-				$http.post('Controller.php', {
-					'task': 'editarCaracteristica',
-					'id': ID,
-					'numeroEquipo':$scope.numeroEquipo,
-					'nombre': $scope.verNombre,
-					'marca': $scope.cambiaMarca,
-					'modelo': $scope.cambiaModelo,
-					'descripcion': $scope.cambiaDescripcion,
-					'numeroserie': $scope.cambiaNumeroserie,
-					'numerofactura': $scope.cambiaNumerofactura,
-					'sistemaoperativo': $scope.cambiaSistemaoperativo,
-					'procesador': $scope.cambiaProcesador,
-					'velocidadprocesador': $scope.cambiaVelocidadprocesador,
-					'memoriaram': $scope.cambiaMemoriaram,
-					'tipoalmacenamiento': $scope.cambiaTipoalmacenamiento,
-					'capaalmacenamiento': $scope.cambiaCapaalmacenamiento,
-					 
-					'id': ID,
-				}).then(function(response){
-					response = response.data;
-					if (response.code == 400) {
-						Swal.fire({
-							// confirmButtonColor: '#3085d6',
-							title: 'Equipo existente',
-							html: response.msj,
-							confirmButtonColor: '#1A4672'
-							});
-							$scope.cambiaNumeroserie = '';}
-					else{{
-						jsShowWindowLoad('Generando entrada...');
-						jsRemoveWindowLoad();
-						Swal.fire({
-							title: '¡Éxito!',
-							html: 'Se editado el equipo'+ ' ' + $scope.verNombre +' ' + 'de manera correcta,<br> <b>Número de serie: ' + $scope.cambiaNumeroserie +'</b>',
-							icon: 'success',
-							showCancelButton: false,
-							confirmButtonColor: 'green',
-							confirmButtonText: 'Aceptar'
-						}).then((result) => {
-							if (result.isConfirmed) {
-								location.reload();
-							  }else{
-								  location.reload();
-							  }
-						})}
+		$http.post('Controller.php', {
+			'task': 'ValidaQueEquipoEs',
+			'cve_equipo': $scope.numeroEquipo
+		}).then(function(response){
+			response = response.data;
+			if (response.code == 400){
+				Swal.fire({ 
+					title: 'Estás a punto de editar la cantidad de una entrada.',
+					text: '¿Es correcta la información agregada?',
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: 'green',
+					cancelButtonColor: 'red',
+					confirmButtonText: 'Aceptar',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					if (result.isConfirmed) {
 						
-
+						$http.post('Controller.php', {
+							'task': 'editarCaracteristica',
+							'id': ID,
+							'numeroEquipo':$scope.numeroEquipo,
+							'nombre': $scope.verNombre,
+							'marca': $scope.cambiaMarca,
+							'modelo': $scope.cambiaModelo,
+							'descripcion': $scope.cambiaDescripcion,
+							'numeroserie': $scope.cambiaNumeroserie,
+							'numerofactura': $scope.cambiaNumerofactura,
+							'sistemaoperativo': $scope.cambiaSistemaoperativo,
+							'procesador': $scope.cambiaProcesador,
+							'velocidadprocesador': $scope.cambiaVelocidadprocesador,
+							'memoriaram': $scope.cambiaMemoriaram,
+							'tipoalmacenamiento': $scope.cambiaTipoalmacenamiento,
+							'capaalmacenamiento': $scope.cambiaCapaalmacenamiento,
+							 
+							'id': ID,
+						}).then(function(response){
+							response = response.data;
+							// if (response.code == 400) {
+							// 	Swal.fire({
+							// 		// confirmButtonColor: '#3085d6',
+							// 		title: 'Equipo existente',
+							// 		html: response.msj,
+							// 		confirmButtonColor: '#1A4672'
+							// 		});
+							// 		$scope.cambiaNumeroserie = '';}
+							{
+								jsShowWindowLoad('Generando entrada...');
+								jsRemoveWindowLoad();
+								Swal.fire({
+									title: '¡Éxito!',
+									html: 'Se editado el equipo'+ ' ' + $scope.verNombre +' ' + 'de manera correcta,<br> <b>Número de serie: ' + $scope.cambiaNumeroserie +'</b>',
+									icon: 'success',
+									showCancelButton: false,
+									confirmButtonColor: 'green',
+									confirmButtonText: 'Aceptar'
+								}).then((result) => {
+									if (result.isConfirmed) {
+										location.reload();
+									  }else{
+										  location.reload();
+									  }
+								})
 						
-				
-				
-				
+							}
+						
+						}, function(error){
+							console.log('error', error);
+							jsRemoveWindowLoad();
+						})
 					}
+				});
 				
-				
-				
-				
-				
-				
-				
-				}, function(error){
-					console.log('error', error);
-	    			jsRemoveWindowLoad();
-				})
-			}
-		});
+			}else {Swal.fire({ 
+				title: 'hola.',
+				text: '¿Es correcta la información agregada?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: 'green',
+				cancelButtonColor: 'red',
+				confirmButtonText: 'Aceptar',
+				cancelButtonText: 'Cancelar'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					
+					$http.post('Controller.php', {
+						'task': 'editarCaracteristica',
+						'id': ID,
+						'numeroEquipo':$scope.numeroEquipo,
+						'nombre': $scope.verNombre,
+						'marca': $scope.cambiaMarca,
+						'modelo': $scope.cambiaModelo,
+						'descripcion': $scope.cambiaDescripcion,
+						'numeroserie': $scope.cambiaNumeroserie,
+						'numerofactura': $scope.cambiaNumerofactura,
+						'numeroserie': $scope.cambiaNumeroserie,
+						'numerofactura': $scope.cambiaNumerofactura,
+						'sistemaoperativo': $scope.cambiaSistemaoperativo,
+						'procesador': $scope.cambiaProcesador,
+						'velocidadprocesador': $scope.cambiaVelocidadprocesador,
+						'memoriaram': $scope.cambiaMemoriaram,
+						'tipoalmacenamiento': $scope.cambiaTipoalmacenamiento,
+						'capaalmacenamiento': $scope.cambiaCapaalmacenamiento,
+					}).then(function(response){
+						response = response.data;
+						// if (response.code == 400) {
+						// 	Swal.fire({
+						// 		// confirmButtonColor: '#3085d6',
+						// 		title: 'Equipo existente',
+						// 		html: response.msj,
+						// 		confirmButtonColor: '#1A4672'
+						// 		});
+						// 		$scope.cambiaNumeroserie = '';}
+						{
+							jsShowWindowLoad('Generando entrada...');
+							jsRemoveWindowLoad();
+							Swal.fire({
+								title: '¡Éxito!',
+								html: 'Se editado el equipo'+ ' ' + $scope.verNombre +' ' + 'de manera correcta,<br> <b>Número de serie: ' + $scope.cambiaNumeroserie +'</b>',
+								icon: 'success',
+								showCancelButton: false,
+								confirmButtonColor: 'green',
+								confirmButtonText: 'Aceptar'
+							}).then((result) => {
+								if (result.isConfirmed) {
+									location.reload();
+								  }else{
+									  location.reload();
+								  }
+							})
+					
+						}
+					
+					}, function(error){
+						console.log('error', error);
+						jsRemoveWindowLoad();
+					})
+				}
+			});
+		
+		}
+		})
+
+		// if ($scope.cambioMarca == '' || $scope.cambiaModelo == null) {
+		// 	Swal.fire(
+		// 	  'Campo faltante',
+		// 	  'Es necesario llenar todos los campos',
+		// 	  'warning'
+		// 	);
+		// 	return;
+		// }
+		
 
 	}
 	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura,
@@ -512,48 +606,6 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 			console.log('error', error);
 			jsRemoveWindowLoad();
 		});
-		
-		// if ($scope.nombre==1  || $scope.nombre==2) {
-		// 	$("#marca").attr("disabled", false);
-		// 	$("#modelo").attr("disabled", false);
-		// 	$("#descripcion ").attr("disabled", false);
-		// 	$("#numeroserie").attr("disabled", false);
-		// 	$("#numerofactura").attr("disabled", false);
-		// 	$("#sistemaoperativo").attr("disabled", false);
-		// 	$("#procesador").attr("disabled", false);
-		// 	$("#velocidadprocesador").attr("disabled", false);
-		// 	$("#memoriaram").attr("disabled", false);
-		// 	$("#tipoalmacenamiento").attr("disabled", false);
-		// 	$("#almacenamiento").attr("disabled", false);
-		// 	// $("#prueba2").attr("disabled", false);
-			
-
-		// }else if($scope.nombre==0){
-		// 	$("#marca").attr("disabled", true);
-		// 	$("#modelo").attr("disabled", true);
-		// 	$("#descripcion ").attr("disabled", true);
-		// 	$("#numeroserie").attr("disabled", true);
-		// 	$("#numerofactura").attr("disabled", true);
-		// 	$("#sistemaoperativo").attr("disabled", true);
-		// 	$("#procesador").attr("disabled", true);
-		// 	$("#velocidadprocesador").attr("disabled", true);
-		// 	$("#memoriaram").attr("disabled", true);
-		// 	$("#tipoalmacenamiento").attr("disabled", true);
-		// 	$("#almacenamiento").attr("disabled", true);
-		// }
-		// else{
-		// 	$("#marca").attr("disabled", false);
-		// 	$("#modelo").attr("disabled", false);
-		// 	$("#descripcion ").attr("disabled", false);
-		// 	$("#numeroserie").attr("disabled", false);
-		// 	$("#numerofactura").attr("disabled", false);
-		// 	$("#sistemaoperativo").attr("disabled", true);
-		// 	$("#procesador").attr("disabled", true);
-		// 	$("#velocidadprocesador").attr("disabled", true);
-		// 	$("#memoriaram").attr("disabled", true);
-		// 	$("#tipoalmacenamiento").attr("disabled", true);
-		// 	$("#almacenamiento").attr("disabled", true);
-		// }
 		
 
 	}
