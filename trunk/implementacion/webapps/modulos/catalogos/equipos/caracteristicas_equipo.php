@@ -132,7 +132,7 @@
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verRam  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verAlmacenamiento  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verCapacidad  disabled></td>
-                                                <td><input class="sinborde my-class"  w-25 {{obj.fecha_ingreso}}></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verRegistro></td>
                                                 
                                 </tbody>
                             </table>
@@ -296,7 +296,7 @@
                                                 <td class="text-center">{{obj.fecha_ingreso}}</td> -->
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-info btn-sm far fa-eye"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
-                                                        obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento)"  data-toggle="modal" data-target="#borrarModal"></button>
+                                                        obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento, obj.fecha_ingreso)"  data-toggle="modal" data-target="#borrarModal"></button>
                                                     <button type="button" class="btn btn-warning btn-sm fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
                                                         obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento,
                                                         obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal"></button>
