@@ -661,5 +661,6 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	},function(error){
 		console.log('error', error);
 	});
+	
 }
 );

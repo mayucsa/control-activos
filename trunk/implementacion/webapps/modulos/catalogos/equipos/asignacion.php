@@ -52,7 +52,7 @@
         </div>
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" ng-click="cambioAsignacion()">Guardar Datos</button>
         </div>
         </div>
@@ -190,16 +190,16 @@
                                         <td class="text-center">{{obj.descripcion}}</td>
                                         <td class="text-center">{{obj.fecha_asignacion}}</td>
                                         <td class="text-center">
-                                                <button type="button" class="btn btn-info  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                                <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
                                                 </button>
-                                                <button type="button" class="btn btn-danger  fas fa-trash-alt " style="margin-bottom: 10px" ng-click="consultarEliminar(obj.cve_asignacion)" data-toggle="modal" data-target="#borrarModal">                                           
+                                                <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="consultarEliminar(obj.cve_asignacion)" data-toggle="modal" data-target="#borrarModal">                                           
                                                     </button>
                                                
                                            </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>

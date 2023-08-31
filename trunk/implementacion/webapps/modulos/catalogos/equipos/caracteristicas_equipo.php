@@ -14,7 +14,7 @@
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
         <div class="modal-header bg-primary">
-            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR CARACTERISTICAS</h5>
+            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR EQUIPOS</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -27,7 +27,7 @@
             <!-- <label>Numero</label> -->
         </div>
         <div style="width: 100%;" class="form-floating mx-1 ">
-            <input  class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
+            <input  hidden="true" class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
             <label>Nombre de equipo</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
@@ -80,7 +80,7 @@
         </div>
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" ng-click="cambioCaracteristica()">Guardar Datos</button>
         </div>
         </div>
@@ -91,8 +91,8 @@
     <div class="modal fade bd-example-modal-lg"  style="width: 100%;" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="exampleModalLabel">VER EQUIPOS</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -120,19 +120,19 @@
                                 </thead>
                                 <tbody>
                                 <!-- <tr ng-repeat="(i, obj) in vercaracteristicas track by i"> -->     
-                                                <td ><input w-25 ng-model=verEquipo type="input" disabled> </td> 
-                                                <td ><input w-25 ng-model=verMarca type="input" disabled></td>
-                                                <td ><input w-25 ng-model=verModelo type="input"disabled></td>
-                                                <td><input ng-model=verDescripcion type="input" disabled></td>
-                                                <td><input  w-25ng-model=verFactura type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verSerie type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verSistema type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verProcesador type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verVelocidad type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verRam type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verAlmacenamiento type="input" disabled></td>
-                                                <td><input  w-25 ng-model=verCapacidad type="input" disabled></td>
-                                                <td><input  w-25 {{obj.fecha_ingreso}}></td>
+                                                <td ><input class="sinborde my-class" w-25 ng-model=verEquipo  disabled </td> 
+                                                <td ><input class="sinborde my-class" w-25 ng-model=verMarca  disabled></td>
+                                                <td ><input class="sinborde my-class" w-25 ng-model=verModelo disabled></td>
+                                                <td><input class="sinborde my-class" ng-model=verDescripcion  disabled></td>
+                                                <td><input  class="sinborde my-class" w-25ng-model=verFactura  disabled></td>
+                                                <td><input  class="sinborde my-class" w-25 ng-model=verSerie  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verSistema  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verProcesador  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verVelocidad  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verRam  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verAlmacenamiento  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 ng-model=verCapacidad  disabled></td>
+                                                <td><input class="sinborde my-class"  w-25 {{obj.fecha_ingreso}}></td>
                                                 
                                 </tbody>
                             </table>
@@ -326,6 +326,7 @@
     <script src="../../../includes/bootstrap/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../../../includes/css/datatables.min.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="../../../includes/css/style.css"/> -->
 
     <script type="text/javascript" src="../../../includes/js/datatables.min.js"></script>
 

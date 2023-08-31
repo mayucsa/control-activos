@@ -3,6 +3,14 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+.redondeadonorelieve {
+    border-radius: 5px;
+    border: 1px solid #39c;
+  }
+  .sinbordefondo {
+    background-color: #eee;
+    border: 0;
+  }
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;

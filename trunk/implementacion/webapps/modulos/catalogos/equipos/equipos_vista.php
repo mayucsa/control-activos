@@ -35,7 +35,7 @@
         </div>
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" ng-click="cambioNombre()">Guardar Datos</button>
         </div>
         </div>
@@ -44,7 +44,7 @@
 
 
     <!-- modal para borrar -->
-    <div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -59,14 +59,14 @@
         </p>
         
         </div>
-        <!-- aca termina el cuerpo del modal -->
-        <div class="modal-footer">
+         aca termina el cuerpo del modal -->
+        <!-- <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">cerrar</button>
             <button type="button" class="btn btn-danger" ng-click="eliminarCaracteristicas()">Aceptar</button>
         </div>
         </div>
     </div>
-    </div>
+    </div> --> 
 
     <main class="app-content">
         <div class="app-title">
