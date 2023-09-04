@@ -158,6 +158,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			cancelButtonText: 'Cancelar'
 		}).then((result) => {
 			if (result.isConfirmed) {
+				jsShowWindowLoad('Capturando caracteristicas...');
 				
 				$http.post('Controller.php', {
 					'task': 'eliminarAsignacion',
@@ -165,10 +166,29 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 					'nombreEliminar':$scope.nombreEliminar
 				}).then(function(response){
 					response = response.data;
-					
+					// console.log('response', response);
+					jsRemoveWindowLoad();
+					if (response.code == 200) {
+						Swal.fire({
+						  title: '¡Éxito!',
+						  html: 'Su asignación de equipo se generó correctamente',
+						  icon: 'success',
+						  showCancelButton: false,
+						  confirmButtonColor: 'green',
+						  confirmButtonText: 'Aceptar'
+						}).then((result) => {
+						  if (result.isConfirmed) {
+							  location.reload();
+						  }else{
+							  location.reload();
+						  }
+						});
+					}else{
+						alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+					}
 				}, function(error){
 					console.log('error', error);
-	    			jsRemoveWindowLoad();
+					jsRemoveWindowLoad();
 				})
 			}
 		});
