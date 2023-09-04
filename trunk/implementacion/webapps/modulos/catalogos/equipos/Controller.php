@@ -14,7 +14,7 @@ function getProduccion($dbcon){
 	$sql = "SELECT ae.cve_asignacion, ae.codigo_empleado, CONCAT(cun.nombre, ' ', cun.apellidopaterno, ' ', cun.apellidomaterno) nombrecompleto, ae.cve_cequipo, ce.marca, ce.modelo, ce.numero_serie, ce.descripcion, fecha_asignacion
 			FROM asignacion_equipos ae
 			INNER JOIN cat_usuario_nomina cun ON ae.codigo_empleado = cun.codigoempleado
-			INNER JOIN caracteristicas_equipos ce ON ce.cve_cequipo = ae.cve_cequipo";
+			INNER JOIN caracteristicas_equipos ce ON ce.cve_cequipo = ae.cve_cequipo WHERE estatus_asignacion>0";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
@@ -59,36 +59,11 @@ function validacionSerie($dbcon, $Datos) {
     }
 	
 }
-// function validacionFactura($dbcon, $Datos) {
-//     $conn = $dbcon->conn();
-	
-
-//     // Verificar si ya existe un registro con la misma serie
-//     $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_factura = '".$Datos->numerofactura."' ";
-//     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-//     if ($resultado->count >= 1) {
-//         dd(['code'=>400,'msj'=>'Ya ha registrado este numero de factura a un equipo']);
-//     }
-	
-// }
-// function validacionFacturaModal($dbcon, $Datos) {
-//     $conn = $dbcon->conn();
-	
-
-//     // Verificar si ya existe un registro con la misma serie
-//     $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_factura = '".$Datos->numerofactura."' ";
-//     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-//     if ($resultado->count >= 1) {
-//         dd(['code'=>400,'msj'=>'Ya ha registrado este numero de factura a un equipo']);
-//     }
-	
-// }
 
 
 
-// checar este codigo
+
+// aqui comienzan las funciones de guardar
 function guardarEquipo($dbcon, $Datos){
 	// if($Datos->nombre==""){ dd(['code'=>400,'msj'=>'El equipo no se pudo guardar']);}
 
@@ -197,20 +172,18 @@ function guardarCaracteristicas($dbcon, $Datos){
 }
 
 function guardarAsignacion($dbcon, $Datos){
-	$conn = $dbcon->conn();
-	$sql = "SELECT COUNT(*) AS count FROM asignacion_equipos WHERE cve_cequipo = ".$Datos->nombre." ";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-    if ($resultado->count >= 1) {
-        dd(['code'=>400,'msj'=>'Este equipo ya esta asignado a un empleado']);
-    }else{
+
 		$fecha = date('Y-m-d H:i:s');
 		$status = '1';
 		$conn = $dbcon->conn();
 		$sql = "INSERT INTO asignacion_equipos (codigo_empleado, cve_cequipo, estatus_asignacion, fecha_asignacion)
 				VALUES (".$Datos->codigo.", ".$Datos->nombre.", ".$status.", '".$fecha."' )";
 		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-	}
+
+		$sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
+		where ce.cve_cequipo=".$Datos->nombre."";
+		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
+	
 }
 
 // funciones para editar
@@ -261,7 +234,7 @@ function editarCaracteristica($dbcon, $Datos){
 	if ($Datos->procesador==''){
 		$Datos->procesador=NULL;
 	}
-	if ($Datos->velocidadprocesador==''){
+	if ($Datos->velocidadprocesador==''){ 
 		$Datos->velocidadprocesador=0;
 	}
 	if ($Datos->memoriaram==''){
@@ -283,56 +256,21 @@ function editarCaracteristica($dbcon, $Datos){
 		tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
 		WHERE cve_cequipo =" .$Datos->numeroEquipo."";
 		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	// $sql = "SELECT COUNT(*) AS count FROM caracteristicas_equipos WHERE numero_serie  ='".$Datos->numeroserie."'";
-    // $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	// if ($resultado->count > 1) {
-    //     dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    // }
-	// else if($resultado->count == 1){
-	// 	$sql = " UPDATE caracteristicas_equipos
-	// SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."',
-	//  numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
-	//  vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
-	// tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
-	// WHERE cve_cequipo =" .$Datos->numeroEquipo."";
-	// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	// // dd($sql);
 
-	// } else{
-		// $sql = " UPDATE caracteristicas_equipos
-		// SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."', numero_serie  ='".$Datos->numeroserie."',
-		//  numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
-		//  vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
-		// tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
-		// WHERE cve_cequipo =" .$Datos->numeroEquipo."";
-		// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-		// dd($sql);}
-	// }
 }
 
-function editarAsignacion($dbcon, $Datos){
-	$fecha = date('Y-m-d H:i:s');
-	$conn = $dbcon->conn();
-	$sql = "SELECT COUNT(*) AS count FROM asignacion_equipos WHERE cve_cequipo = ".$Datos->nombre." ";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-    if ($resultado->count >= 1) {
-        dd(['code'=>400,'msj'=>'Este equipo ya esta asignado a un empleado']);
-    } else{$sql = " UPDATE asignacion_equipos
-		SET  cve_cequipo  =".$Datos->nombre."
-		WHERE cve_asignacion =" .$Datos->numeroAsignacion."";
-		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-		// dd($sql);}
-	}
-}
 
 function eliminarAsignacion($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
 	$sql = "UPDATE asignacion_equipos
-	SET  cve_cequipo  =0
+	SET  estatus_asignacion  =0
 	WHERE cve_asignacion =" .$Datos->nombreEliminar." ";
 	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+
+	$sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=1
+		where ce.cve_cequipo=".$Datos->nombreEliminar."";
+		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
 		// dd($sql);}
 	
 }
@@ -356,11 +294,12 @@ function getCaracteristicas ($dbcon){
 	
 	$sql = "SELECT ce.cve_cequipo, CONCAT('MYS - TIC', ces.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
 			FROM caracteristicas_equipos ce
-			INNER JOIN cat_equipos ces ON ces.cve_equipo = ce.cve_equipo ";
+			INNER JOIN cat_equipos ces ON ces.cve_equipo = ce.cve_equipo
+			WHERE ce.estatus_equipo = 1 ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
-
+// para traer la marca, modelo y descripción para el modal de asignación
 function getMarca($dbcon, $Datos){
 	$conn = $dbcon->conn();
 	$sql = "	SELECT *
@@ -408,9 +347,6 @@ switch ($tarea) {
 	case 'editarCaracteristica':
 		editarCaracteristica($dbcon, $objDatos);
 		break;
-	case 'editarAsignacion':
-		editarAsignacion($dbcon,$objDatos );
-		break;
 	case 'eliminarAsignacion':
 		eliminarAsignacion($dbcon,$objDatos );
 		break;
@@ -446,8 +382,8 @@ switch ($tarea) {
 	case 'validacionSerie':
 		validacionSerie($dbcon,$objDatos);
 		break;
-	// case 'validacionFactura':
-	// 	validacionFactura($dbcon,$objDatos);
+	// case 'validaEquipo':
+	// 	validaEquipo($dbcon,$objDatos);
 	// break;
 	// case 'validacionFacturaModal':
 	// 	validacionFacturaModal($dbcon,$objDatos);

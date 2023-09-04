@@ -10,79 +10,6 @@
         </head>
 
 <div ng-controller="vistaAsignacion">
-<div class="modal fade" id="asignacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header bg-primary">
-            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR ASIGNACIÓN</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div style="width: 100%;" class="form-floating mx-1">
-                <input hidden="true" class="form-control UpperCase" ng-model="numeroAsignacion" id="numero" autocomplete="off"  ng-disabled="false">
-               
-            </div>
-            <div style="width: 100%; " class="form-floating mx-1" >
-                <input class="form-control UpperCase" ng-model="nombreEmpleado" id="numero" autocomplete="off"  ng-disabled="false">
-                <label>Nombre empleado</label>
-            </div>
-            <div style="width: 100%;" class="form-floating mx-1" style="margin-bottom: 20px">
-                <select class="form-control form-group-md" ng-model="nombre"  ng-blur="habilitarinput()" autocomplete="off">
-                    <option selected="selected" value="">[Seleccione una opción..]</option>
-                    <option ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}">{{obj.cve_cequipo}} - {{obj.numero_serie}} (Número de serie)</option>
-                </select>
-                <label>Producto</label>
-            </div>
-            <div class="col-lg-12 d-lg-flex " style=" margin-top: 10px">
-                <div  style="width: 100%;" class="form-floating mx-1">
-                    <input type="text" ng-model="marca" id="marca" name="marca" class="form-control form-control-md " disabled>
-                    <label>Marca</label>
-                </div>
-                <div style="width: 100%;" class="form-floating mx-1">
-                    <input type="text" ng-model="modelo" id="modelo" name="modelo" class="form-control form-control-md " disabled>
-                    <label>Modelo</label>
-                </div>
-                <div style="width: 100%;" class="form-floating mx-1">
-                    <input type="text" ng-model="descripcion" id="descripcion" name="descripcion" class="form-control form-control-md " disabled>
-                    <label>Descripción</label>
-                </div>
-            </div>
-        </div>
-        <!-- aca termina el cuerpo del modal -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" ng-click="cambioAsignacion()">Guardar Datos</button>
-        </div>
-        </div>
-    </div>
-    </div>
-
-<!-- modal para borrar -->
-<div class="modal fade bd-example-modal-lg" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header bg-primary">
-            <h5 class="modal-title text-light" id="exampleModalLabel">ELIMINAR REGISTRO</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <p>
-            ¿Esta seguro que desa elimar este registro? No podrá elimar los cambios 
-        </p>
-        
-        </div>
-        <!-- aca termina el cuerpo del modal -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-            <button type="button" class="btn btn-danger" ng-click="eliminarAsignacion()">Aceptar</button>
-        </div>
-        </div>
-    </div>
-    </div>
 
     <main class="app-content">
         <div class="app-title">
@@ -125,8 +52,9 @@
                                             <option selected="selected" value="" disabled>[Seleccione una opción..]</option>
                                             <option class="text-center" ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}"> {{obj.folio}} </option>
                                         </select>
-                                        <label>Producto</label>
+                                        <label>Producto</label>  
                                     </div>
+                                 
                                 </div>
                                 
                                 
@@ -165,7 +93,7 @@
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
-                        </div>
+                        </div> 
                     </div>
                     <div class="card-footer">
                         <div class="table-responsive">
@@ -184,15 +112,16 @@
                                 <tbody>
                                     <tr ng-repeat="(i, obj) in ssProduccionMorteros ">
                                         <td class="text-center">{{obj.codigo_empleado}}--{{obj.nombrecompleto}}</td>
-                                        <td>{{obj.numero_serie}}</td>
+                                        <input class="sinborde my-class" w-25 ng-model="nombre"  disabled>{{obj.cve_asignacion}}
+                                        <td >{{obj.numero_serie}}</td>
                                         <td class="text-center">{{obj.marca}}</td>
                                         <td class="text-center">{{obj.modelo}}</td>
                                         <td class="text-center">{{obj.descripcion}}</td>
                                         <td class="text-center">{{obj.fecha_asignacion}}</td>
                                         <td class="text-center">
-                                                <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
-                                                </button>
-                                                <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="consultarEliminar(obj.cve_asignacion)" data-toggle="modal" data-target="#borrarModal">                                           
+                                                <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                                </button> -->
+                                                <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
                                                     </button>
                                                
                                            </td>

@@ -6,7 +6,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.codigo = '';
 		$scope.nombre = '';
 	}
-
+// esto 
 	$http.post('Controller.php', {
 		'task': 'getProduccion'
 	}).then(function(response) {
@@ -41,7 +41,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		console.log('error', error);
 	});
 
-	$scope.habilitarinput = function () {
+	
+
+	$scope.validaEquipo = function () {
 
 		$http.post('Controller.php', {
 			'task': 'getMarca',
@@ -58,11 +60,21 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		})
 
 	}
+
+
+
 // 123jas12
 // era para validar si un equipo está asigando, no se puede porque tengo un evento que también está funcionando
 	$scope.validacionCampos = function(){
-		if ($scope.codigo == '' || $scope.codigo == null,
-        $scope.nombre == '' || $scope.nombre == null) {
+		if ($scope.codigo == '' || $scope.codigo == null) {
+			Swal.fire(
+			  'Campo faltante',
+			  'Es necesario llenar todos los campos',
+			  'warning'
+			);
+			return;
+		}
+		if ($scope.nombre == '' || $scope.nombre == null) {
 			Swal.fire(
 			  'Campo faltante',
 			  'Es necesario llenar todos los campos',
@@ -131,68 +143,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 
 
-	$scope.cambioAsignacion = function () {
-		
-		Swal.fire({
-			title: 'Estás a punto de editar la cantidad de una entrada.',
-			text: '¿Es correcta la información agregada?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: 'green',
-			cancelButtonColor: 'red',
-			confirmButtonText: 'Aceptar',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				
-				$http.post('Controller.php', {
-					'task': 'editarAsignacion',
-					'id': ID,
-					'numeroAsignacion':$scope.numeroAsignacion,
-					'nombre':$scope.nombre,
-					
-					
-					'id': ID,
-				}).then(function(response){
-					response = response.data;
-					if (response.code == 400) {
-						Swal.fire({
-							// confirmButtonColor: '#3085d6',
-							title: 'Equipo existente',
-							html: response.msj,
-							confirmButtonColor: '#1A4672'
-							});
-							}
-							else{
-								jsShowWindowLoad('Generando entrada...');
-								jsRemoveWindowLoad();
-								Swal.fire({
-									title: '¡Éxito!',
-									html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
-									icon: 'success',
-									showCancelButton: false,
-									confirmButtonColor: 'green',
-									confirmButtonText: 'Aceptar'
-								}).then((result) => {
-									if (result.isConfirmed) {
-										location.reload();
-									}else{
-										location.reload();
-						  }
-					})
+	$scope.eliminarAsignacion = function (cve_cequipo) {
+		$scope.nombreEliminar=cve_cequipo;
 
-							}
-					
-				}, function(error){
-					console.log('error', error);
-	    			jsRemoveWindowLoad();
-				})
-			}
-		});
-
-	}
-
-	$scope.eliminarAsignacion = function () {
 		
 		Swal.fire({
 			title: 'Estás a punto de eliminar esta asignación.',
@@ -212,33 +165,6 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 					'nombreEliminar':$scope.nombreEliminar
 				}).then(function(response){
 					response = response.data;
-					if (response.code == 400) {
-						Swal.fire({
-							// confirmButtonColor: '#3085d6',
-							title: 'Equipo existente',
-							html: response.msj,
-							confirmButtonColor: '#1A4672'
-							});
-							}
-							else{
-								jsShowWindowLoad('Generando entrada...');
-								jsRemoveWindowLoad();
-								Swal.fire({
-									title: '¡Éxito!',
-									html: 'Se editado el equipo de manera correcta,<br> <b>Folio de equipo: ' + $scope.numero +'</b>',
-									icon: 'success',
-									showCancelButton: false,
-									confirmButtonColor: 'green',
-									confirmButtonText: 'Aceptar'
-								}).then((result) => {
-									if (result.isConfirmed) {
-										location.reload();
-									}else{
-										location.reload();
-						  }
-					})
-
-							}
 					
 				}, function(error){
 					console.log('error', error);
@@ -258,16 +184,18 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		// $scope.numero=cve_equipo;
 		$scope.nombreEliminar = cve_asignacion;
 	}
-	$http.post('Controller.php', {
-		'task': 'getEquipos'
-	}).then(function (response){
-		response = response.data;
-		console.log('getEquipos', response);
-		$scope.equipo = response;
-	},function(error){
-		console.log('error', error);
-	});
+	// $http.post('Controller.php', {
+	// 	'task': 'getEquipos'
+	// }).then(function (response){
+	// 	response = response.data;
+	// 	console.log('getEquipos', response);
+	// 	$scope.equipo = response;
+	// },function(error){
+	// 	console.log('error', error);
+	// });
 
+
+// seleccionamos al empleado y nos muestra la clave y su nombre
 	$http.post('Controller.php', {
 		'task': 'getEmpleado'
 	}).then(function (response){
@@ -279,7 +207,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	});
 
 
-	
+	// para ver la marca, modelo y descripción al seleccionar un producto
 	$http.post('Controller.php', {
 		'task': 'getCaracteristicas'
 	}).then(function (response){

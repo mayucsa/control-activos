@@ -113,7 +113,7 @@
                                     <th> Procesador</th>
                                     <th> Velocidad de procesador</th>
                                     <th>Memoria ram</th>
-                                    <th>Tipo de almacenamiento</th>
+                                    <th>Tipo de almacenamiento</th> 
                                     <th>Capacidad de almacenamiento</th>
                                     <th>Fecha de registro</th>
                                 </tr>

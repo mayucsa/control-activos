@@ -660,7 +660,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		$scope.equipo = response;
 	},function(error){
 		console.log('error', error);
-	});
+	}); 
 	
 }
 );
