@@ -556,15 +556,16 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	
 		}
 
-		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso) {
+		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso) {
 			// $scope.numero=cve_equipo;
 			$scope.verNumeroE = cve_cequipo;
 			$scope.verEquipo = nombre_equipo;
 			$scope.verMarca = marca;
 			$scope.verModelo=modelo;
 			$scope.verDescripcion = descripcion;
+			$scope.verFactura= numero_factura;
+			// $scope.verFactura=numero_factura;
 			$scope.verSerie = numero_serie;
-			$scope.verFactura=numero_factura;
 			$scope.verSistema = sistema_operativo;
 			$scope.verProcesador = procesador;
 			$scope.verVelocidad=vel_procesador;
@@ -575,7 +576,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		
 			}
 
-
+// se utiliza para desmarcar y poder escribir las areas si es compu o cpu
 	$scope.habilitarProducto = function (nombre) {
 
 		$http.post('Controller.php', {
@@ -615,7 +616,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		
 
 	}
-
+// esta función se utiliza en la tabla para raer los datos
 	$http.post('Controller.php', {
 		'task': 'getVercaracteristicas'
 	}).then(function(response) {
@@ -651,7 +652,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	});
 
 
-
+// se utiliza para seleccionar el producto 
 	$http.post('Controller.php', {
 		'task': 'getEquipos'
 	}).then(function (response){

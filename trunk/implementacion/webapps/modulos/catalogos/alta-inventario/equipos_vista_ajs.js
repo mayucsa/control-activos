@@ -1,10 +1,12 @@
     app.controller('vistaCatalogoEquipos', function (BASEURL, ID, $scope, $http) {
 	$scope.nombre = '';
-	$scope.descripcion = '';
+	$scope.equipos = '';
+	$scope.insumos = '';
 
 	$scope.limpiarCampos = function(){
 		$scope.nombre = '';
-		$scope.descripcion = '';
+		$scope.equipos = '';
+		$scope.insumos = '';
 	}
 
 // esta relacionado con el input de nombre de equipo
@@ -24,9 +26,10 @@
 					confirmButtonColor: '#1A4672'
 					});
 					$scope.nombre = '';
-			}else{
-				$scope.validacionCampos(nombre);
 			}
+			// else{
+			// 	$scope.validacionCampos(nombre);
+			// }
 		}, function(error){
 			console.log('error', error);
 			jsRemoveWindowLoad();
@@ -108,10 +111,20 @@
 		// $('#emateriaprima').val([0]['cve_entrada']);
 		// $('#folioe').val([0]['cve_entrada']);
 	}
+	
 
 
 // esta relacionado con e boton de guardar
-	$scope.validacionCampos = function(nombre, descripcion){
+	$scope.validacionCampos = function(nombre, checkh){
+		if ($scope.checkh == '' || $scope.checkh == null) {
+			Swal.fire(
+			  'Campo faltante',
+			  'Es necesario seleccionar un tipo',
+			  'warning'
+			);
+			return;
+		}
+		
 		if ($scope.nombre == '' || $scope.nombre == null) {
 			Swal.fire(
 			  'Campo faltante',
@@ -120,7 +133,8 @@
 			);
 			return;
 		}
-		
+		// console.log('tipo', $scope.checkh);
+		// console.log('nombre', $scope.nombre);
 		Swal.fire({
 			title: 'Estás a punto de registrar un equipo nuevo.',
 			text: '¿Es correcta la información agregada?',
@@ -135,6 +149,7 @@
 				$http.post('Controller.php', {
 					'task': 'guardarEquipo',
 					'nombre': $scope.nombre,
+					'checkh': $scope.checkh,
 					'id': ID,
 				}).then(function(response){
 					response = response.data;
@@ -167,6 +182,7 @@
 				})
 			}
 		})
+		
 	}
 
 	$http.post('Controller.php', {

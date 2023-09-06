@@ -45,6 +45,12 @@
                                         </select>
                                         <label>Empleado</label>
                                     </div>
+                                    <!-- <p>
+                                        Búsqueda de música: <input type="search" name="busquedamusica" placeholder="Canción, autor, álbum...">
+
+                                        <input type="submit" value="Buscar">
+                                        
+                                    </p> -->
 
                                     <!-- para equipo -->
                                     <div style="width: 100%;" class="form-floating mx-1 text-center">

@@ -1,7 +1,7 @@
 <?php
     include_once "../../superior.php";
 ?>
-         <head>
+         <head>  
             <title>Caracteristicas de los equipos</title>
 
             <link rel="stylesheet" type="text/css" href="../../../includes/css/adminlte.min.css">
@@ -42,14 +42,14 @@
             <input class="form-control UpperCase text-center" ng-model="cambiaDescripcion" id="cambiaDescripcion" autocomplete="off" >
             <label>Descripción</label>
         </div>
+        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
+            <input class="form-control UpperCase text-center" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
+            <label>Número de factura</label>
+        </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
         <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
             <input class="form-control UpperCase text-center" ng-model="cambiaNumeroserie"  ng-blur="validaSerie(cambiaNumeroserie)" id="cambiaNumeroserie"  autocomplete="off" >
             <label>Número de serie</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
-            <input class="form-control UpperCase text-center" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
-            <label>Número de factura</label>
         </div>
         <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
             <input class="form-control UpperCase text-center" ng-model="cambiaSistemaoperativo" id="cambiaSistemaoperativo" autocomplete="off" >
@@ -120,11 +120,11 @@
                                 </thead>
                                 <tbody>
                                 <!-- <tr ng-repeat="(i, obj) in vercaracteristicas track by i"> -->     
-                                                <td ><input class="sinborde my-class" w-25 ng-model=verEquipo  disabled </td> 
+                                                <td ><input class="sinborde my-class" w-25 ng-model=verEquipo  disabled></td> 
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verMarca  disabled></td>
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verModelo disabled></td>
-                                                <td><input class="sinborde my-class" ng-model=verDescripcion  disabled></td>
-                                                <td><input  class="sinborde my-class" w-25ng-model=verFactura  disabled></td>
+                                                <td><input class="sinborde my-class" w-25 ng-model=verDescripcion  disabled></td>
+                                                <td><input  class="sinborde my-class" w-25ng-model=verFacturaM disabled></td>
                                                 <td><input  class="sinborde my-class" w-25 ng-model=verSerie  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verSistema  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verProcesador  disabled></td>
@@ -295,7 +295,7 @@
                                                 <td class="text-center">{{obj.capacidad_almacenamiento}}</td>
                                                 <td class="text-center">{{obj.fecha_ingreso}}</td> -->
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm far fa-eye"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
+                                                    <button type="button" class="btn btn-info btn-sm far fa-eye"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_factura, obj.numero_serie, 
                                                         obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento, obj.fecha_ingreso)"  data-toggle="modal" data-target="#borrarModal"></button>
                                                     <button type="button" class="btn btn-warning btn-sm fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
                                                         obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento,

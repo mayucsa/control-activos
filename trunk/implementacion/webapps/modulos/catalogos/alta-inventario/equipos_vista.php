@@ -20,6 +20,21 @@
             </button>
         </div>
         <div class="modal-body">
+             <div class="row form-group form-group-sm">
+                                <div class="col-lg-12 d-lg-flex">
+                                    <label>Selecciona el tipo de equipo a capturar..</label>
+                                </div>
+                                <div class="col-lg-12 d-lg-flex">
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio1" ng-model="checkh" value="Equipo">
+                                    <label class="form-check-label">EQUIPOS</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio2" ng-model="checkh" value="Insumos">
+                                    <label class="form-check-label">INSUMOS</label>
+                                    </div>
+                                </div>
+                            </div>
         <div style="width: 100%;" class="form-floating mx-1" margin >
                                         <input hidden="true" class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false"  >
                                         <!-- <label>Numero de equipo</label> -->
@@ -94,20 +109,31 @@
                         <div class="card-body">
                             <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">
-                               
+                                    <label>Selecciona el tipo de equipo a capturar..</label>
+                                </div>
+                                <div class="col-lg-12 d-lg-flex">
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio1" ng-model="checkh" value="Equipo">
+                                    <label class="form-check-label">EQUIPOS</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio2" ng-model="checkh" value="Insumos">
+                                    <label class="form-check-label">INSUMOS</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group form-group-sm">
+                                <div class="col-lg-12 d-lg-flex">
                                     <div style="width: 100%;" class="form-floating mx-1">
                                         <input class="form-control UpperCase" ng-model="nombre" id="nombre" autocomplete="off" ng-blur="ValidaExistencia(nombre)" >
                                         <label>Nombre equipo</label>
                                     </div>
-                                    <!-- <div style="width: 100%;" class="form-floating mx-1">
-                                        <textarea class="form-control" ng-model="descripcion" id="descripcion" autocomplete="off"></textarea>
-                                        <label>Descripción de equipo</label>
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="row form-group form-group-sm border-top">
                                 <div class="col-sm-12" align="center">
-                                    <input type="submit" value="Guardar" href="#" ng-click="validacionCampos(nombre)" class="btn btn-primary" style="margin-bottom: -20px !important">
+                                    <input type="submit" value="Guardar" href="#" ng-click="validacionCampos(nombre, checkh)" class="btn btn-primary" style="margin-bottom: -20px !important">
                                     <input type="submit" value="Limpiar" href="#" ng-click="limpiarCampos()" class="btn btn-warning" style="margin-bottom: -25px !important">
                                 </div>
                             </div>
@@ -128,6 +154,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Tipo</th>
                                         <th>Producto</th>
                                         <th> Opciones</th>
                                         
@@ -136,10 +163,11 @@
                                 <tbody>
                                     <tr ng-repeat="(i, obj) in verequipos track by i">
                                         <td class="text-center">{{obj.cve_equipo}}</td>
+                                        <td>{{obj.tipo}}</td>
                                         <td>{{obj.nombre_equipo}}</td>
                                         <td class="text-center">
                                             
-                                            <button type="button" class="btn btn-info btn-md fas fa-edit" ng-click="consultar(obj.cve_equipo, obj.nombre_equipo)" data-toggle="modal" data-target="#exampleModal">
+                                            <button type="button" class="btn btn-info btn-md fas fa-edit" ng-click="consultar(obj.cve_equipo, obj.nombre_equipo, obj.tipo)" data-toggle="modal" data-target="#exampleModal">
                                             </button>
                                             <!-- <button type="button" class="btn btn-danger btn-lg fas fa-trash-alt"  data-toggle="modal" data-target="#borrarModal">                                           
                                                     </button> -->

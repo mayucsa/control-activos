@@ -8,16 +8,7 @@ function dd($var){
     }
 }
 
- // me sirve para mostrar en la pantalla de asignación 
-// todas las asignaciones que se han hecho
-function getProduccion($dbcon){
-	$sql = "SELECT ae.cve_asignacion, ae.codigo_empleado, CONCAT(cun.nombre, ' ', cun.apellidopaterno, ' ', cun.apellidomaterno) nombrecompleto, ae.cve_cequipo, ce.marca, ce.modelo, ce.numero_serie, ce.descripcion, fecha_asignacion
-			FROM asignacion_equipos ae
-			INNER JOIN cat_usuario_nomina cun ON ae.codigo_empleado = cun.codigoempleado
-			INNER JOIN caracteristicas_equipos ce ON ce.cve_cequipo = ae.cve_cequipo WHERE estatus_asignacion>0";
-    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-    dd($datos);
-}
+
 
 // me sirve para mostrar en la pantalla de caracteristicas 
 // todas las caracteristicas que se han puesto a los equipos
@@ -28,23 +19,28 @@ function getVercaracteristicas($dbcon){
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+function getEquipos ($dbcon){
+	$sql = "select *  from cat_equipos   ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
+function ValidaQueEquipoEs($dbcon, $Datos){
+	$conn = $dbcon->conn();
+
+    $sql = "SELECT nombre_equipo FROM cat_equipos WHERE cve_equipo = ".$Datos->cve_equipo." ";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+
+    if ($resultado->nombre_equipo == 'CPU' || $resultado->nombre_equipo == 'LAPTOP') {
+    	dd(['code'=>400]);
+    }
+}
 
 
 
 // aca comienzan las validaciones, la primera es sobre si se repite el nombre
 // ya se agregó al controlador de validaciones
 
-function ValidaExistencia($dbcon, $Datos) {
-    $conn = $dbcon->conn();
 
-    // Verificar si ya existe un registro con el mismo nombre
-    $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-    if ($resultado->count >= 1) {
-        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    }
-}
 // validacion para factura y numero de serie
 function validacionSerie($dbcon, $Datos) {
     $conn = $dbcon->conn();
@@ -64,46 +60,6 @@ function validacionSerie($dbcon, $Datos) {
 
 
 // aqui comienzan las funciones de guardar
-function guardarEquipo($dbcon, $Datos){
-	// if($Datos->nombre==""){ dd(['code'=>400,'msj'=>'El equipo no se pudo guardar']);}
-
-	$conn = $dbcon->conn();
-
-    // Verificar si ya existe un registro con el mismo nombre
-    // $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
-    // $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-    // if ($resultado->count >= 1) {
-    //     dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    // }else{
-		$fecha = date('Y-m-d H:i:s');
-		$status = '1';
-		$conn = $dbcon->conn();
-		$sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
-				VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-		if ($qBuilder) {
-			$getId = "SELECT max(cve_equipo) cve_equipo FROM cat_equipos WHERE 
-			fecha_registro = '".$fecha."'
-			AND creado_por = ".$Datos->id."
-			AND estatus_equipo =  ".$status."
-			AND nombre_equipo = '".$Datos->nombre."' ";
-			$getId = $dbcon->qBuilder($conn, 'first', $getId);
-	
-			dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getId->cve_equipo]);
-		}else{
-			dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
-	}
-	// $fecha = date('Y-m-d H:i:s');
-	// $status = '1';
-	// $conn = $dbcon->conn();
-	// $sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
-	// 		VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
-	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-
-	
-	// }
-}
 
 function guardarCaracteristicas($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
@@ -171,56 +127,8 @@ function guardarCaracteristicas($dbcon, $Datos){
 		}
 }
 
-function guardarAsignacion($dbcon, $Datos){
-
-		$fecha = date('Y-m-d H:i:s');
-		$status = '1';
-		$conn = $dbcon->conn();
-		$sql = "INSERT INTO asignacion_equipos (codigo_empleado, cve_cequipo, estatus_asignacion, fecha_asignacion)
-				VALUES (".$Datos->codigo.", ".$Datos->nombre.", ".$status.", '".$fecha."' )";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-
-		$sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
-		where ce.cve_cequipo=".$Datos->nombre."";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
-	
-}
-
 // funciones para editar
 // editar el nombre y la descripción
-function editarNombre($dbcon, $Datos){
-	$conn = $dbcon->conn();
-
-    // Verificar si ya existe un registro con el mismo nombre
-    $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-	
-    if ($resultado->count > 1) {
-        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    }
-	// else if($resultado->count == 1){
-	// 	$fecha = date('Y-m-d H:i:s');
-	// 	$status = '1';
-	// 	$conn = $dbcon->conn();
-	// 	$sql = " UPDATE cat_equipos
-	// SET  descripcion  ='".$Datos->descripcion."'
-	// WHERE cve_equipo =" .$Datos->numero."";
-	// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	// }
-	else{
-		$fecha = date('Y-m-d H:i:s');
-		$status = '1';
-		$conn = $dbcon->conn();
-		$sql = " UPDATE cat_equipos
-	SET  nombre_equipo  ='".$Datos->nombre."'
-	WHERE cve_equipo =" .$Datos->numero."";
-	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	}
-
-
-	
-	// dd($sql);
-}
 
 function editarCaracteristica($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
@@ -260,66 +168,12 @@ function editarCaracteristica($dbcon, $Datos){
 }
 
 
-function eliminarAsignacion($dbcon, $Datos){
-	$fecha = date('Y-m-d H:i:s');
-	$conn = $dbcon->conn();
-	$sql = "UPDATE asignacion_equipos
-	SET  estatus_asignacion  =0
-	WHERE cve_asignacion =" .$Datos->nombreEliminar." ";
-	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-
-	$sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=1
-		where ce.cve_cequipo=".$Datos->nombreEliminar."";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
-		// dd($sql);}
-	
-}
-
-// para traer el codigo del equipo que se agrego
-function getEquipos ($dbcon){
-	$sql = "select *  from cat_equipos   ";
-    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-    dd($datos);
-}
 
 
 // para traer el codigo del empleado
-function getEmpleado ($dbcon){
-	$sql = "select codigoempleado, nombre from cat_usuario_nomina  ";
-    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-    dd($datos);
-}
+
 // para traer las caracteristicas del equipo
-function getCaracteristicas ($dbcon){
-	
-	$sql = "SELECT ce.cve_cequipo, CONCAT('MYS - TIC', ces.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
-			FROM caracteristicas_equipos ce
-			INNER JOIN cat_equipos ces ON ces.cve_equipo = ce.cve_equipo
-			WHERE ce.estatus_equipo = 1 ";
-    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-    dd($datos);
-}
-// para traer la marca, modelo y descripción para el modal de asignación
-function getMarca($dbcon, $Datos){
-	$conn = $dbcon->conn();
-	$sql = "	SELECT *
-				FROM caracteristicas_equipos ce
-				WHERE cve_cequipo = ".$Datos->nombre."  " ;
-	$marca = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-	dd($marca);
 
-	
-}
-function ValidaQueEquipoEs($dbcon, $Datos){
-	$conn = $dbcon->conn();
-
-    $sql = "SELECT nombre_equipo FROM cat_equipos WHERE cve_equipo = ".$Datos->cve_equipo." ";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
-
-    if ($resultado->nombre_equipo == 'CPU' || $resultado->nombre_equipo == 'LAPTOP') {
-    	dd(['code'=>400]);
-    }
-}
 
 include_once "../../../dbconexion/conn.php";
 $dbcon	= 	new MysqlConn;
@@ -332,68 +186,28 @@ if ($tarea == '') {
 	$tarea = $objDatos->task;
 }
 switch ($tarea) {
-	case 'guardarEquipo':
-		guardarEquipo($dbcon, $objDatos);
-		break;
 	case 'guardarCaracteristicas':
 		guardarCaracteristicas($dbcon, $objDatos);
 		break;
-	case 'guardarAsignacion':
-		guardarAsignacion($dbcon, $objDatos);
-		break;
-	case 'editarNombre':
-		editarNombre($dbcon, $objDatos);
-		break;
 	case 'editarCaracteristica':
 		editarCaracteristica($dbcon, $objDatos);
-		break;
-	case 'eliminarAsignacion':
-		eliminarAsignacion($dbcon,$objDatos );
 		break;
 		
 		// los get son para traer informción y que este se muestre
 	case 'getEquipos':
 		getEquipos($dbcon, );
 		break;
-	case 'getEmpleado':
-		getEmpleado($dbcon);
-		break;
-	case 'getCaracteristicas':
-		getCaracteristicas($dbcon);
-		break;
-	// case 'getProducto':
-	// 	getProducto($dbcon);
-	// 	break;
-	case 'getMarca':
-		getMarca($dbcon,$objDatos );
-		break;
-	case 'getProduccion':
-		getProduccion($dbcon);
-		break;
 	case 'getVercaracteristicas':
 		getVercaracteristicas($dbcon);
-		break;
+		break;	
 		// para las validaciones
-
-		// ya se agregó la misma función en otro controlador
-	case 'ValidaExistencia':
-		ValidaExistencia($dbcon,$objDatos);
-		break;
 	case 'validacionSerie':
 		validacionSerie($dbcon,$objDatos);
 		break;
-	// case 'validaEquipo':
-	// 	validaEquipo($dbcon,$objDatos);
-	// break;
-	// case 'validacionFacturaModal':
-	// 	validacionFacturaModal($dbcon,$objDatos);
-	// break;
+
 	case 'ValidaQueEquipoEs':
 		ValidaQueEquipoEs($dbcon,$objDatos);
-	break;
-	// case 'validacionEquipo':
-	// 	validacionEquipo($dbcon,$objDatos);
-	// break;
+	break;;
 	
 		
 		

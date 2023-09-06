@@ -1,6 +1,7 @@
 <?php
 // session_start();
     include_once "../../../modulos/seguridad/login/datos_usuario.php";
+    
 
     if (empty($_SESSION['usuario'])) {
         $type = "error";
@@ -52,28 +53,45 @@
                 </ul>
             </li>
             <!-- catálogos -->
-            <li class="treeview" ng-show="perfilUsu.catalogo_principal == 1">
+            <li class="treeview" >
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Catálogos</span><i class="treeview-indicator fas fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                   <li ng-show="perfilUsu.catalogo_equipos_vista == 1">
-                    <a class="treeview-item" href="../../catalogos/equipos/equipos_vista.php"><i class="icon fa fa-circle-o"></i> Equipos</a>
+                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="icon fas fa-upload"></i> Altas de equipos</a>
                   </li>
                   <li >
-                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="icon fa fa-circle-o"></i> Caracteristicas de equipos</a>
+                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="icon fas fa-tv"></i> Caracteristicas de equipos</a>
                   </li>
+                  <li>
+                  <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="icon fas fa-tools"></i> Servicios</a>
+                </li>
                 </ul>
             </li>
             <!-- asignación de equipos -->
             <li class="treeview">
               <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Asignación</span><i class="treeview-indicator fa fa-angle-right"></i>
+                <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Movimientos</span><i class="treeview-indicator fa fa-angle-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li>
-                  <a class="treeview-item" href="../../catalogos/equipos/asignacion.php"><i class="icon fa fa-circle-o"></i> Equipos</a>
+                  <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="icon fas fa-user-check"></i> Asignación</a>
+                </li>
+                <li>
+                  <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="fas fa-laptop-house"></i>Mantenimiento</a>
                 </li>
               </ul>
             </li>
+            <!-- servicios de equipos -->
+            <!-- <li class="treeview">
+              <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Servicios</span><i class="treeview-indicator fa fa-angle-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a class="treeview-item" href="../../catalogo/servicios/servicio.php"><i class="icon fa fa-circle-o"></i> Servicios</a>
+                </li>
+              </ul>
+            </li> -->
 
 
             <!-- Seguridad -->
