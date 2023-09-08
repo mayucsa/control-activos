@@ -21,11 +21,117 @@
               <li class="breadcrumb-item"><a href="caracteristicas_equipos.php"> Asignación de equipos</a></li>
             </ul>
         </div>
+        <div class="container">
+            <div class="card bg-light mb-3" >
+            <div class="card-header">
+                <h2 class="card-title">RELACIÓN DE LOS EQUIPOS DE COMPUTO</h2>
+                <!-- <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>  -->
+            </div>
+                <div class="row">
+
+                    <div class="col">
+                        <div class="card card-info ">
+                        <div class="card-header">
+                                <h3 class="card-title">EQUIPOS DISPONIBLES</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div class="card-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProducto">
+                                        <thead>
+                                            <tr>
+                                                <th>Folio</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(i, obj) in caracteristicas">
+                                                <td class="text-center">{{obj.folio}}</td>
+                                                
+                                                <td class="text-center">
+                                                        <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                                        </button> -->
+                                                        <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
+                                                            </button>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="col">
+                        <div class="card card-info ">
+                            <div class="card-header">
+                                <h3 class="card-title">EMPLEADO</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div class="card-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaEmpleado">
+                                        <thead>
+                                            <tr>
+                                                <th>código/nombre empleado</th>
+                                                <th> número de serie del equipo</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(i, obj) in empleado ">
+                                                <td class="text-center">{{obj.codigoempleado}}</td>
+                                                <td >{{obj.nombre}}</td>
+                                                
+                                                <td class="text-center">
+                                                        <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                                        </button> -->
+                                                        <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
+                                                            </button>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                1 of 3
+                </div>
+                <div class="col-5">
+                2 of 3 (wider)
+                </div>
+                <div class="col">
+                3 of 3
+                </div>
+            </div>
+<!-- acá termina el contenedor -->
+        </div>
 
         <div class="row">
             <div class="col-md-12">
-                <div class="tile">
-                    <div class="card card-info" ng-show="perfilUsu.catalogo_equipos_captura == 1">
+                <div class="tile col-lg-12 d-lg-flex">
+                    <div class="card card-info col col-lg-6 " ng-show="perfilUsu.catalogo_equipos_captura == 1">
                         <div class="card-header">
                             <h3 class="card-title">ASIGNACIÓN DE EQUIPOS </h3>
                             <div class="card-tools">
@@ -35,13 +141,14 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            
                             <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">
                                     <!-- para empleado -->
                                     <div style="width: 100%;" class="form-floating mx-1 text-center">
                                         <select class="form-control form-group-md " ng-model="codigo" autocomplete="off">
                                             <option selected="selected" value="" disabled>[Seleccione al empleado..]</option>
-                                            <option class="text-center" ng-repeat="(i, obj) in empleado" value="{{obj.codigoempleado}}">Código:{{obj.codigoempleado}}--Nombre:{{obj.nombre}}</option>
+                                            <!-- <option class="text-center" ng-repeat="(i, obj) in empleado" value="{{obj.codigoempleado}}">Código:{{obj.codigoempleado}}--Nombre:{{obj.nombre}}</option> -->
                                         </select>
                                         <label>Empleado</label>
                                     </div>
@@ -56,7 +163,7 @@
                                     <div style="width: 100%;" class="form-floating mx-1 text-center">
                                         <select class="form-control form-group-md" ng-model="nombre" ng-blur="validaEquipo(nombre)" autocomplete="off">
                                             <option selected="selected" value="" disabled>[Seleccione una opción..]</option>
-                                            <option class="text-center" ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}"> {{obj.folio}} </option>
+                                            <!-- <option class="text-center" ng-repeat="(i, obj) in caracteristicas" value="{{obj.cve_cequipo}}"> {{obj.folio}} </option> -->
                                         </select>
                                         <label>Producto</label>  
                                     </div>
@@ -91,6 +198,7 @@
                                 </div>
                             </div>
                     </div>
+                    
                 </div>
                 <div class="card card-info">
                     <div class="card-header">

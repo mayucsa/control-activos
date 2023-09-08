@@ -119,7 +119,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!-- <tr ng-repeat="(i, obj) in vercaracteristicas track by i"> -->     
+                                <!-- <tr ng-repeat="(i, obj) in vercaracteristicas track by i">      -->
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verEquipo  disabled></td> 
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verMarca  disabled></td>
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verModelo disabled></td>

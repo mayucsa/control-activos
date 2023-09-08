@@ -6,4 +6,5 @@ app.controller('vistaServicio', function (BASEURL, ID, $scope, $http) {
 		$scope.nombre = '';
 	}
 
+
 });

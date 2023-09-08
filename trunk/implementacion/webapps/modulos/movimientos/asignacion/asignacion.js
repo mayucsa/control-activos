@@ -6,8 +6,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.codigo = '';
 		$scope.nombre = '';
 	}
-// esto 
+// tabla para traer los datos una vez que ya se asignó el equipo al empleado
 	$http.post('Controller.php', {
+
 		'task': 'getProduccion'
 	}).then(function(response) {
 		response = response.data;
@@ -15,31 +16,101 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.ssProduccionMorteros = response;
 		setTimeout(function(){
 			$('#tablaProduccion').DataTable({
-		        "processing": true,
-		        "bDestroy": true,
+				"processing": true,
+				"bDestroy": true,
 				"order": [5, 'desc'],
 				"lengthMenu": [[15, 30, 45], [15, 30, 45]],
-			     "language": {
-			         "lengthMenu": "Mostrar _MENU_ registros por página.",
-			         "zeroRecords": "No se encontró registro.",
-			         "info": "  _START_ de _END_ (_TOTAL_ registros totales).",
-			         "infoEmpty": "0 de 0 de 0 registros",
-			         "infoFiltered": "(Encontrado de _MAX_ registros)",
-			         "search": "Buscar: ",
-			         "processing": "Procesando...",
-			                  "paginate": {
-			             "first": "Primero",
-			             "previous": "Anterior",
-			             "next": "Siguiente",
-			             "last": "Último"
-			         }
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ registros por página.",
+					"zeroRecords": "No se encontró registro.",
+					"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+					"infoEmpty": "0 de 0 de 0 registros",
+					"infoFiltered": "(Encontrado de _MAX_ registros)",
+					"search": "Buscar: ",
+					"processing": "Procesando...",
+							"paginate": {
+						"first": "Primero",
+						"previous": "Anterior",
+						"next": "Siguiente",
+						"last": "Último"
+					}
 
-			     }
+				}
 			});
 		},800);
 	}, function(error){
 		console.log('error', error);
 	});
+// para mostrar el folio de los equipos
+	$http.post('Controller.php', {
+		'task': 'getCaracteristicas'
+	}).then(function(response) {
+		response = response.data;
+		console.log('getCaracteristicas', response);
+		$scope.caracteristicas = response;
+		setTimeout(function(){
+			$('#tablaProducto').DataTable({
+				"processing": true,
+				"bDestroy": true,
+				"order": [1, 'desc'],
+				"lengthMenu": [[15, 30, 45], [15, 30, 45]],
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ registros por página.",
+					"zeroRecords": "No se encontró registro.",
+					"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+					"infoEmpty": "0 de 0 de 0 registros",
+					"infoFiltered": "(Encontrado de _MAX_ registros)",
+					"search": "Buscar: ",
+					"processing": "Procesando...",
+							"paginate": {
+						"first": "Primero",
+						"previous": "Anterior",
+						"next": "Siguiente",
+						"last": "Último"
+					}
+
+				}
+			});
+		},800);
+	}, function(error){
+		console.log('error', error);
+	});
+
+	// tabla para traer los datos del empleado
+	$http.post('Controller.php', {
+		'task': 'getEmpleado'
+		}).then(function(response) {
+			response = response.data;
+			console.log('getEmpleado', response);
+			$scope.empleado = response;
+			setTimeout(function(){
+				$('#tablaEmpleado').DataTable({
+					"processing": true,
+					"bDestroy": true,
+					"order": [2, 'desc'],
+					"lengthMenu": [[5, 20, 30], [5, 20, 30]],
+					"language": {
+						"lengthMenu": "Mostrar _MENU_ registros por página.",
+						"zeroRecords": "No se encontró registro.",
+						"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+						"infoEmpty": "0 de 0 de 0 registros",
+						"infoFiltered": "(Encontrado de _MAX_ registros)",
+						"search": "Buscar: ",
+						"processing": "Procesando...",
+								"paginate": {
+							"first": "Primero",
+							"previous": "Anterior",
+							"next": "Siguiente",
+							"last": "Último"
+						}
+
+					}
+				});
+			},100);
+		}, function(error){
+			console.log('error', error);
+		});
+
 
 	
 
@@ -228,13 +299,13 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 
 	// para ver la marca, modelo y descripción al seleccionar un producto
-	$http.post('Controller.php', {
-		'task': 'getCaracteristicas'
-	}).then(function (response){
-		response = response.data;
-		console.log('getCaracteristicas', response);
-		$scope.caracteristicas = response;
-	},function(error){
-		console.log('error', error);
-	});
+// 	$http.post('Controller.php', {
+// 		'task': 'getCaracteristicas'
+// 	}).then(function (response){
+// 		response = response.data;
+// 		console.log('getCaracteristicas', response);
+// 		$scope.caracteristicas = response;
+// 	},function(error){
+// 		console.log('error', error);
+// 	});
 });
