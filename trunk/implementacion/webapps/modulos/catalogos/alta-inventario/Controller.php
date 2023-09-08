@@ -53,7 +53,8 @@ function guardarEquipo($dbcon, $Datos){
 // $conn = $dbcon->conn();
 // $sql = "INSERT INTO cat_equipos (nombre_equipo, creado_por, estatus_equipo, fecha_registro)
 // 		VALUES ('".$Datos->nombre."', ".$Datos->id.", ".$status.", '".$fecha."' )";
-$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+// $qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+
 
 
 // }

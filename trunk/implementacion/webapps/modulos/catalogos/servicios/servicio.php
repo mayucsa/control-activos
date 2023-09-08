@@ -37,8 +37,12 @@
                         <div class="row form-group form-group-sm">
                             <div class="col-lg-12 d-lg-flex " style=" margin-top: 15px">
                                 <div style="width: 100%;" class="form-floating mx-1">
-                                    <input type="text" ng-model="servicio" id="servicio" name="servicio" class="form-control form-control-md text-center" >
+                                    <input type="text" ng-model="servicioEntrada" ng-blur='verificarServicio(servicioEntrada)' id="servicioEntrada" name="servicioEntrada" class="form-control form-control-md text-center" >
                                     <label>Servicio</label>
+                                </div>
+                                <div style="width: 100%;" class="form-floating mx-1">
+                                    <input type="text" ng-model="caracteristica" id="caracteristica" name="caracteristica" class="form-control form-control-md text-center" >
+                                    <label>Caracteristicas</label>
                                 </div>
                             </div> 
                         </div>
@@ -67,27 +71,20 @@
                         <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
                             <thead>
                                 <tr>
-                                    <th>código/nombre empleado</th>
-                                    <th> número de serie del equipo</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
+                                    <th>Número de servicio</th>
+                                    <th>Nombre del servicio</th>
                                     <th>Caracteristicas</th>
-                                    <th>Fecha de captura</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr ng-repeat="(i, obj) in ssProduccionMorteros "> -->
-                                    <td class="text-center">{{obj.codigo_empleado}}--{{obj.nombrecompleto}}</td>
-                                    <!-- <input class="sinborde my-class" w-25 ng-model="nombre"  disabled>{{obj.cve_asignacion}} -->
-                                    <td >{{obj.numero_serie}}</td>
-                                    <td class="text-center">{{obj.marca}}</td>
-                                    <td class="text-center">{{obj.modelo}}</td>
+                                <tr ng-repeat="(i, obj) in servicio ">
+                                    <td class="text-center">{{obj.cve_servicio}}</td>
+                                    <td class="text-center">{{obj.nombre_servicio}}</td>
                                     <td class="text-center">{{obj.descripcion}}</td>
-                                    <td class="text-center">{{obj.fecha_asignacion}}</td>
                                     <td class="text-center">
-                                            <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
-                                            </button> -->
+                                            <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                            </button>
                                             <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
                                                 </button>
                                            
