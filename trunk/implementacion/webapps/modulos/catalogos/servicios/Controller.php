@@ -8,6 +8,12 @@ function dd($var){
     }
 }
 
+// function getServicios ($dbcon){
+// 	$sql = "select *  from cat_servicios   ";
+//     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+//     dd($datos);
+// }
+
 function guardarServicio($dbcon, $Datos){
     $fecha = date('Y-m-d H:i:s');
     $status = '1';
@@ -23,7 +29,7 @@ function guardarServicio($dbcon, $Datos){
 		fecha_registro = '".$fecha."'
 		AND creado_por = ".$Datos->id."
 		AND estatus_servicio =  ".$status."
-		AND descripcion = '".$Datos->caracteristica."'
+		AND descripcion = '".$Datos->caracteristica."'  
 		AND nombre_servicio = '".$Datos->servicioEntrada."' ";
 		$getId = $dbcon->qBuilder($conn, 'first', $getId);
 
@@ -31,6 +37,53 @@ function guardarServicio($dbcon, $Datos){
 	}else{
 		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
 }
+
+    // $sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
+    // where ce.cve_cequipo=".$Datos->nombre."";
+    // $qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
+
+}
+
+function cambioServicio($dbcon, $Datos){
+    $fecha = date('Y-m-d H:i:s');
+    $conn = $dbcon->conn();
+    if ($Datos->descripcion==''){
+		$Datos->descripcion=NULL;
+	}
+    $sql = " UPDATE cat_servicios
+		SET  nombre_servicio  ='".$Datos->servicio."',  descripcion  ='".$Datos->descripcion."'
+		WHERE cve_servicio =" .$Datos->numeroEquipoModal."";
+		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+
+    // $sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
+    // where ce.cve_cequipo=".$Datos->nombre."";
+    // $qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
+
+}
+
+function desactivarServicio($dbcon, $Datos){
+    $fecha = date('Y-m-d H:i:s');
+    $conn = $dbcon->conn();
+	
+    $sql = " UPDATE cat_servicios
+		SET  estatus_servicio  = 0
+		WHERE cve_servicio =" .$Datos->baja."";
+		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+
+    // $sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
+    // where ce.cve_cequipo=".$Datos->nombre."";
+    // $qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
+
+}
+
+function activarServicio($dbcon, $Datos){
+    $fecha = date('Y-m-d H:i:s');
+    $conn = $dbcon->conn();
+	
+    $sql = " UPDATE cat_servicios
+		SET  estatus_servicio  = 1
+		WHERE cve_servicio =" .$Datos->alta."";
+		$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
 
     // $sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
     // where ce.cve_cequipo=".$Datos->nombre."";
@@ -46,7 +99,21 @@ function validacionServicio($dbcon, $Datos) {
     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
     if ($resultado->count >= 1) {
-        dd(['code'=>400,'msj'=>'Un equipo se ha registrado con ese numero de serie']);
+        dd(['code'=>400,'msj'=>'Este servicio ya ha sido registrado']);
+    }
+	
+}
+
+function validacionServicioM($dbcon, $Datos) {
+    $conn = $dbcon->conn();
+	
+
+    // Verificar si ya existe un registro con la misma serie
+    $sql = "SELECT COUNT(*) AS count FROM cat_servicios WHERE nombre_servicio = '".$Datos->servicio."' ";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	
+    if ($resultado->count >= 1) {
+        dd(['code'=>400,'msj'=>'Este servicio ya ha sido registrado']);
     }
 	
 }
@@ -72,12 +139,29 @@ if ($tarea == '') {
 	$tarea = $objDatos->task;
 }
 switch ($tarea) { 
-	case 'guardarServicio':
+    // case 'getServicios':
+    //     getServicios($dbcon);
+    //     break;
+	case 'guardarServicio': 
 		guardarServicio($dbcon, $objDatos);
 		break;
+    case 'cambioServicio':
+        cambioServicio($dbcon, $objDatos);
+        break;
+    case 'desactivarServicio': 
+        desactivarServicio($dbcon, $objDatos);
+        break;
+    case 'activarServicio': 
+        activarServicio($dbcon, $objDatos);
+        break;
+        
+        
 	case 'validacionServicio':
 		validacionServicio($dbcon,$objDatos );
 		break;	
+    case 'validacionServicioM':
+        validacionServicioM($dbcon,$objDatos );
+        break;
     case 'getServicio':
         getServicio($dbcon );
         break;

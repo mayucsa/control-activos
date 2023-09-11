@@ -402,7 +402,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 						
 						$http.post('Controller.php', {
 							'task': 'editarCaracteristica',
-							'id': ID,
+							'id': ID, 
 							'numeroEquipo':$scope.numeroEquipo,
 							'nombre': $scope.verNombre,
 							'marca': $scope.cambiaMarca,

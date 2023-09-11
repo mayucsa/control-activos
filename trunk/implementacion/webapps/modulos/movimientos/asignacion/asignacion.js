@@ -215,9 +215,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 
 	$scope.eliminarAsignacion = function (cve_cequipo) {
-		$scope.nombreEliminar=cve_cequipo;
 
-		
 		Swal.fire({
 			title: 'Estás a punto de eliminar esta asignación.',
 			text: '¿Es correcta la información agregada?',
@@ -234,7 +232,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 				$http.post('Controller.php', {
 					'task': 'eliminarAsignacion',
 					'id': ID,
-					'nombreEliminar':$scope.nombreEliminar
+					'nombreEliminar': cve_cequipo
 				}).then(function(response){
 					response = response.data;
 					// console.log('response', response);

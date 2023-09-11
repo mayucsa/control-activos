@@ -9,6 +9,42 @@
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
         </head>
 <div ng-controller="vistaServicio">
+<div class="modal fade bd-example-modal-lg " id="ejemploServicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR SERVICIO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div c class="row row-cols-4">
+                    <div style="width: 100%;" class="form-floating mx-1">
+                        <input class="form-control UpperCase" hidden="true" ng-model="numeroEquipoModal" id="numeroEquipoModal" autocomplete="off"  disabled>
+                        <label>Numero </label>
+                    </div>
+                    <div style="width: 100%; margin-bottom: 10px " class="form-floating mx-1 w-40">
+                        <input  class="form-control UpperCase text-center" ng-model="cambioNombre" id="cambioNombre" autocomplete="off"  ng-blur='verificarServicioM(cambioNombre)' >
+                        <label>Nombre de servicio</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-40">
+                        <input class="form-control UpperCase text-center" ng-model="cambioDescripcion" id="cambioDescripcion" autocomplete="off" >
+                        <label class="form-label">Descripción</label>
+                    </div >
+
+                 </div>
+            </div>
+        </div>
+        <!-- aca termina el cuerpo del modal -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" ng-click="cambioServicio()">Guardar Datos</button>
+        </div>
+        </div>
+    </div>
+    </div>
 
 <main class="app-content">
     <div class="app-title">
@@ -80,13 +116,15 @@
                             <tbody>
                                 <tr ng-repeat="(i, obj) in servicio ">
                                     <td class="text-center">{{obj.cve_servicio}}</td>
-                                    <td class="text-center">{{obj.nombre_servicio}}</td>
+                                    <td class="text-center" >{{obj.nombre_servicio}}</td>
                                     <td class="text-center">{{obj.descripcion}}</td>
                                     <td class="text-center">
-                                            <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                            <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " style="margin-bottom: 10px" ng-click="consultar(obj.cve_servicio, obj.nombre_servicio, obj.descripcion)" data-toggle="modal" data-target="#ejemploServicio">
                                             </button>
-                                            <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
+                                            <button type="button" class="btn btn-success btn-sm fas fa-unlock " style="margin-bottom: 10px" ng-show="[[obj.estatus_servicio]]==0" ng-click="activar(obj.cve_servicio)">                                           
                                                 </button>
+                                            <button type="button" class="btn btn-danger  btn-sm fas fa-lock " style="margin-bottom: 10px"ng-show="[[obj.estatus_servicio]]==1" ng-click="descativar(obj.cve_servicio)">                                           
+                                            </button>
                                            
                                        </td>
                                 </tr>
