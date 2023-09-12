@@ -1,6 +1,92 @@
 app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.codigo = '';
 	$scope.nombre = '';
+	// var miBoton = document.getElementById('miBoton');
+
+	var relacionArray = {
+		listaEmpleado: [],
+		listaEquipo: [],
+		listaFolio: []
+	  };
+	  
+	function contarElementos(array) {
+		return array.length;
+	}
+	$scope.botonesHabilitados = {}; // Un objeto para mantener el estado de los botones
+
+	
+
+	// let cantidadAlmacenada  = contarElementos(relacionArray[listaEmpleado]);
+	// console.log('La cantidadAlmacenada de elementos en el array es:', cantidadAlmacenada);
+	
+	$scope.agregarEmpleado = function(codigoempleado) {
+		console.log('este es el botón', codigoempleado);
+		
+		// Utiliza la función contarElementos para verificar la cantidad almacenada
+		var cantidadAlmacenada = contarElementos(relacionArray.listaEmpleado);
+	
+		if (cantidadAlmacenada === 0) {
+			relacionArray.listaEmpleado = [codigoempleado];
+		} else {
+			relacionArray.listaEmpleado = [codigoempleado];
+		}
+		console.log('esto es el array empleado', relacionArray.listaEmpleado);
+		console.log('esto es el array equipo', relacionArray.listaEquipo);
+	}
+	$scope.agregarEquipo = function(cve_cequipo, folio) {
+		$scope.marca=folio;
+		// Verifica si el botón ya está deshabilitado
+		if (!$scope.botonesHabilitados[cve_cequipo]) {
+			// Deshabilita el botón
+			$scope.botonesHabilitados[cve_cequipo] = true;
+	
+			// Tu lógica para agregar el equipo aquí
+			console.log('este es el botón', cve_cequipo);
+	
+			var cantidadAlmacenada = contarElementos(relacionArray.listaEquipo);
+	
+			if (cantidadAlmacenada === 0) {
+				relacionArray.listaEquipo = [cve_cequipo];
+				// relacionArray.listaEquipo = [folio];
+			} else {
+				relacionArray.listaEquipo.push(cve_cequipo);
+				// relacionArray.listaEquipo.push(folio);
+			}
+			var cantidadAlmacenada = contarElementos(relacionArray.listaFolio);
+	
+			if (cantidadAlmacenada === 0) {
+				relacionArray.listaFolio = [folio];
+				// relacionArray.listaFolio = [folio];
+			} else {
+				relacionArray.listaFolio.push(folio);
+				// relacionArray.listaFolio.push(folio);
+			}
+	
+			console.log('esto es el array de folio', relacionArray.listaFolio);
+			console.log('esto es el array de equipo', relacionArray.listaEquipo);
+			console.log('esto es el array de empleado', relacionArray.listaEmpleado);
+		}
+	};
+	
+	// $scope.agregarEquipo = function(cve_cequipo, button) {
+	// 	// var mibutton = document.getElementById('mibutton');
+		
+	// 	console.log('este es el botón', cve_cequipo);
+	
+	// 	// Utiliza la función contarElementos para verificar la cantidad almacenada
+	// 	var cantidadAlmacenada = contarElementos(relacionArray.listaEquipo);
+	
+	// 	if (cantidadAlmacenada === 0) {
+	// 		relacionArray.listaEquipo = [cve_cequipo];
+	// 	} else {
+	// 		// Utiliza push para agregar el nuevo dato al array existente
+	// 		relacionArray.listaEquipo.push(cve_cequipo);
+	// 	}
+	
+	// 	console.log('esto es el array de equipo', relacionArray.listaEquipo);
+	// 	console.log('esto es el array de empleado', relacionArray.listaEmpleado);
+	// }
+	
 
 	$scope.limpiarCampos = function(){
 		$scope.codigo = '';
@@ -71,7 +157,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 				}
 			});
-		},800);
+		},1000);
 	}, function(error){
 		console.log('error', error);
 	});
@@ -106,7 +192,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 					}
 				});
-			},100);
+			},1000);
 		}, function(error){
 			console.log('error', error);
 		});

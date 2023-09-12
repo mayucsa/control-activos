@@ -44,6 +44,8 @@
                                 </div> 
                             </div>
                             <div class="card-footer">
+                               
+
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaEmpleado">
                                         <thead>
@@ -59,11 +61,11 @@
                                                 <td >{{obj.nombre}}</td>
                                                 
                                                 <td class="text-center">
-                                                        <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
-                                                        </button> -->
-                                                        <input type="radio" ng-model="marca" ng-click="marca(obj.codigoempleado, obj.nombre )" id="marca" name="marca" class="form-control form-control-md text-center" >
-                                                        <!-- <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
-                                                            </button> -->
+                                                        <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="agregarEmpleado(obj.codigoempleado)" data-toggle="modal" data-target="#asignacion">
+                                                            <label for="">agregar</label>
+                                                        </button>
+                                                        <!-- <input type="radio" ng-model="marca" ng-click="marca(obj.codigoempleado, obj.nombre )" id="marca" name="marca" class="form-control form-control-md text-center" > -->
+                                                        
                                                     
                                                 </td>
                                             </tr>
@@ -99,9 +101,13 @@
                                                 <td class="text-center">{{obj.folio}}</td>
                                                 
                                                 <td class="text-center">
-                                                        <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#asignacion">
+                                                    <button type="button" class="btn btn-warning btn-sm fas fa-edit" ng-click="agregarEquipo(obj.cve_cequipo, obj.folio)" data-toggle="modal" data-target="#asignacion" ng-disabled=false>
+                                                        agregar equipo
+                                                    </button>
+                                                        <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="agregarEquipo(obj.cve_cequipo, this)" data-toggle="modal" data-target="#asignacion">
+                                                        agregar equipo
                                                         </button> -->
-                                                        <input type="radio" ng-model="marca" id="marca" name="marca" class="form-control form-control-md text-center" >
+                                                        <!-- <input type="radio" ng-model="marca" id="marca" name="marca" class="form-control form-control-md text-center" > -->
 
                                                         <!-- <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)">                                           
                                                             </button>  -->
@@ -165,7 +171,7 @@
                 <div class="tile col-lg-12 d-lg-flex">
                     <div class="card card-info col col-lg-6 " ng-show="perfilUsu.catalogo_equipos_captura == 1">
                         <div class="card-header">
-                            <h3 class="card-title">ASIGNACIÓN DE EQUIPOS </h3>
+                            <h3 class="card-title">RELACIÓN DE LOS EQUIPOS DE COMPUTOO </h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -174,14 +180,14 @@
                         </div>
                         <div class="card-body">
                             
-                            <div class="row form-group form-group-sm">
+                            <div class="row form-group ">
                                 
                                 
                                 
                                 <div class="col-lg-12 d-lg-flex " style=" margin-top: 15px">
                                     <div style="width: 100%;" class="form-floating mx-1">
-                                        <input type="text" ng-model="marca" id="marca" name="marca" class="form-control form-control-md text-center" disabled>
-                                        <label>Marca</label>
+                                        <input type="text" size="15" maxlength="30" ng-model="marca" id="marca" name="marca" class="form-control form-control-md text-center" disabled>
+                                        <label>folio</label>
                                     </div>
                                     <div style="width: 100%;" class="form-floating mx-1">
                                         <input type="text" ng-model="modelo" id="modelo" name="modelo" class="form-control form-control-md text-center" disabled>
@@ -195,12 +201,12 @@
                             </div>
                         </div>
                             
-                            <div class="row form-group form-group-sm border-top">
+                            <!-- <div class="row form-group form-group-sm border-top">
                                 <div class="col-sm-12" align="center">
                                     <input type="submit" value="Guardar" href="#" ng-click="validacionCampos()" class="btn btn-primary" style="margin-bottom: -25px !important">
                                     <input type="submit" value="Limpiar" href="#" ng-click="limpiarCampos()" class="btn btn-warning" style="margin-bottom: -25px !important">
                                 </div>
-                            </div>
+                            </div> -->
                     </div>
                     
                 </div>
