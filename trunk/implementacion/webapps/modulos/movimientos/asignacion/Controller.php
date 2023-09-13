@@ -60,7 +60,7 @@ function eliminarAsignacion($dbcon, $Datos){
 
 // para traer el codigo del empleado
 function getEmpleado ($dbcon){
-	$sql = "select codigoempleado, nombre from cat_usuario_nomina  ";
+	$sql = "select codigoempleado, nombre from cat_usuario_nomina  WHERE estadoempleado IN ('A','R') ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }

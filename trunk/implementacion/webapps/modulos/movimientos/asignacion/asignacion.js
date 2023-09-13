@@ -20,7 +20,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	// console.log('La cantidadAlmacenada de elementos en el array es:', cantidadAlmacenada);
 	
 	$scope.agregarEmpleado = function(codigoempleado) {
-		console.log('este es el botón', codigoempleado);
+		console.log('empleado', codigoempleado);
 		
 		// Utiliza la función contarElementos para verificar la cantidad almacenada
 		var cantidadAlmacenada = contarElementos(relacionArray.listaEmpleado);
@@ -30,8 +30,8 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		} else {
 			relacionArray.listaEmpleado = [codigoempleado];
 		}
-		console.log('esto es el array empleado', relacionArray.listaEmpleado);
-		console.log('esto es el array equipo', relacionArray.listaEquipo);
+		// console.log('esto es el array empleado', relacionArray.listaEmpleado);
+		// console.log('esto es el array equipo', relacionArray.listaEquipo);
 	}
 	$scope.agregarEquipo = function(cve_cequipo, folio) {
 		$scope.marca=folio;
@@ -94,7 +94,6 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 // tabla para traer los datos una vez que ya se asignó el equipo al empleado
 	$http.post('Controller.php', {
-
 		'task': 'getProduccion'
 	}).then(function(response) {
 		response = response.data;
@@ -171,10 +170,14 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			$scope.empleado = response;
 			setTimeout(function(){
 				$('#tablaEmpleado').DataTable({
-					"processing": true,
-					"bDestroy": true,
-					"order": [2, 'desc'],
-					"lengthMenu": [[5, 20, 30], [5, 20, 30]],
+					"paging": false,
+					"bScrollCollapse": true,
+					"sScrollY": '200px',
+					// "scrollX" '50px'
+					// "processing": true,
+					// "bDestroy": true,
+					// "order": [2, 'desc'],
+					// "lengthMenu": [[5, 20, 30], [5, 20, 30]],
 					"language": {
 						"lengthMenu": "Mostrar _MENU_ registros por página.",
 						"zeroRecords": "No se encontró registro.",
@@ -371,15 +374,15 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 
 // seleccionamos al empleado y nos muestra la clave y su nombre
-	$http.post('Controller.php', {
-		'task': 'getEmpleado'
-	}).then(function (response){
-		response = response.data;
-		console.log('getEmpleado', response);
-		$scope.empleado = response;
-	},function(error){
-		console.log('error', error);
-	});
+	// $http.post('Controller.php', {
+	// 	'task': 'getEmpleado'
+	// }).then(function (response){
+	// 	response = response.data;
+	// 	console.log('getEmpleado', response);
+	// 	$scope.empleado = response;
+	// },function(error){
+	// 	console.log('error', error);
+	// });
 
 
 	// para ver la marca, modelo y descripción al seleccionar un producto

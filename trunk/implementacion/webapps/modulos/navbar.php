@@ -57,10 +57,10 @@
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Catálogos</span><i class="treeview-indicator fas fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                   <li ng-show="perfilUsu.catalogo_equipos_vista == 1">
-                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="icon fas fa-upload"></i> Altas de equipos</a>
+                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="icon fas fa-upload"></i> Equipos</a>
                   </li>
                   <li >
-                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="icon fas fa-tv"></i> Caracteristicas de equipos</a>
+                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="icon fas fa-tv"></i> Alta de equipos</a>
                   </li>
                   <li>
                   <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="icon fas fa-tools"></i> Servicios</a>
