@@ -3,70 +3,174 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.nombre = '';
 	// var miBoton = document.getElementById('miBoton');
 
-	var relacionArray = {
-		listaEmpleado: [],
-		listaEquipo: [],
-		listaFolio: []
-	  };
+	// var relacionArray = {
+	var	listaEmpleado= []
+	var	listaEquipo=[]
+	var	listaFolio= []
+	//  
+	$scope.equiposAgregados = [];
 	  
 	function contarElementos(array) {
 		return array.length;
 	}
 	$scope.botonesHabilitados = {}; // Un objeto para mantener el estado de los botones
 
-	
-
 	// let cantidadAlmacenada  = contarElementos(relacionArray[listaEmpleado]);
 	// console.log('La cantidadAlmacenada de elementos en el array es:', cantidadAlmacenada);
 	
-	$scope.agregarEmpleado = function(codigoempleado) {
-		console.log('empleado', codigoempleado);
+	// $scope.agregarEmpleado = function(codigoempleado, nombre) {
+	// 	if (cantidadAlmacenada === 0) {
+	// 		listaEmpleado = [codigoempleado];
+	// 		$scope.nombreEmpleado=nombre;
+	// 	} 
+	// 	else{
+	// 		Swal.fire({
+	// 			title: 'Cambio de empleado.',
+	// 			text: '¿Estas seguro que deseas reemplazar al empleado?',
+	// 			icon: 'warning',
+	// 			showCancelButton: true,
+	// 			confirmButtonColor: 'green',
+	// 			cancelButtonColor: 'red',
+	// 			confirmButtonText: 'Aceptar',
+	// 			cancelButtonText: 'Cancelar'
+	// 		}).then((result )=> {
+				
+	// 			if (result.isConfirmed) {
+	// 				var empleadoExistente = listaEmpleado.find(function(empleado) {
+	// 					return empleado === codigoempleado; });
+					
+	// 				if (codigoempleado/=listaEmpleado){
+	// 					listaEmpleado = [codigoempleado];
+	// 				}
+	// 			}else {return listaEmpleado}
+	// 		})
+			
+	// 	}
 		
-		// Utiliza la función contarElementos para verificar la cantidad almacenada
-		var cantidadAlmacenada = contarElementos(relacionArray.listaEmpleado);
+	// 	console.log('esto esta en mi array de empleado', listaEmpleado);
+		
+	// 	// Utiliza la función contarElementos para verificar la cantidad almacenada
+	// 	var cantidadAlmacenada = contarElementos(listaEmpleado);
 	
-		if (cantidadAlmacenada === 0) {
-			relacionArray.listaEmpleado = [codigoempleado];
-		} else {
-			relacionArray.listaEmpleado = [codigoempleado];
+	// 	if (cantidadAlmacenada === 0) {
+	// 		listaEmpleado = [codigoempleado];
+	// 	} 
+		
+	// 	// console.log('esto es el array empleado', relacionArray.listaEmpleado);
+	// 	// console.log('esto es el array equipo', relacionArray.listaEquipo);
+	// }
+	$scope.agregarEmpleado = function(codigoempleado, nombre) {
+		
+		// console.log('esto esta en mi array de empleado', listaEmpleado);
+	
+		// Busca si el empleado ya existe en el array
+		var empleadoExistente = listaEmpleado.find(function(empleado) {
+			return empleado !== codigoempleado;
+		});
+	
+		if (empleadoExistente) {
+			Swal.fire({
+				title: 'Cambio de empleado.',
+				text: '¿Estás seguro que deseas reemplazar al empleado?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: 'green',
+				cancelButtonColor: 'red',
+				confirmButtonText: 'Aceptar',
+				cancelButtonText: 'Cancelar'
+			}).then((result) => {
+	
+				if (result.isConfirmed) {
+					$scope.nombreEmpleado = nombre;
+					// Si el empleado ya existe, reemplázalo
+					var indice = listaEmpleado.indexOf(empleadoExistente);
+					if (indice !== -1) {
+						listaEmpleado[indice] = codigoempleado;
+						$scope.nombreEmpleado = nombre;
+					}
+				} else {
+					return listaEmpleado;
+					// return $scope.nombreEmpleado = nombre;
+				}
+			})
+		} 
+		else {
+			// Si el empleado no existe, agrégalo
+			listaEmpleado = [codigoempleado];
+			$scope.nombreEmpleado = nombre;
 		}
-		// console.log('esto es el array empleado', relacionArray.listaEmpleado);
-		// console.log('esto es el array equipo', relacionArray.listaEquipo);
+		console.log('esto es el array empleado', listaEmpleado);
 	}
+	
+
+	function actualizarTablaEquiposAgregados() {
+		// Puedes utilizar $scope.equiposAgregados para actualizar la tabla en la vista
+		// Por ejemplo, puedes generar dinámicamente filas HTML y agregarlas a la tabla
+		var tablaEquiposAgregados = document.getElementById('tablaEquiposAgregados');
+		tablaEquiposAgregados.innerHTML = ''; // Borra el contenido actual de la tabla
+	
+		// Itera sobre los equipos agregados y crea filas para la tabla
+		$scope.equiposAgregados.forEach(function (equipo) {
+			var fila = '<tr><td>' + equipo.folio + '</td></tr>';
+			tablaEquiposAgregados.innerHTML += fila;
+		});
+	}
+
 	$scope.agregarEquipo = function(cve_cequipo, folio) {
-		$scope.marca=folio;
+		// $scope.equipoEmpleado=listaFolio;
 		// Verifica si el botón ya está deshabilitado
 		if (!$scope.botonesHabilitados[cve_cequipo]) {
 			// Deshabilita el botón
 			$scope.botonesHabilitados[cve_cequipo] = true;
+			var equipoExistente = $scope.equiposAgregados.find(function (equipo) {
+				return equipo.cve_cequipo === cve_cequipo;
+			});
+	
+			if (!equipoExistente) {
+				// Agrega el equipo a la lista de equipos agregados
+				$scope.equiposAgregados.push({
+					// cve_cequipo: cve_cequipo,
+					folio: folio
+				});
+	
+				// Aquí puedes realizar cualquier otra lógica que necesites
+	
+				// Por ejemplo, puedes mostrar los equipos en una tabla en la vista
+				// Actualiza la tabla de equipos agregados en la vista
+				actualizarTablaEquiposAgregados();
+			}
 	
 			// Tu lógica para agregar el equipo aquí
 			console.log('este es el botón', cve_cequipo);
+			
+				
 	
-			var cantidadAlmacenada = contarElementos(relacionArray.listaEquipo);
+			var cantidadAlmacenada = contarElementos(listaEquipo);
 	
 			if (cantidadAlmacenada === 0) {
-				relacionArray.listaEquipo = [cve_cequipo];
+				listaEquipo = [cve_cequipo];
 				// relacionArray.listaEquipo = [folio];
 			} else {
-				relacionArray.listaEquipo.push(cve_cequipo);
+				listaEquipo.push(cve_cequipo);
 				// relacionArray.listaEquipo.push(folio);
 			}
-			var cantidadAlmacenada = contarElementos(relacionArray.listaFolio);
+			// if (folio) {
+			var cantidadAlmacenada = contarElementos(listaFolio);
 	
 			if (cantidadAlmacenada === 0) {
-				relacionArray.listaFolio = [folio];
+				listaFolio = [folio];
 				// relacionArray.listaFolio = [folio];
 			} else {
-				relacionArray.listaFolio.push(folio);
+				listaFolio.push(folio);
 				// relacionArray.listaFolio.push(folio);
 			}
 	
-			console.log('esto es el array de folio', relacionArray.listaFolio);
-			console.log('esto es el array de equipo', relacionArray.listaEquipo);
-			console.log('esto es el array de empleado', relacionArray.listaEmpleado);
+			console.log('esto es el array de folio', listaFolio);
+			console.log('esto es el array de equipo', listaEquipo);
+			console.log('esto es el array de empleado', listaEmpleado);
 		}
 	};
+	
 	
 	// $scope.agregarEquipo = function(cve_cequipo, button) {
 	// 	// var mibutton = document.getElementById('mibutton');
@@ -226,18 +330,18 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 // 123jas12
 // era para validar si un equipo está asigando, no se puede porque tengo un evento que también está funcionando
 	$scope.validacionCampos = function(){
-		if ($scope.codigo == '' || $scope.codigo == null) {
+		if (listaEmpleado.length === 0 ) {
 			Swal.fire(
 			  'Campo faltante',
-			  'Es necesario llenar todos los campos',
+			  'Es necesario seleccionar al empleado',
 			  'warning'
 			);
 			return;
 		}
-		if ($scope.nombre == '' || $scope.nombre == null) {
+		if (listaEquipo.length === 0) {
 			Swal.fire(
 			  'Campo faltante',
-			  'Es necesario llenar todos los campos',
+			  'Es necesario seleccionar al menos un producto',
 			  'warning'
 			);
 			return;
@@ -259,8 +363,8 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 				$http.post('Controller.php', {
 					'task': 'guardarAsignacion',
 					'id': ID,
-					'codigo': $scope.codigo,
-                    'nombre': $scope.nombre,
+					'codigoEmpleado': listaEmpleado,
+                    'codigoEquipos': listaEquipo,
 					
 				}).then(function(response){
 					response = response.data;

@@ -28,6 +28,10 @@ function getVercaracteristicas($dbcon){
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+
+
+// Ahora tienes un array de consultas que puedes utilizar
+
 function guardarAsignacion($dbcon, $Datos){
 
 		$fecha = date('Y-m-d H:i:s');
