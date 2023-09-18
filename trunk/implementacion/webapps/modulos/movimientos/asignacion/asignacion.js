@@ -1,6 +1,10 @@
 app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.codigo = '';
 	$scope.nombre = '';
+
+	$scope.nombreEmpleado = '';
+
+	$scope.arrayAgregados = [];
 	// var miBoton = document.getElementById('miBoton');
 
 	// var relacionArray = {
@@ -8,6 +12,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	var	listaEquipo=[]
 	var	listaFolio= []
 	//  
+	$scope.productosAgregados = [];
 	$scope.equiposAgregados = [];
 	  
 	function contarElementos(array) {
@@ -59,7 +64,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	// 	// console.log('esto es el array empleado', relacionArray.listaEmpleado);
 	// 	// console.log('esto es el array equipo', relacionArray.listaEquipo);
 	// }
-	$scope.agregarEmpleado = function(codigoempleado, nombre) {
+	$scope.agregarEmpleadolow = function(codigoempleado, nombre) {
 		
 		// console.log('esto esta en mi array de empleado', listaEmpleado);
 	
@@ -101,6 +106,15 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		}
 		console.log('esto es el array empleado', listaEmpleado);
 	}
+	$scope.agregarEmpleado = function(codigoempleado, nombre) {
+		console.log('codigo', codigoempleado);
+		console.log('nombre', nombre);
+		empleado =  codigoempleado + ' - ' + nombre;
+		$scope.nombreEmpleado = empleado;
+	}
+	$scope.quitaremplado = function(){
+		$scope.nombreEmpleado = '';
+	}
 	
 
 	function actualizarTablaEquiposAgregados() {
@@ -116,7 +130,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		});
 	}
 
-	$scope.agregarEquipo = function(cve_cequipo, folio) {
+	$scope.agregarEquipoLow = function(cve_cequipo, folio) {
 		// $scope.equipoEmpleado=listaFolio;
 		// Verifica si el botón ya está deshabilitado
 		if (!$scope.botonesHabilitados[cve_cequipo]) {
@@ -170,6 +184,55 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			console.log('esto es el array de empleado', listaEmpleado);
 		}
 	};
+
+	$scope.agregarEquipo = function(i) {
+		if ($scope.nombreEmpleado == '' || $scope.nombreEmpleado == null) {
+			Swal.fire(
+			  '',
+			  'Elija primero el empleado a asignar los equipos',
+			  'warning'
+			)
+		}else{
+			if ($scope.arrayAgregados.indexOf($scope.arrayEquipos[i].cve_cequipo) < 0) {
+				$scope.productosAgregados.push({
+					'nombre_equipo': $scope.arrayEquipos[i].nombre_equipo,
+					'folio': $scope.arrayEquipos[i].folio,
+					'marca': $scope.arrayEquipos[i].marca,
+					'modelo': $scope.arrayEquipos[i].modelo,
+				});
+				$scope.arrayAgregados.push($scope.arrayEquipos[i].cve_cequipo)
+			}else{
+				Swal.fire(
+				  '',
+				  'Equipo elegido previamente',
+				  'warning'
+				)
+			}
+		}
+	}
+	$scope.eliminarEquipoAgregado = function(i){
+		Swal.fire({
+		  title: 'Eliminar Equipo',
+		  text: '¿Realmente deseas eliminar '+$scope.productosAgregados[i].nombre_equipo+'?',
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Eliminar',
+		  cancelButtonText: 'Cancelar'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			$scope.$apply(function(){
+				$scope.quitarProducto(i);
+			}, 2000)
+		    
+		  }
+		});
+	}
+	$scope.quitarProducto = function(i){
+		$scope.arrayAgregados.splice(i, 1);
+		$scope.productosAgregados.splice(i, 1);
+	}
 	
 	
 	// $scope.agregarEquipo = function(cve_cequipo, button) {
@@ -197,77 +260,85 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.nombre = '';
 	}
 // tabla para traer los datos una vez que ya se asignó el equipo al empleado
-	$http.post('Controller.php', {
-		'task': 'getProduccion'
-	}).then(function(response) {
-		response = response.data;
-		console.log('getProduccion', response);
-		$scope.ssProduccionMorteros = response;
-		setTimeout(function(){
-			$('#tablaProduccion').DataTable({
-				"processing": true,
-				"bDestroy": true,
-				"order": [5, 'desc'],
-				"lengthMenu": [[15, 30, 45], [15, 30, 45]],
-				"language": {
-					"lengthMenu": "Mostrar _MENU_ registros por página.",
-					"zeroRecords": "No se encontró registro.",
-					"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
-					"infoEmpty": "0 de 0 de 0 registros",
-					"infoFiltered": "(Encontrado de _MAX_ registros)",
-					"search": "Buscar: ",
-					"processing": "Procesando...",
-							"paginate": {
-						"first": "Primero",
-						"previous": "Anterior",
-						"next": "Siguiente",
-						"last": "Último"
+	// $http.post('Controller.php', {
+	// 	'task': 'getProduccion'
+	// }).then(function(response) {
+	// 	response = response.data;
+	// 	console.log('getProduccion', response);
+	// 	$scope.ssProduccionMorteros = response;
+	// 	setTimeout(function(){
+	// 		$('#tablaProduccion').DataTable({
+	// 			"processing": true,
+	// 			"bDestroy": true,
+	// 			"order": [5, 'desc'],
+	// 			"lengthMenu": [[15, 30, 45], [15, 30, 45]],
+	// 			"language": {
+	// 				"lengthMenu": "Mostrar _MENU_ registros por página.",
+	// 				"zeroRecords": "No se encontró registro.",
+	// 				"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+	// 				"infoEmpty": "0 de 0 de 0 registros",
+	// 				"infoFiltered": "(Encontrado de _MAX_ registros)",
+	// 				"search": "Buscar: ",
+	// 				"processing": "Procesando...",
+	// 						"paginate": {
+	// 					"first": "Primero",
+	// 					"previous": "Anterior",
+	// 					"next": "Siguiente",
+	// 					"last": "Último"
+	// 				}
+
+	// 			}
+	// 		});
+	// 	},800);
+	// }, function(error){
+	// 	console.log('error', error);
+	// });
+
+	$scope.getEquipos = function(){
+	// para mostrar el folio de los equipos
+		$http.post('Controller.php', {
+			'task': 'getCaracteristicas'
+		}).then(function(response) {
+			response = response.data;
+			console.log('getCaracteristicas', response);
+			$scope.arrayEquipos = response;
+			setTimeout(function(){
+				$('#tablaProducto').DataTable({
+					"paging": false,
+					"bScrollCollapse": true,
+					"sScrollY": '200px',
+					// "processing": true,
+					// "bDestroy": true,
+					// "order": [1, 'desc'],
+					// "lengthMenu": [[15, 30, 45], [15, 30, 45]],
+					"language": {
+						"lengthMenu": "Mostrar _MENU_ registros por página.",
+						"zeroRecords": "No se encontró registro.",
+						"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+						"infoEmpty": "0 de 0 de 0 registros",
+						"infoFiltered": "(Encontrado de _MAX_ registros)",
+						"search": "Buscar: ",
+						"processing": "Procesando...",
+								"paginate": {
+							"first": "Primero",
+							"previous": "Anterior",
+							"next": "Siguiente",
+							"last": "Último"
+						}
+
 					}
+				});
+			},1000);
+		}, function(error){
+			console.log('error', error);
+		});
+	}
+	$scope.getEquipos();
 
-				}
-			});
-		},800);
-	}, function(error){
-		console.log('error', error);
-	});
-// para mostrar el folio de los equipos
-	$http.post('Controller.php', {
-		'task': 'getCaracteristicas'
-	}).then(function(response) {
-		response = response.data;
-		console.log('getCaracteristicas', response);
-		$scope.caracteristicas = response;
-		setTimeout(function(){
-			$('#tablaProducto').DataTable({
-				"processing": true,
-				"bDestroy": true,
-				"order": [1, 'desc'],
-				"lengthMenu": [[15, 30, 45], [15, 30, 45]],
-				"language": {
-					"lengthMenu": "Mostrar _MENU_ registros por página.",
-					"zeroRecords": "No se encontró registro.",
-					"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
-					"infoEmpty": "0 de 0 de 0 registros",
-					"infoFiltered": "(Encontrado de _MAX_ registros)",
-					"search": "Buscar: ",
-					"processing": "Procesando...",
-							"paginate": {
-						"first": "Primero",
-						"previous": "Anterior",
-						"next": "Siguiente",
-						"last": "Último"
-					}
-
-				}
-			});
-		},1000);
-	}, function(error){
-		console.log('error', error);
-	});
-
-	// tabla para traer los datos del empleado
-	$http.post('Controller.php', {
-		'task': 'getEmpleado'
+	$scope.getEmpleados = function(){
+		// tabla para traer los datos del empleado
+		$http.post('Controller.php', {
+			'task': 'getEmpleado'
 		}).then(function(response) {
 			response = response.data;
 			console.log('getEmpleado', response);
@@ -303,9 +374,8 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		}, function(error){
 			console.log('error', error);
 		});
-
-
-	
+	}
+	$scope.getEmpleados();
 
 	$scope.validaEquipo = function () {
 

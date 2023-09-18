@@ -73,7 +73,7 @@
                                                 <td class="text-center">{{obj.codigoempleado}}</td>
                                                 <td >{{obj.nombre}}</td>
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-success  btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre)" data-toggle="modal" data-target="#asignacion"><label for="">Seleccionar</label></button>
+                                                    <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre)">Seleccionar</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -104,10 +104,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="(i, obj) in caracteristicas">
+                                            <tr ng-repeat="(i, obj) in arrayEquipos track by i">
                                                 <td class="text-center">{{obj.folio}}</td>
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-warning btn-sm fas fa-edit" ng-click="agregarEquipo(obj.cve_cequipo, obj.folio)" data-toggle="modal" data-target="#asignacion" ng-disabled=false>agregar equipo</button>
+                                                    <button type="button" class="btn btn-info btn-sm fas fa-eye" ng-disabled="nombreEmpleado == '' " ng-click="verEquipo(obj.cve_cequipo, obj.folio)" title="Ver equipo"></button>
+                                                    <button type="button" class="btn btn-success btn-sm fas fa-plus" ng-disabled="nombreEmpleado == '' " ng-click="agregarEquipo(i)" title="Asignar equipo"></button>
                                                     <!-- <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="agregarEquipo(obj.cve_cequipo, this)" data-toggle="modal" data-target="#asignacion">agregar equipo</button> -->
                                                     <!-- <input type="radio" ng-model="marca" id="marca" name="marca" class="form-control form-control-md text-center" > -->
                                                     <!-- <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " ng-click="eliminarAsignacion(obj.cve_cequipo)"></button>                                                     -->
@@ -123,67 +124,67 @@
             </div>
             <!-- este es para ver al usuario y equipos seleccionados -->
             <div class="row">
-                <div class="col">
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">EMPLEADOS </h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
+                <div class="col-md-12">
+                    <div class="tile" ng-show="nombreEmpleado.length > 0 || productosAgregados.length > 0">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">ASIGNACION </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div style="margin-bottom: 10px">
-                                <label>nombre de empleado</label>
-                                <input type="text" ng-model="nombreEmpleado" id="nombreEmpleado" name="nombreEmpleado" class="form-control form-control-md text-center" disabled >
-                            </div>
-                                    
-                            <div class="table-responsive" style="margin-bottom: 10px">
-                                <!-- <table class="table table-striped table-bordered table-hover"  id="tablaEmpleado">
-                                    <thead>
-                                        <tr>
-                                            <th>Empleado</th>
-                                            <th>Equipo(s) </th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="card-body">
+                                <div class="row form-group form-group-sm">
+                                    <div class="col-lg-12 d-lg-flex">
+                                        <div style="width: 50%;" class="form-floating mx-1">
+                                            <input type="text" ng-model="nombreEmpleado" id="nombreEmpleado" name="nombreEmpleado" class="form-control form-control-md text-center" disabled >
+                                            <label>nombre de empleado</label>
+                                        </div>
+                                        <!-- <input type="button" class="btn btn-danger"> -->
+                                            <button type="button" class="btn btn-danger fas fa-trash-alt" title="Quitar empleado" ng-click="quitaremplado()"></button>
+                                        <div style="width: 50%;" class="form-floating mx-1" align="right">
+                                            <button type="button" class="btn btn-success" ng-click="GuardarAdignacion()">Guardar</button>                          
+                                        </div>
+                                    </div>
+                                </div>
                                         
-                                            <td><input type="text" ng-model="modelo" id="modelo" name="modelo" class="form-control form-control-md text-center" disabled>
+                                <div class="table-responsive" style="margin-bottom: 10px" ng-show="productosAgregados.length > 0">
+                                    <!-- Agrega esta tabla para mostrar los equipos agregados -->
+                                    <table class="table table-striped table-bordered table-hover" >
+                                        <thead>
+                                            <tr>
+                                                <!-- <th>Cve nombre</th> -->
+                                                <th>Equipo</th>
+                                                <th>Folio</th>
+                                                <th>Marca</th>
+                                                <th>Modelo</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr ng-repeat="(i,obj) in productosAgregados track by i">
+                                                <td>{{obj.nombre_equipo}}</td>
+                                                <td>{{obj.folio}}</td>
+                                                <td>{{obj.marca}}</td>
+                                                <td>{{obj.modelo}}</td>
+                                                <td nowrap="nowrap" class="text-center">
+                                                    <button class="btn btn-danger" ng-click="eliminarEquipoAgregado(i)">
+                                                        Quitar 
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                     <!-- <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " ng-click="validacionCampos()"></button> -->
+                                </div>
+                                
                                                 
-                                             </td>
-                                             <td class="text-center">
-                                                <textarea name="equipoEmpleado" ng-model="equipoEmpleado" id="equipoEmpleado" cols="29" rows="5"></textarea>
-                                                
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-success  btn-sm" ng-click="agregarEmpleado(obj.codigoempleado)" data-toggle="modal" data-target="#asignacion"><label for="">Seleccionar</label></button>
-                                            </td>
-                                        
-                                    </tbody>
-                                </table>  -->
-                                <!-- Agrega esta tabla para mostrar los equipos agregados -->
-                                <table class="table table-striped table-bordered table-hover" >
-                                    <thead>
-                                        <tr>
-                                            <!-- <th>Cve nombre</th> -->
-                                            <th>Folio</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-center" id="tablaEquiposAgregados">
-                                       
-                                        <!-- Los datos de los equipos agregados se actualizarán aquí dinámicamente -->
-                                    </tbody>
-                                </table>
-                                 <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " ng-click="validacionCampos()"></button> 
-
                             </div>
-                            
-                                            
                         </div>
                     </div>
-
                 </div>
                 </div>
 

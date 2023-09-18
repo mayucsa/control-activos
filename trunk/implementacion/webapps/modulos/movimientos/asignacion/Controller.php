@@ -71,7 +71,7 @@ function getEmpleado ($dbcon){
 // para traer las caracteristicas del equipo
 function getCaracteristicas ($dbcon){
 	
-	$sql = "SELECT ce.cve_cequipo, CONCAT('MYS - TIC', ces.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
+	$sql = "SELECT ce.cve_cequipo, CONCAT('MYS - TIC', ces.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio, nombre_equipo, marca, modelo 
 			FROM caracteristicas_equipos ce
 			INNER JOIN cat_equipos ces ON ces.cve_equipo = ce.cve_equipo
 			WHERE ce.estatus_equipo = 1 ";
