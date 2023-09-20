@@ -5,6 +5,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.nombreEmpleado = '';
 
 	$scope.arrayAgregados = [];
+	var arrayEquipoGuardado = $scope.arrayAgregados;
 	// var miBoton = document.getElementById('miBoton');
 
 	// var relacionArray = {
@@ -109,6 +110,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.agregarEmpleado = function(codigoempleado, nombre) {
 		console.log('codigo', codigoempleado);
 		console.log('nombre', nombre);
+		codigoempleado=codigoempleado;
 		empleado =  codigoempleado + ' - ' + nombre;
 		$scope.nombreEmpleado = empleado;
 	}
@@ -199,6 +201,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 					'folio': $scope.arrayEquipos[i].folio,
 					'marca': $scope.arrayEquipos[i].marca,
 					'modelo': $scope.arrayEquipos[i].modelo,
+					
 				});
 				$scope.arrayAgregados.push($scope.arrayEquipos[i].cve_cequipo)
 			}else{
@@ -207,7 +210,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 				  'Equipo elegido previamente',
 				  'warning'
 				)
-			}
+			} console.log("este es un array agregado",$scope.arrayAgregados)
 		}
 	}
 	$scope.eliminarEquipoAgregado = function(i){
@@ -233,66 +236,11 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.arrayAgregados.splice(i, 1);
 		$scope.productosAgregados.splice(i, 1);
 	}
-	
-	
-	// $scope.agregarEquipo = function(cve_cequipo, button) {
-	// 	// var mibutton = document.getElementById('mibutton');
-		
-	// 	console.log('este es el botón', cve_cequipo);
-	
-	// 	// Utiliza la función contarElementos para verificar la cantidad almacenada
-	// 	var cantidadAlmacenada = contarElementos(relacionArray.listaEquipo);
-	
-	// 	if (cantidadAlmacenada === 0) {
-	// 		relacionArray.listaEquipo = [cve_cequipo];
-	// 	} else {
-	// 		// Utiliza push para agregar el nuevo dato al array existente
-	// 		relacionArray.listaEquipo.push(cve_cequipo);
-	// 	}
-	
-	// 	console.log('esto es el array de equipo', relacionArray.listaEquipo);
-	// 	console.log('esto es el array de empleado', relacionArray.listaEmpleado);
-	// }
-	
 
 	$scope.limpiarCampos = function(){
 		$scope.codigo = '';
 		$scope.nombre = '';
 	}
-// tabla para traer los datos una vez que ya se asignó el equipo al empleado
-	// $http.post('Controller.php', {
-	// 	'task': 'getProduccion'
-	// }).then(function(response) {
-	// 	response = response.data;
-	// 	console.log('getProduccion', response);
-	// 	$scope.ssProduccionMorteros = response;
-	// 	setTimeout(function(){
-	// 		$('#tablaProduccion').DataTable({
-	// 			"processing": true,
-	// 			"bDestroy": true,
-	// 			"order": [5, 'desc'],
-	// 			"lengthMenu": [[15, 30, 45], [15, 30, 45]],
-	// 			"language": {
-	// 				"lengthMenu": "Mostrar _MENU_ registros por página.",
-	// 				"zeroRecords": "No se encontró registro.",
-	// 				"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
-	// 				"infoEmpty": "0 de 0 de 0 registros",
-	// 				"infoFiltered": "(Encontrado de _MAX_ registros)",
-	// 				"search": "Buscar: ",
-	// 				"processing": "Procesando...",
-	// 						"paginate": {
-	// 					"first": "Primero",
-	// 					"previous": "Anterior",
-	// 					"next": "Siguiente",
-	// 					"last": "Último"
-	// 				}
-
-	// 			}
-	// 		});
-	// 	},800);
-	// }, function(error){
-	// 	console.log('error', error);
-	// });
 
 	$scope.getEquipos = function(){
 	// para mostrar el folio de los equipos
@@ -399,16 +347,19 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 // 123jas12
 // era para validar si un equipo está asigando, no se puede porque tengo un evento que también está funcionando
-	$scope.validacionCampos = function(){
-		if (listaEmpleado.length === 0 ) {
+	$scope.GuardarAsignacion = function( ){
+		var codigoempleado = empleado.substring(0, empleado.indexOf(' - '));
+		console.log("este es una pruea para btener el numero del equipo",arrayEquipoGuardado)
+		console.log("este es el codigo del empleado",$scope.arrayAgregados)
+		if ($scope.nombreEmpleado=='' || $scope.nombreEmpleado==null){
 			Swal.fire(
-			  'Campo faltante',
-			  'Es necesario seleccionar al empleado',
-			  'warning'
-			);
-			return;
+				'Campo faltante',
+				'Es necesario seleccionar al empleado',
+				'warning'
+			  );
+			  return;
 		}
-		if (listaEquipo.length === 0) {
+		if ($scope.arrayAgregados.length === 0) {
 			Swal.fire(
 			  'Campo faltante',
 			  'Es necesario seleccionar al menos un producto',
@@ -433,10 +384,12 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 				$http.post('Controller.php', {
 					'task': 'guardarAsignacion',
 					'id': ID,
-					'codigoEmpleado': listaEmpleado,
-                    'codigoEquipos': listaEquipo,
+					'codigoempleado': codigoempleado,
+                    'arrayEquipoGuardado': $scope.arrayAgregados,
 					
-				}).then(function(response){
+					
+				}
+				).then(function(response){
 					response = response.data;
 					if (response.code == 400) {
 						Swal.fire({
@@ -524,6 +477,36 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 				})
 			}
 		});
+
+	}
+	$scope.verEquipo=function(marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento){
+		// $http.post('Controller.php', {
+		// 	'task': 'getMarca'
+		// }).then(function (response){
+		// 	response = response.data;
+		// 	console.log('getCaracteristicas', response);
+		// 	$scope.caracteristicas = response;
+		// },function(error){
+		// 	console.log('error', error);
+		// 	console.log('error', caracteristicas.marca);
+		// 	console.log('error', caracteristicas.modelo);
+		// });
+		// $scope.verNumeroE = cve_cequipo;
+		// $scope.verEquipo = nombre_equipo;
+		$scope.verMarca = marca;
+		$scope.verModelo=modelo;
+		$scope.verDescripcion = descripcion;
+		$scope.verNumeroSerie = numero_serie;
+		$scope.verNumeroFactura= numero_factura;
+		// $scope.verFactura=numero_factura;
+		
+		$scope.verSistemaOperativo = sistema_operativo;
+		$scope.verProcesador = procesador;
+		$scope.verVelocidadProcesador=vel_procesador;
+		$scope.verMemoriaRam = memoria_ram;
+		$scope.verTipoAlmacenamiento = tipo_almacenamiento;
+		$scope.verCapaAlmacenamiento=capacidad_almacenamiento;
+		// $scope.verRegistro=fecha_ingreso;
 
 	}
 

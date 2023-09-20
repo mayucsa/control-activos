@@ -33,17 +33,87 @@ function getVercaracteristicas($dbcon){
 // Ahora tienes un array de consultas que puedes utilizar
 
 function guardarAsignacion($dbcon, $Datos){
+	$fecha = date('Y-m-d H:i:s');
+	$status = '1';
+	$conn = $dbcon->conn();
+	$sql = "INSERT INTO asignacion_equipo (codigoempleado, estatus_asignacion, fecha_asignacion)
+			VALUES (".$Datos->codigoempleado.", ".$status.", '".$fecha."' )";
+	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
-		$fecha = date('Y-m-d H:i:s');
-		$status = '1';
-		$conn = $dbcon->conn();
-		$sql = "INSERT INTO asignacion_equipos (codigo_empleado, cve_cequipo, estatus_asignacion, fecha_asignacion)
-				VALUES (".$Datos->codigo.", ".$Datos->nombre.", ".$status.", '".$fecha."' )";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+	if($qBuilder){
+		$getIdQuery = "SELECT max(cve_asignacion) as cve_asignacion FROM asignacion_equipo WHERE
+			fecha_asignacion='".$fecha."'
+			AND codigoempleado= ".$Datos->codigoempleado."
+			AND estatus_asignacion= ".$status."";
 
-		$sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
-		where ce.cve_cequipo=".$Datos->nombre."";
-		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql2);
+		$getIdResult = $dbcon->qBuilder($conn, 'first', $getIdQuery);
+
+		if ($getIdResult && isset($getIdResult->cve_asignacion)) {
+			foreach ($Datos->arrayEquipoGuardado as $i => $equipo) {
+				$sqlDetalle = "INSERT INTO asignacion_equipo_detalle (cve_asignacion, cve_equipo, asignado_por, fecha_asignacion)
+					VALUES (".$getIdResult->cve_asignacion.", ".$equipo.",".$Datos->id.", '".$fecha."' )";
+				$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sql);
+				if(!$qBuilderDetalle){
+					dd(['code'=>300,'msj'=>'Error al crear equipo', 'query'=>$sql]);
+				}
+				
+				$sql2=" UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
+				where ce.cve_cequipo=".$equipo."";
+				$qBuilder2 = $dbcon->qBuilder($conn, 'do', $sql2);
+				if(!$qBuilder2){
+					dd(['code'=>300,'msj'=>'Error al crear equipo', 'query'=>$sql2]);
+				}
+
+				// Agrega una comprobación para verificar si la consulta se ejecuta correctamente
+				
+			}
+			dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdResult->cve_asignacion]);
+		} else {
+			dd(['code'=>300,'msj'=>'Error al obtener cve_asignacion', 'getIdQuery'=>$getIdQuery]);
+		}
+	} else {
+		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
+	}
+	
+	
+
+
+		// // $Equipos=[];
+		// $fecha = date('Y-m-d H:i:s');
+		// $status = '1';
+		// $conn = $dbcon->conn();
+		// $sql = "INSERT INTO asignacion_equipo (codigoempleado, estatus_asignacion, fecha_asignacion)
+		// 		VALUES (".$Datos->codigoempleado.", ".$status.", '".$fecha."' )";
+		// $qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+
+		
+
+		// if($qBuilder){
+		// $getId = "SELECT max (cve_asignacion) cve_asignacion FROM asignacion_equipo WHERE
+		// 	fecha_asignacion='".$fecha."'
+		// 	AND codigoempleado= ".$Datos->codigoempleado."
+		// 	AND estatus_asignacion= ".$status."";
+
+		// 	$getId= $dbcon->qBuilder($conn, 'first', $getId);
+		// 	foreach ($Datos->arrayEquipoGuardado as $i=>$equipo) {
+		// 		$sql = "INSERT INTO asignacion_equipo_detalle (cve_asignacion, cve_equipo, asignado_por, fecha_asignacion)
+		// 			VALUES (".$getId->cve_asignacion.", ".$equipo.",".$Datos->id.", '".$fecha."' )";
+		// 		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+		// 		if(!$qBuilder){
+		// 			dd(['code'=>300,'msj'=>'Error al crear equipo', $getId->cve_asignacion]);
+		// 		}
+	
+				
+		// 	}
+		// 	dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getId->cve_asignacion]);
+		// }
+		// else{
+		// 	dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
+		// }
+
+	
+		
+	
 	
 }
 // funciones para editar
@@ -70,11 +140,14 @@ function getEmpleado ($dbcon){
 }
 // para traer las caracteristicas del equipo
 function getCaracteristicas ($dbcon){
+
 	
-	$sql = "SELECT ce.cve_cequipo, CONCAT('MYS - TIC', ces.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio, nombre_equipo, marca, modelo 
-			FROM caracteristicas_equipos ce
-			INNER JOIN cat_equipos ces ON ces.cve_equipo = ce.cve_equipo
-			WHERE ce.estatus_equipo = 1 ";
+	$sql = "SELECT ce.cve_cequipo, marca, modelo, descripcion, numero_serie, 
+	numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, 
+	CONCAT('MYS - TIC', ces.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio, nombre_equipo, marca, modelo 
+	FROM caracteristicas_equipos ce
+	INNER JOIN cat_equipos ces ON ces.cve_equipo = ce.cve_equipo
+	WHERE ce.estatus_equipo = 1 ; ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
