@@ -390,12 +390,7 @@ switch ($tarea) {
 	case 'ValidaQueEquipoEs':
 		ValidaQueEquipoEs($dbcon,$objDatos);
 	break;
-	// case 'validacionEquipo':
-	// 	validacionEquipo($dbcon,$objDatos);
-	// break;
 	
-		
-		
 }
 
 

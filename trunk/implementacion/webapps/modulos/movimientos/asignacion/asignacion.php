@@ -118,7 +118,7 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
               <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-              <li class="breadcrumb-item"><a href="asignacion.php"> Asignación de equipos</a></li>
+              <li class="breadcrumb-item"><a href="asignacion.php"> Relación de los equipos</a></li>
             </ul>
         </div>
         <!-- <div class="container"> -->

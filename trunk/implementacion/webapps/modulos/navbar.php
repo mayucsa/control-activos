@@ -67,7 +67,7 @@
                 </li>
                 </ul>
             </li>
-            <!-- asignación de equipos -->
+            <!-- MOVIMIENTOS -->
             <li class="treeview">
               <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Movimientos</span><i class="treeview-indicator fa fa-angle-right"></i>
@@ -78,6 +78,20 @@
                 </li>
                 <li>
                   <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="fas fa-laptop-house"></i>Mantenimiento</a>
+                </li>
+              </ul>
+            </li>
+            <!-- VER RELACIONES  -->
+            <li class="treeview">
+              <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Relaciones</span><i class="treeview-indicator fa fa-angle-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a class="treeview-item" href="../../relaciones/EmpleadoEquipo/vistaEmpleado.php"><i class="icon fas fa-circle"></i> Relacion Empleado-Equipo</a>
+                </li>
+                <li>
+                  <a class="treeview-item" href="../../relaciones/EquipoMantenimiento/vistaEquipo.php"><i class="fas fa-laptop-house"></i>Relación Equipo-Mantenimiento</a>
                 </li>
               </ul>
             </li>

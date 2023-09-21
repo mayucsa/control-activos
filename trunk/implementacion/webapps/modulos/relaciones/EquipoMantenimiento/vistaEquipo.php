@@ -33,54 +33,9 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row form-group form-group-sm">
-                                <div class="col-lg-12 d-lg-flex">
-                                    <label>Selecciona al encargado de mantenimiento..</label>
-                                </div>
-                                <div class="col-lg-12 d-lg-flex">
-                                    <div class="form-check form-check-inline ">
-                                     <input class="form-check-input mitexto" type="radio" name="inlineRadioOptions" id="Radio1" ng-model="checkh" value="Equipo">
-                                        <label class="form-check-label">ING. ALFREDO CHAN </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input " type="radio" name="inlineRadioOptions" id="Radio2" ng-model="checkh" value="Insumos">
-                                        <label class="form-check-label">ING. ROGELIO CIAU</label>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="row form-group form-group-sm">
-                            <div class="col-lg-12 d-lg-flex">
-                                <!-- para empleado -->
-                                <div style="width: 100%;" class="form-floating mx-1 text-center">
-                                    <select class="form-control form-group-md " ng-model="mantenimiento" autocomplete="off">
-                                        <option selected="selected" value="" disabled>[Seleccione el servicio..]</option>
-                                        <option class="text-center" ng-repeat="(i, obj) in servicio" value="{{obj.nombre_servicio}}">Servicio:{{obj.nombre_servicio}}</option>
-                                    </select>
-                                    <label>Servicio</label>
-                                </div>
-
-                                <!-- para equipo -->
-                                <div style="width: 100%;" class="form-floating mx-1 text-center">
-                                    <select class="form-control form-group-md" ng-model="nombre" ng-blur="validaEquipo(nombre)" autocomplete="off">
-                                        <option selected="selected" value="" disabled>[Seleccione una opción..]</option>
-                                        <option class="text-center" ng-repeat="(i, obj) in producto" value="{{obj.folio}}"> {{obj.folio}} </option>
-                                    </select>
-                                    <label>Producto</label>  
-                                </div>
-                             
-                            </div>
-        
-                            
-                        </div>
-                    </div>
+                    <!-- <div class="card-body">
                         
-                        <div class="row form-group form-group-sm border-top">
-                            <div class="col-sm-12" align="center">
-                                <input type="submit" value="Guardar" href="#" ng-click="validacionCampos()" class="btn btn-primary" style="margin-bottom: -25px !important">
-                                <input type="submit" value="Limpiar" href="#" ng-click="limpiarCampos()" class="btn btn-warning" style="margin-bottom: -25px !important">
-                            </div>
-                        </div>
+                    </div> -->  
                 </div>
             </div>
             <div class="card card-info">
@@ -97,11 +52,8 @@
                         <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaProduccion">
                             <thead>
                                 <tr>
-                                    <th>NO. Servicio</th>
-                                    <th>Encargado</th>
-                                    <th>Tipo de mantenimiento</th>
-                                    <th>Equipo</th>
-                                    <th>Fecha de captura</th>
+                                    <th>Nombre</th>
+                                    <th>apellidos</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
