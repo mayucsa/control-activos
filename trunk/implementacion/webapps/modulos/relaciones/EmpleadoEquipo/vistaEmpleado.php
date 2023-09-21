@@ -39,7 +39,7 @@
                                                     <td class="text-center">{{obj.modelo}} </td>
                                                     <td class="text-center">{{obj.fecha_asignacion}} </td>
                                                     <td class="text-center">
-                                                        <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion()" data-toggle="modal" data-target="#borrarModal">                                           
+                                                        <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarRelacion(obj.cve_cequipo)" data-toggle="modal" data-target="#borrarModal">                                           
                                                         </button> 
                                             </td>
                                                     
@@ -111,7 +111,7 @@
                                     <td class="text-center">{{obj.nombre}}</td>
                                     <td class="text-center">{{obj.apellidos}}</td>
                                     <td class="text-center">
-                                            <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposUsuario">
+                                            <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultar(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposUsuario">
                                             </button>
                                        </td>
                                 </tr>

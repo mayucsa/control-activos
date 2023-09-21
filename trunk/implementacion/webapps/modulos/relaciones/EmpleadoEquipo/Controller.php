@@ -22,11 +22,26 @@ function getRelacionEquipos ($dbcon, $Datos){
     INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
     INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
     INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
-    where ae.codigoempleado =".$Datos->codigo." ";
+    where ae.codigoempleado =".$Datos->codigo." AND estatus_asignacion_detalle=1";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
 
+function editarRelacion ($dbcon, $Datos){
+	$sql = "UPDATE asignacion_equipo_detalle  set estatus_asignacion_detalle=0
+    where cve_cequipo= ".$Datos->codigo."  ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
+    // dd($datos);
+
+    $sql2=" UPDATE caracteristicas_equipos SET estatus_equipo=1
+		where cve_cequipo=".$Datos->codigo."";
+		$datos2 = $dbcon->qBuilder($dbcon->conn(), 'do', $sql2);
+        if (!$datos2) {
+            // Manejar el error, imprimir un mensaje de error o registrar detalles del error.
+            echo "Error al ejecutar la segunda consulta SQL: " . $dbcon->error(); // Asegúrate de tener un método de manejo de errores adecuado en tu clase $dbcon.
+        }
+		
+}
 
 
 
@@ -48,6 +63,9 @@ switch ($tarea) {
     break; 
     case 'getRelacionEquipos':
         getRelacionEquipos($dbcon, $objDatos);
+    break; 
+    case 'editarRelacion':
+        editarRelacion($dbcon, $objDatos);
     break; 
     
 }
