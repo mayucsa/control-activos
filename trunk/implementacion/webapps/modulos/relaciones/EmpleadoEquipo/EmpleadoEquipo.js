@@ -3,27 +3,58 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
 	$scope.mantenimiento = '';
 	$scope.nombre = '';
 
-	$scope.limpiarCampos = function(){
-        $scope.checkh = '';
-		$scope.mantenimiento = '';
-		$scope.nombre = '';
+	$scope.consultar = function(codigoempleado){
+        console.log("prueba:", codigoempleado);
+        // console.log("otra prueba:", codigo);
+        $http.post('Controller.php', {
+            'task': 'getRelacionEquipos',
+            'codigo': codigoempleado
+        }).then(function(response) {
+            response = response.data;
+            console.log('verRelacionesEquipos', response);
+            // Destruye la instancia DataTable existente si hay una
+            if ($.fn.DataTable.isDataTable('#tablaRelacionEquipo')) 
+            {
+            $('#tablaRelacionEquipo').DataTable().destroy();
+             }
+            $scope.verEquipos = response;
+            setTimeout(function(){
+                $('#tablaRelacionEquipo').DataTable({
+                    "processing": true,
+                    "bDestroy": true,
+                    // "order": [5, 'desc'],
+                    "lengthMenu": [[15, 30, 45], [15, 30, 45]],
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ registros por página.",
+                        "zeroRecords": "No se encontró registro.",
+                        "info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+                        "infoEmpty": "0 de 0 de 0 registros",
+                        "infoFiltered": "(Encontrado de _MAX_ registros)",
+                        "search": "Buscar: ",
+                        "processing": "Procesando...",
+                                "paginate": {
+                            "first": "Primero",
+                            "previous": "Anterior",
+                            "next": "Siguiente",
+                            "last": "Último"
+                        }
+        
+                    }
+                });
+            },400);
+        }, function(error){
+            console.log('error', error);
+        });
+        
 	}
-// trae los datos de la tabla servicio para que se pueda ver en el select
-	$http.post('Controller.php', {
-		'task': 'getServicio'
-	}).then(function (response){
-		response = response.data;
-		console.log('getEquipos', response);
-		$scope.servicio = response;
-	},function(error){
-		console.log('error', error);
-	}); 
-// trae los datos de la tabla caracteristicas para que se pueda ver en el select
+// trae los datos de la tabla asignación detalle, para que se muestre los equipos que tiene cierto usuario
+
+// trae los datos de la tabla asignación para que podamos ver los usuarios 
     $http.post('Controller.php', {
-        'task': 'getRelacionEquipos'
+        'task': 'getRelacionEmpleados'
     }).then(function(response) {
         response = response.data;
-        console.log('getVercaracteristicas', response);
+        console.log('verRelaciones', response);
         $scope.verRelaciones = response;
         setTimeout(function(){
             $('#tablaRelacion').DataTable({

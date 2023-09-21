@@ -21,45 +21,32 @@
             </div>
             <div class="modal-body">
             <div class="card-footer">
-                            <!-- <div class="table-responsive"> -->
-                                <table class="table table-striped table-bordered table-hover table-responsive " style="width: 100%;" id="tablaProduccion">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover table-responsive " style="width: 100%;" id="tablaRelacionEquipo">
                                     <thead>
                                     <tr>
-                                        <th > Equipo</th>
+                                        <th >Nombre Equipo</th>
                                         <th> Marca</th>
                                         <th>Modelo</th>
-                                        <th>Descripción</th>
-                                        <th>Número de factura</th>
-                                        <th>Número de serie</th>
-                                        <th>Sistema operativo</th>
-                                        <th> Procesador</th>
-                                        <th> Velocidad de procesador</th>
-                                        <th>Memoria ram</th>
-                                        <th>Tipo de almacenamiento</th> 
-                                        <th>Capacidad de almacenamiento</th>
-                                        <th>Fecha de registro</th>
+                                        <th>Fecha de asignación</th>
+                                        <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- <tr ng-repeat="(i, obj) in vercaracteristicas track by i">      -->
-                                                    <td ><input class="sinborde my-class" w-25 ng-model=verEquipo  disabled></td> 
-                                                    <td ><input class="sinborde my-class" w-25 ng-model=verMarca  disabled></td>
-                                                    <td ><input class="sinborde my-class" w-25 ng-model=verModelo disabled></td>
-                                                    <td><input class="sinborde my-class" w-25 ng-model=verDescripcion  disabled></td>
-                                                    <td><input  class="sinborde my-class" w-25ng-model=verFacturaM disabled></td>
-                                                    <td><input  class="sinborde my-class" w-25 ng-model=verSerie  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verSistema  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verProcesador  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verVelocidad  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verRam  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verAlmacenamiento  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verCapacidad  disabled></td>
-                                                    <td><input class="sinborde my-class"  w-25 ng-model=verRegistro></td>
+                                    <tr ng-repeat="(i, obj) in verEquipos track by i">     
+                                                    <td class="text-center">{{obj.nombre_equipo}} </td> 
+                                                    <td class="text-center">{{obj.marca}} </td>
+                                                    <td class="text-center">{{obj.modelo}} </td>
+                                                    <td class="text-center">{{obj.fecha_asignacion}} </td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion()" data-toggle="modal" data-target="#borrarModal">                                           
+                                                        </button> 
+                                            </td>
                                                     
                                     </tbody>
                                 </table>
                             </div>
-                        <!-- </div> -->
+                        </div>
             
             </div>
             <!-- aca termina el cuerpo del modal -->
@@ -124,11 +111,8 @@
                                     <td class="text-center">{{obj.nombre}}</td>
                                     <td class="text-center">{{obj.apellidos}}</td>
                                     <td class="text-center">
-                                            <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.cve_asignacion, obj.nombrecompleto)" data-toggle="modal" data-target="#verEquiposUsuario">
+                                            <button type="button" class="btn btn-warning  btn-sm  fas fa-edit " ng-click="consultar(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposUsuario">
                                             </button>
-                                            <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarAsignacion(obj.cve_cequipo)" data-toggle="modal" data-target="#borrarModal">                                           
-                                                </button>
-                                           
                                        </td>
                                 </tr>
                             </tbody>

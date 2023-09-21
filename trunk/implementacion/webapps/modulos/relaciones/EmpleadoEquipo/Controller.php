@@ -8,7 +8,7 @@ function dd($var){
     }
 }
 
-function getRelacionEquipos ($dbcon){
+function getRelacionEmpleados ($dbcon){
 	$sql = "SELECT cun.nombre ,CONCAT(cun.apellidopaterno, ' ', cun.apellidomaterno) apellidos, ae.codigoempleado
     FROM asignacion_equipo ae 
     inner join cat_usuario_nomina cun on cun.codigoempleado =ae.codigoempleado ";
@@ -16,13 +16,16 @@ function getRelacionEquipos ($dbcon){
     dd($datos);
 }
 
-// function getProducto ($dbcon){
-// 	$sql = "SELECT CONCAT('MYS - TIC', ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
-//     FROM caracteristicas_equipos ce
-//     INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo; ";
-//     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-//     dd($datos);
-// }
+function getRelacionEquipos ($dbcon, $Datos){
+	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ae.codigoempleado, marca, modelo, ce2.nombre_equipo, aed.fecha_asignacion
+    from asignacion_equipo_detalle aed
+    INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
+    INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
+    INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
+    where ae.codigoempleado =".$Datos->codigo." ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
 
 
 
@@ -40,11 +43,11 @@ if ($tarea == '') {
 	$tarea = $objDatos->task;
 }
 switch ($tarea) {
-    case 'getRelacionEquipos':
-        getRelacionEquipos($dbcon);
+    case 'getRelacionEmpleados':
+        getRelacionEmpleados($dbcon);
     break; 
-    // case 'getProducto':
-    //     getProducto($dbcon);
-    // break; 
+    case 'getRelacionEquipos':
+        getRelacionEquipos($dbcon, $objDatos);
+    break; 
     
 }
