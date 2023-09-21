@@ -60,7 +60,7 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-          <h1><i class="fas fa-boxes"></i> Mantenimiento de equipos</h1>
+          <h1><i class="fas fa-boxes"></i> Relación de los equipos</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -70,21 +70,6 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="tile">
-                <div class="card card-info" ng-show="perfilUsu.catalogo_equipos_captura == 1">
-                    <div class="card-header">
-                        <h3 class="card-title"> MANTENIMIENTO DE EQUIPOS </h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- <div class="card-body">
-                        
-                    </div> -->  
-                </div>
-            </div>
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">RELACIÓN DE LOS EQUIPOS DE COMPUTO</h3>
