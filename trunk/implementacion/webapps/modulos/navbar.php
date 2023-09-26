@@ -57,27 +57,27 @@
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Catálogos</span><i class="treeview-indicator fas fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                   <li ng-show="perfilUsu.catalogo_equipos_vista == 1">
-                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="icon fas fa-upload"></i> Equipos</a>
+                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="app-menu__icon far fa-circle"></i> Registro de equipos</a>
                   </li>
                   <li >
-                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="icon fas fa-tv"></i> Alta de equipos</a>
+                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
                   </li>
                   <li>
-                  <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="icon fas fa-tools"></i> Servicios</a>
+                  <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
                 </li>
                 </ul>
             </li>
             <!-- MOVIMIENTOS -->
             <li class="treeview">
               <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fas fa-network-wired"></i><span class="app-menu__label">Movimientos</span><i class="treeview-indicator fa fa-angle-right"></i>
+              <i class="app-menu__icon fas fa-wrench"></i><span class="app-menu__label">Movimientos</span> <i class="treeview-indicator fas fa-angle-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li>
-                  <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="icon fas fa-user-check"></i> Asignación</a>
+                  <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="app-menu__icon far fa-circle"></i> Asignación</a>
                 </li>
                 <li>
-                  <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="fas fa-laptop-house"></i>Mantenimiento</a>
+                  <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="app-menu__icon far fa-circle"></i>Mantenimiento</a>
                 </li>
               </ul>
             </li>
@@ -88,10 +88,10 @@
               </a>
               <ul class="treeview-menu">
                 <li>
-                  <a class="treeview-item" href="../../relaciones/EmpleadoEquipo/vistaEmpleado.php"><i class="icon fas fa-circle"></i> Relacion Empleado-Equipo</a>
+                  <a class="treeview-item" href="../../relaciones/EmpleadoEquipo/vistaEmpleado.php"><i class="app-menu__icon far fa-circle"></i> Relacion Empleado-Equipo</a>
                 </li>
                 <li>
-                  <a class="treeview-item" href="../../relaciones/EquipoMantenimiento/vistaEquipo.php"><i class="fas fa-laptop-house"></i>Relación Equipo-Mantenimiento</a>
+                  <a class="treeview-item" href="../../relaciones/EquipoMantenimiento/vistaEquipo.php"><i class="app-menu__icon far fa-circle"></i>Relación Equipo-Mantenimiento</a>
                 </li>
               </ul>
             </li>

@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">
-                                    <label>Selecciona al encargado de mantenimiento..</label>
+                                    <label>Selecciona el tipo de equipo a capturar..</label>
                                 </div>
                                 <div class="col-lg-12 d-lg-flex">
                                     <div class="form-check form-check-inline ">

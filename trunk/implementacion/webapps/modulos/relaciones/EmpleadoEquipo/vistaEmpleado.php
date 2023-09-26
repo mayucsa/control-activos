@@ -7,52 +7,78 @@
             <link rel="stylesheet" type="text/css" href="../../../includes/css/adminlte.min.css">
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/jquery.dataTables.min.css">
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
+
+            <style>
+
+            table {
+                width: 70%;
+                height: 300px;
+            }
+
+            /* table tr {
+                text-align: center;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #eee;
+            }
+
+            table tr:nth-child(odd) {
+                background-color: #fff;
+            }
+
+            table th {
+                color: #fff;
+                background-color: #000;
+            } */
+
+</style>
         </head>
 <div ng-controller="vistaEmpleadoEquipo">
     <!-- modal para ver -->
     <div class="modal fade bd-example-modal-lg"  style="width: 100%;" id="verEquiposUsuario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">VER EQUIPOS</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            <div class="card-footer">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover table-responsive " style="width: 100%;" id="tablaRelacionEquipo">
-                                    <thead>
-                                    <tr>
-                                        <th >Nombre Equipo</th>
-                                        <th> Marca</th>
-                                        <th>Modelo</th>
-                                        <th>Fecha de asignación</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="(i, obj) in verEquipos track by i">     
-                                                    <td class="text-center">{{obj.nombre_equipo}} </td> 
-                                                    <td class="text-center">{{obj.marca}} </td>
-                                                    <td class="text-center">{{obj.modelo}} </td>
-                                                    <td class="text-center">{{obj.fecha_asignacion}} </td>
-                                                    <td class="text-center">
-                                                        <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarRelacion(obj.cve_cequipo)" data-toggle="modal" data-target="#borrarModal">                                           
-                                                        </button> 
-                                            </td>
-                                                    
-                                    </tbody>
-                                </table>
-                            </div>
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">VER EQUIPOS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-footer">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover table-responsive " style="width: 100%;" id="tablaRelacionEquipo">
+                                <thead>
+                                <tr>
+                                    <th >Nombre Equipo</th>
+                                    <th> Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Fecha de asignación</th>
+                                    <th>Opciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(i, obj) in verEquipos track by i">     
+                                                <td class="text-center">{{obj.nombre_equipo}} </td> 
+                                                <td class="text-center">{{obj.marca}} </td>
+                                                <td class="text-center">{{obj.modelo}} </td>
+                                                <td class="text-center">{{obj.fecha_asignacion}} </td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarRelacion(obj.cve_cequipo)" data-toggle="modal" data-target="#borrarModal">                                           
+                                                    </button> 
+                                        </td>
+                                                
+                                </tbody>
+                            </table>
                         </div>
-            
-            </div>
-            <!-- aca termina el cuerpo del modal -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            </div>
+                    </div>
+                
+                </div>
+                <!-- aca termina el cuerpo del modal -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -87,7 +113,7 @@
                                     <th>Código Empleado</th>
                                     <th>Nombre</th>
                                     <th>apellidos</th>
-                                    <th>Opciones</th>
+                                    <th>Equipos Relacionados</th>
                                 </tr>
                             </thead>
                             <tbody>
