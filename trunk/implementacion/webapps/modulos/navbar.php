@@ -57,14 +57,20 @@
               <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Catálogos</span><i class="treeview-indicator fas fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                   <li ng-show="perfilUsu.catalogo_equipos_vista == 1">
-                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="app-menu__icon far fa-circle"></i> Registro de equipos</a>
+                    <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="app-menu__icon far fa-circle"></i> Equipos / accesorios</a>
                   </li>
-                  <li >
+                  <li>
+                    <a class="treeview-item" href=""><i class="app-menu__icon far fa-circle"></i> Empleados</a>
+                  </li>
+                  <li>
+                    <a class="treeview-item" href=""><i class="app-menu__icon far fa-circle"></i> Grupos</a>
+                  </li>
+                  <!-- <li >
                     <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
                   </li>
                   <li>
-                  <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
-                </li>
+                    <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
+                  </li> -->
                 </ul>
             </li>
             <!-- MOVIMIENTOS -->
@@ -73,6 +79,12 @@
               <i class="app-menu__icon fas fa-wrench"></i><span class="app-menu__label">Movimientos</span> <i class="treeview-indicator fas fa-angle-right"></i>
               </a>
               <ul class="treeview-menu">
+                <li >
+                  <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
+                </li>
+                <li>
+                  <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
+                </li>
                 <li>
                   <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="app-menu__icon far fa-circle"></i> Asignación</a>
                 </li>
