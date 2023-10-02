@@ -37,78 +37,78 @@
 <div class="modal fade bd-example-modal-lg " id="verModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
-        <div class="modal-header bg-primary">
-            <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR EQUIPOS</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-light" id="exampleModalLabel">EDITAR EQUIPOS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         <div class="modal-body">
-        <div class="container">
-            <div c class="row row-cols-4">
-        <div style="width: 100%;" class="form-floating mx-1">
-            <input hidden="true" class="form-control UpperCase" ng-model="VerEquipo" id="VerEquipo" autocomplete="off"  disabled>
-            <!-- <label>Numero</label> -->
-        </div>
-        <div style="width: 100%;" class="form-floating mx-1 ">
-            <input  hidden="true" class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
-            <label>Nombre de equipo</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase text-center" ng-model="verMarca" id="verMarca" autocomplete="off" >
-            <label class="form-label">Marca</label>
-        </div >
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase text-center" ng-model="verModelo" id="verModelo" autocomplete="off" >
-            <label>Modelo</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase text-center" ng-model="verDescripcion" id="verDescripcion" autocomplete="off" >
-            <label>Descripción</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
-            <input class="form-control UpperCase text-center" ng-model="verNumeroFactura" id="verNumeroFactura" autocomplete="off" >
-            <label>Número de factura</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-        <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
-            <input class="form-control UpperCase text-center" ng-model="verNumeroSerie"  ng-blur="validaSerie(verNumeroSerie)" id="verNumeroSerie"  autocomplete="off" >
-            <label>Número de serie</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase text-center" ng-model="verSistemaOperativo" id="verSistemaOperativo" autocomplete="off" >
-            <label>Sistema operativo</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase text-center" ng-model="verProcesador" id="verProcesador" autocomplete="off" >
-            <label>Procesador</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control validanumericos text-center"  ng-model="verVelocidadProcesador" id="verVelocidadProcesador" autocomplete="off" >
-            <label>Velocidad de procesador</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control validanumericos text-center"  ng-model="verMemoriaRam" id="verMemoriaRam" autocomplete="off" >
-            <label>Memoria ram</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control UpperCase text-center"  ng-model="verTipoAlmacenamiento" id="verTipoAlmacenamiento" autocomplete="off" >
-            <label>Tipo de almacenamiento</label>
-        </div>
-        <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
-            <input class="form-control validanumericos text-center"  ng-model="verCapaAlmacenamiento" id="verCapaAlmacenamiento" autocomplete="off" >
-            <label>C. de almacenamiento</label>
-        </div>
-        </div>
-        </div>
-        </div>
-        <!-- aca termina el cuerpo del modal -->
-        <div class="modal-footer">
+            <div class="container">
+                <div class="row row-cols-4">
+                    <div style="width: 100%;" class="form-floating mx-1">
+                        <input hidden="true" class="form-control UpperCase" ng-model="VerEquipo" id="VerEquipo" autocomplete="off"  disabled>   
+                        <label>Numero</label>
+                    </div>
+                    <div style="width: 100%;" class="form-floating mx-1 ">
+                        <input  hidden="true" class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
+                        <label>Nombre de equipo</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control UpperCase text-center" ng-model="verMarca" id="verMarca" autocomplete="off" >
+                        <label class="form-label">Marca</label>
+                    </div >
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control UpperCase text-center" ng-model="verModelo" id="verModelo" autocomplete="off" >
+                        <label>Modelo</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control UpperCase text-center" ng-model="verDescripcion" id="verDescripcion" autocomplete="off" >
+                        <label>Descripción</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
+                        <input class="form-control UpperCase text-center" ng-model="verNumeroFactura" id="verNumeroFactura" autocomplete="off" >
+                        <label>Número de factura</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25"> 
+                    <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
+                        <input class="form-control UpperCase text-center" ng-model="verNumeroSerie"  ng-blur="validaSerie(verNumeroSerie)" id="verNumeroSerie"  autocomplete="off" >
+                        <label>Número de serie</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control UpperCase text-center" ng-model="verSistemaOperativo" id="verSistemaOperativo" autocomplete="off" >
+                        <label>Sistema operativo</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control UpperCase text-center" ng-model="verProcesador" id="verProcesador" autocomplete="off" >
+                        <label>Procesador</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control validanumericos text-center"  ng-model="verVelocidadProcesador" id="verVelocidadProcesador" autocomplete="off" >
+                        <label>Velocidad de procesador</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control validanumericos text-center"  ng-model="verMemoriaRam" id="verMemoriaRam" autocomplete="off" >
+                        <label>Memoria ram</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control UpperCase text-center"  ng-model="verTipoAlmacenamiento" id="verTipoAlmacenamiento" autocomplete="off" >
+                        <label>Tipo de almacenamiento</label>
+                    </div>
+                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
+                        <input class="form-control validanumericos text-center"  ng-model="verCapaAlmacenamiento" id="verCapaAlmacenamiento" autocomplete="off" >
+                        <label>C. de almacenamiento</label>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <!-- aca termina el cuerpo del modal  -->
+         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" ng-click="cambioCaracteristica()">Guardar Datos</button>
+            <!-- <button type="button" class="btn btn-primary" ng-click="cambioCaracteristica()">Guardar Datos</button> -->
         </div>
         </div>
-    </div>
+    </div> 
     </div>
 
     <main class="app-content">
@@ -123,7 +123,24 @@
         </div>
         <!-- <div class="container"> -->
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
+                <div class= "row form-group form-group-sm">
+                        <div class="col-lg-12 d-lg-flex">
+                            <label>Selecciona al usuario o grupos..</label>
+                        </div>
+                        <div class="col-lg-12 d-lg-flex">
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio1" ng-model="checkh" value="1">
+                                <label class="form-check-label">USUARIOS </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio2" ng-model="checkh" value="2">
+                                <label class="form-check-label">GRUPOS</label>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-6">                    
                     <div class="tile">
                         <div class="card card-info">
                             <div class="card-header">
@@ -137,21 +154,8 @@
                             <div class="card-body">
 
                             <!-- ESTTE CÓDIGO COMENTADO SERVIRÁ MÁS ADELANTE SI SE QUOERE AGREGAR LOS GRUPOS DE PERSONAS -->
-                                <!-- <div class="row form-group form-group-sm">
-                                    <div class="col-lg-12 d-lg-flex">
-                                        <label>Selecciona al usuario o grupos..</label>
-                                    </div>
-                                    <div class="col-lg-12 d-lg-flex">
-                                        <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio1" ng-model="checkh" value="Equipo">
-                                            <label class="form-check-label">USUARIOS </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio2" ng-model="checkh" value="Insumos">
-                                            <label class="form-check-label">GRUPOS</label>
-                                        </div>
-                                    </div>
-                                </div> --> 
+                           
+                               
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover"  id="tablaEmpleado">
                                         <thead>
@@ -172,6 +176,44 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- esto es una tabla para grupos -->
+                <div class="col-md-6"> 
+                    <div class="tile">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">GRUPOS </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                            <button type="button" class="btn btn-success btn-sm" ng-click="agregarGrupo(obj.codigoempleado, obj.nombre)">Seleccionar</button>
+                                <!-- <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover"  id="tablaEmpleado">
+                                        <thead>
+                                            <tr>
+                                                <th>Código de empleado</th>
+                                                <th>Nombre de empleado</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(i, obj) in empleado ">
+                                                <td class="text-center">{{obj.codigoempleado}}</td>
+                                                <td >{{obj.nombre}}</td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre)">Seleccionar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -238,7 +280,7 @@
                                         </div>
                                         <!-- <input type="button" class="btn btn-danger"> -->
                                             <button type="button" class="btn btn-danger fas fa-trash-alt" title="Quitar empleado" ng-click="quitaremplado()"></button>
-                                        <div style="width: 50%;" class="form-floating mx-1" align="right">
+                                        <div style="width: 50%;" class="form-floating mx-1" align="right" >
                                             <button type="button" class="btn btn-success" ng-click="GuardarAsignacion()">Guardar</button>                          
                                         </div>
                                     </div>
@@ -280,7 +322,7 @@
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
 
                        
         <?php include_once "../../footer.php" ?>
