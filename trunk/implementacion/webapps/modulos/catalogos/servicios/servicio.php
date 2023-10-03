@@ -40,7 +40,7 @@
         <!-- aca termina el cuerpo del modal -->
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" ng-click="cambioServicio()">Guardar Datos</button>
+            <!-- <button type="button" class="btn btn-primary" ng-click="cambioServicio()">Guardar Datos</button> -->
         </div>
         </div>
     </div>

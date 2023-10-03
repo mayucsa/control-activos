@@ -218,6 +218,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- para la tabla equipos -->
                 <div class="col-md-6">
                     <div class="tile">
                         <div class="card card-info">

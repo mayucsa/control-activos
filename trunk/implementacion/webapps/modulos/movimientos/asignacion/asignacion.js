@@ -121,6 +121,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.quitaremplado = function(){
 		$scope.nombreEmpleado = '';
 	}
+
+
+	
 	
 
 	// function actualizarTablaEquiposAgregados() {

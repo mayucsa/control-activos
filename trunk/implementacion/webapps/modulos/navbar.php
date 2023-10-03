@@ -60,10 +60,10 @@
                     <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="app-menu__icon far fa-circle"></i> Equipos / accesorios</a>
                   </li>
                   <li>
-                    <a class="treeview-item" href=""><i class="app-menu__icon far fa-circle"></i> Empleados</a>
+                    <a class="treeview-item" href="../../catalogos/empleados/empleado.php"><i class="app-menu__icon far fa-circle"></i> Empleados</a>
                   </li>
                   <li>
-                    <a class="treeview-item" href=""><i class="app-menu__icon far fa-circle"></i> Grupos</a>
+                    <a class="treeview-item" href="../../catalogos/grupos/grupo.php"><i class="app-menu__icon far fa-circle"></i> Grupos</a>
                   </li>
                   <!-- <li >
                     <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
