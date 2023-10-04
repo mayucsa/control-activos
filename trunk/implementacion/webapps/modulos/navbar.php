@@ -65,6 +65,9 @@
                   <li>
                     <a class="treeview-item" href="../../catalogos/grupos/grupo.php"><i class="app-menu__icon far fa-circle"></i> Grupos</a>
                   </li>
+                  <li>
+                    <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Servicios</a>
+                  </li>
                   <!-- <li >
                     <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
                   </li>
@@ -82,9 +85,9 @@
                 <li >
                   <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
-                </li>
+                </li> -->
                 <li>
                   <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="app-menu__icon far fa-circle"></i> Asignación</a>
                 </li>
