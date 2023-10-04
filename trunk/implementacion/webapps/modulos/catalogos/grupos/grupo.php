@@ -8,6 +8,13 @@
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/jquery.dataTables.min.css">
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
         </head>
+<style>
+.tablas{
+    margin-bottom: 80px;
+
+};
+
+</style>
 <div ng-controller="vistaGrupos">
 
 
@@ -35,6 +42,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="tile" ng-model="nuevogrupo" id="nuevogrupo" ng-show="nuevogrupo == true">
+                <div class="card card-info">
+                    <div class="card-body">
+                
+                        <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo()">Guardar Grupo</button>
+                    
+                    </div>
+        
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row" >
@@ -52,11 +71,11 @@
                     <div class="card-body">
                         <div>
                             <div style="width: 100%;  " class="form-floating mx-1 ">
-                                <input class="form-control UpperCase text-center" ng-model="marca" id="marca" autocomplete="off">
+                                <input class="form-control UpperCase text-center"  ng-model="nombreGrupo" id="nombreGrupo" autocomplete="off">
                                 <label>Nombre del grupo</label>
                             </div>
-                            <div style="width: 100%;" class="form-floating mx-1">
-                                <input class="form-control UpperCase text-center" ng-model="modelo" id="modelo" autocomplete="off" >
+                            <div style="width: 100%" class="form-floating mx-1">
+                                <input class="form-control UpperCase text-center" ng-model="descripcion" id="descripcion" autocomplete="off" >
                                 <label>Descripción</label>
                             </div>
                             <div class="table-responsive">
@@ -135,6 +154,36 @@
             </div>
         </div>
         
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover"  id="tablaGrupos">
+                    <thead>
+                        <tr>
+                            <th>Código de grupo</th>
+                            <th>Caracteristicas</th>
+                            <!-- <th>Apellido</th> -->
+                            <!-- <th>Puesto</th> -->
+                            <!-- <th>Departamento</th> -->
+                            <th>Ver integrantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(i, obj) in empleadosss ">
+                            <td class="text-center">{{obj.codigoempleado}}</td>
+                            <td >{{obj.nombreC}}</td>
+                            <!-- <td class="text-center">{{obj.apellido}}</td> -->
+                            <!-- <td class="text-center">{{obj.puesto}}</td> -->
+                            <!-- <td class="text-center">{{obj.departamento}}</td> -->
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success btn-sm" id="agregarEmpleado" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombreC)">Seleccionar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <?php include_once "../../footer.php" ?>
 </main>

@@ -14,6 +14,53 @@ function getEmpleadoGrupos ($dbcon){
     dd($datos);
 }
 
+function guardarGrupos($dbcon, $Datos){
+	$fecha = date('Y-m-d H:i:s');
+	$status = '1';
+	$conn = $dbcon->conn();
+	$sql = "INSERT INTO grupos_usuarios (nombre_gpo, descripcion, estatus_grupo, creado_por, fecha_registro)
+    VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
+	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+
+	if($qBuilder){
+		$getIdQuery = "SELECT max(cve_grupo) as cve_grupo FROM grupos_usuarios WHERE
+			fecha_registro='".$fecha."'
+			AND nombre_gpo= '".$Datos->nombreGrupo."'
+			AND estatus_grupo= ".$status."";
+
+		$getIdResult = $dbcon->qBuilder($conn, 'first', $getIdQuery);
+
+		if ($getIdResult && isset($getIdResult->cve_grupo)) {
+			foreach ($Datos->empleadosCodigo as $i => $equipo) {
+				$sqlDetalle = "INSERT INTO grupos_usuarios_detalle (cve_grupo, numeroempleado, asignado_por, estatus_gpo_detalle, fecha_asignacion)
+					VALUES (".$getIdResult->cve_grupo.", ".$equipo.", ".$Datos->id.", ".$status.", '".$fecha."' )";
+				$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sqlDetalle);
+
+				if(!$qBuilderDetalle){
+					dd(['code'=>300,'msj'=>'Error al crear equipo', 'query'=>$sqlDetalle]);
+				}
+
+				// Actualizar la tabla caracteristicas_equipos para establecer estatus_equipo=2
+				// $sql2 = "UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
+				// 		WHERE ce.cve_cequipo=".$equipo;
+				// $qBuilder2 = $dbcon->qBuilder($conn, 'do', $sql2);
+
+				// if(!$qBuilder2){
+				// 	dd(['code'=>300,'msj'=>'Error al actualizar equipo', 'query'=>$sql2]);
+				// }
+			}
+			dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdResult->cve_grupo]);
+		} else {
+			dd(['code'=>300,'msj'=>'Error al obtener cve_grupo', 'getIdQuery'=>$getIdQuery]);
+		}
+	}
+    if (!$qBuilder) {
+        die("Error en la consulta: " . mysqli_error($conn));
+    } else {
+		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
+	}
+}
+
 
 include_once "../../../dbconexion/conn.php";
 $dbcon	= 	new MysqlConn;
@@ -26,9 +73,9 @@ if ($tarea == '') {
 	$tarea = $objDatos->task;
 }
 switch ($tarea) { 
-    // case 'getServicios':
-    //     getServicios($dbcon);
-    //     break;
+    case 'guardarGrupos':
+        guardarGrupos($dbcon, $objDatos);
+        break;
 	case 'getEmpleadoGrupos': 
 		getEmpleadoGrupos($dbcon);
 		break;

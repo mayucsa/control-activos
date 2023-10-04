@@ -1,6 +1,7 @@
 app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	$scope.nuevogrupo= "";
 	$scope.empleadosAgregados=[]
+	$scope.empleadosCodigo=[]
 
 	$scope.getEmpleadoGrupos = function(){
 		// tabla para traer los datos del empleado
@@ -46,14 +47,6 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	// este linea llama a la funcion para que muestre todos los empleados
 	$scope.getEmpleadoGrupos();
 
-	// function hideDiv() {
-	// 	var aux = $("button[name=".esconder."]:.checked.").val();
-	// 	if (aux == "show"){
-	// 	$(".hideDiv").css("display","block");
-	// 	}else{
-	// 	$(".hideDiv").css("display","none");
-	// 	}
-	// 	}
 	$scope.agregar = function(){
 		
 	if ($scope.nuevogrupo == false) {
@@ -69,26 +62,39 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	// $scope.empleados = [];
 
 	$scope.agregarEmpleado = function(codigoempleado, nombreC) {
-		console.log('codigo', codigoempleado);
-		console.log('nombre', nombreC);
+		// console.log('codigo', codigoempleado);
+		// console.log('nombre', nombreC);
 	
 		// Combina el código de empleado y el nombre en un objeto o cadena, según tu necesidad.
 		const empleadoCompleto = {
 			codigo: codigoempleado,
 			nombre: nombreC
 		};
+		const empleadoCod= {
+			codigoempleado
+		};
 
 		// Variable de bandera para verificar si el empleado existe en el array
 		let existe = false;
+		let existente = false;
 	
 		// Verifica si empleadoCompleto ya existe en empleadosAgregados
 		for (let i = 0; i < $scope.empleadosAgregados.length; i++) {
 			if (empleadoCompleto.codigo === $scope.empleadosAgregados[i].codigo &&
+				// empleadoCompleto.codigo === $scope.empleadosCodigo[i].codigo &&
 				empleadoCompleto.nombre === $scope.empleadosAgregados[i].nombre) {
 				existe = true;
 				break;
 			}
 		}
+		for (let j = 0; j < $scope.empleadosCodigo.length; j++) {
+			if (empleadoCod === $scope.empleadosCodigo) {
+				existente = true;
+				break;
+			}
+		}
+		
+
 	
 		// Si el empleado no existe, agrégalo al array
 		if (!existe) {
@@ -97,8 +103,15 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 		} else {
 			console.log('El empleado ya existe en el array.');
 		}
+		if (!existente) {
+			$scope.empleadosCodigo.push(empleadoCod);
+			// console.log('codigo del empleado', $scope.empleadosCodigo);;
+		} else {
+			console.log('El empleado ya existe en el array.');
+		}
 	
 		// Imprime el array actualizado en la consola
+		console.log('codigo del empleado', $scope.empleadosCodigo)
 		console.log($scope.empleadosAgregados);
 		// console.log("codigo",empleados.codigo);
 		// console.log("nombre",nombreC);
@@ -110,32 +123,76 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 		console.log($scope.empleadosAgregados);
 	}
 
-	// $scope.agregarEmpleado=function(codigoempleado, nombreC){
+	$scope.guardarGrupo=function(){
+		if ($scope.nombreGrupo=='' || $scope.nombreGrupo==null  ) {
+			Swal.fire(
+				'Campo faltante',
+				'Es necesario indicar el nombre del grupo',
+				'warning'
+			  );
+			  return;
+		}
+		if ($scope.empleadosAgregados.length===0) {
+			Swal.fire(
+				'Campo faltante',
+				'Es necesario tener al menos un integrante',
+				'warning'
+			  );
+			  return;
+		}
+		Swal.fire({
+			title: 'Estás a punto de eliminar esta asignación.',
+			text: '¿Es correcta la información agregada?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			confirmButtonText: 'Aceptar',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				jsShowWindowLoad('Capturando caracteristicas...');
+				
+				$http.post('Controller.php', {
+					'task': 'guardarGrupos',
+					'id': ID,
+					'nombreGrupo': nombreGrupo,
+					'descripcion': descripcion,
+					'empleadosCodigo':$scope.empleadosCodigo,
+				}).then(function(response){
+					response = response.data;
+					// console.log('response', response);
+					jsRemoveWindowLoad();
+					if (response.code == 200) {
+						Swal.fire({
+						  title: '¡Éxito!',
+						  html: 'Su asignación de equipo se generó correctamente',
+						  icon: 'success',
+						  showCancelButton: false,
+						  confirmButtonColor: 'green',
+						  confirmButtonText: 'Aceptar'
+						}).then((result) => {
+						  if (result.isConfirmed) {
+							  location.reload();
+						  }else{
+							  location.reload();
+						  }
+						});
+					}else{
+						alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+					}
+				}, function(error){
+					console.log('error', error);
+					jsRemoveWindowLoad();
+				})
+			}
+		});
 
-		
-		// console.log('codigo', codigoempleado);
-		// console.log('nombre', nombreC);
-		// empleadoCompleto =  codigoempleado + nombreC;
-		// // empleadoCompleto = empleados;
-		// console.log('nombre', empleados);
-		// const agregarEmpleado = document.getElementById('agregarEmpleado');
-
-		// // Agrega un evento de clic al botón
-		// agregarEmpleado.addEventListener('click', function() {
-		// 	// Obtiene el dato que deseas agregar (puedes obtenerlo de un input u otra fuente de datos)
-		// 	const empleadoCompleto = empleados; // Cambia esto con el dato que deseas agregar
-			
-		// 	// Agrega el nuevo dato al array
-		// 	empleados.push(empleadoCompleto);
-			
-		// 	// Imprime el array actualizado en la consola
-		// 	console.log(empleados);
-		// });
 
 
-	// }
 
-// Selecciona el botón por su ID
+
+	}
 
 
 		
