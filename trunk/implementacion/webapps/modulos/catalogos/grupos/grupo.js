@@ -1,7 +1,10 @@
 app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	$scope.nuevogrupo= "";
-	$scope.empleadosAgregados=[]
-	$scope.empleadosCodigo=[]
+	$scope.empleadosAgregados=[];
+	$scope.empleadosCodigo=[];
+
+	$scope.nombreGrupo = '';
+	$scope.descripcion = '';
 
 	$scope.getEmpleadoGrupos = function(){
 		// tabla para traer los datos del empleado
@@ -156,8 +159,8 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 				$http.post('Controller.php', {
 					'task': 'guardarGrupos',
 					'id': ID,
-					'nombreGrupo': nombreGrupo,
-					'descripcion': descripcion,
+					'nombreGrupo': $scope.nombreGrupo,
+					'descripcion': $scope.descripcion,
 					'empleadosCodigo':$scope.empleadosCodigo,
 				}).then(function(response){
 					response = response.data;

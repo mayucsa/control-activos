@@ -27,6 +27,7 @@ function guardarGrupos($dbcon, $Datos){
 	$sql = "INSERT INTO grupos_usuarios (nombre_gpo, descripcion, estatus_grupo, creado_por, fecha_registro)
    			 VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+	// dd($sql);
 
 	if($qBuilder){
 		$getIdQuery = "SELECT max(cve_grupo) as cve_grupo FROM grupos_usuarios WHERE
