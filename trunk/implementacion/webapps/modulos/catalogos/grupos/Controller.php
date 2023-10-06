@@ -14,12 +14,18 @@ function getEmpleadoGrupos ($dbcon){
     dd($datos);
 }
 
+// $stmt->close();
+
+
+
+
 function guardarGrupos($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$status = '1';
 	$conn = $dbcon->conn();
+
 	$sql = "INSERT INTO grupos_usuarios (nombre_gpo, descripcion, estatus_grupo, creado_por, fecha_registro)
-    VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
+   			 VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
 	if($qBuilder){
