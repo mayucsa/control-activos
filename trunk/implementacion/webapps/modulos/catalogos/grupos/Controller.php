@@ -25,7 +25,7 @@ function guardarGrupos($dbcon, $Datos){
 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 	// dd($sql);
     dd($Datos);
-
+	
 	if($qBuilder){
 		$getIdQuery = "SELECT max(cve_grupo) as cve_grupo FROM grupos_usuarios WHERE
 			fecha_registro='".$fecha."'
@@ -67,7 +67,7 @@ function guardarGrupos($dbcon, $Datos){
     } else {
 		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
 	}
-	
+
 }
 
 

@@ -52,23 +52,19 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 
 	$scope.agregar = function(){
 		
-	if ($scope.nuevogrupo == false) {
-		$scope.nuevogrupo = true
-		$scope.nuevogrupoEmpleado = true
-	}else{
-		$scope.nuevogrupo = false
-		$scope.nuevogrupoEmpleado = false
+		if ($scope.nuevogrupo == false) {
+			$scope.nuevogrupo = true
+			$scope.nuevogrupoEmpleado = true
+		}else{
+			$scope.nuevogrupo = false
+			$scope.nuevogrupoEmpleado = false
+		}
 	}
-	}
-
-	// Suponiendo que empleados sea un array definido previamente en tu código.
-	// $scope.empleados = [];
 
 	$scope.agregarEmpleado = function(codigoempleado, nombreC) {
 		// console.log('codigo', codigoempleado);
 		// console.log('nombre', nombreC);
 	
-		// Combina el código de empleado y el nombre en un objeto o cadena, según tu necesidad.
 		const empleadoCompleto = {
 			codigo: codigoempleado,
 			nombre: nombreC
@@ -162,7 +158,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 					'id': ID,
 					'nombreGrupo': $scope.nombreGrupo,
 					'descripcion': $scope.descripcion,
-					'empleadosCodigo':$scope.empleadosCodig,
+					'empleadosCodigo':$scope.empleadosCodigo,
 					
 				}).then(function(response){
 					console.log($scope.empleadosCodigo);
