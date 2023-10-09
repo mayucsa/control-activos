@@ -115,7 +115,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	
 		// Imprime el array actualizado en la consola
 		console.log('codigo del empleado', $scope.empleadosCodigo)
-		console.log($scope.empleadosAgregados);
+		// console.log($scope.empleadosAgregados);
 		// console.log("codigo",empleados.codigo);
 		// console.log("nombre",nombreC);
 	};
@@ -123,10 +123,11 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	$scope.eliminar = function(i){
 		$scope.empleadosAgregados.splice(i, 1);
 		// $scope.productosAgregados.splice(i, 1);
-		console.log($scope.empleadosAgregados);
+		// console.log($scope.empleadosAgregados);
 	}
 
-	$scope.guardarGrupo=function(){
+	$scope.guardarGrupo=function(codigo){
+		// $cod=$scope.empleadosCodigo;
 		if ($scope.nombreGrupo=='' || $scope.nombreGrupo==null  ) {
 			Swal.fire(
 				'Campo faltante',
@@ -161,8 +162,10 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 					'id': ID,
 					'nombreGrupo': $scope.nombreGrupo,
 					'descripcion': $scope.descripcion,
-					'empleadosCodigo':$scope.empleadosCodigo,
+					'empleadosCodigo':$scope.empleadosCodig,
+					
 				}).then(function(response){
+					console.log($scope.empleadosCodigo);
 					response = response.data;
 					// console.log('response', response);
 					jsRemoveWindowLoad();

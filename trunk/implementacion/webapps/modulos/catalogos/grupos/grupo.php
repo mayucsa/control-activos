@@ -47,7 +47,7 @@
                 <div class="card card-info">
                     <div class="card-body">
                 
-                        <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo()">Guardar Grupo</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
                     
                     </div>
         

@@ -15,10 +15,6 @@ function getEmpleadoGrupos ($dbcon){
 }
 
 // $stmt->close();
-
-
-
-
 function guardarGrupos($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$status = '1';
@@ -28,6 +24,7 @@ function guardarGrupos($dbcon, $Datos){
    			 VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 	// dd($sql);
+    dd($Datos);
 
 	if($qBuilder){
 		$getIdQuery = "SELECT max(cve_grupo) as cve_grupo FROM grupos_usuarios WHERE
@@ -42,6 +39,7 @@ function guardarGrupos($dbcon, $Datos){
 				$sqlDetalle = "INSERT INTO grupos_usuarios_detalle (cve_grupo, numeroempleado, asignado_por, estatus_gpo_detalle, fecha_asignacion)
 					VALUES (".$getIdResult->cve_grupo.", ".$equipo.", ".$Datos->id.", ".$status.", '".$fecha."' )";
 				$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sqlDetalle);
+                
 
 				if(!$qBuilderDetalle){
 					dd(['code'=>300,'msj'=>'Error al crear equipo', 'query'=>$sqlDetalle]);
@@ -56,6 +54,9 @@ function guardarGrupos($dbcon, $Datos){
 				// 	dd(['code'=>300,'msj'=>'Error al actualizar equipo', 'query'=>$sql2]);
 				// }
 			}
+            dd($sql);
+            dd($Datos);
+
 			dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdResult->cve_grupo]);
 		} else {
 			dd(['code'=>300,'msj'=>'Error al obtener cve_grupo', 'getIdQuery'=>$getIdQuery]);
@@ -66,6 +67,7 @@ function guardarGrupos($dbcon, $Datos){
     } else {
 		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
 	}
+	
 }
 
 
@@ -86,6 +88,7 @@ switch ($tarea) {
 	case 'getEmpleadoGrupos': 
 		getEmpleadoGrupos($dbcon);
 		break;
+        
 
 }
 
