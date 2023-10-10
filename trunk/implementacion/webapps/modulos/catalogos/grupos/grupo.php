@@ -17,6 +17,47 @@
 </style>
 <div ng-controller="vistaGrupos">
 
+<!-- modal para ver lista de empleados en grupo -->
+    <div class="modal fade bd-example-modal-lg " id="modalLista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Empleados en el grupo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover"  id="tablaGruposDetalle">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Numero empleado</th>
+                                    <th class="text-center">Nombre</th>
+                                    <th class="text-center">Quitar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(i, obj) in gruposDetalle track by i">
+                                    <td class="text-center">{{obj.numeroempleado}}</td>
+                                    <td class="text-center">{{obj.empleado}}</td>
+                                    <td class="text-center">
+                                        <!-- <button type="button" class="btn btn-info btn-sm" ng-click="verLista(obj.cve_grupo)"></button> -->
+                                        <!-- <span class="btn btn-warning btn-sm" title="Ver lista" data-toggle="modal" data-target="#modalLista" ng-click="verLista(obj.cve_grupo)"><i class="fas fa-list-ol"></i></span> -->
+                                        <span class="btn btn-danger btn-sm" title="Eliminar del grupo" ng-click="QuitardelGrupo(obj.cve_gpo_detalle)"><i class="fas fa-trash-alt"></i></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <!-- <button type="button" class="btn btn-primary" ng-click="cambioCaracteristica()">Guardar Datos</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 
 <main class="app-content">
     <div class="app-title">
@@ -25,30 +66,18 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="caracteristicas_equipos.php"> s</a></li>
+          <li class="breadcrumb-item"><a href="grupo.php"> Grupos</a></li>
         </ul>
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-12">
             <div class="tile">
                 <div class="card card-info">
                     <div class="card-body">
-                
-                        <button type="button" class="btn btn-success btn-sm" ng-click="agregar()">Nuevo Grupo</button>
-                    
-                    </div>
-        
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="tile" ng-model="nuevogrupo" id="nuevogrupo" ng-show="nuevogrupo == true">
-                <div class="card card-info">
-                    <div class="card-body">
-                
-                        <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
-                    
+                        <button type="button" class="btn btn-success btn-sm" ng-show="nuevogrupo == false" ng-click="agregar()">Nuevo Grupo</button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-show="nuevogrupo == true" ng-click="agregar()">Regresar</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-show="nuevogrupo == true" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
                     </div>
         
                 </div>
@@ -156,32 +185,34 @@
         
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover"  id="tablaGrupos">
-                    <thead>
-                        <tr>
-                            <th>Código de grupo</th>
-                            <th>Caracteristicas</th>
-                            <!-- <th>Apellido</th> -->
-                            <!-- <th>Puesto</th> -->
-                            <!-- <th>Departamento</th> -->
-                            <th>Ver integrantes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="(i, obj) in empleadosss ">
-                            <td class="text-center">{{obj.codigoempleado}}</td>
-                            <td >{{obj.nombreC}}</td>
-                            <!-- <td class="text-center">{{obj.apellido}}</td> -->
-                            <!-- <td class="text-center">{{obj.puesto}}</td> -->
-                            <!-- <td class="text-center">{{obj.departamento}}</td> -->
-                            <td class="text-center">
-                                <button type="button" class="btn btn-success btn-sm" id="agregarEmpleado" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombreC)">Seleccionar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="card card-info">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover"  id="tablaGrupos">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Código de grupo</th>
+                                        <th class="text-center">Nombre de grupo</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(i, obj) in grupos ">
+                                        <td class="text-center">{{obj.cve_grupo}}</td>
+                                        <td class="text-center">{{obj.nombre_gpo}}</td>
+                                        <td class="text-center">
+                                            <!-- <button type="button" class="btn btn-info btn-sm" ng-click="verLista(obj.cve_grupo)"></button> -->
+                                            <span class="btn btn-info btn-sm" title="Ver lista" data-toggle="modal" data-target="#modalLista" ng-click="verLista(obj.cve_grupo)"><i class="fas fa-list-ol"></i></span>
+                                            <span class="btn btn-danger btn-sm" title="Eliminar grupo completo" ng-click="eliminarGrupo(obj.cve_grupo)"><i class="fas fa-trash-alt"></i></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

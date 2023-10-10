@@ -6,6 +6,68 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 	$scope.nombreGrupo = '';
 	$scope.descripcion = '';
 
+	$scope.getGrupos =  function () {
+		$http.post('Controller.php', {
+			'task': 'getGrupos'
+		}).then(function(response) {
+			response = response.data;
+			console.log('grupos', response);
+			$scope.grupos = response;
+		})
+	}
+	$scope.getGrupos();
+
+	$scope.verLista = function(cve_grupo){
+		$http.post('Controller.php', {
+			'task': 'getGruposDetalle',
+			'cve_grupo': cve_grupo
+		}).then(function(response) {
+			response = response.data;
+			console.log('getGruposDetalle', response);
+			$scope.gruposDetalle = response;
+		})
+	}
+
+	$scope.QuitardelGrupo = function(cve_gpo_detalle){
+		Swal.fire({
+			title: 'Eliminar empleado',
+			text: '¿Deseas quitar el empleado del grupo?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			confirmButtonText: 'Aceptar',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				jsShowWindowLoad('Eliminando empleado...');
+				$http.post('Controller.php', {
+					'task': 'quitarEmpleado',
+					'cve': cve_gpo_detalle,
+					'id': ID,
+				}).then(function(response){
+					response = response.data;
+					// console.log('response', response);
+					jsRemoveWindowLoad();
+					Swal.fire({
+					  title: '¡Éxito!',
+					  html: 'Se elimino el empleado de manera exitosa',
+					  icon: 'success',
+					  showCancelButton: false,
+					  confirmButtonColor: 'green',
+					  confirmButtonText: 'Aceptar'
+					}).then((result) => {
+					  if (result.isConfirmed) {
+						  location.reload();
+					  }else{
+						  location.reload();
+					  }
+					});
+				})
+			}
+		})
+	}
+
 	$scope.getEmpleadoGrupos = function(){
 		// tabla para traer los datos del empleado
 		$http.post('Controller.php', {
@@ -122,6 +184,105 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 		// console.log($scope.empleadosAgregados);
 	}
 
+	$scope.eliminarGrupo = function(cve_grupo){
+		Swal.fire({
+			title: 'Eliminar grupo',
+			text: '¿Deseas eliminar el grupo por completo?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			confirmButtonText: 'Aceptar',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				jsShowWindowLoad('Revisando existencia de empleados...');
+				$http.post('Controller.php', {
+					'task': 'validaExistenciaEmpleados',
+					'cve': cve_grupo,
+					'id': ID,
+				}).then(function(response){
+					response = response.data;
+					// console.log('response', response);
+					jsRemoveWindowLoad();
+					if (response.code == 200) {
+						Swal.fire({
+						  title: 'Alerta!',
+						  html: 'Este grupo tiene empleados asignados<br> ¿Deseas eliminar el grupo y los empleados asignados? ',
+						  icon: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: 'green',
+						  cancelButtonColor: 'red',
+						  confirmButtonText: 'Aceptar',
+						  cancelButtonText: 'Cancelar'
+						}).then((result) => {
+						  if (result.isConfirmed) {
+						  		jsShowWindowLoad('Eliminando grupo...');
+							  $http.post('Controller.php', {
+							  	'task': 'eliminarGrupo',
+								'cve': cve_grupo,
+								'id': ID,
+							  }).then(function(response){
+							  	response = response.data;
+								// console.log('response', response);
+								jsRemoveWindowLoad();
+								Swal.fire({
+								  title: '¡Éxito!',
+								  html: 'Se elimino el grupo de manera exitosa',
+								  icon: 'success',
+								  showCancelButton: false,
+								  confirmButtonColor: 'green',
+								  confirmButtonText: 'Aceptar'
+								}).then((result) => {
+								  if (result.isConfirmed) {
+								  	location.reload();
+								  }else{
+								  	location.reload();
+								  }
+								});
+							  }, function(error){
+							  	console.log('error', error);
+								jsRemoveWindowLoad();
+							  })
+						  }
+						});
+					}else{
+							jsShowWindowLoad('Eliminando grupo...');
+						  $http.post('Controller.php', {
+						  	'task': 'eliminarGrupo',
+							'cve': cve_grupo,
+							'id': ID,
+						  }).then(function(response){
+						  	response = response.data;
+							// console.log('response', response);
+							jsRemoveWindowLoad();
+							Swal.fire({
+							  title: '¡Éxito!',
+							  html: 'Se elimino el grupo de manera exitosa',
+							  icon: 'success',
+							  showCancelButton: false,
+							  confirmButtonColor: 'green',
+							  confirmButtonText: 'Aceptar'
+							}).then((result) => {
+							  if (result.isConfirmed) {
+							  	location.reload();
+							  }else{
+							  	location.reload();
+							  }
+							});
+						  }, function(error){
+						  	console.log('error', error);
+							jsRemoveWindowLoad();
+						  });
+					}
+				}, function(errorLog){
+					console.log('error', error);
+					jsRemoveWindowLoad();
+				})
+			}
+		})
+	}
+
 	$scope.guardarGrupo=function(codigo){
 		// $cod=$scope.empleadosCodigo;
 		if ($scope.nombreGrupo=='' || $scope.nombreGrupo==null  ) {
@@ -168,7 +329,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 					if (response.code == 200) {
 						Swal.fire({
 						  title: '¡Éxito!',
-						  html: 'Su asignación de equipo se generó correctamente',
+						  html: 'Su genero un nuevo grupo nombre: <b> '+ response.nombre+'</b>',
 						  icon: 'success',
 						  showCancelButton: false,
 						  confirmButtonColor: 'green',
