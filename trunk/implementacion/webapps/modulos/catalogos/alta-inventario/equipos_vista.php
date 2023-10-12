@@ -19,6 +19,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        ValidaExistencia
         <div class="modal-body">
              <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">

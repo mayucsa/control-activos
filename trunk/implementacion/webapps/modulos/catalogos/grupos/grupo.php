@@ -100,7 +100,7 @@
                     <div class="card-body">
                         <div>
                             <div style="width: 100%;  " class="form-floating mx-1 ">
-                                <input class="form-control UpperCase text-center"  ng-model="nombreGrupo" id="nombreGrupo" autocomplete="off">
+                                <input class="form-control UpperCase text-center"  ng-model="nombreGrupo" id="nombreGrupo" autocomplete="off" ng-blur="ValidaExistencia(nombreGrupo)">
                                 <label>Nombre del grupo</label>
                             </div>
                             <div style="width: 100%" class="form-floating mx-1">
@@ -132,7 +132,7 @@
                         
                     
                     </div>
-        
+                    
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@
                             <table class="table table-striped table-bordered table-hover"  id="tablaGrupos">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Código de grupo</th>
+                                        <th class="text-center">Código de grupo hola</th>
                                         <th class="text-center">Nombre de grupo</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>

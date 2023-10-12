@@ -7,11 +7,26 @@ function dd($var){
         die($var);
     }
 }
+// valida si existe el nombre en la base de datos
+function ValidaExistencia($dbcon, $Datos) {
+    $conn = $dbcon->conn();
+
+    // Verificar si ya existe un registro con el mismo nombre
+    $sql = "SELECT COUNT(*) AS count FROM grupos_usuarios WHERE nombre_gpo = '".$Datos->nombreGrupo."'";
+    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	
+    if ($resultado->count >= 1) {
+        dd(['code'=>400,'msj'=>'Actualmente existe un grupo con el mismo nombre']);
+    }
+}
+// trae a los grupos ya creados
 function getGrupos ($dbcon){
 	$sql = "SELECT * FROM grupos_usuarios gu WHERE estatus_grupo = 1 ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+
+// trae a los usuarios que estan dentro de los grupos
 function getGruposDetalle ($dbcon, $cve_grupo){
 	$sql = "SELECT gud.cve_gpo_detalle, gud.cve_grupo, gud.numeroempleado, CONCAT(cun.nombre, ' ', cun.apellidopaterno, ' ', cun.apellidomaterno)empleado
 			FROM grupos_usuarios_detalle gud
@@ -46,6 +61,8 @@ function eliminarGrupo ($dbcon, $Datos){
     $sqldetalle = "UPDATE grupos_usuarios_detalle SET estatus_gpo_detalle = ".$status.", desasignado_por = ".$Datos->id.", fecha_desasignacion = '".$fecha."' WHERE cve_grupo = ".$Datos->cve." ";
     $datod = $dbcon->qBuilder($dbcon->conn(), 'do', $sqldetalle);
 }
+
+// trae a los empleados para que podamos escoger 
 function getEmpleadoGrupos ($dbcon){
 	$sql = "select codigoempleado,CONCAT(nombre,' ',apellidopaterno,' ', apellidomaterno) nombreC, 
     departamento  from cat_usuario_nomina  WHERE estadoempleado IN ('A','R') ";
@@ -147,6 +164,10 @@ switch ($tarea) {
 	case 'getEmpleadoGrupos': 
 		getEmpleadoGrupos($dbcon);
 		break;
+	case 'ValidaExistencia': 
+	ValidaExistencia($dbcon, $objDatos);
+	break;
+		
         
 
 }

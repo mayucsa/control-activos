@@ -5,17 +5,100 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 
 	$scope.nombreGrupo = '';
 	$scope.descripcion = '';
-
-	$scope.getGrupos =  function () {
+// valida si ya existe el nombre del grupo
+	$scope.ValidaExistencia = function (nombreGrupo) {
+		// console.log('nombre:', nombre);
 		$http.post('Controller.php', {
-			'task': 'getGrupos'
-		}).then(function(response) {
+			'task': 'ValidaExistencia',
+			'nombreGrupo': nombreGrupo
+		}).then(function(response){
 			response = response.data;
-			console.log('grupos', response);
-			$scope.grupos = response;
-		})
+			if (response.code == 400) {
+				Swal.fire({
+					// confirmButtonColor: '#3085d6',
+					title: 'Grupo existente',
+					html: response.msj,
+					confirmButtonColor: '#1A4672'
+					});
+					$scope.nombreGrupo = '';
+			}
+			// else{
+			// 	$scope.validacionCampos(nombre);
+			// }
+		}, function(error){
+			console.log('error', error);
+			// jsRemoveWindowLoad();
+		});
 	}
-	$scope.getGrupos();
+
+	$http.post('Controller.php', {
+        'task': 'getGrupos'
+    }).then(function(response) {
+        response = response.data;
+        console.log('getGrupos', response);
+        $scope.grupos = response;
+        // setTimeout(function(){
+            $('#tablaGrupos').DataTable({
+                "processing": true,
+                "bDestroy": true,
+                // "order": [5, 'desc'],
+                "lengthMenu": [[2, 30, 45], [2, 30, 45]],
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página.",
+                    "zeroRecords": "No se encontró registro.",
+                    "info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+                    "infoEmpty": "0 de 0 de 0 registros",
+                    "infoFiltered": "(Encontrado de _MAX_ registros)",
+                    "search": "Buscar: ",
+                    "processing": "Procesando...",
+                            "paginate": {
+                        "first": "Primero",
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "last": "Último"
+                    }
+
+                }
+            });
+        // },800);
+    })
+	// , function(error){
+    //     console.log('error', error);
+    // });
+
+	// $scope.getGrupos =  function () {
+	// 	$http.post('Controller.php', {
+	// 		'task': 'getGrupos'
+	// 	}).then(function(response) {
+	// 		response = response.data;
+	// 		console.log('grupos', response);
+	// 		$scope.grupos = response;
+			// $('#tablaGrupos').DataTable({
+            //     "processing": true,
+            //     "bDestroy": true,
+            //     // "order": [5, 'desc'],
+            //     "lengthMenu": [[15, 30, 45], [15, 30, 45]],
+            //     "language": {
+            //         "lengthMenu": "Mostrar _MENU_ registros por página.",
+            //         "zeroRecords": "No se encontró registro.",
+            //         "info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+            //         "infoEmpty": "0 de 0 de 0 registros",
+            //         "infoFiltered": "(Encontrado de _MAX_ registros)",
+            //         "search": "Buscar: ",
+            //         "processing": "Procesando...",
+            //                 "paginate": {
+            //             "first": "Primero",
+            //             "previous": "Anterior",
+            //             "next": "Siguiente",
+            //             "last": "Último"
+            //         }
+
+            //     }
+            // })
+	// 	})
+	// }
+	
+	// $scope.getGrupos();
 
 	$scope.verLista = function(cve_grupo){
 		$http.post('Controller.php', {
@@ -28,6 +111,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 		})
 	}
 
+	// este quita al usuario del  grupo (en el modal se puede ver)
 	$scope.QuitardelGrupo = function(cve_gpo_detalle){
 		Swal.fire({
 			title: 'Eliminar empleado',
@@ -68,6 +152,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 		})
 	}
 
+// tabla de los empleados para que se visualice
 	$scope.getEmpleadoGrupos = function(){
 		// tabla para traer los datos del empleado
 		$http.post('Controller.php', {
@@ -177,10 +262,11 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 		// console.log("codigo",empleados.codigo);
 		// console.log("nombre",nombreC);
 	};
+	
 
 	$scope.eliminar = function(i){
 		$scope.empleadosAgregados.splice(i, 1);
-		// $scope.productosAgregados.splice(i, 1);
+		$scope.empleadosCodigo.splice(i, 1);
 		// console.log($scope.empleadosAgregados);
 	}
 
