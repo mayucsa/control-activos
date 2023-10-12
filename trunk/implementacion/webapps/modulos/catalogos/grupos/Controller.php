@@ -12,7 +12,7 @@ function ValidaExistencia($dbcon, $Datos) {
     $conn = $dbcon->conn();
 
     // Verificar si ya existe un registro con el mismo nombre
-    $sql = "SELECT COUNT(*) AS count FROM grupos_usuarios WHERE nombre_gpo = '".$Datos->nombreGrupo."'";
+    $sql = "SELECT COUNT(*) AS count FROM grupos_usuarios WHERE estatus_grupo = 1 AND nombre_gpo = '".$Datos->nombreGrupo."'";
     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
     if ($resultado->count >= 1) {

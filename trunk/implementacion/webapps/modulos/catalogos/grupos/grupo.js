@@ -37,12 +37,12 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
         response = response.data;
         console.log('getGrupos', response);
         $scope.grupos = response;
-        // setTimeout(function(){
+        setTimeout(function(){
             $('#tablaGrupos').DataTable({
                 "processing": true,
                 "bDestroy": true,
                 // "order": [5, 'desc'],
-                "lengthMenu": [[2, 30, 45], [2, 30, 45]],
+                "lengthMenu": [[10, 30, 45], [10, 30, 45]],
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página.",
                     "zeroRecords": "No se encontró registro.",
@@ -60,8 +60,10 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 
                 }
             });
-        // },800);
-    })
+        },800);
+    }, function(error){
+    	console.log('error', error);
+    });
 	// , function(error){
     //     console.log('error', error);
     // });

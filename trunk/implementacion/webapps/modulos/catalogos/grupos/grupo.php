@@ -193,7 +193,7 @@
                             <table class="table table-striped table-bordered table-hover"  id="tablaGrupos">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Código de grupo hola</th>
+                                        <th class="text-center">Código de grupo</th>
                                         <th class="text-center">Nombre de grupo</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
