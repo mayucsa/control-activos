@@ -76,59 +76,54 @@ function guardarGrupos($dbcon, $Datos){
 	$status = '1';
 	$conn = $dbcon->conn();
 
-	$sql = "INSERT INTO grupos_usuarios (nombre_gpo, descripcion, estatus_grupo, creado_por, fecha_registro)
-   			 VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
-	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
-	// dd($sql);
-    // dd($Datos);
-	
-	if($qBuilder){
-		$getIdQuery = "SELECT max(cve_grupo) cve_grupo FROM grupos_usuarios WHERE
-			fecha_registro='".$fecha."'
-			AND nombre_gpo= '".$Datos->nombreGrupo."'
-			AND estatus_grupo= ".$status."";
+	$sqlc = "SELECT COUNT(cve_grupo)count, cve_grupo
+			FROM grupos_usuarios gu 
+			WHERE estatus_grupo = 1 AND nombre_gpo  = '.$Datos->nombreGrupo.'";
+	$qBuilderc = $dbcon->qBuilder($conn, 'first', $sqlc);
 
-		$getIdResult = $dbcon->qBuilder($conn, 'first', $getIdQuery);
-		// dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdQuery]);
-		// if ($getIdResult && isset($getIdResult->cve_grupo)) {
-			foreach ($Datos->empleadosCodigo as $i => $equipo) {
-				$sqlDetalle = "	INSERT INTO grupos_usuarios_detalle (cve_grupo, numeroempleado, asignado_por, estatus_gpo_detalle, fecha_asignacion) 
-								VALUES (".$getIdResult->cve_grupo.", ".$equipo->codigoempleado.", ".$Datos->id.", ".$status.", '".$fecha."' ) ";
-				$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sqlDetalle);
-				// dd($sqlDetalle);
-			}
-			dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdResult->cve_grupo, 'nombre'=>$Datos->nombreGrupo]);
-		// 		$sqlDetalle = "INSERT INTO grupos_usuarios_detalle (cve_grupo, numeroempleado, asignado_por, estatus_gpo_detalle, fecha_asignacion)
-		// 			VALUES (".$getIdResult->cve_grupo.", ".$equipo.", ".$Datos->id.", ".$status.", '".$fecha."' )";
-		// 		$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sqlDetalle);
-		// 		// dd($sqlDetalle);
-                
+	if ($qBuilderc->count == 1) {
+		$sql = "UPDATE grupos_usuarios gu  set estatus_grupo=1
+			where nombre_gpo  ='".$Datos->nombreGrupo."'  ";
+		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
-		// 		if(!$qBuilderDetalle){
-		// 			dd(['code'=>300,'msj'=>'Error al crear equipo', 'query'=>$sqlDetalle]);
-		// 		}
+		foreach ($Datos->empleadosCodigo as $i => $equipo) {
+			$sqlDetalle = "	INSERT INTO grupos_usuarios_detalle (cve_grupo, numeroempleado, asignado_por, estatus_gpo_detalle, fecha_asignacion) 
+							VALUES (".$qBuilderc->cve_grupo.", ".$equipo->codigoempleado.", ".$Datos->id.", ".$status.", '".$fecha."' ) ";
+			$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sqlDetalle);
+			// dd($sqlDetalle);
+		}
+		dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$qBuilderc->cve_grupo, 'nombre'=>$Datos->nombreGrupo]);
 
-		// 		// Actualizar la tabla caracteristicas_equipos para establecer estatus_equipo=2
-		// 		// $sql2 = "UPDATE caracteristicas_equipos ce SET ce.estatus_equipo=2
-		// 		// 		WHERE ce.cve_cequipo=".$equipo;
-		// 		// $qBuilder2 = $dbcon->qBuilder($conn, 'do', $sql2);
+	}else{
+		$sql = "INSERT INTO grupos_usuarios (nombre_gpo, descripcion, estatus_grupo, creado_por, fecha_registro)
+				VALUES ('".$Datos->nombreGrupo."','".$Datos->descripcion."', ".$status.", ".$Datos->id.", '".$fecha."' )";
+		$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
+		// dd($sql);
+		// dd($Datos);
+		
+		if($qBuilder){
+			$getIdQuery = "SELECT max(cve_grupo) cve_grupo FROM grupos_usuarios WHERE
+				fecha_registro='".$fecha."'
+				AND nombre_gpo= '".$Datos->nombreGrupo."'
+				AND estatus_grupo= ".$status."";
 
-		// 		// if(!$qBuilder2){
-		// 		// 	dd(['code'=>300,'msj'=>'Error al actualizar equipo', 'query'=>$sql2]);
-		// 		// }
-		// 	}
-
-		// 	dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdResult->cve_grupo]);
-		// } else {
-		// 	dd(['code'=>300,'msj'=>'Error al obtener cve_grupo', 'getIdQuery'=>$getIdQuery]);
-		// }
+			$getIdResult = $dbcon->qBuilder($conn, 'first', $getIdQuery);
+			// dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdQuery]);
+			// if ($getIdResult && isset($getIdResult->cve_grupo)) {
+				foreach ($Datos->empleadosCodigo as $i => $equipo) {
+					$sqlDetalle = "	INSERT INTO grupos_usuarios_detalle (cve_grupo, numeroempleado, asignado_por, estatus_gpo_detalle, fecha_asignacion) 
+									VALUES (".$getIdResult->cve_grupo.", ".$equipo->codigoempleado.", ".$Datos->id.", ".$status.", '".$fecha."' ) ";
+					$qBuilderDetalle = $dbcon->qBuilder($conn, 'do', $sqlDetalle);
+					// dd($sqlDetalle);
+				}
+				dd(['code'=>200,'msj'=>'Carga ok', 'folio'=>$getIdResult->cve_grupo, 'nombre'=>$Datos->nombreGrupo]);
+		}
+		if (!$qBuilder) {
+			die("Error en la consulta: " . mysqli_error($conn));
+		} else {
+			dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
+		}
 	}
-    if (!$qBuilder) {
-        die("Error en la consulta: " . mysqli_error($conn));
-    } else {
-		dd(['code'=>300, 'msj'=>'error al crear folio.', 'sql'=>$sql]);
-	}
-
 }
 
 
