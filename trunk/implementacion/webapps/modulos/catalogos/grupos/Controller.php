@@ -78,7 +78,7 @@ function guardarGrupos($dbcon, $Datos){
 
 	$sqlc = "SELECT COUNT(cve_grupo)count, cve_grupo
 			FROM grupos_usuarios gu 
-			WHERE estatus_grupo = 1 AND nombre_gpo  = '.$Datos->nombreGrupo.'";
+			WHERE estatus_grupo = 0 AND nombre_gpo  = '".$Datos->nombreGrupo."' ";
 	$qBuilderc = $dbcon->qBuilder($conn, 'first', $sqlc);
 
 	if ($qBuilderc->count == 1) {
