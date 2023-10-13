@@ -9,10 +9,10 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	// var miBoton = document.getElementById('miBoton');
 
 	// var relacionArray = {
-	var	listaEmpleado= []
-	var	listaEquipo=[]
-	var	listaFolio= []
-	//  
+	// var	listaEmpleado= []
+	// var	listaEquipo=[]
+	// var	listaFolio= []
+	// //  
 	$scope.productosAgregados = [];
 	$scope.equiposAgregados = [];
 	  
@@ -21,94 +21,8 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 	$scope.botonesHabilitados = {}; // Un objeto para mantener el estado de los botones
 
-	// let cantidadAlmacenada  = contarElementos(relacionArray[listaEmpleado]);
-	// console.log('La cantidadAlmacenada de elementos en el array es:', cantidadAlmacenada);
-	
-	// $scope.agregarEmpleado = function(codigoempleado, nombre) {
-	// 	if (cantidadAlmacenada === 0) {
-	// 		listaEmpleado = [codigoempleado];
-	// 		$scope.nombreEmpleado=nombre;
-	// 	} 
-	// 	else{
-	// 		Swal.fire({
-	// 			title: 'Cambio de empleado.',
-	// 			text: '¿Estas seguro que deseas reemplazar al empleado?',
-	// 			icon: 'warning',
-	// 			showCancelButton: true,
-	// 			confirmButtonColor: 'green',
-	// 			cancelButtonColor: 'red',
-	// 			confirmButtonText: 'Aceptar',
-	// 			cancelButtonText: 'Cancelar'
-	// 		}).then((result )=> {
-				
-	// 			if (result.isConfirmed) {
-	// 				var empleadoExistente = listaEmpleado.find(function(empleado) {
-	// 					return empleado === codigoempleado; });
-					
-	// 				if (codigoempleado/=listaEmpleado){
-	// 					listaEmpleado = [codigoempleado];
-	// 				}
-	// 			}else {return listaEmpleado}
-	// 		})
-			
-	// 	}
-		
-	// 	console.log('esto esta en mi array de empleado', listaEmpleado);
-		
-	// 	// Utiliza la función contarElementos para verificar la cantidad almacenada
-	// 	var cantidadAlmacenada = contarElementos(listaEmpleado);
-	
-	// 	if (cantidadAlmacenada === 0) {
-	// 		listaEmpleado = [codigoempleado];
-	// 	} 
-		
-	// 	// console.log('esto es el array empleado', relacionArray.listaEmpleado);
-	// 	// console.log('esto es el array equipo', relacionArray.listaEquipo);
-	// }
-	// $scope.agregarEmpleadolow = function(codigoempleado, nombre) {
-		
-	// 	// console.log('esto esta en mi array de empleado', listaEmpleado);
-	
-	// 	// Busca si el empleado ya existe en el array
-	// 	var empleadoExistente = listaEmpleado.find(function(empleado) {
-	// 		return empleado !== codigoempleado;
-	// 	});
-	
-	// 	if (empleadoExistente) {
-	// 		Swal.fire({
-	// 			title: 'Cambio de empleado.',
-	// 			text: '¿Estás seguro que deseas reemplazar al empleado?',
-	// 			icon: 'warning',
-	// 			showCancelButton: true,
-	// 			confirmButtonColor: 'green',
-	// 			cancelButtonColor: 'red',
-	// 			confirmButtonText: 'Aceptar',
-	// 			cancelButtonText: 'Cancelar'
-	// 		}).then((result) => {
-	
-	// 			if (result.isConfirmed) {
-	// 				$scope.nombreEmpleado = nombre;
-	// 				// Si el empleado ya existe, reemplázalo
-	// 				var indice = listaEmpleado.indexOf(empleadoExistente);
-	// 				if (indice !== -1) {
-	// 					listaEmpleado[indice] = codigoempleado;
-	// 					$scope.nombreEmpleado = nombre;
-	// 				}
-	// 			} else {
-	// 				return listaEmpleado;
-	// 				// return $scope.nombreEmpleado = nombre;
-	// 			}
-	// 		})
-	// 	} 
-	// 	else {
-	// 		// Si el empleado no existe, agrégalo
-	// 		listaEmpleado = [codigoempleado];
-	// 		$scope.nombreEmpleado = nombre;
-	// 	}
-	// 	console.log('esto es el array empleado', listaEmpleado);
-	// }
-
 // este si va
+// se utiliza para crear un array con el nombre y codigo de empleado
 	$scope.agregarEmpleado = function(codigoempleado, nombre) {
 		console.log('codigo', codigoempleado);
 		console.log('nombre', nombre);
@@ -121,78 +35,20 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.quitaremplado = function(){
 		$scope.nombreEmpleado = '';
 	}
+// hace lo mismo que el fragmento de arriba pero con los grupos
+	$scope.agregarGrupo = function(cve_grupo, nombre_gpo) {
+		console.log('codigo', cve_grupo);
+		console.log('nombre', nombre_gpo);
+		codigoGrupo=cve_grupo;
+		empleado =  codigoGrupo + ' - ' + nombre_gpo;
+		$scope.nombreEmpleado = empleado;
+	}
 
+	// este si va
+	$scope.quitarGrupo = function(){
+		$scope.nombreEmpleado = '';
+	}
 
-	
-	
-
-	// function actualizarTablaEquiposAgregados() {
-	// 	// Puedes utilizar $scope.equiposAgregados para actualizar la tabla en la vista
-	// 	// Por ejemplo, puedes generar dinámicamente filas HTML y agregarlas a la tabla
-	// 	var tablaEquiposAgregados = document.getElementById('tablaEquiposAgregados');
-	// 	tablaEquiposAgregados.innerHTML = ''; // Borra el contenido actual de la tabla
-	
-	// 	// Itera sobre los equipos agregados y crea filas para la tabla
-	// 	$scope.equiposAgregados.forEach(function (equipo) {
-	// 		var fila = '<tr><td>' + equipo.folio + '</td></tr>';
-	// 		tablaEquiposAgregados.innerHTML += fila;
-	// 	});
-	// }
-
-	// $scope.agregarEquipoLow = function(cve_cequipo, folio) {
-	// 	// $scope.equipoEmpleado=listaFolio;
-	// 	// Verifica si el botón ya está deshabilitado
-	// 	if (!$scope.botonesHabilitados[cve_cequipo]) {
-	// 		// Deshabilita el botón
-	// 		$scope.botonesHabilitados[cve_cequipo] = true;
-	// 		var equipoExistente = $scope.equiposAgregados.find(function (equipo) {
-	// 			return equipo.cve_cequipo === cve_cequipo;
-	// 		});
-	
-	// 		if (!equipoExistente) {
-	// 			// Agrega el equipo a la lista de equipos agregados
-	// 			$scope.equiposAgregados.push({
-	// 				// cve_cequipo: cve_cequipo,
-	// 				folio: folio
-	// 			});
-	
-	// 			// Aquí puedes realizar cualquier otra lógica que necesites
-	
-	// 			// Por ejemplo, puedes mostrar los equipos en una tabla en la vista
-	// 			// Actualiza la tabla de equipos agregados en la vista
-	// 			actualizarTablaEquiposAgregados();
-	// 		}
-	
-	// 		// Tu lógica para agregar el equipo aquí
-	// 		console.log('este es el botón', cve_cequipo);
-			
-				
-	
-	// 		var cantidadAlmacenada = contarElementos(listaEquipo);
-	
-	// 		if (cantidadAlmacenada === 0) {
-	// 			listaEquipo = [cve_cequipo];
-	// 			// relacionArray.listaEquipo = [folio];
-	// 		} else {
-	// 			listaEquipo.push(cve_cequipo);
-	// 			// relacionArray.listaEquipo.push(folio);
-	// 		}
-	// 		// if (folio) {
-	// 		var cantidadAlmacenada = contarElementos(listaFolio);
-	
-	// 		if (cantidadAlmacenada === 0) {
-	// 			listaFolio = [folio];
-	// 			// relacionArray.listaFolio = [folio];
-	// 		} else {
-	// 			listaFolio.push(folio);
-	// 			// relacionArray.listaFolio.push(folio);
-	// 		}
-	
-	// 		console.log('esto es el array de folio', listaFolio);
-	// 		console.log('esto es el array de equipo', listaEquipo);
-	// 		console.log('esto es el array de empleado', listaEmpleado);
-	// 	}
-	// };
 
 // este si va
 	$scope.agregarEquipo = function(i) {
@@ -251,8 +107,8 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	// 	$scope.nombre = '';
 	// }
 
+	// trae los codigos de los equipos
 	$scope.getEquipos = function(){
-	// para mostrar el folio de los equipos
 		$http.post('Controller.php', {
 			'task': 'getCaracteristicas'
 		}).then(function(response) {
@@ -292,8 +148,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 	$scope.getEquipos();
 
+	// tabla para traer los datos del empleado
 	$scope.getEmpleados = function(){
-		// tabla para traer los datos del empleado
+		
 		$http.post('Controller.php', {
 			'task': 'getEmpleado'
 		}).then(function(response) {
@@ -355,12 +212,58 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 	}
 
+	// este trae los datos de los grupos
+	$http.post('Controller.php', {
+		'task': 'getGrupos'
+	}).then(function(response)
+	{
+		response = response.data;
+		console.log('getGrupos', response);
+		$scope.gruposVer = response;
+		setTimeout(function(){
+			$('#tablaGrupos').DataTable({
+				"paging": false,
+				"bScrollCollapse": true,
+				"sScrollY": '200px',
+				// "scrollX" '50px'
+				// "processing": true,
+				// "bDestroy": true,
+				// "order": [2, 'desc'],
+				// "lengthMenu": [[5, 20, 30], [5, 20, 30]],
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ registros por página.",
+					"zeroRecords": "No se encontró registro.",
+					"info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+					"infoEmpty": "0 de 0 de 0 registros",
+					"infoFiltered": "(Encontrado de _MAX_ registros)",
+					"search": "Buscar: ",
+					"processing": "Procesando...",
+							"paginate": {
+						"first": "Primero",
+						"previous": "Anterior",
+						"next": "Siguiente",
+						"last": "Último"
+					}
+
+				}
+			});
+		},800);
+	}, function(error){
+		console.log('error', error);
+	});
+
+		
+	
+
 
 
 // 123jas12
 // era para validar si un equipo está asigando, no se puede porque tengo un evento que también está funcionando
 	$scope.GuardarAsignacion = function( ){
-		var codigoempleado = empleado.substring(0, empleado.indexOf(' - '));
+		// la linea de codigo de abajo, 
+		// toma un valor del array y lo guarda en mi array codigoempleado
+		// este valor, comienza en la primera posición (0) hasta que encuentre un guión
+		var codigoempleado  = empleado.substring(0, empleado.indexOf(' - '));
 		console.log("este es una pruea para btener el numero del equipo",arrayEquipoGuardado)
 		console.log("este es el codigo del empleado",$scope.arrayAgregados)
 		if ($scope.nombreEmpleado=='' || $scope.nombreEmpleado==null){
@@ -531,37 +434,15 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		// $scope.numero=cve_equipo;
 		$scope.nombreEliminar = cve_asignacion;
 	}
-	// $http.post('Controller.php', {
-	// 	'task': 'getEquipos'
-	// }).then(function (response){
-	// 	response = response.data;
-	// 	console.log('getEquipos', response);
-	// 	$scope.equipo = response;
-	// },function(error){
-	// 	console.log('error', error);
-	// });
-
-
-// seleccionamos al empleado y nos muestra la clave y su nombre
-	// $http.post('Controller.php', {
-	// 	'task': 'getEmpleado'
-	// }).then(function (response){
-	// 	response = response.data;
-	// 	console.log('getEmpleado', response);
-	// 	$scope.empleado = response;
-	// },function(error){
-	// 	console.log('error', error);
-	// });
-
-
-	// para ver la marca, modelo y descripción al seleccionar un producto
-// 	$http.post('Controller.php', {
-// 		'task': 'getCaracteristicas'
-// 	}).then(function (response){
-// 		response = response.data;
-// 		console.log('getCaracteristicas', response);
-// 		$scope.caracteristicas = response;
-// 	},function(error){
-// 		console.log('error', error);
-// 	});
+	
+	$scope.agregar = function(){
+		
+		if ($scope.nuevogrupo == false) {
+			$scope.nuevogrupo = true
+			$scope.nuevogrupoEmpleado = true
+		}else{
+			$scope.nuevogrupo = false
+			$scope.nuevogrupoEmpleado = false
+		}
+	}
 });

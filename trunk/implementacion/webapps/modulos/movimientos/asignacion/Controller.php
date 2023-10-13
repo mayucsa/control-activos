@@ -28,6 +28,13 @@ function getVercaracteristicas($dbcon){
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+// trae los datos de los grupos
+function getGrupos($dbcon){
+	$sql = "SELECT cve_grupo, nombre_gpo, descripcion, fecha_registro  
+			from grupos_usuarios gu; ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
 
 
 // Ahora tienes un array de consultas que puedes utilizar
@@ -143,6 +150,9 @@ switch ($tarea) {
 
 	case 'getEmpleado':
 		getEmpleado($dbcon);
+		break;
+	case 'getGrupos':
+		getGrupos($dbcon);
 		break;
 	case 'getCaracteristicas':
 		getCaracteristicas($dbcon);
