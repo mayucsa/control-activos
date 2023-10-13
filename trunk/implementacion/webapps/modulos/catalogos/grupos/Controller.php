@@ -52,6 +52,8 @@ function validaExistenciaEmpleados ($dbcon, $Datos){
     	dd(['code'=>200,'msj'=>'Carga ok']);
     }
 }
+// actualiza el estado del grupo a 0 y si 
+// aun contiene usuarios su estado los actualiza a 0 tambien
 function eliminarGrupo ($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$status = '0';
@@ -76,11 +78,14 @@ function guardarGrupos($dbcon, $Datos){
 	$status = '1';
 	$conn = $dbcon->conn();
 
+// hace un conteo en la base datos y trae el dato seleccionado si se cumpla 
+// el where
 	$sqlc = "SELECT COUNT(cve_grupo)count, cve_grupo
 			FROM grupos_usuarios gu 
 			WHERE estatus_grupo = 0 AND nombre_gpo  = '".$Datos->nombreGrupo."' ";
 	$qBuilderc = $dbcon->qBuilder($conn, 'first', $sqlc);
-
+// si la condición se cumple entonces actualiza la tabla 
+// e inserta los nuevos usuarios al grupo
 	if ($qBuilderc->count == 1) {
 		$sql = "UPDATE grupos_usuarios gu  set estatus_grupo=1
 			where nombre_gpo  ='".$Datos->nombreGrupo."'  ";
