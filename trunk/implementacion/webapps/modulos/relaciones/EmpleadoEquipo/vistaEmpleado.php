@@ -133,6 +133,46 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">RELACIÓN DE LOS EQUIPOS DE COMPUTO</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div> 
+                </div>
+                <div class="card-footer">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaRelacion">
+                            <thead>
+                                <tr>
+                                    <th>Código Empleado</th>
+                                    <th>Nombre</th>
+                                    <th>apellidos</th>
+                                    <th>Equipos Relacionados</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(i, obj) in verRelaciones ">
+                                    <td class="text-center">{{obj.codigoempleado}}</td>
+                                    <td class="text-center">{{obj.nombre}}</td>
+                                    <td class="text-center">{{obj.apellidos}}</td>
+                                    <td class="text-center">
+                                            <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultar(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposUsuario">
+                                            </button>
+                                       </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
     <?php include_once "../../footer.php" ?>
 </main>
 </div>

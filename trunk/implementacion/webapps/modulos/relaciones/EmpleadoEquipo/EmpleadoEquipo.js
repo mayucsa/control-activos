@@ -1,6 +1,7 @@
 app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     $scope.checkh = '';
 	$scope.mantenimiento = '';
+    
 	$scope.eliminarRelacion=function(cve_cequipo){
         console. log('debe traer el dato de cve_cequipo', cve_cequipo)
         Swal.fire({ 
