@@ -1,7 +1,19 @@
 app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     $scope.checkh = '';
 	$scope.mantenimiento = '';
-    
+    $scope.nuevogrupo= "";
+
+    $scope.agregar = function(){
+		
+		if ($scope.nuevogrupo == false) {
+			$scope.nuevogrupo = true
+			// $scope.nuevogrupoEmpleado = true
+		}else{
+			$scope.nuevogrupo = false
+			// $scope.nuevogrupoEmpleado = false
+		}
+	}
+
 	$scope.eliminarRelacion=function(cve_cequipo){
         console. log('debe traer el dato de cve_cequipo', cve_cequipo)
         Swal.fire({ 
@@ -136,5 +148,38 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
         console.log('error', error);
     });
 	
+    $http.post('Controller.php', {
+        'task': 'getRelacionGrupos'
+    }).then(function(response) {
+        response = response.data;
+        console.log('verRelaciones', response);
+        $scope.verGrupos = response;
+        setTimeout(function(){
+            $('#tablaRelacion').DataTable({
+                "processing": true,
+                "bDestroy": true,
+                // "order": [5, 'desc'],
+                "lengthMenu": [[15, 30, 45], [15, 30, 45]],
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página.",
+                    "zeroRecords": "No se encontró registro.",
+                    "info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+                    "infoEmpty": "0 de 0 de 0 registros",
+                    "infoFiltered": "(Encontrado de _MAX_ registros)",
+                    "search": "Buscar: ",
+                    "processing": "Procesando...",
+                            "paginate": {
+                        "first": "Primero",
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "last": "Último"
+                    }
+
+                }
+            });
+        },800);
+    }, function(error){
+        console.log('error', error);
+    });
 
 });

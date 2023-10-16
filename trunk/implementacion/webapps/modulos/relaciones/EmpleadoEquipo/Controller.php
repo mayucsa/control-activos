@@ -16,6 +16,13 @@ function getRelacionEmpleados ($dbcon){
     dd($datos);
 }
 
+function getRelacionGrupos ($dbcon){
+	$sql = "SELECT cun.nombre ,CONCAT(cun.apellidopaterno, ' ', cun.apellidomaterno) apellidos, ae.codigoempleado
+    FROM asignacion_equipo ae 
+    inner join cat_usuario_nomina cun on cun.codigoempleado =ae.codigoempleado ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
 function getRelacionEquipos ($dbcon, $Datos){
 	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ae.codigoempleado, marca, modelo, ce2.nombre_equipo, aed.fecha_asignacion
     from asignacion_equipo_detalle aed
@@ -60,6 +67,9 @@ if ($tarea == '') {
 switch ($tarea) {
     case 'getRelacionEmpleados':
         getRelacionEmpleados($dbcon);
+    break; 
+    case 'getRelacionGrupos':
+        getRelacionGrupos($dbcon);
     break; 
     case 'getRelacionEquipos':
         getRelacionEquipos($dbcon, $objDatos);
