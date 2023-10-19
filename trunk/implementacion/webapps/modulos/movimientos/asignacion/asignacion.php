@@ -1,15 +1,23 @@
 <?php
     include_once "../../superior.php";
 ?>
-         <head>
-            <title>Caracteristicas de los equipos</title>
 
-            <link rel="stylesheet" type="text/css" href="../../../includes/css/adminlte.min.css">
-            <link rel="stylesheet" href="../../../includes/css/data_tables_css/jquery.dataTables.min.css">
-            <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
-        </head>
+
+
+<head>
+    <title>Caracteristicas de los equipos</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../includes/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../../includes/css/data_tables_css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="../../../includes/css/ajustesJasiel.css">
+
+
+</head>
+
 
 <div ng-controller="vistaAsignacion">
+    
     <div class="modal fade bd-example-modal-lg " id="verModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
@@ -107,10 +115,11 @@
                                 <label>Selecciona una opción..</label>
                             </div>
                             <div class="col-lg-12 d-lg-flex">
-                                <button type="button" class="btn btn-info btn-sm" ng-disabled="empleados == true" ng-click="agregar()">Empleados</button>
-                                <button type="button" class="btn btn-info btn-sm" ng-disabled="empleados == false" ng-click="agregar()">Grupos</button>
-                                <div class="menu">
-                                    <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == true" ng-click="agregar()">Empleados</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == false" ng-click="agregar()">Grupos</button>
+                                <button type="button" class="btn btn-success btn-sm derecho" style="derecho" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
+                                <div class="">
+                                    <button type="button" class="btn btn-success btn-sm derecho" ng-click="guardarGrupo(obj.codigo)">Guardar jjnjjj Grupo</button>
                                 </div>
                             </div>
                             <!-- <div class="col-lg-12 d-lg-flex">
