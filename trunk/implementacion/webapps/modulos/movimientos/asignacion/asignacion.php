@@ -7,30 +7,6 @@
             <link rel="stylesheet" type="text/css" href="../../../includes/css/adminlte.min.css">
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/jquery.dataTables.min.css">
             <link rel="stylesheet" href="../../../includes/css/data_tables_css/buttons.dataTables.min.css">
-
-            <style type="text/css">
-                body{
-                    background-color: #f7f6f6;
-                }
-                table thead{
-                    background-color: #1A4672;
-                    color:  white;
-                }
-                .fixedTable tbody{
-                    display: block;
-                    height:400px;
-                    overflow-y:auto;
-                }
-                .fixedTable thead, tbody, tr{
-                    display: table;
-                    width: 100%;
-                    table-layout: fixed;
-                }
-                .fixedTable thead{
-                    width: calc( 100% - 1em )
-                }
-            </style>
-
         </head>
 
 <div ng-controller="vistaAsignacion">
@@ -118,7 +94,7 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
               <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-              <li class="breadcrumb-item"><a href="asignacion.php"> Relación de los equipos</a></li>
+              <li class="breadcrumb-item"><a href="asignacion.php"> Asignación</a></li>
             </ul>
         </div>
         <!-- <div class="container"> -->
@@ -127,19 +103,30 @@
                 <div class="tile">
                     <div class="card card-info">
                         <div class="card-body">
-                            <button type="button" class="btn btn-success btn-sm" ng-show="nuevogrupo == false" ng-click="agregar()">Nuevo Grupo</button>
-                            <button type="button" class="btn btn-danger btn-sm" ng-show="nuevogrupo == true" ng-click="agregar()">Regresar</button>
-                            <button type="button" class="btn btn-success btn-sm" ng-show="nuevogrupo == true" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
+                            <div class="col-lg-12 d-lg-flex">
+                                <label>Selecciona una opción..</label>
+                            </div>
+                            <div class="col-lg-12 d-lg-flex">
+                                <button type="button" class="btn btn-info btn-sm" ng-disabled="empleados == true" ng-click="agregar()">Empleados</button>
+                                <button type="button" class="btn btn-info btn-sm" ng-disabled="empleados == false" ng-click="agregar()">Grupos</button>
+                                <div class="menu">
+                                    <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-12 d-lg-flex">
+                                <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
+                            </div> -->
+                            <!-- <button type="button" class="btn btn-info btn-sm" ng-show="empleados == true" ng-click="agregar()">Grupos</button> -->
+                            
                         </div>
-        
+            
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-
             <div class="col-md-6">                    
-                <div class="tile">
+                <div class="tile" ng-model="empleados" id="empleados" ng-show="empleados == true">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">EMPLEADOS </h3>
@@ -150,25 +137,21 @@
                             </div>
                         </div>
                         <div class="card-body">
-
-                        <!-- ESTTE CÓDIGO COMENTADO SERVIRÁ MÁS ADELANTE SI SE QUOERE AGREGAR LOS GRUPOS DE PERSONAS -->
-                        
-                            
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover"  id="tablaEmpleado">
+                                <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaEmpleado">
                                     <thead>
                                         <tr>
-                                            <th>Código de empleado</th>
-                                            <th>Nombre de empleado</th>
-                                            <th>Opciones</th>
+                                            <th class="text-center">Número de empleado</th>
+                                            <th class="text-center">Nombre de empleado</th>
+                                            <th class="text-center">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="(i, obj) in empleado ">
                                             <td class="text-center">{{obj.codigoempleado}}</td>
-                                            <td >{{obj.nombre}}</td>
+                                            <td class="text-center">{{obj.nombre}}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre)">Seleccionar</button>
+                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado)">Seleccionar</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -177,10 +160,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- esto es una tabla para grupos -->
-            <div class="col-md-6"> 
-                <div class="tile">
+                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == false">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">GRUPOS </h3>
@@ -191,22 +171,21 @@
                             </div>
                         </div>
                         <div class="card-body">
-                        <!-- <button type="button" class="btn btn-success btn-sm" ng-click="agregarGrupo(obj.codigoempleado, obj.nombre)">Seleccionar</button> -->
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover"  id="tablaGrupos">
-                                        <thead>
-                                            <tr>
-                                                <th>Código de empleado</th>
-                                                <th>Nombre de empleado</th>
-                                                <th>Descripcion</th>
-                                                <th>Opciones</th>
-                                            </tr>
-                                        </thead>
+                                <table class="table table-striped table-bordered table-hover" style="width: 100%;" id="tablaGrupos">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Nombre de grupo</th>
+                                            <th>Descripcion</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr ng-repeat="(i, obj) in gruposVer ">
                                             <td class="text-center">{{obj.cve_grupo}}</td>
-                                            <td >{{obj.nombre_gpo}}</td>
-                                            <td >{{obj.descripcion}}</td>
+                                            <td class="text-center">{{obj.nombre_gpo}}</td>
+                                            <td class="text-center">{{obj.descripcion}}</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-success btn-sm" ng-click="agregarGrupo(obj.cve_grupo, obj.nombre_gpo)">Seleccionar</button>
                                             </td>
@@ -233,7 +212,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover w-100 shadow" id="tablaProducto">
+                                <table class="table table-striped table-bordered table-hover w-100 shadow" style="width: 100%;" id="tablaProducto">
                                     <thead>
                                         <tr>
                                             <th>Folio</th>

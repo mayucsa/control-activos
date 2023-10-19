@@ -1,6 +1,8 @@
 app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.codigo = '';
 	$scope.nombre = '';
+	$scope.empleados= "";
+	// $scope.grupos= "";
 
 	$scope.nombreEmpleado = '';
 
@@ -20,6 +22,16 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		return array.length;
 	}
 	$scope.botonesHabilitados = {}; // Un objeto para mantener el estado de los botones
+
+	$scope.agregar = function(){
+		if ($scope.empleados == false) {
+			$scope.empleados = true
+			$scope.grupos = true
+		}else{
+			$scope.empleados = false
+			$scope.grupos = false
+		}
+	}
 
 // este si va
 // se utiliza para crear un array con el nombre y codigo de empleado
@@ -149,7 +161,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.getEquipos();
 
 	// tabla para traer los datos del empleado
-	$scope.getEmpleados = function(){
+	// $scope.getEmpleados = function(){
 		
 		$http.post('Controller.php', {
 			'task': 'getEmpleado'
@@ -175,12 +187,12 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 						"infoFiltered": "(Encontrado de _MAX_ registros)",
 						"search": "Buscar: ",
 						"processing": "Procesando...",
-								"paginate": {
-							"first": "Primero",
-							"previous": "Anterior",
-							"next": "Siguiente",
-							"last": "Último"
-						}
+						// 		"paginate": {
+						// 	"first": "Primero",
+						// 	"previous": "Anterior",
+						// 	"next": "Siguiente",
+						// 	"last": "Último"
+						// }
 
 					}
 				});
@@ -189,9 +201,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			console.log('error', error);
 		});
 		
-	}
+	// }
 	// este linea llama a la funcion para que muestre todos los empleados
-	$scope.getEmpleados();
+	// $scope.getEmpleados();
 	
 
 	$scope.validaEquipo = function () {
@@ -215,8 +227,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	// este trae los datos de los grupos
 	$http.post('Controller.php', {
 		'task': 'getGrupos'
-	}).then(function(response)
-	{
+	}).then(function(response)	{
 		response = response.data;
 		console.log('getGrupos', response);
 		$scope.gruposVer = response;
@@ -435,14 +446,4 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		$scope.nombreEliminar = cve_asignacion;
 	}
 	
-	$scope.agregar = function(){
-		
-		if ($scope.nuevogrupo == false) {
-			$scope.nuevogrupo = true
-			$scope.nuevogrupoEmpleado = true
-		}else{
-			$scope.nuevogrupo = false
-			$scope.nuevogrupoEmpleado = false
-		}
-	}
 });
