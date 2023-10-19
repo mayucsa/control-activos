@@ -99,9 +99,9 @@
             <div class="tile">
                 <div class="card card-info">
                     <div class="card-body">
-                        <button type="button" class="btn btn-success btn-sm" ng-show="nuevogrupo == false" ng-click="agregar()">Ver grupos</button>
-                        <button type="button" class="btn btn-danger btn-sm" ng-show="nuevogrupo == true" ng-click="agregar()">Ver empleados</button>
-                        <!-- <button type="button" class="btn btn-success btn-sm" ng-show="nuevogrupo == true" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button> -->
+                        <button type="button" class="btn btn-success btn-sm" ng-show="cambioVista == false" ng-click="agregar()">Ver grupos</button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-show="cambioVista == true" ng-click="agregar()">Ver empleados</button>
+                        <!-- <button type="button" class="btn btn-success btn-sm" ng-show="cambioVista == true" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button> -->
                     </div>
         
                 </div>
@@ -111,7 +111,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="tile" ng-model="nuevogrupo" id="nuevogrupo" ng-show="nuevogrupo == false">
+            <div class="tile" ng-model="cambioVista" id="cambioVista" ng-show="cambioVista == false">
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Relación de empleados</h3>
@@ -153,7 +153,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="tile" ng-model="nuevogrupo" id="nuevogrupo" ng-show="nuevogrupo == true">
+            <div class="tile" ng-model="cambioVista" id="cambioVista" ng-show="cambioVista == true">
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Relacion de grupos</h3>

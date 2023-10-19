@@ -1,16 +1,16 @@
 app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     $scope.checkh = '';
 	$scope.mantenimiento = '';
-    $scope.nuevogrupo= "";
+    $scope.cambioVista= "";
 
     $scope.agregar = function(){
 		
-		if ($scope.nuevogrupo == false) {
-			$scope.nuevogrupo = true
-			// $scope.nuevogrupoEmpleado = true
+		if ($scope.cambioVista == false) {
+			$scope.cambioVista = true
+			// $scope.cambioVistaEmpleado = true
 		}else{
-			$scope.nuevogrupo = false
-			// $scope.nuevogrupoEmpleado = false
+			$scope.cambioVista = false
+			// $scope.cambioVistaEmpleado = false
 		}
 	}
 
