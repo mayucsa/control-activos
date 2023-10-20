@@ -2,6 +2,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.codigo = '';
 	$scope.nombre = '';
 	$scope.empleados= "";
+	$scope.btneg = "";
 	// agregarEquipo
 	
 
@@ -28,6 +29,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			$scope.grupos = false
 		}
 	}
+	$scope.agregari = function(){
+		console.log('valor', $scope.btneg);
+	}
 
 // este si va
 // se utiliza para crear un array con el nombre y codigo de empleado
@@ -45,6 +49,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 // hace lo mismo que el fragmento de arriba pero con los grupos
 	$scope.agregarGrupo = function(cve_grupo, nombre_gpo) {
+		// console.log('valor boton', value);
 		console.log('codigo', cve_grupo);
 		console.log('nombre', nombre_gpo);
 		codigoGrupo=cve_grupo;
@@ -87,7 +92,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 	// se encuentra en el botón de quitar
 // esta función se encuentra en el div que aparece una vez que escoges al empleado y al producto
-productosAgregados
+
 	$scope.eliminarEquipoAgregado = function(i){
 		console.log("codigo",$scope.arrayAgregados);
 		console.log("todo",$scope.productosAgregados);
@@ -120,6 +125,7 @@ productosAgregados
 		// $scope.arrayAgregados.splice(i, 1);
 		$scope.productosAgregados.splice(i, 1);
 		$scope.arrayAgregados.splice(i, 1);
+		$scope.$apply();
 	}
 
 	// $scope.limpiarCampos = function(){

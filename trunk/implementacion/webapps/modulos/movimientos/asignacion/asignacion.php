@@ -115,9 +115,9 @@
                                 <label>Selecciona una opción..</label>
                             </div>
                             <div class="col-lg-12 d-lg-flex">
-                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == false" ng-click="agregar()">Empleados</button>
-                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == true" ng-click="agregar()">Grupos</button>
-                                <button type="button" class="btn btn-success btn-sm derecho"  ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-model="btneg" id="btneg" ng-disabled="empleados == false" value="A" ng-click="agregar()">Empleados</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-model="btneg" id="btneg" ng-disabled="empleados == true"  value="B" ng-click="agregar()">Grupos</button>
+                                <!-- <button type="button" class="btn btn-success btn-sm derecho"  ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button> -->
                             </div>
                             <!-- <div class="col-lg-12 d-lg-flex">
                                 <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
@@ -194,7 +194,7 @@
                                             <td class="text-center">{{obj.nombre_gpo}}</td>
                                             <td class="text-center">{{obj.descripcion}}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarGrupo(obj.cve_grupo, obj.nombre_gpo)">Seleccionar</button>
+                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarGrupo(obj.cve_grupo, obj.nombre_gpo)">Seleccionar grupo</button>
                                             </td>
                                         </tr>
                                     </tbody>
