@@ -17,7 +17,7 @@
 
 
 <div ng-controller="vistaAsignacion">
-    
+
     <div class="modal fade bd-example-modal-lg " id="verModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
@@ -115,12 +115,9 @@
                                 <label>Selecciona una opción..</label>
                             </div>
                             <div class="col-lg-12 d-lg-flex">
-                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == true" ng-click="agregar()">Empleados</button>
-                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == false" ng-click="agregar()">Grupos</button>
-                                <button type="button" class="btn btn-success btn-sm derecho" style="derecho" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
-                                <div class="">
-                                    <button type="button" class="btn btn-success btn-sm derecho" ng-click="guardarGrupo(obj.codigo)">Guardar jjnjjj Grupo</button>
-                                </div>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == false" ng-click="agregar()">Empleados</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-disabled="empleados == true" ng-click="agregar()">Grupos</button>
+                                <button type="button" class="btn btn-success btn-sm derecho"  ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
                             </div>
                             <!-- <div class="col-lg-12 d-lg-flex">
                                 <button type="button" class="btn btn-success btn-sm" ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button>
@@ -133,9 +130,10 @@
                 </div>
             </div>
         </div>
+        <!-- trae la tabla de empleados para seleccionar -->
         <div class="row">
             <div class="col-md-6">                    
-                <div class="tile" ng-model="empleados" id="empleados" ng-show="empleados == true">
+                <div class="tile" ng-model="empleados" id="empleados" ng-show="empleados == false">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">EMPLEADOS </h3>
@@ -160,7 +158,7 @@
                                             <td class="text-center">{{obj.codigoempleado}}</td>
                                             <td class="text-center">{{obj.nombre}}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado)">Seleccionar</button>
+                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre)">Seleccionar</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -169,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == false">
+                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">GRUPOS </h3>
@@ -266,7 +264,7 @@
                                 <div class="col-lg-12 d-lg-flex">
                                     <div style="width: 50%;" class="form-floating mx-1">
                                         <input type="text" ng-model="nombreEmpleado" id="nombreEmpleado" name="nombreEmpleado" class="form-control form-control-md text-center" value={{obj.codigoempleado}}  disabled >
-                                        <label>nombre de empleadojjjj</label>
+                                        <label>nombre de empleado</label>
                                     </div>
                                     <!-- <input type="button" class="btn btn-danger"> -->
                                         <button type="button" class="btn btn-danger fas fa-trash-alt" title="Quitar empleado" ng-click="quitaremplado()"></button>
@@ -297,7 +295,7 @@
                                             <td>{{obj.modelo}}</td>
                                             <td nowrap="nowrap" class="text-center">
                                                 <button class="btn btn-danger" ng-click="eliminarEquipoAgregado(i)">
-                                                    Quitar 
+                                                    Quitar jeje
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>

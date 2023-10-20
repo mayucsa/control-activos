@@ -19,6 +19,7 @@ function getProduccion($dbcon){
     dd($datos);
 }
 
+
 // me sirve para mostrar en la pantalla de caracteristicas 
 // todas las caracteristicas que se han puesto a los equipos
 function getVercaracteristicas($dbcon){
@@ -28,6 +29,7 @@ function getVercaracteristicas($dbcon){
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+
 // trae los datos de los grupos
 function getGrupos($dbcon){
 	$sql = "SELECT cve_grupo, nombre_gpo, descripcion, fecha_registro  
@@ -117,16 +119,16 @@ function getCaracteristicas ($dbcon){
     dd($datos);
 }
 // para traer la marca, modelo y descripción para el modal de asignación
-function getMarca($dbcon, $Datos){
-	$conn = $dbcon->conn();
-	$sql = "	SELECT *
-				FROM caracteristicas_equipos ce
-				WHERE cve_cequipo = ".$Datos->nombre."  " ;
-	$marca = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-	dd($marca);
+// function getMarca($dbcon, $Datos){
+// 	$conn = $dbcon->conn();
+// 	$sql = "	SELECT *
+// 				FROM caracteristicas_equipos ce
+// 				WHERE cve_cequipo = ".$Datos->nombre."  " ;
+// 	$marca = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+// 	dd($marca);
 
 	
-}
+// }
 
 include_once "../../../dbconexion/conn.php";
 $dbcon	= 	new MysqlConn;
@@ -160,9 +162,9 @@ switch ($tarea) {
 	// case 'getProducto':
 	// 	getProducto($dbcon);
 	// 	break;
-	case 'getMarca':
-		getMarca($dbcon,$objDatos );
-		break;
+	// case 'getMarca':
+	// 	getMarca($dbcon,$objDatos );
+	// 	break;
         
 	case 'getProduccion':
 		getProduccion($dbcon);

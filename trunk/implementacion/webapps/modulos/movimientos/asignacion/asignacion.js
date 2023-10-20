@@ -2,21 +2,17 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.codigo = '';
 	$scope.nombre = '';
 	$scope.empleados= "";
-	// $scope.grupos= "";
+	// agregarEquipo
+	
 
 	$scope.nombreEmpleado = '';
 
 	$scope.arrayAgregados = [];
 	var arrayEquipoGuardado = $scope.arrayAgregados;
-	// var miBoton = document.getElementById('miBoton');
-
-	// var relacionArray = {
-	// var	listaEmpleado= []
-	// var	listaEquipo=[]
-	// var	listaFolio= []
-	// //  
+	 
 	$scope.productosAgregados = [];
 	$scope.equiposAgregados = [];
+	
 	  
 	function contarElementos(array) {
 		return array.length;
@@ -89,8 +85,13 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 			} console.log("este es un array agregado",$scope.arrayAgregados)
 		}
 	}
-	// este si va
+	// se encuentra en el botón de quitar
+// esta función se encuentra en el div que aparece una vez que escoges al empleado y al producto
+productosAgregados
 	$scope.eliminarEquipoAgregado = function(i){
+		console.log("codigo",$scope.arrayAgregados);
+		console.log("todo",$scope.productosAgregados);
+
 		Swal.fire({
 		  title: 'Eliminar Equipo',
 		  text: '¿Realmente deseas eliminar '+$scope.productosAgregados[i].nombre_equipo+'?',
@@ -102,16 +103,23 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		  cancelButtonText: 'Cancelar'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			$scope.$apply(function(){
-				$scope.quitarProducto(i);
-			}, 2000)
+			$scope.quitarProducto(i);
+			// $scope.$apply(function(){
+			// 	$scope.quitarProducto(i);
+			// }, 2000)
 		    
 		  }
 		});
 	}
+
+	// esta función quita el producto que queremos guardar
+	// se puede ver en la tabla de asignación
 	$scope.quitarProducto = function(i){
-		$scope.arrayAgregados.splice(i, 1);
+		// console.log(quitarProducto);
+		// console.log(arrayAgregados);
+		// $scope.arrayAgregados.splice(i, 1);
 		$scope.productosAgregados.splice(i, 1);
+		$scope.arrayAgregados.splice(i, 1);
 	}
 
 	// $scope.limpiarCampos = function(){
@@ -206,23 +214,25 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	// $scope.getEmpleados();
 	
 
-	$scope.validaEquipo = function () {
+	// $scope.validaEquipo = function () {
 
-		$http.post('Controller.php', {
-			'task': 'getMarca',
-			'nombre': $scope.nombre
-		}).then(function (response){
-			response = response.data;
-			// // console.log('getMarca', response[0].marca);
-			// console.log('getPresentacion', response[0].presentacion);
-			$scope.marca = response[0].marca;
-			$scope.modelo = response[0].modelo;
-			$scope.descripcion = response[0].descripcion;
-		}, function(error){
-			console.log('error', error);
-		})
+	// 	$http.post('Controller.php', {
+	// 		'task': 'getMarca',
+	// 		'nombre': $scope.nombre
+			
+	// 	}).then(function (response){
+	// 		response = response.data;
+	// 		console.log(getMarca);
+	// 		// // console.log('getMarca', response[0].marca);
+	// 		// console.log('getPresentacion', response[0].presentacion);
+	// 		$scope.marca = response[0].marca;
+	// 		$scope.modelo = response[0].modelo;
+	// 		$scope.descripcion = response[0].descripcion;
+	// 	}, function(error){
+	// 		console.log('error', error);
+	// 	})
 
-	}
+	// }
 
 	// este trae los datos de los grupos
 	$http.post('Controller.php', {
@@ -356,56 +366,57 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	}
 
 
-	$scope.eliminarAsignacion = function (cve_cequipo) {
+	// $scope.eliminarAsignacion = function (cve_cequipo) {
 
-		Swal.fire({
-			title: 'Estás a punto de eliminar esta asignación.',
-			text: '¿Es correcta la información agregada?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: 'green',
-			cancelButtonColor: 'red',
-			confirmButtonText: 'Aceptar',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				jsShowWindowLoad('Capturando caracteristicas...');
+	// 	Swal.fire({
+	// 		title: 'Estás a punto de eliminar esta asignación.',
+	// 		text: '¿Es correcta la información agregada?',
+	// 		icon: 'warning',
+	// 		showCancelButton: true,
+	// 		confirmButtonColor: 'green',
+	// 		cancelButtonColor: 'red',
+	// 		confirmButtonText: 'Aceptar',
+	// 		cancelButtonText: 'Cancelar'
+	// 	}).then((result) => {
+	// 		if (result.isConfirmed) {
+	// 			jsShowWindowLoad('Capturando caracteristicas...');
 				
-				$http.post('Controller.php', {
-					'task': 'eliminarAsignacion',
-					'id': ID,
-					'nombreEliminar': cve_cequipo
-				}).then(function(response){
-					response = response.data;
-					// console.log('response', response);
-					jsRemoveWindowLoad();
-					if (response.code == 200) {
-						Swal.fire({
-						  title: '¡Éxito!',
-						  html: 'Su asignación de equipo se generó correctamente',
-						  icon: 'success',
-						  showCancelButton: false,
-						  confirmButtonColor: 'green',
-						  confirmButtonText: 'Aceptar'
-						}).then((result) => {
-						  if (result.isConfirmed) {
-							  location.reload();
-						  }else{
-							  location.reload();
-						  }
-						});
-					}else{
-						alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
-					}
-				}, function(error){
-					console.log('error', error);
-					jsRemoveWindowLoad();
-				})
-			}
-		});
+	// 			$http.post('Controller.php', {
+	// 				'task': 'eliminarAsignacion',
+	// 				'id': ID,
+	// 				'nombreEliminar': cve_cequipo
+	// 			}).then(function(response){
+	// 				response = response.data;
+	// 				// console.log('response', response);
+	// 				jsRemoveWindowLoad();
+	// 				if (response.code == 200) {
+	// 					Swal.fire({
+	// 					  title: '¡Éxito!',
+	// 					  html: 'Su asignación de equipo se generó correctamente',
+	// 					  icon: 'success',
+	// 					  showCancelButton: false,
+	// 					  confirmButtonColor: 'green',
+	// 					  confirmButtonText: 'Aceptar'
+	// 					}).then((result) => {
+	// 					  if (result.isConfirmed) {
+	// 						  location.reload();
+	// 					  }else{
+	// 						  location.reload();
+	// 					  }
+	// 					});
+	// 				}else{
+	// 					alert('Error en controlador. \nFavor de ponerse en contacto con el administrador del sitio.');
+	// 				}
+	// 			}, function(error){
+	// 				console.log('error', error);
+	// 				jsRemoveWindowLoad();
+	// 			})
+	// 		}
+	// 	});
 
-	}
-	$scope.verEquipo=function(marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento){
+	// }
+
+	// $scope.verEquipo=function(marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento){
 		// $http.post('Controller.php', {
 		// 	'task': 'getMarca'
 		// }).then(function (response){
@@ -419,31 +430,31 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		// });
 		// $scope.verNumeroE = cve_cequipo;
 		// $scope.verEquipo = nombre_equipo;
-		$scope.verMarca = marca;
-		$scope.verModelo=modelo;
-		$scope.verDescripcion = descripcion;
-		$scope.verNumeroSerie = numero_serie;
-		$scope.verNumeroFactura= numero_factura;
+		// $scope.verMarca = marca;
+		// $scope.verModelo=modelo;
+		// $scope.verDescripcion = descripcion;
+		// $scope.verNumeroSerie = numero_serie;
+		// $scope.verNumeroFactura= numero_factura;
 		// $scope.verFactura=numero_factura;
 		
-		$scope.verSistemaOperativo = sistema_operativo;
-		$scope.verProcesador = procesador;
-		$scope.verVelocidadProcesador=vel_procesador;
-		$scope.verMemoriaRam = memoria_ram;
-		$scope.verTipoAlmacenamiento = tipo_almacenamiento;
-		$scope.verCapaAlmacenamiento=capacidad_almacenamiento;
+		// $scope.verSistemaOperativo = sistema_operativo;
+		// $scope.verProcesador = procesador;
+		// $scope.verVelocidadProcesador=vel_procesador;
+		// $scope.verMemoriaRam = memoria_ram;
+		// $scope.verTipoAlmacenamiento = tipo_almacenamiento;
+		// $scope.verCapaAlmacenamiento=capacidad_almacenamiento;
 		// $scope.verRegistro=fecha_ingreso;
 
-	}
+	// }
 
-	$scope.consultar = function (cve_asignacion ,nombrecompleto) {
-		// $scope.numero=cve_equipo;
-		$scope.numeroAsignacion = cve_asignacion;
-		$scope.nombreEmpleado = nombrecompleto;
-	}
-	$scope.consultarEliminar = function (cve_asignacion) {
-		// $scope.numero=cve_equipo;
-		$scope.nombreEliminar = cve_asignacion;
-	}
+	// $scope.consultar = function (cve_asignacion ,nombrecompleto) {
+	// 	// $scope.numero=cve_equipo;
+	// 	$scope.numeroAsignacion = cve_asignacion;
+	// 	$scope.nombreEmpleado = nombrecompleto;
+	// }
+	// $scope.consultarEliminar = function (cve_asignacion) {
+	// 	// $scope.numero=cve_equipo;
+	// 	$scope.nombreEliminar = cve_asignacion;
+	// }
 	
 });

@@ -13,6 +13,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
 			// $scope.cambioVistaEmpleado = false
 		}
 	}
+    console.log(getMarca);
 
 	$scope.eliminarRelacion=function(cve_cequipo){
         console. log('debe traer el dato de cve_cequipo', cve_cequipo)
