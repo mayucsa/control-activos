@@ -3,6 +3,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.nombre = '';
 	$scope.empleados= "";
 	$scope.btneg = "";
+	$scope.valueEmpleado="";
+	// $scope.valueEmpleado="B";
+
 	// agregarEquipo
 	
 
@@ -19,7 +22,10 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		return array.length;
 	}
 	$scope.botonesHabilitados = {}; // Un objeto para mantener el estado de los botones
-
+	$scope.valor=function(){
+		$scope.value="B"
+		console.log('codigo', $scope.value);
+	}
 	$scope.agregar = function(){
 		if ($scope.empleados == false) {
 			$scope.empleados = true
@@ -38,9 +44,12 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.agregarEmpleado = function(codigoempleado, nombre) {
 		console.log('codigo', codigoempleado);
 		console.log('nombre', nombre);
+		
 		codigoempleado=codigoempleado;
 		empleado =  codigoempleado + ' - ' + nombre;
 		$scope.nombreEmpleado = empleado;
+		$scope.valueEmpleado="A"
+		console.log('valor', $scope.valueEmpleado);
 	}
 
 	// este si va
@@ -55,6 +64,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		codigoGrupo=cve_grupo;
 		empleado =  codigoGrupo + ' - ' + nombre_gpo;
 		$scope.nombreEmpleado = empleado;
+		$scope.valueEmpleado="B"
+		console.log('valor', $scope.valueEmpleado);
+
 	}
 
 	// este si va
@@ -293,6 +305,9 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		var codigoempleado  = empleado.substring(0, empleado.indexOf(' - '));
 		console.log("este es una pruea para btener el numero del equipo",arrayEquipoGuardado)
 		console.log("este es el codigo del empleado",$scope.arrayAgregados)
+		$scope.valueEmpleado
+		console.log("valor", $scope.valueEmpleado)
+		
 		if ($scope.nombreEmpleado=='' || $scope.nombreEmpleado==null){
 			Swal.fire(
 				'Campo faltante',
@@ -328,6 +343,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 					'id': ID,
 					'codigoempleado': codigoempleado,
                     'arrayEquipoGuardado': $scope.arrayAgregados,
+					'valor': $scope.valueEmpleado,
 					
 					
 				}

@@ -44,10 +44,10 @@ function getGrupos($dbcon){
 function guardarAsignacion($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
 	$status = '1';
-	$tipo='B';
+	// $tipo='B';
 	$conn = $dbcon->conn();
 	$sql = "INSERT INTO asignacion_equipo (tipo, codigoempleado, estatus_asignacion, fecha_asignacion)
-			VALUES ('".$tipo."', ".$Datos->codigoempleado.", ".$status.", '".$fecha."' )";
+			VALUES ('".$Datos->valor."', ".$Datos->codigoempleado.", ".$status.", '".$fecha."' )";
 	$qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
 
 	if($qBuilder){

@@ -158,7 +158,7 @@
                                             <td class="text-center">{{obj.codigoempleado}}</td>
                                             <td class="text-center">{{obj.nombre}}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre)">Seleccionar</button>
+                                                <button type="button" class="btn btn-success btn-sm" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombre, value)" value="A">Seleccionar</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -167,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true">
+                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true" ng-click="valor">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">GRUPOS </h3>
