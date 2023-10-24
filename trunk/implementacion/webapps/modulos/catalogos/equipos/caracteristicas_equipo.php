@@ -10,6 +10,27 @@
         </head>
  
 <div ng-controller="vistaCaracteristicasEquipos">
+<!-- MODAL VER SCANNER -->
+<div id="modalScanner" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Código de Barras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center" id="modalBarCode">
+        <!-- <img class="codigo" id="imgcodigo" ng-model="imgcodigo" name="imgcodigo"/> -->
+      </div>
+      <div class="modal-footer">
+        <input type="button" value="Imprimir" onclick="imprSelec('modalBarCode')" class="btn btn-primary">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <div class="modal fade bd-example-modal-lg " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
@@ -295,11 +316,12 @@
                                                     <td class="text-center">{{obj.capacidad_almacenamiento}}</td>
                                                     <td class="text-center">{{obj.fecha_ingreso}}</td> -->
                                                     <td class="text-center">
-                                                        <button type="button" class="btn btn-info btn-sm far fa-eye"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_factura, obj.numero_serie, 
-                                                            obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento, obj.fecha_ingreso)"  data-toggle="modal" data-target="#borrarModal"></button>
-                                                        <button type="button" class="btn btn-warning btn-sm fas fa-edit" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
+                                                        <span class= "btn btn-info btn-sm" title="Scanner" ng-click="scanner(obj.cve_cequipo)" data-toggle="modal" data-target="#modalScanner" data-whatever="@getbootstrap"><i class="fas fa-barcode"></i></span>
+                                                        <button type="button" class="btn btn-info btn-sm"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_factura, obj.numero_serie, 
+                                                            obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento, obj.fecha_ingreso)"  data-toggle="modal" data-target="#borrarModal"><i class="far fa-eye"></i></button>
+                                                        <button type="button" class="btn btn-warning btn-sm" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
                                                             obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento,
-                                                            obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal"></button>
+                                                            obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></button>
                                                     </td>
                                     </tbody>
                                 </table>
@@ -315,6 +337,9 @@
 <script src="../../../includes/js/adminlte.min.js"></script>
 
 <?php include_once "../../inferior.php" ?>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+
     <script src="caracteristicas_vista_ajs.js"></script>
 
     <script src="../../../includes/js/jquery331.min.js"></script>
@@ -338,6 +363,6 @@
     <script src="../../../includes/js/data_tables_js/buttons.html5.min.js"></script>
     <script src="../../../includes/js/data_tables_js/buttons.print.min.js"></script>
 
-   
-
-                                                
+   <script type="text/javascript">
+        JsBarcode(".codigo").init();
+    </script>

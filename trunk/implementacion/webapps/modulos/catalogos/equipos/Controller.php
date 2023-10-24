@@ -167,7 +167,16 @@ function editarCaracteristica($dbcon, $Datos){
 
 }
 
+function scanner($dbcon, $cve){
+	$conn = $dbcon->conn();
 
+	$sql = "SELECT CONCAT('MYS - TIC',ce2.nombre_equipo , ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
+			FROM caracteristicas_equipos ce
+			INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo
+			WHERE ce.cve_cequipo = ".$cve." ";
+	$resultado = $dbcon->qBuilder($conn, 'first', $sql);
+	dd($resultado);
+}
 
 
 // para traer el codigo del empleado
@@ -207,7 +216,10 @@ switch ($tarea) {
 
 	case 'ValidaQueEquipoEs':
 		ValidaQueEquipoEs($dbcon,$objDatos);
-	break;;
+	break;
+	case 'scanner':
+		scanner($dbcon,$objDatos->cve);
+	break;
 	
 		
 		

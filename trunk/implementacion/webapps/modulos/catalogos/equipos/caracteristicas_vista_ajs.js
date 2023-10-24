@@ -25,6 +25,26 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
         $scope.tipoalmacenamiento = '';
         $scope.capaalmacenamiento = '';
 	}
+	$scope.scanner = function(cve){
+		// console.log('cve', cve);
+		$http.post('Controller.php', {
+			'task': 'scanner',
+			'cve': cve
+		}).then(function(response){
+			// jsShowWindowLoad('Generando codigo de barras...');
+			console.log('codigo', response.data.folio);
+			response = response.data;
+			const imgBarCode = '<img class="codigo" id="imgcodigo" />';
+        	$('#modalBarCode').html(imgBarCode);
+        	// actualizar el data-value de la imagen
+        	JsBarcode("#imgcodigo", response['folio']);
+
+		}, function(error){
+			console.log('error', error);
+			jsRemoveWindowLoad();
+		});
+	}
+
 	$scope.validame = function(){
 		console.log('nombre', $scope.nombre)
 	}
@@ -536,9 +556,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		
 
 	}
-	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura,
-		sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,
-		capacidad_almacenamiento) {
+	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,	capacidad_almacenamiento) {
 		// $scope.numero=cve_equipo;
 		$scope.numeroEquipo = cve_cequipo;
 		$scope.verNombre = nombre_equipo;
@@ -663,5 +681,13 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		console.log('error', error);
 	}); 
 	
+});
+
+function imprSelec(id) {
+    var div = document.getElementById(id);
+    var ventimp = window.open(' ', 'popimpr');
+    ventimp.document.write( div.innerHTML );
+    ventimp.document.close();
+    ventimp.print( );
+    ventimp.close();
 }
-);
