@@ -30,7 +30,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 			// jsRemoveWindowLoad();
 		});
 	}
-
+	
 	$http.post('Controller.php', {
         'task': 'getGrupos'
     }).then(function(response) {

@@ -1,19 +1,33 @@
 app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
-    $scope.checkh = '';
-	$scope.mantenimiento = '';
-    $scope.cambioVista= "";
+ $scope.empleados='';
+ $scope.btneg = "";
 
-    $scope.agregar = function(){
+    $scope.agregarV = function(){
 		
-		if ($scope.cambioVista == false) {
-			$scope.cambioVista = true
+		if ($scope.empleados == false) {
+			$scope.empleados = true
+            $scope.grupos = true
 			// $scope.cambioVistaEmpleado = true
 		}else{
-			$scope.cambioVista = false
+			$scope.empleados = false
+			$scope.grupos = false
 			// $scope.cambioVistaEmpleado = false
 		}
 	}
-    console.log(getMarca);
+
+// sirve para traer los empleados que hay dentro de los grupos
+    $scope.verLista = function(cve_grupo){
+		$http.post('Controller.php', {
+			'task': 'getGruposDetalle',
+			'cve_grupo': cve_grupo
+		}).then(function(response) {
+			response = response.data;
+			console.log('getGruposDetalle', response);
+			$scope.gruposDetalle = response;
+		})
+	}
+
+    // console.log(getMarca);
 
 	$scope.eliminarRelacion=function(cve_cequipo){
         console. log('debe traer el dato de cve_cequipo', cve_cequipo)
@@ -67,7 +81,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
             }
         })
     }
-
+// esta es para la tabla del modal de los empleados
 	$scope.consultar = function(codigoempleado){
         console.log("prueba:", codigoempleado);
         // console.log("otra prueba:", codigo);
@@ -112,6 +126,50 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
         });
         
 	}
+
+    $scope.consultaEquiposGrupos = function(codigoempleado){
+        console.log("prueba:", codigoempleado);
+        $http.post('Controller.php', {
+            'task': 'getRelacionEquiposGrupos',
+            'codigo': codigoempleado
+        }).then(function(response) {
+            response = response.data;
+            console.log('verRelacionesEquipos', response);
+            // Destruye la instancia DataTable existente si hay una
+            // if ($.fn.DataTable.isDataTable('#tablaRelacionEquipo')) 
+            // {
+            // $('#tablaRelacionEquipo').DataTable().destroy();
+            //  }
+            $scope.verEquiposGrupos = response;
+            setTimeout(function(){
+                $('#tablaEquiposGrupos').DataTable({
+                    "processing": true,
+                    "bDestroy": true,
+                    // "order": [5, 'desc'],
+                    "lengthMenu": [[15, 30, 45], [15, 30, 45]],
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ registros por página.",
+                        "zeroRecords": "No se encontró registro.",
+                        "info": "  _START_ de _END_ (_TOTAL_ registros totales).",
+                        "infoEmpty": "0 de 0 de 0 registros",
+                        "infoFiltered": "(Encontrado de _MAX_ registros)",
+                        "search": "Buscar: ",
+                        "processing": "Procesando...",
+                                "paginate": {
+                            "first": "Primero",
+                            "previous": "Anterior",
+                            "next": "Siguiente",
+                            "last": "Último"
+                        }
+        
+                    }
+                });
+            },400);
+        }, function(error){
+            console.log('error', error);
+        });
+        
+	}
 // trae los datos de la tabla asignación detalle, para que se muestre los equipos que tiene cierto usuario
 
 // trae los datos de la tabla asignación para que podamos ver los usuarios 
@@ -120,9 +178,9 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     }).then(function(response) {
         response = response.data;
         console.log('verRelaciones', response);
-        $scope.verRelaciones = response;
+        $scope.verRelacionesEmpleado = response;
         setTimeout(function(){
-            $('#tablaRelacion').DataTable({
+            $('#tablaRelacionEmpleado').DataTable({
                 "processing": true,
                 "bDestroy": true,
                 // "order": [5, 'desc'],
@@ -144,19 +202,19 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
 
                 }
             });
-        },800);
+        },200);
     }, function(error){
         console.log('error', error);
     });
-	
+// trae a todos los grupos que se han creado
     $http.post('Controller.php', {
         'task': 'getRelacionGrupos'
     }).then(function(response) {
         response = response.data;
-        console.log('verRelaciones', response);
-        $scope.verGrupos = response;
+        console.log('verRelaciones grupos', response);
+        $scope.verRelacionesGrupo = response;
         setTimeout(function(){
-            $('#tablaRelacion').DataTable({
+            $('#tablaRelacionGrupos').DataTable({
                 "processing": true,
                 "bDestroy": true,
                 // "order": [5, 'desc'],
@@ -178,7 +236,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
 
                 }
             });
-        },800);
+        },200);
     }, function(error){
         console.log('error', error);
     });

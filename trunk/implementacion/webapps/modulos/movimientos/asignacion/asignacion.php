@@ -115,8 +115,8 @@
                                 <label>Selecciona una opción..</label>
                             </div>
                             <div class="col-lg-12 d-lg-flex">
-                                <button type="button" class="btn btn-info btn-sm B1" ng-model="btneg" id="btneg" ng-disabled="empleados == false" value="A" ng-click="agregar()">Empleados</button>
-                                <button type="button" class="btn btn-info btn-sm B1" ng-model="btneg" id="btneg" ng-disabled="empleados == true"  value="B" ng-click="agregar()">Grupos</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-model="btneg" id="btneg" ng-disabled="empleados == false" ng-click="agregar()">Empleados</button>
+                                <button type="button" class="btn btn-info btn-sm B1" ng-model="btneg" id="btneg" ng-disabled="empleados == true"  ng-click="agregar()">Grupos</button>
                                 <!-- <button type="button" class="btn btn-success btn-sm derecho"  ng-click="guardarGrupo(obj.codigo)">Guardar Grupo</button> -->
                             </div>
                             <!-- <div class="col-lg-12 d-lg-flex">
@@ -167,7 +167,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true" ng-click="valor">
+
+                <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true" >
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">GRUPOS </h3>

@@ -8,21 +8,32 @@ function dd($var){
     }
 }
 
+// trae a los usuarios que estan dentro de los grupos
+function getGruposDetalle ($dbcon, $cve_grupo){
+	$sql = "SELECT gud.cve_gpo_detalle, gud.cve_grupo, gud.numeroempleado, CONCAT(cun.nombre, ' ', cun.apellidopaterno, ' ', cun.apellidomaterno)empleado
+			FROM grupos_usuarios_detalle gud
+			INNER JOIN cat_usuario_nomina cun ON gud.numeroempleado = cun.codigoempleado
+			WHERE estatus_gpo_detalle = 1 AND cve_grupo = ".$cve_grupo." ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
+// trae a los empleados que tienen equipos
 function getRelacionEmpleados ($dbcon){
-	$sql = "SELECT cun.nombre ,CONCAT(cun.apellidopaterno, ' ', cun.apellidomaterno) apellidos, ae.codigoempleado
+	$sql = "SELECT DISTINCT cun.nombre ,CONCAT(cun.apellidopaterno, ' ', cun.apellidomaterno) apellidos, ae.codigoempleado
     FROM asignacion_equipo ae 
     inner join cat_usuario_nomina cun on cun.codigoempleado =ae.codigoempleado ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
-
+// trae a los grupos que tienen equipos
 function getRelacionGrupos ($dbcon){
-	$sql = "SELECT cun.nombre ,CONCAT(cun.apellidopaterno, ' ', cun.apellidomaterno) apellidos, ae.codigoempleado
-    FROM asignacion_equipo ae 
-    inner join cat_usuario_nomina cun on cun.codigoempleado =ae.codigoempleado ";
+	$sql = "SELECT DISTINCT nombre_gpo, descripcion, cve_grupo, codigoempleado
+    from grupos_usuarios gu
+    inner join asignacion_equipo ae on gu.cve_grupo = ae.codigoempleado  ;";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+// trae los equipos de los empleados
 function getRelacionEquipos ($dbcon, $Datos){
 	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ae.codigoempleado, marca, modelo, ce2.nombre_equipo, aed.fecha_asignacion
     from asignacion_equipo_detalle aed
@@ -33,7 +44,18 @@ function getRelacionEquipos ($dbcon, $Datos){
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+// trae los equipos de los empleados
 
+function getRelacionEquiposGrupos ($dbcon, $Datos){
+	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ae.codigoempleado, marca, modelo, ce2.nombre_equipo, aed.fecha_asignacion
+    from asignacion_equipo_detalle aed
+    INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
+    INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
+    INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
+    where ae.codigoempleado =".$Datos->codigo." AND estatus_asignacion_detalle=1";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
 function editarRelacion ($dbcon, $Datos){
 	$sql = "UPDATE asignacion_equipo_detalle  set estatus_asignacion_detalle=0
     where cve_cequipo= ".$Datos->codigo."  ";
@@ -65,6 +87,9 @@ if ($tarea == '') {
 	$tarea = $objDatos->task;
 }
 switch ($tarea) {
+    case 'getGruposDetalle': 
+		getGruposDetalle($dbcon, $objDatos->cve_grupo);
+    break;
     case 'getRelacionEmpleados':
         getRelacionEmpleados($dbcon);
     break; 
@@ -74,6 +99,9 @@ switch ($tarea) {
     case 'getRelacionEquipos':
         getRelacionEquipos($dbcon, $objDatos);
     break; 
+    case 'getRelacionEquiposGrupos':
+        getRelacionEquiposGrupos($dbcon, $objDatos);
+    break;
     case 'editarRelacion':
         editarRelacion($dbcon, $objDatos);
     break; 

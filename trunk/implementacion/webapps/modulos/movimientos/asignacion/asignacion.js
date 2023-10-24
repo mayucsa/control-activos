@@ -5,7 +5,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 	$scope.btneg = "";
 	$scope.valueEmpleado="";
 	// $scope.valueEmpleado="B";
-
+	
 	// agregarEquipo
 	
 
