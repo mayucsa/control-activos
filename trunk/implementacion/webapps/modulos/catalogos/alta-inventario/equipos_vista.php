@@ -19,9 +19,9 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        ValidaExistencia
+       
         <div class="modal-body">
-             <div class="row form-group form-group-sm">
+             <!-- <div class="row form-group form-group-sm">
                                 <div class="col-lg-12 d-lg-flex">
                                     <label>Selecciona el tipo de equipo a capturar..</label>
                                 </div>
@@ -35,7 +35,7 @@
                                     <label class="form-check-label">INSUMOS</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
         <div style="width: 100%;" class="form-floating mx-1" margin >
                                         <input hidden="true" class="form-control UpperCase" ng-model="numero" id="numero" autocomplete="off"  ng-disabled="false"  >
                                         <!-- <label>Numero de equipo</label> -->

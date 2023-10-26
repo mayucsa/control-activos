@@ -7,6 +7,8 @@
 		$scope.nombre = '';
 		$scope.equipos = '';
 		$scope.insumos = '';
+		$scope.checkh = '';
+		
 	}
 
 // esta relacionado con el input de nombre de equipo

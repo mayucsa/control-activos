@@ -8,7 +8,7 @@ app.controller('vistaServicio', function (BASEURL, ID, $scope, $http) {
 	}
 
 	$scope.validacionCampos = function(){
-		if ($scope.servicio == '' || $scope.servicio == null) {
+		if ($scope.servicioEntrada == '' || $scope.servicioEntrada == null) {
 			Swal.fire(
 			  'Campo faltante',
 			  'Es necesario indicar el nombre del servicio',
@@ -18,7 +18,7 @@ app.controller('vistaServicio', function (BASEURL, ID, $scope, $http) {
 		}
 		// console.log('nombre:', $scope.nombre);
 		Swal.fire({
-			title: 'Estás a punto de registrar un equipo nuevo.',
+			title: 'Estás a punto de registrar un nuevo servicio.',
 			text: '¿Es correcta la información agregada?',
 			icon: 'warning',
 			showCancelButton: true,
@@ -33,7 +33,7 @@ app.controller('vistaServicio', function (BASEURL, ID, $scope, $http) {
 				$http.post('Controller.php', {
 					'task': 'guardarServicio',
 					'id': ID,
-					'servicio': $scope.servicio,
+					'servicio': $scope.servicioEntrada,
                     'caracteristica': $scope.caracteristica,
 					// console.log('nombre', $scope.servicio),
 					
@@ -53,7 +53,7 @@ app.controller('vistaServicio', function (BASEURL, ID, $scope, $http) {
 						// if (response.code == 200) {
 							Swal.fire({
 							title: '¡Éxito!',
-							html: 'Su captura de equipo nuevo se generó correctamente. ',
+							html: 'Su captura del nuevo servicio se generó correctamente. ',
 							icon: 'success',
 							showCancelButton: false,
 							confirmButtonColor: 'green',

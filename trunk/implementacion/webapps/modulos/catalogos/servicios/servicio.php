@@ -73,11 +73,11 @@
                         <div class="row form-group form-group-sm">
                             <div class="col-lg-12 d-lg-flex " style=" margin-top: 15px">
                                 <div style="width: 100%;" class="form-floating mx-1">
-                                    <input type="text" ng-model="servicioEntrada" ng-blur='verificarServicio(servicioEntrada)' id="servicioEntrada" name="servicioEntrada" class="form-control form-control-md text-center" >
+                                    <input type="text" ng-model="servicioEntrada" ng-blur='verificarServicio(servicioEntrada)' id="servicioEntrada" name="servicioEntrada" class="form-control UpperCase text-center" >
                                     <label>Servicio</label>
                                 </div>
                                 <div style="width: 100%;" class="form-floating mx-1">
-                                    <input type="text" ng-model="caracteristica" id="caracteristica" name="caracteristica" class="form-control form-control-md text-center" >
+                                    <input type="text" ng-model="caracteristica" id="caracteristica" name="caracteristica" class="form-control UpperCase text-center" >
                                     <label>Caracteristicas</label>
                                 </div>
                             </div> 

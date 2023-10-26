@@ -113,7 +113,7 @@
                                     <tr>
                                         <th>Código de empleado</th>
                                         <th>Nombre de empleado</th>
-                                        <th>eliminar</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>

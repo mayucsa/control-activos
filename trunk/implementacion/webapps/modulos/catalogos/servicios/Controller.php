@@ -22,7 +22,7 @@ function guardarServicio($dbcon, $Datos){
 		$Datos->caracteristica=NULL;
 	}
     $sql = "INSERT INTO cat_servicios (nombre_servicio, descripcion, creado_por, estatus_servicio, fecha_registro)
-            VALUES ('".$Datos->servicioEntrada."', '".$Datos->caracteristica."', ".$Datos->id.", ".$status.", '".$fecha."' )";
+            VALUES ('".$Datos->servicio  ."', '".$Datos->caracteristica."', ".$Datos->id.", ".$status.", '".$fecha."' )";
     $qBuilder = $dbcon->qBuilder($conn, 'do', $sql);
     if ($qBuilder) {
 		$getId = "SELECT max(cve_servicio) cve_servicio FROM cat_servicios WHERE 

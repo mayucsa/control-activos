@@ -390,7 +390,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 			  return;
 		}
 		Swal.fire({
-			title: 'Estás a punto de eliminar esta asignación.',
+			title: 'Estás a punto de crear un nuevo grupo.',
 			text: '¿Es correcta la información agregada?',
 			icon: 'warning',
 			showCancelButton: true,
@@ -417,7 +417,7 @@ app.controller('vistaGrupos', function (BASEURL, ID, $scope, $http) {
 					if (response.code == 200) {
 						Swal.fire({
 						  title: '¡Éxito!',
-						  html: 'Su genero un nuevo grupo nombre: <b> '+ response.nombre+'</b>',
+						  html: 'Se generó el grupo: <b> '+ response.nombre+'</b>',
 						  icon: 'success',
 						  showCancelButton: false,
 						  confirmButtonColor: 'green',
