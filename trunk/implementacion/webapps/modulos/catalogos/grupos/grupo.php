@@ -167,12 +167,12 @@
                                 <tbody>
                                     <tr ng-repeat="(i, obj) in empleado ">
                                         <td class="text-center">{{obj.codigoempleado}}</td>
-                                        <td >{{obj.nombreC}}</td>
+                                        <td class="text-center">{{obj.nombreC}}</td>
                                         <!-- <td class="text-center">{{obj.apellido}}</td> -->
                                         <!-- <td class="text-center">{{obj.puesto}}</td> -->
                                         <td class="text-center">{{obj.departamento}}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-success btn-sm" id="agregarEmpleado" ng-click="agregarEmpleado(obj.codigoempleado, obj.nombreC)">Seleccionar</button>
+                                            <button type="button" class="btn btn-success btn-sm" id="agregarEmpleado" style="margin-bottom: 10px"  ng-click="agregarEmpleado(obj.codigoempleado, obj.nombreC)">Seleccionar</button>
                                         </td>
                                     </tr>
                                 </tbody>

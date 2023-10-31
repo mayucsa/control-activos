@@ -296,7 +296,7 @@
                                             <td>{{obj.modelo}}</td>
                                             <td nowrap="nowrap" class="text-center">
                                                 <button class="btn btn-danger" ng-click="eliminarEquipoAgregado(i)">
-                                                    Quitar jeje
+                                                    Quitar
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>

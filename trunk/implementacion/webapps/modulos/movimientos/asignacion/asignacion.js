@@ -326,7 +326,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		}
 		// console.log('nombre:', $scope.nombre);
 		Swal.fire({
-			title: 'Estás a punto de registrar un equipo nuevo.',
+			title: 'Estás a punto de asignar un nuevo equipo.',
 			text: '¿Es correcta la información agregada?',
 			icon: 'warning',
 			showCancelButton: true,

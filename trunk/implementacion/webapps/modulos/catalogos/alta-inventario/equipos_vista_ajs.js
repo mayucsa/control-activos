@@ -49,7 +49,7 @@
 		}
 		
 		Swal.fire({
-			title: 'Estás a punto de editar la cantidad de una entrada.',
+			title: 'Estás a punto de editar el nombre del servicio.',
 			text: '¿Es correcta la información agregada?',
 			icon: 'warning',
 			showCancelButton: true,

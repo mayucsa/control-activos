@@ -80,28 +80,28 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 				}if ($scope.numeroserie == '' || $scope.numeroserie == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar un numero de serie',
+						'Es necesario indicar un número de serie',
 						'warning'
 						);
 						return;
 				}if ($scope.numerofactura == '' || $scope.numerofactura == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar el numero de factura',
+						'Es necesario indicar el número de factura',
 						'warning'
 						);
 						return;
 				}if ($scope.sistemaoperativo == '' || $scope.sistemaoperativo == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar una sistema sistema operativo',
+						'Es necesario indicar el sistema operativo',
 						'warning'
 						);
 						return;
 				}if ($scope.procesador == '' || $scope.procesador == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar un procesador',
+						'Es necesario indicar el procesador',
 						'warning'
 						);
 						return;
@@ -122,7 +122,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 				}if ($scope.tipoalmacenamiento == '' || $scope.tipoalmacenamiento == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar el tiupo de almacenamiento',
+						'Es necesario indicar el tipo de almacenamiento',
 						'warning'
 						);
 						return;
@@ -173,7 +173,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 							if (response.code == 200) {
 								Swal.fire({
 								  title: '¡Éxito!',
-								  html: 'Su captura de equipo nuevo se generó correctamente.\n Se ha guardado correctamente',
+								  html: 'Su captura de equipo nuevo se generó correctamente.',
 								  icon: 'success',
 								  showCancelButton: false,
 								  confirmButtonColor: 'green',
@@ -219,14 +219,14 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 				}if ($scope.numeroserie == '' || $scope.numeroserie == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar un numero de serie',
+						'Es necesario indicar un número de serie',
 						'warning'
 						);
 						return;
 				}if ($scope.numerofactura == '' || $scope.numerofactura == null) {
 					Swal.fire(
 						'Campo faltante',
-						'Es necesario indicar el numero de factura',
+						'Es necesario indicar el número de factura',
 						'warning'
 						);
 						return;
@@ -269,7 +269,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 							if (response.code == 200) {
 								Swal.fire({
 								  title: '¡Éxito!',
-								  html: 'Su captura de equipo nuevo se generó correctamente.\n Se ha guardado correctamente',
+								  html: 'Su captura de equipo nuevo se generó correctamente.',
 								  icon: 'success',
 								  showCancelButton: false,
 								  confirmButtonColor: 'green',
