@@ -91,9 +91,9 @@
                 <li>
                   <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="app-menu__icon far fa-circle"></i> Asignación</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="app-menu__icon far fa-circle"></i>Mantenimiento</a>
-                </li>
+                </li> -->
               </ul>
             </li>
             <!-- VER RELACIONES  -->
@@ -103,11 +103,11 @@
               </a>
               <ul class="treeview-menu">
                 <li>
-                  <a class="treeview-item" href="../../relaciones/EmpleadoEquipo/vistaEmpleado.php"><i class="app-menu__icon far fa-circle"></i> Relacion Empleado-Equipo</a>
+                  <a class="treeview-item" href="../../relaciones/EmpleadoEquipo/vistaEmpleado.php"><i class="app-menu__icon far fa-circle"></i> Relacion asignación</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a class="treeview-item" href="../../relaciones/EquipoMantenimiento/vistaEquipo.php"><i class="app-menu__icon far fa-circle"></i>Relación Equipo-Mantenimiento</a>
-                </li>
+                </li> -->
               </ul>
             </li>
             <!-- servicios de equipos -->
