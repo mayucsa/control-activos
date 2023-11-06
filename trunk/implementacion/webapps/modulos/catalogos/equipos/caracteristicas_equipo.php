@@ -145,7 +145,7 @@
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verMarca  disabled></td>
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verModelo disabled></td>
                                                 <td><input class="sinborde my-class" w-25 ng-model=verDescripcion  disabled></td>
-                                                <td><input  class="sinborde my-class" w-25ng-model=verFacturaM disabled></td>
+                                                <td><input  class="sinborde my-class" w-25 ng-model=verFactura disabled></td>
                                                 <td><input  class="sinborde my-class" w-25 ng-model=verSerie  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verSistema  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verProcesador  disabled></td>

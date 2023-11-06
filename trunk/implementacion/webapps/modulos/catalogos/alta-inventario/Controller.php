@@ -64,12 +64,12 @@ function editarNombre($dbcon, $Datos){
 	$conn = $dbcon->conn();
 
     // Verificar si ya existe un registro con el mismo nombre
-    $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
-    $resultado = $dbcon->qBuilder($conn, 'first', $sql);
+    // $sql = "SELECT COUNT(*) AS count FROM cat_equipos WHERE nombre_equipo = '".$Datos->nombre."'";
+    // $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 	
-    if ($resultado->count > 1) {
-        dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
-    }
+    // if ($resultado->count > 1) {
+    //     dd(['code'=>400,'msj'=>'El equipo no se puede duplicar']);
+    // }
 	// else if($resultado->count == 1){
 	// 	$fecha = date('Y-m-d H:i:s');
 	// 	$status = '1';
@@ -79,15 +79,15 @@ function editarNombre($dbcon, $Datos){
 	// WHERE cve_equipo =" .$Datos->numero."";
 	// $qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
 	// }
-	else{
+	
 		$fecha = date('Y-m-d H:i:s');
 		$status = '1';
-		$conn = $dbcon->conn();
+		// $conn = $dbcon->conn();
 		$sql = " UPDATE cat_equipos
 	SET  nombre_equipo  ='".$Datos->nombre."'
 	WHERE cve_equipo =" .$Datos->numero."";
 	$qBuilder = $dbcon->qBuilder($dbcon->conn(), 'do', $sql);
-	}
+	
 
 
 	

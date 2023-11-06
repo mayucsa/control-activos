@@ -138,7 +138,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 					$scope.descripción = '';
 				}
 				Swal.fire({
-					title: 'Estás a punto de registrar un equipo nuevo.',
+					title: 'Estás a punto de dar de alta un equipo.',
 					text: '¿Es correcta la información agregada?',
 					icon: 'warning',
 					showCancelButton: true,
@@ -235,7 +235,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 					$scope.descripción = '';
 				}
 				Swal.fire({
-					title: 'Estás a punto de registrar un equipo nuevo.',
+					title: 'Estás a punto de dar de alta un equipo.',
 					text: '¿Es correcta la información agregada?',
 					icon: 'warning',
 					showCancelButton: true,
@@ -409,7 +409,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 			response = response.data;
 			if (response.code == 400){
 				Swal.fire({ 
-					title: 'Estás a punto de editar la cantidad de una entrada.',
+					title: 'Estás a punto de editar la información de un equipo' ,
 					text: '¿Es correcta la información agregada?',
 					icon: 'warning',
 					showCancelButton: true,
@@ -476,7 +476,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 				});
 				
 			}else {Swal.fire({ 
-				title: 'hola.',
+				title: 'Estás a punto de editar la información de un equipo.',
 				text: '¿Es correcta la información agregada?',
 				icon: 'warning',
 				showCancelButton: true,
@@ -545,16 +545,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		}
 		})
 
-		// if ($scope.cambioMarca == '' || $scope.cambiaModelo == null) {
-		// 	Swal.fire(
-		// 	  'Campo faltante',
-		// 	  'Es necesario llenar todos los campos',
-		// 	  'warning'
-		// 	);
-		// 	return;
-		// }
+	
 		
-
+// este trae los datos de los equipos en el modal de editar
 	}
 	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,	capacidad_almacenamiento) {
 		// $scope.numero=cve_equipo;
@@ -574,6 +567,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	
 		}
 
+		// esto trae los equipos en el modal de ver
 		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso) {
 			// $scope.numero=cve_equipo;
 			$scope.verNumeroE = cve_cequipo;

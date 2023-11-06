@@ -41,7 +41,7 @@
                                         <!-- <label>Numero de equipo</label> -->
                                     </div>
             <div style="width: 100%;" class="form-floating mx-1" pt-5>
-                <input class="form-control UpperCase" ng-model="cambioNombreVer" id="cambioNombreVer" autocomplete="off" >
+                <input class="form-control UpperCase" ng-model="cambioNombreVer" id="cambioNombreVer" autocomplete="off" ng-blur="ValidaExistenciaModal(cambioNombreVer)" >
                 <label>Nombre del equipo</label>
             </div>
             <!-- <div style="width: 100%;" class="form-floating mx-1">

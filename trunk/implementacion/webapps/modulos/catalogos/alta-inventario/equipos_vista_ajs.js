@@ -10,14 +10,16 @@
 		$scope.checkh = '';
 		
 	}
+	
 
 // esta relacionado con el input de nombre de equipo
 // todo este código se agregó al de validacion
-	$scope.ValidaExistencia = function (nombre) {
+	$scope.ValidaExistencia = function (nombre, cambioNombreVer) {
 		// console.log('nombre:', nombre);
 		$http.post('Controller.php', {
 			'task': 'ValidaExistencia',
-			'nombre': nombre
+			'nombre': nombre,
+			'nombre': cambioNombreVer
 		}).then(function(response){
 			response = response.data;
 			if (response.code == 400) {
@@ -28,6 +30,33 @@
 					confirmButtonColor: '#1A4672'
 					});
 					$scope.nombre = '';
+					$scope.cambioNombreVer = '';
+			}
+			// else{
+			// 	$scope.validacionCampos(nombre);
+			// }
+		}, function(error){
+			console.log('error', error);
+			jsRemoveWindowLoad();
+		});
+	}
+
+	$scope.ValidaExistenciaModal = function (cambioNombreVer) {
+		// console.log('nombre:', nombre);
+		$http.post('Controller.php', {
+			'task': 'ValidaExistencia',
+			'nombre': cambioNombreVer
+		}).then(function(response){
+			response = response.data;
+			if (response.code == 400) {
+				Swal.fire({
+					// confirmButtonColor: '#3085d6',
+					title: 'Equipo existente',
+					html: response.msj,
+					confirmButtonColor: '#1A4672'
+					});
+					// $scope.nombre = '';
+					$scope.cambioNombreVer = '';
 			}
 			// else{
 			// 	$scope.validacionCampos(nombre);
@@ -49,7 +78,7 @@
 		}
 		
 		Swal.fire({
-			title: 'Estás a punto de editar el nombre del servicio.',
+			title: 'Estás a punto de editar el nombre del equipo.',
 			text: '¿Es correcta la información agregada?',
 			icon: 'warning',
 			showCancelButton: true,
