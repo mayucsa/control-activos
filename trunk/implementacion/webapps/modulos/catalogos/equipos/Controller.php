@@ -30,9 +30,10 @@ function ValidaQueEquipoEs($dbcon, $Datos){
     $sql = "SELECT nombre_equipo FROM cat_equipos WHERE cve_equipo = ".$Datos->cve_equipo." ";
     $resultado = $dbcon->qBuilder($conn, 'first', $sql);
 
-    if ($resultado->nombre_equipo == 'CPU' || $resultado->nombre_equipo == 'LAPTOP') {
+    if ($resultado->nombre_equipo == 'CPU' || $resultado->nombre_equipo == 'LAPTOP'|| $resultado->nombre_equipo == 'ALL IN ONE') {
     	dd(['code'=>400]);
     }
+	
 }
 
 

@@ -68,7 +68,7 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 		console.log('valor', $scope.valueEmpleado);
 
 	}
-
+	
 	// este si va
 	$scope.quitarGrupo = function(){
 		$scope.nombreEmpleado = '';
@@ -438,36 +438,27 @@ app.controller('vistaAsignacion', function (BASEURL, ID, $scope, $http) {
 
 	// }
 
-	// $scope.verEquipo=function(marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento){
-		// $http.post('Controller.php', {
-		// 	'task': 'getMarca'
-		// }).then(function (response){
-		// 	response = response.data;
-		// 	console.log('getCaracteristicas', response);
-		// 	$scope.caracteristicas = response;
-		// },function(error){
-		// 	console.log('error', error);
-		// 	console.log('error', caracteristicas.marca);
-		// 	console.log('error', caracteristicas.modelo);
-		// });
-		// $scope.verNumeroE = cve_cequipo;
-		// $scope.verEquipo = nombre_equipo;
-		// $scope.verMarca = marca;
-		// $scope.verModelo=modelo;
-		// $scope.verDescripcion = descripcion;
-		// $scope.verNumeroSerie = numero_serie;
-		// $scope.verNumeroFactura= numero_factura;
-		// $scope.verFactura=numero_factura;
+	$scope.verEquipo=function(marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento){
 		
-		// $scope.verSistemaOperativo = sistema_operativo;
-		// $scope.verProcesador = procesador;
-		// $scope.verVelocidadProcesador=vel_procesador;
-		// $scope.verMemoriaRam = memoria_ram;
-		// $scope.verTipoAlmacenamiento = tipo_almacenamiento;
-		// $scope.verCapaAlmacenamiento=capacidad_almacenamiento;
+		// $scope.VerEquipo = cve_cequipo;
+		// $scope.verNombre = nombre_equipo;
+		$scope.verMarca = marca;
+		$scope.verModelo=modelo;
+		$scope.verDescripcion = descripcion;
+		
+		$scope.verNumeroFactura= numero_factura;
+		$scope.verNumeroSerie = numero_serie;
+		$scope.verFactura=numero_factura;
+		
+		$scope.verSistemaOperativo = sistema_operativo;
+		$scope.verProcesador = procesador;
+		$scope.verVelocidadProcesador=vel_procesador;
+		$scope.verMemoriaRam = memoria_ram;
+		$scope.verTipoAlmacenamiento = tipo_almacenamiento;
+		$scope.verCapaAlmacenamiento=capacidad_almacenamiento;
 		// $scope.verRegistro=fecha_ingreso;
 
-	// }
+	}
 
 	// $scope.consultar = function (cve_asignacion ,nombrecompleto) {
 	// 	// $scope.numero=cve_equipo;
