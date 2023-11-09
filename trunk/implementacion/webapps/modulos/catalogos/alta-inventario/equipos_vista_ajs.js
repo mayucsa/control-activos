@@ -14,12 +14,11 @@
 
 // esta relacionado con el input de nombre de equipo
 // todo este código se agregó al de validacion
-	$scope.ValidaExistencia = function (nombre, cambioNombreVer) {
+	$scope.ValidaExistencia = function (nombre) {
 		// console.log('nombre:', nombre);
 		$http.post('Controller.php', {
 			'task': 'ValidaExistencia',
 			'nombre': nombre,
-			'nombre': cambioNombreVer
 		}).then(function(response){
 			response = response.data;
 			if (response.code == 400) {
