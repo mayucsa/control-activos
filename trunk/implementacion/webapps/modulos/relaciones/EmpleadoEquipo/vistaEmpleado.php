@@ -230,8 +230,9 @@
                                         <td class="text-center">{{obj.nombre}}</td>
                                         <td class="text-center">{{obj.apellidos}}</td>
                                         <td class="text-center">
-                                                <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultar(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposEmpleados">
-                                                </button>
+                                                <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultar(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposEmpleados"></button>
+                                                <button type="button" class="btn btn-danger btn-sm fas fa-file-pdf" ng-click="getPDF(obj.codigoempleado)" title="Descargar PDF"></button>
+                                                <!-- <span class= "btn btn-danger btn-sm" ng-click="getPDF(obj.codigoempleado)" title="Descargar PDF"><i class="fas fa-file-pdf"></i> </span> -->
                                         </td>
                                        
                                     </tr>
@@ -293,6 +294,7 @@
     </div>
     <?php include_once "../../footer.php" ?>
 </main>
+    <?php include "pdfHojaResguardo.html"; ?>
 </div>
 
 

@@ -1,4 +1,9 @@
 app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
+    var fechaActual = new Date();
+        $scope.fechaActual = fechaActual.toLocaleDateString('en-ZA');
+        $scope.fechai = $scope.fechaActual;
+        $scope.fechaf = $scope.fechaActual;
+    
  $scope.empleados='';
  $scope.btneg = "";
 
@@ -172,6 +177,27 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
 	}
 // trae los datos de la tabla asignación detalle, para que se muestre los equipos que tiene cierto usuario
 
+
+    $scope.getPDF =  function(codigoempleado){
+        // console.log('codigoempleado', codigoempleado);
+        jsShowWindowLoad('Imprimiendo hoja de resguardo de empleado...');
+        $http.post('Controller.php', {
+            'task': 'getRelacionEquipos',
+            'codigo': codigoempleado
+        }).then(function (response){
+            response = response.data;
+            console.log('HojaResguardo', response);
+            $scope.resguardo = response;
+            setTimeout(function(){
+                imprSelec('pdfHojaResguardo');
+                jsRemoveWindowLoad();
+            }, 700);
+        }, function(error){
+            console.log('error', error);
+            jsRemoveWindowLoad();
+        });
+    }
+
 // trae los datos de la tabla asignación para que podamos ver los usuarios 
     $http.post('Controller.php', {
         'task': 'getRelacionEmpleados'
@@ -242,3 +268,12 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     });
 
 });
+
+function imprSelec(id) {
+    var div = document.getElementById(id);
+    var ventimp = window.open(' ', 'popimpr');
+    ventimp.document.write( div.innerHTML );
+    ventimp.document.close();
+    ventimp.print( );
+    ventimp.close();
+}

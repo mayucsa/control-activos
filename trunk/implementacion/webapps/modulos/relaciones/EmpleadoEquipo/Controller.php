@@ -35,14 +35,15 @@ function getRelacionGrupos ($dbcon){
 }
 // trae los equipos de los empleados
 function getRelacionEquipos ($dbcon, $Datos){
-	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ae.codigoempleado, marca, modelo, ce2.nombre_equipo, aed.fecha_asignacion
-    from asignacion_equipo_detalle aed
-    INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
-    INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
-    INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
-    where ae.codigoempleado =".$Datos->codigo." AND estatus_asignacion_detalle=1";
+	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ae.codigoempleado, marca, modelo, ce2.nombre_equipo, aed.fecha_asignacion,
+            CONCAT('MYS - TIC', ce2.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
+            FROM asignacion_equipo_detalle aed
+            INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
+            INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
+            INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
+            WHERE ae.codigoempleado =".$Datos->codigo." AND estatus_asignacion_detalle=1";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-    dd($datos);
+    dd(['sql' => $datos]);
 }
 // trae los equipos de los empleados
 
