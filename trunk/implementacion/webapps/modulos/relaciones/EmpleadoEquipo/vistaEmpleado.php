@@ -64,7 +64,7 @@
                                                 <td class="text-center">{{obj.nombre_equipo}} </td> 
                                                 <td class="text-center">{{obj.marca}} </td>
                                                 <td class="text-center">{{obj.modelo}} </td>
-                                                <td class="text-center">{{obj.fecha_asignacion}} </td>
+                                                <td class="text-center">{{obj.fechaasignacion}} </td>
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-danger  btn-sm fas fa-trash-alt " style="margin-bottom: 10px" ng-click="eliminarRelacion(obj.cve_cequipo)" data-toggle="modal" data-target="#borrarModal">                                           
                                                     </button> 

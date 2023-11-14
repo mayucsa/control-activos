@@ -35,20 +35,62 @@ function getRelacionGrupos ($dbcon){
 }
 // trae los equipos de los empleados
 
-function getRelacionEquipos ($dbcon, $Datos){
-	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo,ce2.nombre_equipo, CONCAT(nombre, apellidopaterno, apellidomaterno)nombrecompleto, puesto, ae.codigoempleado,cun.departamento, marca, modelo, numero_serie,numero_factura,
-    procesador, vel_procesador, memoria_ram, capacidad_almacenamiento, sistema_operativo, DATE(aed.fecha_asignacion) fechaasignacion,
-    CONCAT('MYS - TIC', ce2.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio,
-    CONCAT(DATE_FORMAT(ae.fecha_asignacion, '%d%m%Y') , 'MYS - ', ae.cve_asignacion) numeroresguardo
+// function getRelacionEquipos ($dbcon, $Datos){
+// 	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo,ce2.nombre_equipo, CONCAT(nombre, apellidopaterno, apellidomaterno)nombrecompleto, puesto, ae.codigoempleado,cun.departamento, marca, modelo, numero_serie,numero_factura,
+//     procesador, vel_procesador, memoria_ram, capacidad_almacenamiento, sistema_operativo, DATE(aed.fecha_asignacion) fechaasignacion,
+//     CONCAT('MYS - TIC', ce2.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio,
+//     CONCAT(DATE_FORMAT(ae.fecha_asignacion, '%d%m%Y') , 'MYS - ', ae.cve_asignacion) numeroresguardo
+//     FROM asignacion_equipo_detalle aed
+//     INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
+//     INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
+//     INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
+//     INNER JOIN cat_usuario_nomina cun on cun.codigoempleado =ae.codigoempleado
+//             WHERE ae.codigoempleado =".$Datos->codigo." AND estatus_asignacion_detalle=1";
+//     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+//     dd($datos);
+
+    
+// }
+
+function getRelacionEquipos($dbcon, $Datos)
+{
+    $sql = "SELECT aed.cve_asignacion, aed.cve_cequipo, ce2.nombre_equipo, 
+    CONCAT(nombre, apellidopaterno, apellidomaterno) nombrecompleto, puesto, 
+    ae.codigoempleado, cun.departamento, marca, modelo, numero_serie, numero_factura,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE procesador
+            END AS procesador,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE vel_procesador
+            END AS vel_procesador,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE memoria_ram
+            END AS memoria_ram,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE capacidad_almacenamiento
+            END AS capacidad_almacenamiento,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE sistema_operativo
+            END AS sistema_operativo,
+            DATE(aed.fecha_asignacion) fechaasignacion,
+            CONCAT('MYS - TIC', ce2.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio,
+            CONCAT(DATE_FORMAT(ae.fecha_asignacion, '%d%m%Y') , 'MYS - ', ae.cve_asignacion) numeroresguardo
     FROM asignacion_equipo_detalle aed
     INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
-    INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
+    INNER JOIN caracteristicas_equipos ce ON ce.cve_cequipo = aed.cve_cequipo
     INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
-    INNER JOIN cat_usuario_nomina cun on cun.codigoempleado =ae.codigoempleado
-            WHERE ae.codigoempleado =".$Datos->codigo." AND estatus_asignacion_detalle=1";
+    INNER JOIN cat_usuario_nomina cun ON cun.codigoempleado = ae.codigoempleado
+    WHERE ae.codigoempleado = ".$Datos->codigo." AND estatus_asignacion_detalle = 1";
+
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+
 // trae los equipos de los empleados
 
 function getRelacionEquiposGrupos ($dbcon, $Datos){

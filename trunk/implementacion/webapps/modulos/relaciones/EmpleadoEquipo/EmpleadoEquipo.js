@@ -197,7 +197,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
             jsRemoveWindowLoad();
         });
     }
-
+    
 // trae los datos de la tabla asignación para que podamos ver los usuarios 
     $http.post('Controller.php', {
         'task': 'getRelacionEmpleados'

@@ -23,11 +23,11 @@
 
 		<div style=" display: flex;"> 
 			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
-				<span><b>Numero de Resguardo:</b> {{resguardo[0].numeroresguardo}}</span>
+				<span><b style="font-weight: bold; text-align: startr;">NÚMERO DE RESGURADO:</b> {{resguardo[0].numeroresguardo}}</span>
 
 			</div>
 			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
-				<span><b>Fecha de asignación: </b>{{resguardo[0].fechaasignacion}}</span>
+				<span><b style="font-weight: bold; text-align: startr;">FECHA DE ASIGNACIÓN: </b>{{resguardo[0].fechaasignacion}}</span>
  
 			</div>
 		</div>
@@ -38,12 +38,12 @@
 				<th colspan="5" style="text-align: center;">DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
 			</tr>
 			<tr ng-if="resguardo.length > 0">
-				<td style="border: solid 1px; text-align: center;" class="text-center">RESGUARDANTE: {{resguardo[0].nombrecompleto}}</td>
-				<td style="border: solid 1px; text-align: center;" class="text-center">AREA: {{resguardo[0].departamento}} </td>
+				<td style="border: solid 1px; text-align: startr; " class="text-center"><b style="font-weight: bold;">RESGUARDANTE:</b> {{resguardo[0].nombrecompleto}}</td>
+				<td style="border: solid 1px; text-align: startr; " class="text-center"><b style="font-weight: bold;">AREA:</b> {{resguardo[0].departamento}} </td>
 			</tr>
 			<tr ng-if="resguardo.length > 0">
-				<td style="border: solid 1px; text-align: center;" class="text-center">PUESTO: {{resguardo[0].puesto}} </td>
-				<td style="border: solid 1px; text-align: center;" class="text-center">NUMERO DE EMPLEADO: {{resguardo[0].codigoempleado}}</td>
+				<td style="border: solid 1px; text-align: startr; " class="text-center"><b style="font-weight: bold;">PUESTO:</b> {{resguardo[0].puesto}} </td>
+				<td style="border: solid 1px; text-align: startr; " class="text-center"><b style="font-weight: bold;">NUMERO DE EMPLEADO:</b> {{resguardo[0].codigoempleado}}</td>
 			</tr>
 		</table>
 		
@@ -51,11 +51,12 @@
 		<table class="table table-bordered" style="border-collapse: collapse; width:100%;">
 			<thead>
 				<tr style="border: solid 1px; background-color: #999999;">
-					<th colspan="6" style="text-align: center;" >REGISTRO DE HARDWARE</th>
+					<th colspan="7" style="text-align: center;" >REGISTRO DE HARDWARE</th>
 				</tr>
 				<tr style="border: solid 1px;">
 					<th style="border: solid 1px; text-align: center;" class="text-center">EQUIPO</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">MARCA</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">MODELO</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">No. SERIE</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">FOLIO</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">UBICACIÓN FISICA DEL EQUIPO</th>
@@ -66,6 +67,7 @@
 				<tr style="border: solid 1px;" ng-repeat="(i, obj) in resguardo">
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombre_equipo}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.marca}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.modelo}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numero_serie}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.folio}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
@@ -90,7 +92,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(i, obj) in resguardo track by i">
+				<tr ng-repeat="(i, obj) in resguardo track by i" ng-if="obj.procesador || obj.vel_procesador || obj.memoria_ram || obj.capacidad_almacenamiento || obj.sistema_operativo">
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.procesador}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.vel_procesador}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.memoria_ram}}</td>
@@ -104,13 +106,12 @@
 	
 		<div  style="border: solid 1px;">
 
-			<p style="font-weight: bold; text-align: center">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO</p>
-			<ol style=" text-align: start">
-				
-				<li>EQUIPO COMPLETAMENTE NUEVO</li>
-				<li>SE INSTALÓ PROGRAMAS BÁSICOS PARA USO DE ACTIVIDADES DIARIAS</li>
-				<li>CONFIGURACIÓN DE IMPRESORA</li>
-				<li>SE CONFIGURÓ EL CORREO ELECTRONICO</li>
+			<p style="font-weight: bold; text-align: center; margin-top: 5px;">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO</p>
+			<ol style=" text-align: start; margin-top: 0; ">
+				<li style="font-size: 10px; ">EQUIPO COMPLETAMENTE NUEVO</li>
+				<li style="font-size: 10px; ">SE INSTALÓ PROGRAMAS BÁSICOS PARA USO DE ACTIVIDADES DIARIAS</li>
+				<li style="font-size: 10px; ">CONFIGURACIÓN DE IMPRESORA</li>
+				<li style="font-size: 10px; ">SE CONFIGURÓ EL CORREO ELECTRONICO</li>
 			
 			
 			</ol>
@@ -132,7 +133,7 @@
 				 <hr>
 
 				 <!-- Descripción debajo de la línea -->
-				 <p style="text-align: center;">Resguardante.</p>
+				 <p style="text-align: center;">RESGUARDANTE.</p>
 
 			</div>
 			<div style=" flex: 1;  margin: 10px;  padding: 15px;">
@@ -142,7 +143,7 @@
 				 <hr>
 
 				 <!-- Descripción debajo de la línea -->
-				 <p style="text-align: center;">Jefe de Tecnologías de la Información y Comunicaciones.</p>
+				 <p style="text-align: center;">JEFE DE TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES.</p>
  
 			</div>
 		</div>
