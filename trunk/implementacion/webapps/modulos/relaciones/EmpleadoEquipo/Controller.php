@@ -37,8 +37,9 @@ function getRelacionGrupos ($dbcon){
 
 function getRelacionEquipos ($dbcon, $Datos){
 	$sql = "SELECT aed.cve_asignacion, aed.cve_cequipo,ce2.nombre_equipo, CONCAT(nombre, apellidopaterno, apellidomaterno)nombrecompleto, puesto, ae.codigoempleado,cun.departamento, marca, modelo, numero_serie,numero_factura,
-    procesador, vel_procesador, memoria_ram, capacidad_almacenamiento, sistema_operativo, aed.fecha_asignacion,
-    CONCAT('MYS - TIC', ce2.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio
+    procesador, vel_procesador, memoria_ram, capacidad_almacenamiento, sistema_operativo, DATE(aed.fecha_asignacion) fechaasignacion,
+    CONCAT('MYS - TIC', ce2.nombre_equipo, ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio,
+    CONCAT(DATE_FORMAT(ae.fecha_asignacion, '%d%m%Y') , 'MYS - ', ae.cve_asignacion) numeroresguardo
     FROM asignacion_equipo_detalle aed
     INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion
     INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo
