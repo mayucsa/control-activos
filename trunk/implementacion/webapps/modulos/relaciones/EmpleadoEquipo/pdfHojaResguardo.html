@@ -1,6 +1,30 @@
-<?php ?>
 
-<div class="container" style="display: none;">
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesPDF.css">
+   <style>
+	
+		.styled-table {
+			border-collapse: collapse;
+		}
+
+		.styled-table th, .styled-table td {
+			border: 5px solid black;
+			text-align: center;
+		}
+
+		.text-align-center {
+			text-align: center;
+		}
+
+		.importante {
+			background: blue;
+		}
+
+   </style>
+</head>
+<!-- ... tu código HTML ... -->
+
+<div  class="container" style="display: none;">
 	<div class="row" id="pdfHojaResguardo">
 		<table>
 			<tr>
@@ -17,15 +41,123 @@
 				</td>
 			</tr>
 		</table>
-		<table style="width: 80%; margin-left: 10%;">
+
+		<!-- <table style="width: 80%; margin-left: 10%;">
 			<tr>
 				<td style="width: 30%">
-					<span><b>Numero de Resguardo:</b> {{resguardo.sql.folio}}</span>
+					<span><b>Numero de Resguardo:</b> {{resguardo.folio}}</span>
 				</td>
 				<td style="width: 70%; text-align: center; padding-top: 10px; " >
 					<span><b>Fecha: </b>{{resguardo.sql.folio}}</span>
 				</td>
 			</tr>
 		</table>
+
+		<table style="width: 80%; margin-left: 10%;">
+			<tr>
+				<th colspan="2" style="text-align: center; " id="titulos">DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
+			</tr>
+			<tr ng-if="resguardo.length > 0">
+				<td>RESGUARDANTE: {{resguardo[0].nombrecompleto}}</td>
+				<td>AREA: {{resguardo[0].departamento}} </td>
+			</tr>
+			<tr ng-if="resguardo.length > 0">
+				<td>PUESTO: {{resguardo[0].puesto}} </td>
+				<td>NUMERO DE EMPLEADO: {{resguardo[0].codigoempleado}}</td>
+			</tr>
+		</table>
+		 -->
+		<br>
+		<table class="styled-table" >
+			>
+			<thead>
+				<tr>
+					<th colspan="6" >REGISTRO DE HARDWARE</th>
+				</tr>
+				<tr>
+					<th class="styled-table">EQUIPO</th>
+					<th class="styled-table">MARCA</th>
+					<th class="styled-table">No. SERIE</th>
+					<th class="styled-table">FOLIO</th>
+					<th class="styled-table">UBICACIÓN FISICA DEL EQUIPO</th>
+					<th class="styled-table">FACTURA</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(i, obj) in resguardo">
+					<td style="border: 2px solid black; text-align: center">{{obj.nombre_equipo}}</td>
+					<td class="styled-table">{{obj.marca}}</td>
+					<td class="styled-table">{{obj.numero_serie}}</td>
+					<td class="styled-table">{{obj.folio}}</td>
+					<td class="styled-table">{{obj.departamento}}</td>
+					<td class="styled-table">{{obj.numero_factura}}</td>
+					
+				</tr>
+			</tbody>
+		</table>
+		<br>
+
+		<table class="styled-table">
+			<thead>
+				<tr>
+					<th colspan="5" >COMPONENTES BASICOS DEL EQUIPO</th>
+				</tr>
+				<tr>
+					<th >PROCESADOR</th>
+					<th >VEL. PROCESADOR (GHz)</th>
+					<th >MEMORIA RAM</th>
+					<th >CAPACIDAD DEL DISCO DURO O ESTADO SOLIDO</th>
+					<th >SISTEMA OPERATIVO</th>
+	
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(i, obj) in resguardo track by i">
+					<td >{{obj.procesador}}</td>
+					<td >{{obj.vel_procesador}}</td>
+					<td >{{obj.memoria_ram}}</td>
+					<td >{{obj.capacidad_almacenamiento}}</td>
+					<td >{{obj.sistema_operativo}}</td>
+					
+				</tr>
+			</tbody>
+		</table>
+		<br> 
+		<P class="importante">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO
+			<ol>
+				<li>EQUIPO COMPLETAMENTE NUEVO</li>
+				<li>SE INSTALÓ PROGRAMAS BÁSICOS PARA USO DE ACTIVIDADES DIARIAS</li>
+				<li>CONFIGURACIÓN DE IMPRESORA</li>
+				<li>SE CONFIGURÓ EL CORREO ELECTRONICO</li>
+			</ol>
+		</P>
+		<br>
+		<P class="importante">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO
+			
+		</P>
+
+		<div class="row">
+			<div  class="col-md-6">
+				<P>NOMBRE Y FIRMA</P>
+				 <!-- Línea horizontal -->
+				 <hr>
+
+				 <!-- Descripción debajo de la línea -->
+				 <p>Esta es una descripción que aparece debajo de la línea horizontal.</p>
+			 
+
+			</div>
+			<div  class="col-md-6">
+				<P>NOMBRE Y FIRMA</P>
+				 <!-- Línea horizontal -->
+				 <hr>
+
+				 <!-- Descripción debajo de la línea -->
+				 <p>Esta es una descripción que aparece debajo de la línea horizontal.</p>
+			 
+
+			</div>
+			
+		</div>
 	</div>	
 </div>
