@@ -1,28 +1,4 @@
-
-<head>
-    <link rel="stylesheet" type="text/css" href="stylesPDF.css">
-   <style>
-	
-		.styled-table {
-			border-collapse: collapse;
-		}
-
-		.styled-table th, .styled-table td {
-			border: 5px solid black;
-			text-align: center;
-		}
-
-		.text-align-center {
-			text-align: center;
-		}
-
-		.importante {
-			background: blue;
-		}
-
-   </style>
-</head>
-<!-- ... tu código HTML ... -->
+<?php ?>
 
 <div  class="container" style="display: none;">
 	<div class="row" id="pdfHojaResguardo">
@@ -68,30 +44,28 @@
 		</table>
 		 -->
 		<br>
-		<table class="styled-table" >
-			>
+		<table class="table table-bordered" style="border-collapse: collapse; width:100%;">
 			<thead>
-				<tr>
+				<tr style="border: solid 1px;">
 					<th colspan="6" >REGISTRO DE HARDWARE</th>
 				</tr>
-				<tr>
-					<th class="styled-table">EQUIPO</th>
-					<th class="styled-table">MARCA</th>
-					<th class="styled-table">No. SERIE</th>
-					<th class="styled-table">FOLIO</th>
-					<th class="styled-table">UBICACIÓN FISICA DEL EQUIPO</th>
-					<th class="styled-table">FACTURA</th>
+				<tr style="border: solid 1px;">
+					<th style="border: solid 1px; text-align: center;" class="text-center">EQUIPO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">MARCA</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">No. SERIE</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">FOLIO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">UBICACIÓN FISICA DEL EQUIPO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">FACTURA</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(i, obj) in resguardo">
-					<td style="border: 2px solid black; text-align: center">{{obj.nombre_equipo}}</td>
-					<td class="styled-table">{{obj.marca}}</td>
-					<td class="styled-table">{{obj.numero_serie}}</td>
-					<td class="styled-table">{{obj.folio}}</td>
-					<td class="styled-table">{{obj.departamento}}</td>
-					<td class="styled-table">{{obj.numero_factura}}</td>
-					
+				<tr style="border: solid 1px;" ng-repeat="(i, obj) in resguardo">
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombre_equipo}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.marca}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numero_serie}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.folio}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numero_factura}}</td>
 				</tr>
 			</tbody>
 		</table>
