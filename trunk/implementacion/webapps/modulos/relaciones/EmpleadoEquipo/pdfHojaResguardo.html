@@ -1,5 +1,8 @@
 <?php ?>
+<head>
+	
 
+</head>
 <div  class="container" style="display: none;">
 	<div class="row" id="pdfHojaResguardo">
 		<table>
@@ -18,36 +21,37 @@
 			</tr>
 		</table>
 
-		<!-- <table style="width: 80%; margin-left: 10%;">
-			<tr>
-				<td style="width: 30%">
-					<span><b>Numero de Resguardo:</b> {{resguardo.folio}}</span>
-				</td>
-				<td style="width: 70%; text-align: center; padding-top: 10px; " >
-					<span><b>Fecha: </b>{{resguardo.sql.folio}}</span>
-				</td>
-			</tr>
-		</table>
+		<div style=" display: flex;"> 
+			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
+				<span><b>Numero de Resguardo:</b> {{resguardo.folio}}</span>
 
-		<table style="width: 80%; margin-left: 10%;">
-			<tr>
-				<th colspan="2" style="text-align: center; " id="titulos">DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
+			</div>
+			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
+				<span><b>Fecha de asignación: </b>{{resguardo.sql.folio}}</span>
+ 
+			</div>
+		</div>
+		
+
+		<table  class="table table-bordered" style="border-collapse: collapse; width:100%;">
+			<tr style="border: solid 1px; background-color: #999999;">
+				<th colspan="5" style="text-align: center;">DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
 			</tr>
 			<tr ng-if="resguardo.length > 0">
-				<td>RESGUARDANTE: {{resguardo[0].nombrecompleto}}</td>
-				<td>AREA: {{resguardo[0].departamento}} </td>
+				<td style="border: solid 1px; text-align: center;" class="text-center">RESGUARDANTE: {{resguardo[0].nombrecompleto}}</td>
+				<td style="border: solid 1px; text-align: center;" class="text-center">AREA: {{resguardo[0].departamento}} </td>
 			</tr>
 			<tr ng-if="resguardo.length > 0">
-				<td>PUESTO: {{resguardo[0].puesto}} </td>
-				<td>NUMERO DE EMPLEADO: {{resguardo[0].codigoempleado}}</td>
+				<td style="border: solid 1px; text-align: center;" class="text-center">PUESTO: {{resguardo[0].puesto}} </td>
+				<td style="border: solid 1px; text-align: center;" class="text-center">NUMERO DE EMPLEADO: {{resguardo[0].codigoempleado}}</td>
 			</tr>
 		</table>
-		 -->
+		
 		<br>
 		<table class="table table-bordered" style="border-collapse: collapse; width:100%;">
 			<thead>
-				<tr style="border: solid 1px;">
-					<th colspan="6" >REGISTRO DE HARDWARE</th>
+				<tr style="border: solid 1px; background-color: #999999;">
+					<th colspan="6" style="text-align: center;" >REGISTRO DE HARDWARE</th>
 				</tr>
 				<tr style="border: solid 1px;">
 					<th style="border: solid 1px; text-align: center;" class="text-center">EQUIPO</th>
@@ -71,67 +75,78 @@
 		</table>
 		<br>
 
-		<table class="styled-table">
+		<table class="table table-bordered" style="border-collapse: collapse; width:100%; ">
 			<thead>
-				<tr>
-					<th colspan="5" >COMPONENTES BASICOS DEL EQUIPO</th>
+				<tr style="border: solid 1px; background-color: #999999;">
+            <th colspan="5" style="text-align: center;" >COMPONENTES BASICOS DEL EQUIPO</th>
 				</tr>
 				<tr>
-					<th >PROCESADOR</th>
-					<th >VEL. PROCESADOR (GHz)</th>
-					<th >MEMORIA RAM</th>
-					<th >CAPACIDAD DEL DISCO DURO O ESTADO SOLIDO</th>
-					<th >SISTEMA OPERATIVO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">PROCESADOR</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">VEL. PROCESADOR (GHz)</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">MEMORIA RAM</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">CAPACIDAD DEL DISCO DURO O ESTADO SOLIDO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">SISTEMA OPERATIVO</th>
 	
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="(i, obj) in resguardo track by i">
-					<td >{{obj.procesador}}</td>
-					<td >{{obj.vel_procesador}}</td>
-					<td >{{obj.memoria_ram}}</td>
-					<td >{{obj.capacidad_almacenamiento}}</td>
-					<td >{{obj.sistema_operativo}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.procesador}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.vel_procesador}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.memoria_ram}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.capacidad_almacenamiento}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.sistema_operativo}}</td>
 					
 				</tr>
 			</tbody>
 		</table>
 		<br> 
-		<P class="importante">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO
-			<ol>
+	
+		<div  style="border: solid 1px;">
+
+			<p style="font-weight: bold; text-align: center">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO</p>
+			<ol style=" text-align: start">
+				
 				<li>EQUIPO COMPLETAMENTE NUEVO</li>
 				<li>SE INSTALÓ PROGRAMAS BÁSICOS PARA USO DE ACTIVIDADES DIARIAS</li>
 				<li>CONFIGURACIÓN DE IMPRESORA</li>
 				<li>SE CONFIGURÓ EL CORREO ELECTRONICO</li>
+			
+			
 			</ol>
-		</P>
-		<br>
-		<P class="importante">OBSERVACIONES GENERALES RESPECTO AL HARDWARE Y SOFTWARE REGISTRADO
-			
-		</P>
-
-		<div class="row">
-			<div  class="col-md-6">
-				<P>NOMBRE Y FIRMA</P>
-				 <!-- Línea horizontal -->
-				 <hr>
-
-				 <!-- Descripción debajo de la línea -->
-				 <p>Esta es una descripción que aparece debajo de la línea horizontal.</p>
-			 
-
-			</div>
-			<div  class="col-md-6">
-				<P>NOMBRE Y FIRMA</P>
-				 <!-- Línea horizontal -->
-				 <hr>
-
-				 <!-- Descripción debajo de la línea -->
-				 <p>Esta es una descripción que aparece debajo de la línea horizontal.</p>
-			 
-
-			</div>
-			
 		</div>
+		<br>
+		
+		<P style="background-color: #999999; border: solid 1px; text-align: start; font-weight: bold;">
+			MANIFIESTO L ACEPTACIÓN DEL RESGURADO Y EL BUEN USO DE LOS BIENES QUE SE LE ENLISTAN ARRIBA, 
+			LOS CUALES SON PROPIEDAD DE LA EMPRESA MAYUCSA Y ME HAN SIDO ASIGNADOS COMO 
+			APOYO A MIS FUNCIONES EN EL PAPEL DE TRABAJADR DEL MISMO
+			
+		</P>
+
+		<div style=" display: flex;"> 
+			<div style=" flex: 1;  margin: 10px;  padding: 15px; ">
+				<P style="text-align: center;">NOMBRE Y FIRMA</P>
+				<br>
+				 <!-- Línea horizontal -->
+				 <hr>
+
+				 <!-- Descripción debajo de la línea -->
+				 <p style="text-align: center;">Resguardante.</p>
+
+			</div>
+			<div style=" flex: 1;  margin: 10px;  padding: 15px;">
+				<P style="text-align: center;">NOMBRE Y FIRMA</P>
+				<br>
+				 <!-- Línea horizontal -->
+				 <hr>
+
+				 <!-- Descripción debajo de la línea -->
+				 <p style="text-align: center;">Jefe de Tecnologías de la Información y Comunicaciones.</p>
+ 
+			</div>
+		</div>
+
+		
 	</div>	
 </div>
