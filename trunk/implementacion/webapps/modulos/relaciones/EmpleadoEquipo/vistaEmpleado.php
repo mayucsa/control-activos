@@ -245,7 +245,7 @@
             </div>
         <!-- </div> -->
     <!-- </div> -->
-
+    HojaResguardo
     <!-- <div class="row"> -->
         <!-- <div class="col-md-12"> -->
             <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true">
@@ -282,6 +282,7 @@
                                         <td class="text-center">
                                                 <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultaEquiposGrupos(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposgrupo">
                                                 </button>
+                                                <button type="button" class="btn btn-danger btn-sm fas fa-file-pdf" ng-click="getPdfGrup(obj.codigoempleado, obj.numeroempleado)"  title="Descargar PDF"></button>
                                         </td>
                                         
                                     </tr>
@@ -296,6 +297,7 @@
     <?php include_once "../../footer.php" ?>
 </main>
     <?php include "pdfHojaResguardo.html"; ?>
+    <?php include "pdfHojaResguardoGrupo.html"; ?>
 </div>
 
 

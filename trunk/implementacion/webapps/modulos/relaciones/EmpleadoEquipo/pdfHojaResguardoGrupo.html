@@ -1,10 +1,10 @@
 <?php ?>
 <head>
 	
-	
+
 </head>
 <div  class="container" style="display: none;">
-	<div class="row" id="pdfHojaResguardo">
+	<div class="row" id="pdfHojaResguardoGrupo">
 		<table>
 			<tr>
 				<td colspan="2" style="text-align: right;">
@@ -23,17 +23,21 @@
 
 		<div style=" display: flex;"> 
 			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
-				<span><b style="font-weight: bold; text-align: startr;">NÚMERO DE RESGURADO:</b> {{resguardo[0].numeroresguardo}}</span>
+				<span><b style="font-weight: bold; text-align: startr;">NÚMERO DE RESGURADO:</b> {{resguardoGrupo[0].numeroresguardo}}</span>
 
 			</div>
 			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
-				<span><b style="font-weight: bold; text-align: startr;">FECHA DE ASIGNACIÓN: </b>{{resguardo[0].fechaasignacion}}</span>
+				<span><b style="font-weight: bold; text-align: startr;">GRUPO ASIGNADO:</b> {{resguardoGrupo[0].nombre_gpo}}</span>
+
+			</div>
+			<div style=" flex: 1;  margin: 10px;  padding: 15px; border: solid 1px;">
+				<span><b style="font-weight: bold; text-align: startr;">FECHA DE ASIGNACIÓN: </b>{{resguardoGrupo[0].fecha_asignacion}}</span>
  
 			</div>
 		</div>
 		
 
-		<table  class="table table-bordered" style="border-collapse: collapse; width:100%;">
+		<!-- <table  class="table table-bordered" style="border-collapse: collapse; width:100%;">
 			<tr style="border: solid 1px; background-color: #999999;">
 				<th colspan="5" style="text-align: center;">DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
 			</tr>
@@ -45,7 +49,7 @@
 				<td style="border: solid 1px; text-align: startr; " class="text-center"><b style="font-weight: bold;">PUESTO:</b> {{resguardo[0].puesto}} </td>
 				<td style="border: solid 1px; text-align: startr; " class="text-center"><b style="font-weight: bold;">NUMERO DE EMPLEADO:</b> {{resguardo[0].codigoempleado}}</td>
 			</tr>
-		</table>
+		</table> -->
 		
 		<br>
 		<table class="table table-bordered" style="border-collapse: collapse; width:100%;">
@@ -64,20 +68,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr style="border: solid 1px;" ng-repeat="(i, obj) in resguardo">
+				<tr style="border: solid 1px;" ng-repeat="(i, obj) in resguardoGrupo">
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombre_equipo}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.marca}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.modelo}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numero_serie}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.folio}}</td>
-					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombre_gpo}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numero_factura}}</td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
 
-		<table class="table table-bordered" style="border-collapse: collapse; width:100%; ">
+		<table class="table table-bordered" style="border-collapse: collapse; width:100%; "> 
 			<thead>
 				<tr style="border: solid 1px; background-color: #999999;">
             <th colspan="5" style="text-align: center;" >COMPONENTES BASICOS DEL EQUIPO</th>
@@ -92,7 +96,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(i, obj) in resguardo track by i" ng-if="obj.procesador || obj.vel_procesador || obj.memoria_ram || obj.capacidad_almacenamiento || obj.sistema_operativo">
+				<tr ng-repeat="(i, obj) in resguardoGrupo track by i" ng-if="obj.procesador || obj.vel_procesador || obj.memoria_ram || obj.capacidad_almacenamiento || obj.sistema_operativo">
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.procesador}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.vel_procesador}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.memoria_ram}}</td>
@@ -102,7 +106,36 @@
 				</tr>
 			</tbody>
 		</table>
+
 		<br> 
+
+		<table class="table table-bordered" style="border-collapse: collapse; width:100%; ">
+			<thead>
+				<tr style="border: solid 1px; background-color: #999999;">
+            <th colspan="5" style="text-align: center;" >DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
+				</tr>
+				<tr>
+					<th style="border: solid 1px; text-align: center;" class="text-center">NOMBRE COMPLETO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">CÓDIGO DE EMPLEADO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">AREA</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">PUESTO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">FIRMA</th>
+	
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(i, obj) in resguardoGrupo track by i" >
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombrecompleto}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.codigoempleado}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.puesto}}</td>
+					<!-- <td style="border: solid 1px; text-align: center;" class="text-center">{{obj.sistema_operativo}}</td> -->
+					
+				</tr>
+			</tbody>
+		</table>
+
+		<br>
 	
 		<div  style="border: solid 1px;">
 
@@ -133,7 +166,7 @@
 				 <hr>
 
 				 <!-- Descripción debajo de la línea -->
-				 <p style="text-align: center;">RESGUARDANTE. {{resguardo[0].nombrecompleto}}</p>
+				 <p style="text-align: center;">RESGUARDANTE. {{resguardoGrupo[0].nombrecompleto}}</p>
 
 			</div>
 			<div style=" flex: 1;  margin: 10px;  padding: 15px;">
