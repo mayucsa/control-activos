@@ -282,7 +282,7 @@
                                         <td class="text-center">
                                                 <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultaEquiposGrupos(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposgrupo">
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-sm fas fa-file-pdf" ng-click="getPdfGrup(obj.codigoempleado, obj.numeroempleado)"  title="Descargar PDF"></button>
+                                                <button type="button" class="btn btn-danger btn-sm fas fa-file-pdf" ng-click="getPdfGrup(obj.cve_grupo, obj.numeroempleado)"  title="Descargar PDF"></button>
                                         </td>
                                         
                                     </tr>

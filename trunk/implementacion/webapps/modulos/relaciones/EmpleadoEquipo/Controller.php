@@ -26,11 +26,12 @@ function getRelacionEmpleados ($dbcon){
     dd($datos);
 }
 // trae a los grupos que tienen equipos
-function getRelacionGrupos ($dbcon){
+function getRelacionGrupos ($dbcon, $Datos){
 	$sql = "SELECT DISTINCT nombre_gpo, descripcion, gu.cve_grupo, codigoempleado 
-    from grupos_usuarios gu
-    inner join asignacion_equipo ae on gu.cve_grupo = ae.codigoempleado
-   INNER JOIN grupos_usuarios_detalle gud on gud.cve_grupo =gu.cve_grupo   ;";
+        from grupos_usuarios gu
+        INNER JOIN asignacion_equipo ae on gu.cve_grupo = ae.codigoempleado
+       INNER JOIN grupos_usuarios_detalle gud on gud.cve_grupo =gu.cve_grupo
+       ;";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
@@ -129,7 +130,8 @@ function getRelacionEquiposGrupos ($dbcon, $Datos){
     CONCAT(cun.nombre,' ', cun.apellidopaterno, ' ', cun.apellidomaterno) AS nombrecompleto,
     cun.codigoempleado,
     cun.departamento,
-    cun.puesto
+    cun.puesto, 
+    ae.fecha_asignacion
 FROM asignacion_equipo_detalle aed
     INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion 
     INNER JOIN caracteristicas_equipos ce2 ON ce2.cve_cequipo = aed.cve_cequipo 
@@ -181,7 +183,7 @@ switch ($tarea) {
         getRelacionEmpleados($dbcon);
     break; 
     case 'getRelacionGrupos':
-        getRelacionGrupos($dbcon);
+        getRelacionGrupos($dbcon,  $objDatos);
     break; 
     case 'getRelacionEquipos':
         getRelacionEquipos($dbcon, $objDatos);

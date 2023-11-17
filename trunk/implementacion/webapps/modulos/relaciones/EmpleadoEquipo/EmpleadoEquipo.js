@@ -6,6 +6,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     
  $scope.empleados='';
  $scope.btneg = "";
+ 
 
 
     $scope.agregarV = function(){
@@ -198,17 +199,20 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
             jsRemoveWindowLoad();
         });
     }
+    
 // hace lo mismo que lo de arriba pero trae a los grupos
-    $scope.getPdfGrup =  function(codigoempleado, numeroempleado){
-        console.log('codigoempleado', numeroempleado);
+
+    $scope.getPdfGrup =  function(cve_grupo){
         jsShowWindowLoad('Imprimiendo hoja de resguardo del grupo...');
         $http.post('Controller.php', {
             'task': 'getRelacionEquiposGrupos',
-            'codigo': codigoempleado
+            'codigo': cve_grupo
         }).then(function (response){
+            // firma=response.data[4];
             response = response.data;
             console.log('HojaResguardoGrupo', response);
             $scope.resguardoGrupo = response;
+            // console.log('Empleado agregado:', response);
             setTimeout(function(){
                 imprSelec('pdfHojaResguardoGrupo');
                 jsRemoveWindowLoad();
@@ -219,6 +223,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
             jsRemoveWindowLoad();
         });
     }
+    
    
 // trae los datos de la tabla asignación para que podamos ver los usuarios 
     $http.post('Controller.php', {

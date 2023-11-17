@@ -119,7 +119,7 @@
 					<th style="border: solid 1px; text-align: center;" class="text-center">CÓDIGO DE EMPLEADO</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">AREA</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">PUESTO</th>
-					<th style="border: solid 1px; text-align: center;" class="text-center">FIRMA</th>
+					<!-- <th style="border: solid 1px; text-align: center;" class="text-center">FIRMA</th> -->
 	
 				</tr>
 			</thead>
@@ -151,6 +151,7 @@
 		</div>
 		<br>
 		
+		
 		<P style="background-color: #999999; border: solid 1px; text-align: start; font-weight: bold;">
 			MANIFIESTO L ACEPTACIÓN DEL RESGURADO Y EL BUEN USO DE LOS BIENES QUE SE LE ENLISTAN ARRIBA, 
 			LOS CUALES SON PROPIEDAD DE LA EMPRESA MAYUCSA Y ME HAN SIDO ASIGNADOS COMO 
@@ -159,16 +160,19 @@
 		</P>
 
 		<div style=" display: flex;"> 
-			<div style=" flex: 1;  margin: 10px;  padding: 15px; ">
-				<P style="text-align: center;">NOMBRE Y FIRMA</P>
+			<div style="flex: 1; margin: 10px; padding: 15px;" ng-repeat="(i, obj) in resguardoGrupo track by i">
+				<p style="text-align: center;">NOMBRE Y FIRMA</p>
 				<br>
-				 <!-- Línea horizontal -->
-				 <hr>
+				<!-- Línea horizontal -->
+				<hr>
+			
+				<!-- Descripción debajo de la línea -->
+				<div style="text-align: center;">
+				  <p>RESGUARDANTE: {{obj.nombrecompleto}}</p>
+				  <!-- <p>Firma: {{item.firma}}</p> -->
+				</div>
+			  </div>
 
-				 <!-- Descripción debajo de la línea -->
-				 <p style="text-align: center;">RESGUARDANTE. {{resguardoGrupo[0].nombrecompleto}}</p>
-
-			</div>
 			<div style=" flex: 1;  margin: 10px;  padding: 15px;">
 				<P style="text-align: center;">NOMBRE Y FIRMA</P>
 				<br>
