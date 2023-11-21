@@ -208,34 +208,13 @@ $scope.getPdfGrup = function(cve_grupo) {
         'task': 'getRelacionEquiposGrupos',
         'codigo': cve_grupo
     }).then(function(response) {
-        // Suponiendo que resguardoGrupo contiene el resultado de tu consulta
-        let resguardoGrupo = response.nombrecompleto; // Ajusta según la estructura de tu respuesta
-
-        // Crear una nueva variable para repetir la información
-        let empleadosRepetidos = [];
-
-        // Iterar sobre resguardoGrupo y repetir la información
-        for (let empleado of resguardoGrupo) {
-            for (let i = 0; i < empleado.cantidad_empleados; i++) {
-                empleadosRepetidos.push({
-                    nombrecompletoInfo: empleado.nombre +' '+empleado.apellidopaterno + ' '+empleado.apellidomaterno,
-                    numeroempleado: empleado.numeroempleado,
-                    departamento: empleado.departamento,
-                    puesto: empleado.puesto,
-                    // Agrega otros campos según sea necesario
-                });
-            }
-        }
+       
 
         response = response.data;
-        console.log(Array.isArray(resguardoGrupo));
-        console.log(resguardoGrupo[0]);
-
-
-        console.log($scope.empleadosRepetidos);
+        // console.log($scope.empleadosRepetidos);
         console.log('HojaResguardoGrupo', response);
-        $scope.resguardoGrupo = response;
-
+        $scope.resguardoGrupo = response.datos1;
+        $scope.resguardoEmpleados = response.datos2;
         setTimeout(function() {
             imprSelec('pdfHojaResguardoGrupo');
             jsRemoveWindowLoad();

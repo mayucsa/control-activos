@@ -127,8 +127,21 @@ function getRelacionEquiposGrupos ($dbcon, $Datos){
     inner join cat_equipos ce2 on ce2.cve_equipo=ce.cve_equipo
     where gu.cve_grupo=2
     group by  aed.cve_cequipo";
-    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
-    dd($datos);
+
+      // Segunda consulta
+    $sql2 = "SELECT cun.codigoempleado, CONCAT(cun.nombre, ' ',cun.apellidopaterno ,' ',cun.apellidomaterno) nombrecompleto, 
+    cun.puesto, cun.departamento FROM cat_usuario_nomina cun
+    where cun.codigoempleado =2553;";
+
+// Ejecutar ambas consultas
+$datos1 = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+$datos2 = $dbcon->qBuilder($dbcon->conn(), 'all', $sql2);
+
+// Puedes acceder a los resultados de ambas consultas usando $datos1 y $datos2
+$respuesta = array('datos1' => $datos1, 'datos2' => $datos2);
+
+// Enviar la respuesta como JSON
+echo json_encode($respuesta);
 }
 function editarRelacion ($dbcon, $Datos){
 	$sql = "UPDATE asignacion_equipo_detalle  set estatus_asignacion_detalle=0

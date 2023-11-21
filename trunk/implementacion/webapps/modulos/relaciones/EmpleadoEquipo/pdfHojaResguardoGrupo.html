@@ -115,16 +115,18 @@
 					<th colspan="5" style="text-align: center;" >DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
 				</tr>
 				<tr>
-					<th style="border: solid 1px; text-align: center;" class="text-center">NOMBRES DE EMPLEADOS</th>
-					<th style="border: solid 1px; text-align: center;" class="text-center">CANTIDAD DE EMPLEADOS</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">CÓDIGO DE EMPLEADO</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">NOMBRE DE LOS EMPLEADOS</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">PUESTO</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">DEPARTAMENTO</th>
 					<!-- Otros encabezados según tus necesidades -->
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(i, obj) in empleadosRepetidos" >
-					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombrecompletoInfo}}</td>
-					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numeroempleado}}</td>
+				<tr ng-repeat="(i, obj) in resguardoEmpleados" >
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.codigoempleado}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombrecompleto}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.puesto}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
 					<!-- Otros datos según tus necesidades -->
 				</tr>
@@ -191,7 +193,7 @@
 			
 				<!-- Descripción debajo de la línea -->
 				<div style="text-align: center;">
-				  <p>RESGUARDANTE: {{obj.nombrecompleto}}</p>
+				  <p>RESGUARDANTE: {{obj.resguardoEmpleados.nombrecompleto}}</p>
 				  <!-- <p>Firma: {{item.firma}}</p> -->
 				</div>
 			  </div>
