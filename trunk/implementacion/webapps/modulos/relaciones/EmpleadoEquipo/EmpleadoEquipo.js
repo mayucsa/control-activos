@@ -142,11 +142,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
         }).then(function(response) {
             response = response.data;
             console.log('verRelacionesEquipos', response);
-            // Destruye la instancia DataTable existente si hay una
-            // if ($.fn.DataTable.isDataTable('#tablaRelacionEquipo')) 
-            // {
-            // $('#tablaRelacionEquipo').DataTable().destroy();
-            //  }
+           
             $scope.verEquiposGrupos = response;
             setTimeout(function(){
                 $('#tablaEquiposGrupos').DataTable({
@@ -179,14 +175,17 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
 	}
 // trae los datos de la tabla asignación detalle, para que se muestre los equipos que tiene cierto usuario
 
-// hace que se ejecute el pdf que contiene los datos del usuario
     $scope.getPDF =  function(codigoempleado){
         // console.log('codigoempleado', codigoempleado);
         jsShowWindowLoad('Imprimiendo hoja de resguardo de empleado...');
+       
         $http.post('Controller.php', {
             'task': 'getRelacionEquipos',
-            'codigo': codigoempleado
+            'codigo': codigoempleado,
+          
         }).then(function (response){
+            // hace que se ejecute el pdf que contiene los datos del usuario
+
             response = response.data;
             console.log('HojaResguardo', response);
             $scope.resguardo = response;
@@ -202,27 +201,51 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
     
 // hace lo mismo que lo de arriba pero trae a los grupos
 
-    $scope.getPdfGrup =  function(cve_grupo){
-        jsShowWindowLoad('Imprimiendo hoja de resguardo del grupo...');
-        $http.post('Controller.php', {
-            'task': 'getRelacionEquiposGrupos',
-            'codigo': cve_grupo
-        }).then(function (response){
-            // firma=response.data[4];
-            response = response.data;
-            console.log('HojaResguardoGrupo', response);
-            $scope.resguardoGrupo = response;
-            // console.log('Empleado agregado:', response);
-            setTimeout(function(){
-                imprSelec('pdfHojaResguardoGrupo');
-                jsRemoveWindowLoad();
-            }, 700);
-        }, function(error){
-            console.log('error', error);
-           
+$scope.getPdfGrup = function(cve_grupo) {
+    jsShowWindowLoad('Imprimiendo hoja de resguardo del grupo...');
+
+    $http.post('Controller.php', {
+        'task': 'getRelacionEquiposGrupos',
+        'codigo': cve_grupo
+    }).then(function(response) {
+        // Suponiendo que resguardoGrupo contiene el resultado de tu consulta
+        let resguardoGrupo = response.nombrecompleto; // Ajusta según la estructura de tu respuesta
+
+        // Crear una nueva variable para repetir la información
+        let empleadosRepetidos = [];
+
+        // Iterar sobre resguardoGrupo y repetir la información
+        for (let empleado of resguardoGrupo) {
+            for (let i = 0; i < empleado.cantidad_empleados; i++) {
+                empleadosRepetidos.push({
+                    nombrecompletoInfo: empleado.nombre +' '+empleado.apellidopaterno + ' '+empleado.apellidomaterno,
+                    numeroempleado: empleado.numeroempleado,
+                    departamento: empleado.departamento,
+                    puesto: empleado.puesto,
+                    // Agrega otros campos según sea necesario
+                });
+            }
+        }
+
+        response = response.data;
+        console.log(Array.isArray(resguardoGrupo));
+        console.log(resguardoGrupo[0]);
+
+
+        console.log($scope.empleadosRepetidos);
+        console.log('HojaResguardoGrupo', response);
+        $scope.resguardoGrupo = response;
+
+        setTimeout(function() {
+            imprSelec('pdfHojaResguardoGrupo');
             jsRemoveWindowLoad();
-        });
-    }
+        }, 700);
+    }, function(error) {
+        console.log('error', error);
+        jsRemoveWindowLoad();
+    });
+}
+
     
    
 // trae los datos de la tabla asignación para que podamos ver los usuarios 

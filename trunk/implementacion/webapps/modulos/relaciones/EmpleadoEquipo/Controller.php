@@ -87,7 +87,8 @@ function getRelacionEquipos($dbcon, $Datos)
     INNER JOIN caracteristicas_equipos ce ON ce.cve_cequipo = aed.cve_cequipo
     INNER JOIN cat_equipos ce2 ON ce2.cve_equipo = ce.cve_equipo
     INNER JOIN cat_usuario_nomina cun ON cun.codigoempleado = ae.codigoempleado
-    WHERE  ae.codigoempleado = ".$Datos->codigo." AND estatus_asignacion_detalle = 1";
+    WHERE  ae.codigoempleado = ".$Datos->codigo." AND estatus_asignacion_detalle = 1
+    ";
 
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
@@ -96,52 +97,36 @@ function getRelacionEquipos($dbcon, $Datos)
 // trae los equipos de los empleados 
 
 function getRelacionEquiposGrupos ($dbcon, $Datos){
-	$sql = "SELECT DISTINCT
-    CONCAT(DATE_FORMAT(ae.fecha_asignacion, '%d%m%Y'), 'MYS - ', ae.cve_asignacion) AS numeroresguardo,
+	$sql = "SELECT 
+    gu.cve_grupo,
     gu.nombre_gpo,
-    ae.estatus_asignacion,
-    ce.nombre_equipo,
-    ce2.marca,
-    ce2.modelo,
-    ce2.numero_serie,
-    CONCAT('MYS - TIC', ce.nombre_equipo, ce2.cve_cequipo, ' - ', DATE_FORMAT(ce2.fecha_ingreso, '%d%m%Y')) AS folio,
-    gu.nombre_gpo,
-    ce2.numero_factura,
-    CASE
-        WHEN ce.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
-        ELSE ce2.procesador
-    END AS procesador,
-    CASE
-        WHEN ce.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
-        ELSE ce2.vel_procesador
-    END AS vel_procesador,
-    CASE
-        WHEN ce.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
-        ELSE ce2.memoria_ram
-    END AS memoria_ram,
-    CASE
-        WHEN ce.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
-        ELSE ce2.capacidad_almacenamiento
-    END AS capacidad_almacenamiento,
-    CASE
-        WHEN ce.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
-        ELSE ce2.sistema_operativo
-    END AS sistema_operativo,
-    CONCAT(cun.nombre,' ', cun.apellidopaterno, ' ', cun.apellidomaterno) AS nombrecompleto,
-    cun.codigoempleado,
-    cun.departamento,
-    cun.puesto, 
-    ae.fecha_asignacion
-FROM asignacion_equipo_detalle aed
-    INNER JOIN asignacion_equipo ae ON ae.cve_asignacion = aed.cve_asignacion 
-    INNER JOIN caracteristicas_equipos ce2 ON ce2.cve_cequipo = aed.cve_cequipo 
-    INNER JOIN cat_equipos ce ON ce.cve_equipo = ce2.cve_equipo
-    INNER JOIN grupos_usuarios gu ON gu.cve_grupo = ae.codigoempleado 
-    INNER JOIN grupos_usuarios_detalle gud ON gud.cve_grupo = gu.cve_grupo 
-    INNER JOIN cat_usuario_nomina cun ON cun.codigoempleado = gud.numeroempleado 
-WHERE
-    ae.codigoempleado = ".$Datos->codigo."
-GROUP BY nombrecompleto, codigoempleado, departamento, puesto";
+   group_concat(concat(gud.numeroempleado,'.- ',cun.nombre,' ',cun.apellidopaterno,' ',cun.apellidomaterno,
+' ',cun.departamento, ' ', cun.puesto)separator ',') nombrecompleto,
+    COUNT(*) as cantidad_empleados,
+    aed.cve_cequipo,
+    ce.marca,
+    ce.modelo,
+    ce.descripcion,
+    ce.numero_serie,
+    ce.numero_factura,
+    ce.sistema_operativo,
+    ce.procesador,
+    ce.vel_procesador,
+    ce.memoria_ram,
+    ce.tipo_almacenamiento,
+    ce.capacidad_almacenamiento,
+    ce2.nombre_equipo,
+    ce2.tipo
+    from 
+    grupos_usuarios gu
+    inner join grupos_usuarios_detalle gud on gu.cve_grupo=gud.cve_grupo
+    inner join cat_usuario_nomina cun on gud.numeroempleado=cun.codigoempleado
+    inner join asignacion_equipo ae on ae.codigoempleado=gu.cve_grupo 
+    inner join asignacion_equipo_detalle aed on ae.cve_asignacion=aed.cve_asignacion and aed.cve_asignacion=3
+    inner join caracteristicas_equipos ce on ce.cve_cequipo=aed.cve_cequipo
+    inner join cat_equipos ce2 on ce2.cve_equipo=ce.cve_equipo
+    where gu.cve_grupo=2
+    group by  aed.cve_cequipo";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }

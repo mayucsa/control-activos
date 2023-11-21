@@ -108,8 +108,31 @@
 		</table>
 
 		<br> 
-
+		
 		<table class="table table-bordered" style="border-collapse: collapse; width:100%; ">
+			<thead>
+				<tr style="border: solid 1px; background-color: #999999;">
+					<th colspan="5" style="text-align: center;" >DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
+				</tr>
+				<tr>
+					<th style="border: solid 1px; text-align: center;" class="text-center">NOMBRES DE EMPLEADOS</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">CANTIDAD DE EMPLEADOS</th>
+					<th style="border: solid 1px; text-align: center;" class="text-center">DEPARTAMENTO</th>
+					<!-- Otros encabezados según tus necesidades -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(i, obj) in empleadosRepetidos" >
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombrecompletoInfo}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numeroempleado}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
+					<!-- Otros datos según tus necesidades -->
+				</tr>
+			</tbody>
+		</table>
+		
+
+		<!-- <table class="table table-bordered" style="border-collapse: collapse; width:100%; ">
 			<thead>
 				<tr style="border: solid 1px; background-color: #999999;">
             <th colspan="5" style="text-align: center;" >DATOS GENERALES DE QUIEN RESGUARDA EL EQUIPO INFORMATICO</th>
@@ -119,21 +142,21 @@
 					<th style="border: solid 1px; text-align: center;" class="text-center">CÓDIGO DE EMPLEADO</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">AREA</th>
 					<th style="border: solid 1px; text-align: center;" class="text-center">PUESTO</th>
-					<!-- <th style="border: solid 1px; text-align: center;" class="text-center">FIRMA</th> -->
+					<th style="border: solid 1px; text-align: center;" class="text-center">FIRMA</th>
 	
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="(i, obj) in resguardoGrupo track by i" >
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.nombrecompleto}}</td>
-					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.codigoempleado}}</td>
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.numeroempleado}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.departamento}}</td>
 					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.puesto}}</td>
-					<!-- <td style="border: solid 1px; text-align: center;" class="text-center">{{obj.sistema_operativo}}</td> -->
+					<td style="border: solid 1px; text-align: center;" class="text-center">{{obj.sistema_operativo}}</td>
 					
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
 
 		<br>
 	
