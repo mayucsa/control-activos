@@ -97,41 +97,41 @@ function getRelacionEquipos($dbcon, $Datos)
 // trae los equipos de los empleados 
 
 function getRelacionEquiposGrupos ($dbcon, $Datos){
-	$sql = "SELECT 
-    gu.cve_grupo,
-    gu.nombre_gpo,
-   group_concat(concat(gud.numeroempleado,'.- ',cun.nombre,' ',cun.apellidopaterno,' ',cun.apellidomaterno,
-' ',cun.departamento, ' ', cun.puesto)separator ',') nombrecompleto,
-    COUNT(*) as cantidad_empleados,
-    aed.cve_cequipo,
-    ce.marca,
-    ce.modelo,
-    ce.descripcion,
-    ce.numero_serie,
-    ce.numero_factura,
-    ce.sistema_operativo,
-    ce.procesador,
-    ce.vel_procesador,
-    ce.memoria_ram,
-    ce.tipo_almacenamiento,
-    ce.capacidad_almacenamiento,
-    ce2.nombre_equipo,
-    ce2.tipo
-    from 
-    grupos_usuarios gu
-    inner join grupos_usuarios_detalle gud on gu.cve_grupo=gud.cve_grupo
-    inner join cat_usuario_nomina cun on gud.numeroempleado=cun.codigoempleado
-    inner join asignacion_equipo ae on ae.codigoempleado=gu.cve_grupo 
-    inner join asignacion_equipo_detalle aed on ae.cve_asignacion=aed.cve_asignacion and aed.cve_asignacion=3
-    inner join caracteristicas_equipos ce on ce.cve_cequipo=aed.cve_cequipo
-    inner join cat_equipos ce2 on ce2.cve_equipo=ce.cve_equipo
-    where gu.cve_grupo=2
-    group by  aed.cve_cequipo";
+	$sql = "SELECT ce2.nombre_equipo, ce.marca, ce.modelo, ce.numero_serie, gu.nombre_gpo, ce.numero_factura,
+    CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE procesador
+            END AS procesador,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE vel_procesador
+            END AS vel_procesador,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE memoria_ram
+            END AS memoria_ram,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE capacidad_almacenamiento
+            END AS capacidad_almacenamiento,
+            CASE
+                WHEN ce2.nombre_equipo NOT IN ('laptop', 'cpu', 'all in one') THEN NULL
+                ELSE sistema_operativo
+            END AS sistema_operativo, 
+    aed.fecha_asignacion  
+    from grupos_usuarios gu
+    INNER JOIN asignacion_equipo ae on ae.codigoempleado =gu.cve_grupo
+    INNER JOIN asignacion_equipo_detalle aed on aed.cve_asignacion =ae.cve_asignacion 
+    INNER JOIN caracteristicas_equipos ce on ce.cve_cequipo =aed.cve_cequipo 
+    INNER JOIN cat_equipos ce2 on ce2.cve_equipo =ce.cve_equipo 
+    WHERE gu.cve_grupo =".$Datos->codigo."";
 
       // Segunda consulta
-    $sql2 = "SELECT cun.codigoempleado, CONCAT(cun.nombre, ' ',cun.apellidopaterno ,' ',cun.apellidomaterno) nombrecompleto, 
-    cun.puesto, cun.departamento FROM cat_usuario_nomina cun
-    where cun.codigoempleado =2553;";
+      $sql2 = "SELECT cun.codigoempleado, CONCAT(cun.nombre, ' ',cun.apellidopaterno ,' ',cun.apellidomaterno)nombrecompleto, 
+      cun.puesto, cun.departamento from cat_usuario_nomina cun
+      inner join grupos_usuarios_detalle gud on gud.numeroempleado =cun.codigoempleado 
+      inner join grupos_usuarios gu on gu.cve_grupo = gud.cve_grupo 
+      where gu.cve_grupo=".$Datos->codigo."";
 
 // Ejecutar ambas consultas
 $datos1 = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);

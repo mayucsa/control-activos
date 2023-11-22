@@ -185,7 +185,7 @@
 		</P>
 
 		<div style=" display: flex;"> 
-			<div style="flex: 1; margin: 10px; padding: 15px;" ng-repeat="(i, obj) in resguardoGrupo track by i">
+			<div style="flex: 1; margin: 10px; padding: 15px;" ng-repeat="(i, obj) in resguardoEmpleados">
 				<p style="text-align: center;">NOMBRE Y FIRMA</p>
 				<br>
 				<!-- Línea horizontal -->
@@ -193,7 +193,7 @@
 			
 				<!-- Descripción debajo de la línea -->
 				<div style="text-align: center;">
-				  <p>RESGUARDANTE: {{obj.resguardoEmpleados.nombrecompleto}}</p>
+				  <p>RESGUARDANTE: {{obj.nombrecompleto}}</p>
 				  <!-- <p>Firma: {{item.firma}}</p> -->
 				</div>
 			  </div>

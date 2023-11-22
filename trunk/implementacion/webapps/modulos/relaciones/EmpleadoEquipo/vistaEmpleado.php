@@ -108,7 +108,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="(i, obj) in verEquiposGrupos track by i">     
+                                <tr ng-repeat="(i, obj) in verEquiposGrupos ">     
                                                 <td class="text-center">{{obj.nombre_equipo}} </td> 
                                                 <td class="text-center">{{obj.marca}} </td>
                                                 <td class="text-center">{{obj.modelo}} </td>
@@ -132,7 +132,7 @@
         </div>
     </div>
 
-      <!-- modal para ver los equipos de los grupos -->
+      <!-- modal para ver los empleados de los grupos -->
       <div class="modal fade bd-example-modal-lg " id="modalLista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
@@ -245,7 +245,7 @@
             </div>
         <!-- </div> -->
     <!-- </div> -->
-    HojaResguardo
+
     <!-- <div class="row"> -->
         <!-- <div class="col-md-12"> -->
             <div class="tile" ng-model="grupos" id="grupos" ng-show="grupos == true">
@@ -273,14 +273,14 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="(i, obj) in verRelacionesGrupo ">
-                                        <td class="text-center">{{obj.codigoempleado}}</td>
+                                        <td class="text-center">{{obj.cve_grupo}}</td>
                                         <td class="text-center">{{obj.nombre_gpo}}</td>
                                         <td class="text-center">{{obj.descripcion}}</td>
                                         <td class="text-center">
                                         <span class="btn btn-info btn-sm" title="Ver lista" data-toggle="modal" data-target="#modalLista" ng-click="verLista(obj.cve_grupo)"><i class="fas fa-list-ol"></i></span>
                                         </td>
                                         <td class="text-center">
-                                                <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultaEquiposGrupos(obj.codigoempleado)" data-toggle="modal" data-target="#verEquiposgrupo">
+                                                <button type="button" class="btn btn-warning  btn-sm  far fa-eye" ng-click="consultaEquiposGrupos(obj.cve_grupo)" data-toggle="modal" data-target="#verEquiposgrupo">
                                                 </button>
                                                 <button type="button" class="btn btn-danger btn-sm fas fa-file-pdf" ng-click="getPdfGrup(obj.cve_grupo, obj.numeroempleado)"  title="Descargar PDF"></button>
                                         </td>

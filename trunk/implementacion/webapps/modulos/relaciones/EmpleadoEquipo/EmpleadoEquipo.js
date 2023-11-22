@@ -134,16 +134,18 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
         
 	}
 
-    $scope.consultaEquiposGrupos = function(codigoempleado){
-        console.log("prueba:", codigoempleado);
+    $scope.consultaEquiposGrupos = function(cve_grupo){
+        console.log("prueba:", cve_grupo);
         $http.post('Controller.php', {
             'task': 'getRelacionEquiposGrupos',
-            'codigo': codigoempleado
+            'codigo': cve_grupo 
+            
         }).then(function(response) {
             response = response.data;
             console.log('verRelacionesEquipos', response);
-           
-            $scope.verEquiposGrupos = response;
+            console.log('codigo', cve_grupo);
+            $scope.verEquiposGrupos = response.datos1;
+            $('#tablaEquiposGrupos').DataTable().destroy();
             setTimeout(function(){
                 $('#tablaEquiposGrupos').DataTable({
                     "processing": true,
@@ -167,7 +169,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
         
                     }
                 });
-            },400);
+            },800);
         }, function(error){
             console.log('error', error);
         });
@@ -199,7 +201,7 @@ app.controller('vistaEmpleadoEquipo', function (BASEURL, ID, $scope, $http) {
         });
     }
     
-// hace lo mismo que lo de arriba pero trae a los grupos
+// hace lo mismo que lo de arriba pero trae a los grupos verEquiposGrupos
 
 $scope.getPdfGrup = function(cve_grupo) {
     jsShowWindowLoad('Imprimiendo hoja de resguardo del grupo...');
@@ -208,13 +210,14 @@ $scope.getPdfGrup = function(cve_grupo) {
         'task': 'getRelacionEquiposGrupos',
         'codigo': cve_grupo
     }).then(function(response) {
-       
+      
 
         response = response.data;
         // console.log($scope.empleadosRepetidos);
         console.log('HojaResguardoGrupo', response);
         $scope.resguardoGrupo = response.datos1;
         $scope.resguardoEmpleados = response.datos2;
+        console.log('prueba',$scope.resguardoEmpleados);
         setTimeout(function() {
             imprSelec('pdfHojaResguardoGrupo');
             jsRemoveWindowLoad();
