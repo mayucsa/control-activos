@@ -65,15 +65,11 @@
                   <li>
                     <a class="treeview-item" href="../../catalogos/grupos/grupo.php"><i class="app-menu__icon far fa-circle"></i> Grupos</a>
                   </li>
-                  <li>
+                  <!-- El modulo de servicios aun no esta vigente -->
+                  <!-- <li>
                     <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Servicios</a>
-                  </li>
-                  <!-- <li >
-                    <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
-                  </li>
-                  <li>
-                    <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
                   </li> -->
+                 
                 </ul>
             </li>
             <!-- MOVIMIENTOS -->
@@ -85,15 +81,11 @@
                 <li >
                   <a class="treeview-item" href="../../catalogos/equipos/caracteristicas_equipo.php"><i class="app-menu__icon far fa-circle"></i> Alta de equipos</a>
                 </li>
-                <!-- <li>
-                  <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Alta de servicios</a>
-                </li> -->
+              
                 <li>
                   <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="app-menu__icon far fa-circle"></i> Asignación</a>
                 </li>
-                <!-- <li>
-                  <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="app-menu__icon far fa-circle"></i>Mantenimiento</a>
-                </li> -->
+                
               </ul>
             </li>
             <!-- VER RELACIONES  -->

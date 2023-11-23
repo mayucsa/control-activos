@@ -102,7 +102,8 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
               <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-              <li class="breadcrumb-item"><a href="asignacion.php"> Asignación</a></li>
+              <li class="breadcrumb-item"><a href="../../bienvenida/bienvenida/bienvenida.php">INICIO</a></li>
+              <li class="breadcrumb-item"><a href="../../relaciones/EmpleadoEquipo/vistaEmpleado.php">VER RELACIONES</a></li>
             </ul>
         </div>
         <!-- <div class="container"> -->
