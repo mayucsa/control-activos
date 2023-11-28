@@ -63,15 +63,27 @@
                                     <input class="form-control UpperCase text-center" ng-model="cambiaDescripcion" id="cambiaDescripcion" autocomplete="off" >
                                     <label>Descripción</label>
                                 </div>
-                                <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25" >
-                                    <input class="form-control UpperCase text-center" ng-model="cambiaNumerofactura" id="cambiaNumerofactura" autocomplete="off" >
-                                    <label>Número de factura</label>
-                                </div>
                                 <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
                                 <!-- poner la condición en la base de datos que si se encuentra serie o factura no se guarde -->
                                     <input class="form-control UpperCase text-center" ng-model="cambiaNumeroserie"  ng-blur="validaSerie(cambiaNumeroserie)" id="cambiaNumeroserie"  autocomplete="off" >
                                     <label>Número de serie</label>
                                 </div>
+                                <div style="width: 100%;" class="form-floating mx-1">
+                                        <select class="form-control form-group-md" ng-model="cambioProveedor" autocomplete="off" >
+                                            <option selected="selected" value="" disabled >[Seleccione una opción..]</option>
+                                            <option ng-repeat="(i, obj) in proveedor" value="{{obj.cve_proveedor}}">{{obj.razon_social}}</option>
+                                        </select>
+                                        <label>Proveedor</label>
+                                    </div>
+                                    <div style="width: 100%" class="form-floating mx-1">
+                                        <input class="form-control UpperCase text-center" ng-model="cambiaNumerofactura" id="numerofactura"  autocomplete="off" >
+                                        <label>Número de factura</label>
+                                    </div>
+                                    <div> 
+                                        <label for="start">Fecha de factura:</label>
+                                    <input type="date" id="start" name="trip-start" value="1990-07-22" min="1999-01-01" max="2100-12-31" ng-model="cambioFechaFactura"/>
+                                </div>
+                                
                                 <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
                                     <input class="form-control UpperCase text-center" ng-model="cambiaSistemaoperativo" id="cambiaSistemaoperativo" autocomplete="off" >
                                     <label>Sistema operativo</label>
@@ -128,8 +140,10 @@
                                     <th> Marca</th>
                                     <th>Modelo</th>
                                     <th>Descripción</th>
-                                    <th>Número de factura</th>
                                     <th>Número de serie</th>
+                                    <th>Nombre del proveedor</th>
+                                    <th>Número de factura</th>
+                                    <th>Fecha de factura</th>
                                     <th>Sistema operativo</th>
                                     <th> Procesador</th>
                                     <th> Velocidad de procesador</th>
@@ -145,8 +159,10 @@
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verMarca  disabled></td>
                                                 <td ><input class="sinborde my-class" w-25 ng-model=verModelo disabled></td>
                                                 <td><input class="sinborde my-class" w-25 ng-model=verDescripcion  disabled></td>
-                                                <td><input  class="sinborde my-class" w-25 ng-model=verFactura disabled></td>
                                                 <td><input  class="sinborde my-class" w-25 ng-model=verSerie  disabled></td>
+                                                <td><input  class="sinborde my-class" w-25 ng-model=verNombreProveedor disabled></td>
+                                                <td><input  class="sinborde my-class" w-25 ng-model=verFactura disabled></td>
+                                                <td><input  class="sinborde my-class" w-25 ng-model=verFechaFactura disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verSistema  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verProcesador  disabled></td>
                                                 <td><input class="sinborde my-class"  w-25 ng-model=verVelocidad  disabled></td>
@@ -223,10 +239,22 @@
                                         <input class="form-control UpperCase text-center" ng-model="numeroserie" id="numeroserie" autocomplete="off" ng-blur="validaSerie(numeroserie)" ng-disabled="true">
                                         <label>Número de serie</label>
                                     </div>
-                                    <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
+                                    <div style="width: 100%;" class="form-floating mx-1">
+                                        <select class="form-control form-group-md" ng-model="nombreProveedor" autocomplete="off" >
+                                            <option selected="selected" value="" disabled >[Seleccione una opción..]</option>
+                                            <option ng-repeat="(i, obj) in proveedor" value="{{obj.cve_proveedor}}">{{obj.razon_social}}</option>
+                                        </select>
+                                        <label>Proveedor</label>
+                                    </div>
+                                    <div style="width: 100%" class="form-floating mx-1">
                                         <input class="form-control UpperCase text-center" ng-model="numerofactura" id="numerofactura"  autocomplete="off"  ng-disabled="true">
                                         <label>Número de factura</label>
                                     </div>
+                                    <div> 
+                                        <label for="start">Fecha de factura:</label>
+                                    <input type="date" id="start" name="trip-start" value="1990-07-22" min="1999-01-01" max="2100-12-31" ng-model="fechaFactura"/>
+                                </div>
+                                    
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
                                         <input class="form-control UpperCase text-center" ng-model="sistemaoperativo" id="sistemaoperativo" autocomplete="off" ng-disabled="true">
                                         <label>Sistema operativo</label>
@@ -253,10 +281,15 @@
                                         <input class="form-control validanumericos text-center" ng-model="capaalmacenamiento" id="almacenamiento" autocomplete="off" ng-disabled="true">
                                         <label>Capacidad de almacenamiento</label>
                                     </div>
+                                   
                                     <!-- <div style="width: 100%;" class="form-floating mx-1">
                                         <input class="form-control validanumericos" ng-model="prueba" id="prueba2" autocomplete="off" ng-disabled="true">
                                         <label>Prueba</label>
                                     </div> -->
+                                </div>
+                                <div class="col-lg-12 d-lg-flex">
+                                  
+                                   
                                 </div>
                             </div>
                             
@@ -317,9 +350,9 @@
                                                     <td class="text-center">{{obj.fecha_ingreso}}</td> -->
                                                     <td class="text-center">
                                                         <span class= "btn btn-info btn-sm" title="Scanner" ng-click="scanner(obj.cve_cequipo)" data-toggle="modal" data-target="#modalScanner" data-whatever="@getbootstrap"><i class="fas fa-barcode"></i></span>
-                                                        <button type="button" class="btn btn-info btn-sm"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_factura, obj.numero_serie, 
+                                                        <button type="button" class="btn btn-info btn-sm"  ng-click="ver(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion,obj.numero_serie, obj.cve_proveedor, obj.numero_factura, obj.fecha_factura,
                                                             obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento, obj.capacidad_almacenamiento, obj.fecha_ingreso)"  data-toggle="modal" data-target="#borrarModal"><i class="far fa-eye"></i></button>
-                                                        <button type="button" class="btn btn-warning btn-sm" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.numero_factura,
+                                                        <button type="button" class="btn btn-warning btn-sm" ng-click="consultar(obj.cve_cequipo, obj.nombre_equipo, obj.marca, obj.modelo, obj.descripcion, obj.numero_serie, obj.cve_proveedor, obj.numero_factura, obj.fecha_factura,
                                                             obj.sistema_operativo, obj.procesador, obj.vel_procesador, obj.memoria_ram, obj.tipo_almacenamiento,
                                                             obj.capacidad_almacenamiento)" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></button>
                                                     </td>

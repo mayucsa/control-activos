@@ -60,15 +60,18 @@
                     <a class="treeview-item" href="../../catalogos/alta-inventario/equipos_vista.php"><i class="app-menu__icon far fa-circle"></i> Equipos / accesorios</a>
                   </li>
                   <li>
+                    <a class="treeview-item" href="../../catalogos/grupos/grupo.php"><i class="app-menu__icon far fa-circle"></i> Grupos</a>
+                  </li>
+                  <li>
                     <a class="treeview-item" href="../../catalogos/empleados/empleado.php"><i class="app-menu__icon far fa-circle"></i> Empleados</a>
                   </li>
                   <li>
-                    <a class="treeview-item" href="../../catalogos/grupos/grupo.php"><i class="app-menu__icon far fa-circle"></i> Grupos</a>
+                    <a class="treeview-item" href="../../catalogos/proveedores/proveedores.php"><i class="app-menu__icon far fa-circle"></i> Proveedores</a>
                   </li>
                   <!-- El modulo de servicios aun no esta vigente -->
-                  <!-- <li>
+                  <li>
                     <a class="treeview-item" href="../../catalogos/servicios/servicio.php"><i class="app-menu__icon far fa-circle"></i> Servicios</a>
-                  </li> -->
+                  </li>
                  
                 </ul>
             </li>
@@ -84,6 +87,9 @@
               
                 <li>
                   <a class="treeview-item" href="../../movimientos/asignacion/asignacion.php"><i class="app-menu__icon far fa-circle"></i> Asignación</a>
+                </li>
+                <li>
+                  <a class="treeview-item" href="../../movimientos/mantenimiento/mantenimiento_vista.php"><i class="app-menu__icon far fa-circle"></i> Mantenimiento</a>
                 </li>
                 
               </ul>

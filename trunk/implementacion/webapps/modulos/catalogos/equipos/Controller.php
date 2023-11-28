@@ -13,14 +13,21 @@ function dd($var){
 // me sirve para mostrar en la pantalla de caracteristicas 
 // todas las caracteristicas que se han puesto a los equipos
 function getVercaracteristicas($dbcon){
-	$sql = "SELECT CONCAT('MYS - TIC', ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio, ce.cve_cequipo, nombre_equipo, numero_serie, marca, modelo, ce.descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso
+	$sql = "SELECT CONCAT('MYS - TIC', ce.cve_cequipo, ' - ', DATE_FORMAT(ce.fecha_ingreso, '%d%m%Y') ) folio, ce.cve_cequipo, nombre_equipo, numero_serie, marca, modelo, ce.descripcion, numero_serie, cve_proveedor, numero_factura, fecha_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso
 			FROM caracteristicas_equipos ce
 			INNER JOIN cat_equipos ce2 ON ce.cve_equipo  = ce2.cve_equipo";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
+// este trae a los equipos de la base de datos
 function getEquipos ($dbcon){
 	$sql = "select *  from cat_equipos   ";
+    $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
+    dd($datos);
+}
+// trae a los proveedores
+function getProveedor ($dbcon){
+	$sql = "SELECT * from cat_proveedores cp  ";
     $datos = $dbcon->qBuilder($dbcon->conn(), 'all', $sql);
     dd($datos);
 }
@@ -64,6 +71,8 @@ function validacionSerie($dbcon, $Datos) {
 
 function guardarCaracteristicas($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
+	$Datos->fechafactura = date('Y-m-d H:i:s');
+
 	$status = '1';
 	$conn = $dbcon->conn();
 	if ($Datos->descripcion==''){
@@ -90,11 +99,11 @@ function guardarCaracteristicas($dbcon, $Datos){
 		
 	
 
-		$sql = "INSERT INTO caracteristicas_equipos (cve_equipo, marca, modelo, descripcion, numero_serie, 
-		numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, 
+		$sql = "INSERT INTO caracteristicas_equipos (cve_equipo, marca, modelo, descripcion, numero_serie, cve_proveedor,
+		numero_factura, fecha_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, 
 		creado_por, estatus_equipo, fecha_ingreso)
 				VALUES (".$Datos->nombre.", '".$Datos->marca."', '".$Datos->modelo."', 
-				'".$Datos->descripcion."', '".$Datos->numeroserie."', '".$Datos->numerofactura."',
+				'".$Datos->descripcion."', '".$Datos->numeroserie."', ".$Datos->proveedor.", '".$Datos->numerofactura."', '".$Datos->fechafactura."',
 				'".$Datos->sistemaoperativo."', '".$Datos->procesador."', ".$Datos->velocidadprocesador.",
 				".$Datos->memoriaram.", '".$Datos->tipoalmacenamiento."', ".$Datos->capaalmacenamiento.",
 				".$Datos->id.", ".$status.", '".$fecha."')";
@@ -112,7 +121,9 @@ function guardarCaracteristicas($dbcon, $Datos){
 			AND modelo = '".$Datos->modelo."'
 			AND descripcion = '".$Datos->descripcion."'
 			AND numero_serie = '".$Datos->numeroserie."'
+			AND cve_proveedor =".$Datos->proveedor."
 			AND numero_factura = '".$Datos->numerofactura."'
+			AND fecha_factura = '".$Datos->fechafactura."'
 			AND sistema_operativo = '".$Datos->sistemaoperativo."'
 			AND procesador = '".$Datos->procesador."'
 			AND vel_procesador = ".$Datos->velocidadprocesador."
@@ -160,7 +171,7 @@ function editarCaracteristica($dbcon, $Datos){
 	}
 	$sql = " UPDATE caracteristicas_equipos
 		SET  marca  ='".$Datos->marca."', modelo  ='".$Datos->modelo."',  descripcion  ='".$Datos->descripcion."', numero_serie  ='".$Datos->numeroserie."',
-		 numero_factura  ='".$Datos->numerofactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
+		 cve_proveedor  =".$Datos->proveedor.", numero_factura  ='".$Datos->numerofactura."', fecha_factura  ='".$Datos->fechafactura."', sistema_operativo  ='".$Datos->sistemaoperativo."', procesador  ='".$Datos->procesador."', 
 		 vel_procesador  =".$Datos->velocidadprocesador.",  memoria_ram  =".$Datos->memoriaram.", 
 		tipo_almacenamiento  ='".$Datos->tipoalmacenamiento."', capacidad_almacenamiento  =".$Datos->capaalmacenamiento."
 		WHERE cve_cequipo =" .$Datos->numeroEquipo."";
@@ -203,9 +214,12 @@ switch ($tarea) {
 		editarCaracteristica($dbcon, $objDatos);
 		break;
 		
+	case 'getProveedor':
+		getProveedor($dbcon );
+		break;
 		// los get son para traer informción y que este se muestre
 	case 'getEquipos':
-		getEquipos($dbcon, );
+		getEquipos($dbcon );
 		break;
 	case 'getVercaracteristicas':
 		getVercaracteristicas($dbcon);

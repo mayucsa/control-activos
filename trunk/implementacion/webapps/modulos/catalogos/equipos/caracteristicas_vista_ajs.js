@@ -3,7 +3,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	$scope.modelo = '';
     $scope.descripcion = '';
 	$scope.numeroserie = '';
+	$scope.nombreProveedor = '';
     $scope.numerofactura = '';
+	$scope.fechaFactura = '';
 	$scope.sistemaoperativo = '';
     $scope.procesador = '';
 	$scope.velocidadprocesador = '';
@@ -17,7 +19,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
         $scope.modelo = '';
         $scope.descripcion = '';
         $scope.numeroserie = ''; 
+		$scope.nombreProveedor = '';
         $scope.numerofactura = '';
+		$scope.fechaFactura = '';
         $scope.sistemaoperativo = '';
         $scope.procesador = '';
         $scope.velocidadprocesador = '';
@@ -50,6 +54,8 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 	}
 
 	$scope.validacionCampos = function(){
+		console.log("proveedor", $scope.nombreProveedor)
+		console.log("proveedor", $scope.fechaFactura)
 		$http.post('Controller.php', {
 			'task': 'ValidaQueEquipoEs',
 			'cve_equipo': $scope.nombre
@@ -84,10 +90,24 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 						'warning'
 						);
 						return;
+				}if ($scope.nombreProveedor == '' || $scope.nombreProveedor == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar el proveedor',
+						'warning'
+						);
+						return;
 				}if ($scope.numerofactura == '' || $scope.numerofactura == null) {
 					Swal.fire(
 						'Campo faltante',
 						'Es necesario indicar el número de factura',
+						'warning'
+						);
+						return;
+				}if ($scope.fechaFactura == '' || $scope.fechaFactura == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar la fecha de factura',
 						'warning'
 						);
 						return;
@@ -164,10 +184,14 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 							'memoriaram': $scope.memoriaram,
 							'tipoalmacenamiento': $scope.tipoalmacenamiento,
 							'capaalmacenamiento': $scope.capaalmacenamiento,
+							'proveedor':$scope.nombreProveedor,
+							'fechafactura':$scope.fechaFactura,
 							// 	NXR62413FD
 
 						}).then(function(response){
 							response = response.data;
+							console.log("proveedor", $scope.nombreProveedor)
+							console.log("proveedor", $scope.fechaFactura)
 							// console.log('response', response);
 							jsRemoveWindowLoad();
 							if (response.code == 200) {
@@ -223,10 +247,24 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 						'warning'
 						);
 						return;
+				}if ($scope.nombreProveedor == '' || $scope.nombreProveedor == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar el proveedor',
+						'warning'
+						);
+						return;
 				}if ($scope.numerofactura == '' || $scope.numerofactura == null) {
 					Swal.fire(
 						'Campo faltante',
 						'Es necesario indicar el número de factura',
+						'warning'
+						);
+						return;
+				}if ($scope.fechaFactura == '' || $scope.fechaFactura == null) {
+					Swal.fire(
+						'Campo faltante',
+						'Es necesario indicar la fecha de factura',
 						'warning'
 						);
 						return;
@@ -261,6 +299,8 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 							'memoriaram': $scope.memoriaram,
 							'tipoalmacenamiento': $scope.tipoalmacenamiento,
 							'capaalmacenamiento': $scope.capaalmacenamiento,
+							'proveedor':$scope.nombreProveedor,
+							'fechafactura':$scope.fechaFactura,
 
 						}).then(function(response){
 							response = response.data;
@@ -402,6 +442,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 
 	
 	$scope.cambioCaracteristica = function () {
+		console.log("proveedor", $scope.cambioProveedor)
+		console.log("proveedor", $scope.cambioFechaFactura)
+
 		$http.post('Controller.php', {
 			'task': 'ValidaQueEquipoEs',
 			'cve_equipo': $scope.numeroEquipo
@@ -436,6 +479,9 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 							'memoriaram': $scope.cambiaMemoriaram,
 							'tipoalmacenamiento': $scope.cambiaTipoalmacenamiento,
 							'capaalmacenamiento': $scope.cambiaCapaalmacenamiento,
+							'proveedor':$scope.cambioProveedor,
+							'fechafactura':$scope.cambioFechaFactura,
+
 							 
 							'id': ID,
 						}).then(function(response){
@@ -498,13 +544,16 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 						'numeroserie': $scope.cambiaNumeroserie,
 						'numerofactura': $scope.cambiaNumerofactura,
 						'numeroserie': $scope.cambiaNumeroserie,
-						'numerofactura': $scope.cambiaNumerofactura,
+						// 'numerofactura': $scope.cambiaNumerofactura,
 						'sistemaoperativo': $scope.cambiaSistemaoperativo,
 						'procesador': $scope.cambiaProcesador,
 						'velocidadprocesador': $scope.cambiaVelocidadprocesador,
 						'memoriaram': $scope.cambiaMemoriaram,
 						'tipoalmacenamiento': $scope.cambiaTipoalmacenamiento,
 						'capaalmacenamiento': $scope.cambiaCapaalmacenamiento,
+						'proveedor':$scope.cambioProveedor,
+						'fechafactura':$scope.cambioFechaFactura,
+
 					}).then(function(response){
 						response = response.data;
 						// if (response.code == 400) {
@@ -549,7 +598,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		
 // este trae los datos de los equipos en el modal de editar
 	}
-	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, numero_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,	capacidad_almacenamiento) {
+	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, cve_proveedor, numero_factura, fecha_factura,sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,	capacidad_almacenamiento) {
 		// $scope.numero=cve_equipo;
 		$scope.numeroEquipo = cve_cequipo;
 		$scope.verNombre = nombre_equipo;
@@ -564,11 +613,13 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		$scope.cambiaMemoriaram = memoria_ram;
 		$scope.cambiaTipoalmacenamiento = tipo_almacenamiento;
 		$scope.cambiaCapaalmacenamiento=capacidad_almacenamiento;
+		$scope.cambioProveedor=cve_proveedor;
+		$scope.cambioFechaFactura= fecha_factura;
 	
 		}
 
 		// esto trae los equipos en el modal de ver
-		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_factura, numero_serie, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso) {
+		$scope.ver = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, cve_proveedor, numero_factura, fecha_factura, sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento, capacidad_almacenamiento, fecha_ingreso) {
 			// $scope.numero=cve_equipo;
 			$scope.verNumeroE = cve_cequipo;
 			$scope.verEquipo = nombre_equipo;
@@ -585,6 +636,8 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 			$scope.verAlmacenamiento = tipo_almacenamiento;
 			$scope.verCapacidad=capacidad_almacenamiento;
 			$scope.verRegistro=fecha_ingreso;
+			$scope.verNombreProveedor= cve_proveedor;
+			$scope.verFechaFactura= fecha_factura;
 		
 			}
 
@@ -671,6 +724,17 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		response = response.data;
 		console.log('getEquipos', response);
 		$scope.equipo = response;
+	},function(error){
+		console.log('error', error);
+	}); 
+
+	// se utiliza para seleccionar el al proveedor 
+	$http.post('Controller.php', {
+		'task': 'getProveedor'
+	}).then(function (response){
+		response = response.data;
+		console.log('getProveedor', response);
+		$scope.proveedor = response;
 	},function(error){
 		console.log('error', error);
 	}); 
