@@ -12,6 +12,8 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
     $scope.memoriaram = '';
 	$scope.tipoalmacenamiento = '';
     $scope.capaalmacenamiento = '';
+	$scope.cambioFechaFactura = new Date(); // o inicializa con una fecha válida
+
 
 	$scope.limpiarCampos = function(){
 		$scope.nombre = '';
@@ -598,7 +600,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		
 // este trae los datos de los equipos en el modal de editar
 	}
-	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, cve_proveedor, numero_factura, fecha_factura,sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,	capacidad_almacenamiento) {
+	$scope.consultar = function (cve_cequipo ,nombre_equipo, marca, modelo, descripcion, numero_serie, cve_proveedor, numero_factura, fecha_factura,sistema_operativo, procesador, vel_procesador, memoria_ram, tipo_almacenamiento,capacidad_almacenamiento) {
 		// $scope.numero=cve_equipo;
 		$scope.numeroEquipo = cve_cequipo;
 		$scope.verNombre = nombre_equipo;
@@ -614,7 +616,7 @@ app.controller('vistaCaracteristicasEquipos', function (BASEURL, ID, $scope, $ht
 		$scope.cambiaTipoalmacenamiento = tipo_almacenamiento;
 		$scope.cambiaCapaalmacenamiento=capacidad_almacenamiento;
 		$scope.cambioProveedor=cve_proveedor;
-		$scope.cambioFechaFactura= fecha_factura;
+		$scope.cambioFechaFactura=null;
 	
 		}
 

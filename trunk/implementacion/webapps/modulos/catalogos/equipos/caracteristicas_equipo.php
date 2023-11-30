@@ -46,7 +46,7 @@
                                 <div style="width: 100%;" class="form-floating mx-1">
                                     <input hidden="true" class="form-control UpperCase" ng-model="numeroEquipo" id="numeroEquipo" autocomplete="off"  disabled>
                                     <!-- <label>Numero</label> -->
-                                </div>
+                                </div> 
                                 <div style="width: 100%;" class="form-floating mx-1 ">
                                     <input  hidden="true" class="form-control UpperCase" ng-model="verNombre" id="verNombre" autocomplete="off"  disabled>
                                     <label>Nombre de equipo</label>
@@ -68,20 +68,20 @@
                                     <input class="form-control UpperCase text-center" ng-model="cambiaNumeroserie"  ng-blur="validaSerie(cambiaNumeroserie)" id="cambiaNumeroserie"  autocomplete="off" >
                                     <label>Número de serie</label>
                                 </div>
-                                <div style="width: 100%;" class="form-floating mx-1">
+                                <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
                                         <select class="form-control form-group-md" ng-model="cambioProveedor" autocomplete="off" >
                                             <option selected="selected" value="" disabled >[Seleccione una opción..]</option>
                                             <option ng-repeat="(i, obj) in proveedor" value="{{obj.cve_proveedor}}">{{obj.razon_social}}</option>
                                         </select>
                                         <label>Proveedor</label>
                                     </div>
-                                    <div style="width: 100%" class="form-floating mx-1">
+                                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
                                         <input class="form-control UpperCase text-center" ng-model="cambiaNumerofactura" id="numerofactura"  autocomplete="off" >
                                         <label>Número de factura</label>
                                     </div>
-                                    <div> 
+                                    <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25"> 
                                         <label for="start">Fecha de factura:</label>
-                                    <input type="date" id="start" name="trip-start" value="1990-07-22" min="1999-01-01" max="2100-12-31" ng-model="cambioFechaFactura"/>
+                                    <input class="form-control UpperCase text-center" type="date" id="start" name="trip-start" value="1990-07-22" min="1999-01-01" max="2100-12-31" ng-model="cambioFechaFactura"/>
                                 </div>
                                 
                                 <div style=" width:100%; margin-bottom: 10px  " class="form-floating mx-1 w-25">
@@ -233,27 +233,28 @@
                                         <input class="form-control UpperCase text-center" ng-model="descripcion" id="descripcion" autocomplete="off" ng-disabled="true">
                                         <label>Descripción</label>
                                     </div>
-                                </div>
-                                <div class="col-lg-12 d-lg-flex">
-                                    <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
+                                    <div style="width: 100%" class="form-floating mx-1">
                                         <input class="form-control UpperCase text-center" ng-model="numeroserie" id="numeroserie" autocomplete="off" ng-blur="validaSerie(numeroserie)" ng-disabled="true">
                                         <label>Número de serie</label>
                                     </div>
-                                    <div style="width: 100%;" class="form-floating mx-1">
+                                </div>
+                                <div class="col-lg-12 d-lg-flex">
+                                    
+                                    <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
                                         <select class="form-control form-group-md" ng-model="nombreProveedor" autocomplete="off" >
                                             <option selected="selected" value="" disabled >[Seleccione una opción..]</option>
                                             <option ng-repeat="(i, obj) in proveedor" value="{{obj.cve_proveedor}}">{{obj.razon_social}}</option>
                                         </select>
                                         <label>Proveedor</label>
                                     </div>
-                                    <div style="width: 100%" class="form-floating mx-1">
+                                    <div style="width: 100%; margin-top: 10px " class="form-floating mx-1">
                                         <input class="form-control UpperCase text-center" ng-model="numerofactura" id="numerofactura"  autocomplete="off"  ng-disabled="true">
                                         <label>Número de factura</label>
                                     </div>
-                                    <div> 
-                                        <label for="start">Fecha de factura:</label>
-                                    <input type="date" id="start" name="trip-start" value="1990-07-22" min="1999-01-01" max="2100-12-31" ng-model="fechaFactura"/>
-                                </div>
+                                    <div  style=" width:100%; margin-top: 10px  " class="form-floating mx-1 w-25"> 
+                                        <label for="start; style=font-size: smaller;">Fecha de factura:</label>
+                                    <input class="form-control UpperCase text-center" type="date" id="start" name="trip-start" value="1990-07-22" min="1999-01-01" max="2100-12-31" ng-model="fechaFactura"/>
+                                    </div>
                                     
                                     <div style="width: 100%; margin-top: 10px" class="form-floating mx-1">
                                         <input class="form-control UpperCase text-center" ng-model="sistemaoperativo" id="sistemaoperativo" autocomplete="off" ng-disabled="true">

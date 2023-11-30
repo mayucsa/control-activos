@@ -144,6 +144,7 @@ function guardarCaracteristicas($dbcon, $Datos){
 
 function editarCaracteristica($dbcon, $Datos){
 	$fecha = date('Y-m-d H:i:s');
+	$Datos->fechafactura = date('Y-m-d H:i:s');
 	$conn = $dbcon->conn();
 	if ($Datos->descripcion==''){
 		$Datos->descripcion=NULL;}
